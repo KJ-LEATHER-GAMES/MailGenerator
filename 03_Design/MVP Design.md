@@ -9,7 +9,7 @@
 | バージョン | v0.1.2 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.3 日本語版 |
+| 要件文書 | MVP Requirements v0.1.4 日本語版 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
@@ -19,7 +19,7 @@
 
 ### v0.1.2 更新概要
 
-MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで残ったDesign側の2件を局所修正し、MVP Requirements v0.1.3との文書参照を更新した。新しいDesign Decisionは追加していない。
+MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで残ったDesign側の2件を局所修正し、MVP Requirements v0.1.4との文書参照を更新した。新しいDesign Decisionは追加していない。
 
 1. `Required=False` かつ空欄 / 未選択の入力値はValue Formatterで空文字列 `""` とし、RendererがVariableを空文字列へ置換する規則を明示
 2. 手動同期およびUserForm起動シーケンスで、OFT不存在時にError Resultを返して後続処理を停止するFail Fast分岐を明示
@@ -39,7 +39,7 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.3` を満たすためのMVP基本設計を定義する。
+本書は、`MVP Requirements v0.1.4` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -1280,7 +1280,7 @@ MVP実装時に、実際のOFTで以下を確認する。
 - 通常入力した `{{VariableName}}` がHTMLBody内で連続文字列として保持されること
 - 書式設定により変数文字列が分断されないこと
 
-MVP Requirements v0.1.3では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
+MVP Requirements v0.1.4では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
 
 上記を超える新しい利用者向けテンプレート記述制約が必要になった場合は、Design内で決定せずRequirement Gapとして扱う。
 
@@ -1317,7 +1317,7 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 MVP Design v0.1.2への修正後は、以下の順を推奨する。
 
 ```text
-MVP Requirements v0.1.3
+MVP Requirements v0.1.4
         ↓
 MVP Design v0.1.2
         ↓

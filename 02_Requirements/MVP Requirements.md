@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.3 日本語版
+# MVP Requirements v0.1.4 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.3 |
+| バージョン | v0.1.4 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +15,18 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.4 更新概要
+
+v0.1.4では、MVP Requirements v0.1.3 × MVP Design v0.1.2 の最終差分レビューで確認した工程責務表現のみを修正した。利用者向けRequirementおよびDesign Decisionは変更していない。
+
+1. OFT不存在時の具体的な復旧UIをImplementation事項として明確化した
+2. Invalid Variable Syntaxの具体的な表示形式・メッセージ文言・エラーコードをImplementation事項として明確化した
+3. 曜日表記生成について、Design責務と具体的VBA実装責務を分離した
+4. Validation強調について、VariableNameとの関連付けと具体的な表示方式・色の責務を分離した
+5. HTML Encodeについて、Body Renderer側の責務と具体的Encode関数の実装責務を分離した
+
+---
 
 ### v0.1.3 更新概要
 
@@ -211,7 +223,7 @@ OFTが存在しない状態では、テンプレートとの整合性を保証�
 
 OFT不存在時は、ユーザーが原因と必要な確認内容を理解できる形で通知する。
 
-OFT再指定専用UIやファイル選択ダイアログをMVP必須要件とはしない。具体的な復旧UIはMVP Designで決定する。
+OFT再指定専用UIやファイル選択ダイアログをMVP必須要件とはしない。具体的な復旧UIはImplementationで具体化する。
 
 ---
 
@@ -314,7 +326,7 @@ VariableDefinitionに既存のVariableNameが存在する場合は、そのVaria
 
 エラー発生時は、検出した不正記述をユーザーが確認できるようにする。
 
-具体的なエラー表示方式、メッセージ形式、エラーコード等はMVP Designで決定する。
+不正変数記法を検出して処理停止へつなげる責務構造はMVP Designで定義し、具体的な表示形式、メッセージ文言、エラーコード等はImplementationで具体化する。
 
 ---
 
@@ -588,7 +600,7 @@ MVPではDate Formatの自由記述を許可しない。
 
 Date型Variableでは、上記6種類からFormatを選択する。
 
-曜日表記を含むFormatの具体的な生成方法はMVP Designで決定する。
+Date変換処理および定義済みDate Formatを適用する責務はMVP Designで定義し、曜日表記生成の具体的なVBA実装はImplementationで具体化する。
 
 ---
 
@@ -779,7 +791,7 @@ Validationエラーが存在する入力コントロールは、UserForm上で�
 
 MVPでは背景色変更等の方式を想定する。
 
-具体的な色、Tag利用等の実装方式はMVP Designで定義する。
+入力コントロールとVariableNameの関連付け方法はMVP Designで定義し、具体的な強調表示方式・色はImplementationで具体化する。
 
 ### FR-VAL-004
 
@@ -831,7 +843,7 @@ MVPで書式維持の確認対象とする代表的な基本書式は以下と�
 - 特殊なOutlook固有書式
 - `{{VariableName}}` の文字列途中がHTMLタグ等によって分断されるケース
 
-HTML Encode等の具体的な処理方式はMVP Designで決定する。
+HTML EncodeをBody Renderer側で適用する責務はMVP Designで定義し、具体的なEncode関数はImplementationで具体化する。
 
 ---
 
