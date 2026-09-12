@@ -1,4 +1,4 @@
-# MVP Test Specification v0.1 日本語版
+# MVP Test Specification v0.1.1 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Test Specification |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1 |
+| バージョン | v0.1.1 |
 | 文書種別 | MVPテスト仕様 |
 | Requirements Baseline | `MVP Requirements v0.1.6 日本語版.md` |
 | Design Baseline | `MVP Design v0.1.5 日本語版.md` |
@@ -15,6 +15,27 @@
 | 対象テンプレート | Outlook Template File（`.oft`） |
 | 実施状態 | 未実施 |
 | 作成日 | 2026-09-11 |
+
+### v0.1.1 更新概要
+
+`MVP Test Specification v0.1` とBaseline 3文書の整合性レビュー結果を反映した。
+
+主な変更は以下である。
+
+1. Mandatory Testは「実施済み」ではなく「すべてPASS」をMVP Test Gate条件とした
+2. UserForm起動時の未登録Variable / 削除済みActive Variableを独立Testとして追加した
+3. Invalid Variable Syntaxについて、処理停止だけでなく不正記述をユーザーが確認できることを明示した
+4. Date入力をValidation後に日付値として扱い、入力表記を直接引き継がず再FormatするTestを明確化した
+5. Optional空欄VariableのSubject / Body双方での空文字列置換を確認対象とした
+6. Select OptionがOptionMaster管理であることを直接確認するEvidenceを追加した
+7. RISK-DES-003に対応し、実使用Variable数でのUserForm利用可能性を確認するTestを追加した
+8. NFR-006をMandatory Design Reviewとした
+9. 重複していたMTS-SAFE-004をMTS-VAL-005へ統合した
+10. MTS-NFR-004を独立実行TestではなくSafety Summary Gateへ再分類した
+11. Date 6 FormatのExpectedを具体値で定義した
+12. 1回の実行Evidenceを複数Test Caseへ再利用できるルールを明示した
+
+利用者向けRequirement、Design Decision、Technical Decisionは変更していない。
 
 ---
 
@@ -97,6 +118,20 @@ Evidence
 ↓
 Result
 ```
+
+Requirement Coverageは以下の2段階で扱う。
+
+```text
+Traceability Mapping Coverage
+= Requirement IDが1件以上のTest Caseへ紐付いていること
+
+Condition Coverage
+= Requirement本文に含まれる必要条件がTest手順 / Expectedへ具体化されていること
+```
+
+§18の `47 / 47 FR` はTraceability Mapping Coverageを表す。
+
+MVP Test PASS判定では、IDの紐付けだけでなく、各Mandatory TestのExpected ResultがPASSしていることを必要とする。
 
 ### 4.2 Test粒度
 
@@ -195,6 +230,29 @@ PASS / FAILだけでなく、実施不能と仕様対象外を区別する。
 Technical Spike Aで問題となったFalse Positiveを避けるため、
 
 > 「0件だった」ことと「正しく検出できた」ことを別Evidenceとして扱う。
+
+### 6.1 Evidence再利用
+
+1回のTest実行が複数のRequirement / Test Caseを同時に検証する場合、同一Evidenceを複数Test Caseから参照してよい。
+
+ただし以下を満たすこと。
+
+- 各Test IDごとのExpected Resultを個別に判定できる
+- Evidenceの参照先を記録する
+- 1つのTest CaseがFAILしたことを、同じEvidenceを参照する別Test Caseへ自動的に波及させない
+- Test目的の異なるCaseを単に1件として統合しない
+
+例：
+
+```text
+MTS-TPL-004実行Evidence
+→ MTS-ERR-001のOFT読込Error確認にも参照可能
+
+MTS-UNR-002実行Evidence
+→ MTS-MAIL-004のError時Lifecycle確認にも参照可能
+```
+
+Test Coverageを維持しながら、不要な再実行を避ける。
 
 ---
 
@@ -359,10 +417,13 @@ WordEditor方式ではHTML Encodeせず、意図した文字列として表示�
 | MTS-CFG-004 | Date Format不正 | Negative | Mandatory |
 | MTS-CFG-005 | Select OptionSource未設定 | Negative | Mandatory |
 | MTS-CFG-006 | Select Active Optionなし | Negative | Mandatory |
+| MTS-CFG-007 | Template未登録VariableでUserForm停止 | Negative | Mandatory |
+| MTS-CFG-008 | Template削除済みActive VariableでUserForm停止 | Negative | Mandatory |
 | MTS-UI-001 | Dynamic UserForm生成 | Manual / Functional | Mandatory |
 | MTS-UI-002 | Type / Control対応 | Manual / Functional | Mandatory |
 | MTS-UI-003 | DisplayName / Required / Description | Manual | Mandatory |
-| MTS-UI-004 | Select選択専用 / Active Option順 | Manual / Functional | Mandatory |
+| MTS-UI-004 | Select選択専用 / Active Option順 / OptionMaster参照 | Manual / Functional | Mandatory |
+| MTS-UI-005 | 実使用Variable数でのUserForm利用可能性 | Manual / Risk | Mandatory |
 
 ## 9.4 Input / Validation
 
@@ -405,7 +466,6 @@ WordEditor方式ではHTML Encodeせず、意図した文字列として表示�
 | MTS-SAFE-001 | UserForm表示後OFT削除 | Negative / Safety | Mandatory |
 | MTS-SAFE-002 | UserForm表示後Invalid Variable追加 | Negative / Safety | Mandatory |
 | MTS-SAFE-003 | UserForm表示後VariableDefinition変更 | Negative / Safety | Mandatory |
-| MTS-SAFE-004 | UserForm表示後OptionMaster変更 | Negative / Safety | Mandatory |
 | MTS-ERR-001 | 主要Errorが理解可能なMessageを返す | Manual | Mandatory |
 | MTS-ERR-002 | Outlook / Word COM Error変換 | Negative | Mandatory |
 
@@ -416,9 +476,9 @@ WordEditor方式ではHTML Encodeせず、意図した文字列として表示�
 | MTS-NFR-001 | Template固有処理を設定で変更可能 | Design / Functional | Mandatory |
 | MTS-NFR-002 | Component責務分離 Review | Design Review | Mandatory |
 | MTS-NFR-003 | 問題箇所がユーザーから観測可能 | Manual | Mandatory |
-| MTS-NFR-004 | 不完全状態Fail Fast | Safety Summary | Mandatory |
+| MTS-NFR-004 | 不完全状態Fail Fast | Summary Gate | Mandatory |
 | MTS-NFR-005 | UserFormのみでメール生成 | Manual E2E | Mandatory |
-| MTS-NFR-006 | 将来型追加時の局所変更性Review | Design Review | Conditional |
+| MTS-NFR-006 | 将来型追加時の局所変更性Review | Design Review | Mandatory |
 
 ---
 
@@ -613,7 +673,43 @@ Comment    = Body
 
 - ValidVariablesへ入らない
 - InvalidCandidatesとして全件検出する
-- 手動同期 / UserForm / メール生成を停止可能なResultとなる
+- 検出した不正記述そのものをResultとして保持する
+
+Expected InvalidCandidates：
+
+```text
+{{1stGate}}
+{{_GateDate}}
+{{審査日}}
+{{User-Name}}
+{{ UserName }}
+```
+
+このResultが以下へ接続できること。
+
+```text
+InvalidCandidates
+├─ 手動同期停止 → MTS-SYNC-010
+├─ UserForm起動停止
+└─ メール生成停止 → MTS-SAFE-002等
+```
+
+UI通知では、少なくとも検出した不正記述をユーザーが確認できる。
+
+Scanner内部の検出成功だけでFR-VAR-005全体をPASSとしない。
+
+**Integration Variant：UserForm**
+
+1. Invalid Variableを含むOFTを最初から用意する
+2. UserForm起動を実行する
+
+Expected：
+
+- UserForm起動停止
+- 自動同期しない
+- 不正記述一覧を通知
+
+手動同期停止は `MTS-SYNC-010`、メール生成停止は `MTS-SAFE-002` のEvidenceと合わせてFR-VAR-005を判定する。
 
 ---
 
@@ -992,6 +1088,79 @@ Configuration ErrorとなりUserFormを起動しない。
 
 ---
 
+## MTS-CFG-007 Template未登録VariableでUserForm停止
+
+**Traceability**
+
+- FR-UI-CHECK-001
+- FR-UI-CHECK-002
+- NFR-004
+
+**Precondition**
+
+VariableDefinitionには存在しないVariableをOFTへ追加する。
+
+```text
+OFT:
+{{NewVariable}}
+
+VariableDefinition:
+NewVariableなし
+```
+
+手動同期は実施しない。
+
+**Steps**
+
+1. UserForm起動を実行する
+2. VariableDefinitionを確認する
+
+**Expected**
+
+- Current OFT Scanで `NewVariable` を検出する
+- Template未登録VariableとしてConfiguration Error
+- UserFormを起動しない
+- VariableDefinitionへ `NewVariable` を自動追加しない
+- 自動同期を実行しない
+- ユーザーが `NewVariable` が未登録であることを確認できる
+
+---
+
+## MTS-CFG-008 Template削除済みActive VariableでUserForm停止
+
+**Traceability**
+
+- FR-UI-CHECK-001
+- FR-UI-CHECK-002
+- NFR-004
+
+**Precondition**
+
+```text
+OFT:
+ModelNameなし
+
+VariableDefinition:
+ModelName = Active
+```
+
+手動同期は実施しない。
+
+**Steps**
+
+1. UserForm起動を実行する
+2. VariableDefinitionを確認する
+
+**Expected**
+
+- Templateから削除されたActive VariableとしてConfiguration Error
+- UserFormを起動しない
+- `ModelName` を自動でUnusedへ変更しない
+- 自動同期を実行しない
+- ユーザーが `ModelName` の不整合を確認できる
+
+---
+
 ## MTS-UI-001 Dynamic UserForm生成
 
 **Traceability**
@@ -1050,12 +1219,64 @@ Select → ComboBox
 - AC-011
 - Design §17.2
 
+**Precondition**
+
+```text
+VariableDefinition:
+VariableName = Department
+Type         = Select
+OptionSource = Department
+```
+
+```text
+OptionMaster:
+Department / 設計部 / Active=True
+Department / 品質部 / Active=True
+Department / 生産部 / Active=False
+```
+
 **Expected**
 
-- Active Optionのみ
+- ComboBoxの選択肢はOptionMasterから取得する
+- VariableDefinitionは選択肢文字列リストを直接保持せず、OptionSourceだけを参照する
+- Active Optionのみ表示
 - SortOrder順
 - 自由入力不可
 - Inactive Option「生産部」は表示しない
+
+---
+
+## MTS-UI-005 実使用Variable数でのUserForm利用可能性
+
+**Traceability**
+
+- FR-UI-001
+- NFR-005
+- Design RISK-DES-003
+
+**Type**
+
+Manual / Risk
+
+**Precondition**
+
+MVPで実際に使用予定のOFT / VariableDefinitionの最大または代表的Variable数を使用する。
+
+**Steps**
+
+1. UserFormを起動する
+2. 全入力項目へアクセスできるか確認する
+3. 末尾付近の項目へ入力する
+4. 「入力クリア」「メール作成」等の主要操作へアクセスする
+
+**Expected**
+
+- 必要なすべての入力項目へアクセスできる
+- 入力Controlが操作不能な位置へ隠れない
+- Mail作成 / 入力クリア等の主要操作を実行できる
+- 実使用Variable数でUserForm利用が成立する
+
+具体的なForm寸法、ScrollBar有無、配置方式を本Testから新Requirementとして固定しない。
 
 ---
 
@@ -1284,18 +1505,44 @@ Word `Range.Find / Range.Text` 方式で成立する。
 **Traceability**
 
 - FR-VAL-001
+- FR-RENDER-SUB-001
+- FR-RENDER-BODY-001
 - Design §21.1
 
-**Input**
+Optional Variableの空欄をSubject / Body双方で確認する。
+
+### Variant A：Body
+
+Baseline OFTの `{{Comment}}` を使用する。
 
 ```text
-Comment = 空欄
+Comment  = 空欄
 Required = False
 ```
 
 **Expected**
 
-`{{Comment}}` を空文字列へ置換し、未置換として残さない。
+- Bodyの `{{Comment}}` を空文字列へ置換
+- Unresolved Variableとして残らない
+
+### Variant B：Subject
+
+Test用OFTのSubjectへOptional Variableを配置する。
+
+```text
+Subject:
+【{{ModelName}}】{{OptionalNote}}
+
+OptionalNote = 空欄
+Required     = False
+```
+
+**Expected**
+
+- Subjectの `{{OptionalNote}}` を空文字列へ置換
+- Unresolved Variableとして残らない
+
+Optional空欄が存在してもRender / Displayを阻害しない。
 
 ---
 
@@ -1308,20 +1555,34 @@ Required = False
 
 **Input**
 
-同一日付を6 Formatで出力する。
+ユーザー入力：
+
+```text
+2026-9-30
+```
+
+Validation後は日付値 `2026-09-30` として扱い、入力時のゼロ埋め・セパレータを出力へ直接引き継がない。
+
+同一日付値へ6種類のFormatを適用する。
 
 **Expected**
 
 ```text
-yyyy/mm/dd
-yyyy-mm-dd
-yyyy年m月d日
-m月d日
-yyyy年m月d日(aaa)
-m月d日(aaa)
+yyyy/mm/dd        → 2026/09/30
+yyyy-mm-dd        → 2026-09-30
+yyyy年m月d日       → 2026年9月30日
+m月d日             → 9月30日
+yyyy年m月d日(aaa)  → 2026年9月30日(水)
+m月d日(aaa)        → 9月30日(水)
 ```
 
-定義どおり。
+**PASS条件**
+
+- Raw Input `2026-9-30` の文字列表現を直接コピーしていない
+- Validation後の日付意味値から各Formatを生成している
+- 6種類すべてExpectedと一致する
+
+曜日生成の具体的なVBA実装方法はTest側で固定しない。
 
 ---
 
@@ -1574,17 +1835,6 @@ Mail生成時Current VariableDefinitionを使用してInput Validationする。
 
 ---
 
-## MTS-SAFE-004 UserForm表示後OptionMaster変更
-
-**Traceability**
-
-- FR-VAL-001
-- FCR-001
-
-MTS-VAL-005と同じScenarioをSafety視点で確認する。
-
----
-
 ## MTS-ERR-001 主要Error Message
 
 **Traceability**
@@ -1684,16 +1934,32 @@ Sync / Configuration / Validation / Unresolved / Outlook Errorについて、ユ
 
 - NFR-004
 
-**PASS**
+**Type**
 
-以下の個別TestがすべてPASS。
+Summary Gate
+
+本Case自体で新しい操作を実行しない。
+
+以下のSafety関連Mandatory Test Resultを集約する。
 
 - MTS-TPL-003
 - MTS-SCAN-004
-- MTS-CFG-001〜006
-- MTS-VAL-001 / 003〜008
+- MTS-CFG-001〜008
+- MTS-VAL-001
+- MTS-VAL-003〜008
 - MTS-UNR-002 / 003
-- MTS-SAFE-001〜004
+- MTS-SAFE-001〜003
+- MTS-MAIL-004
+
+**PASS**
+
+上記の適用対象Mandatory TestがすべてPASSしている。
+
+**FAIL**
+
+上記のいずれかにFAIL / BLOCKEDが残存している。
+
+同一Evidenceを複数Caseから参照してよく、本Summary GateのためにTestを再実行しない。
 
 ---
 
@@ -1745,9 +2011,23 @@ Design / Code Review。
 
 **Gate**
 
-Conditional。
+Mandatory Design Review。
 
-MVP実装完了をBlockingする定量性能Testとはしない。
+将来型そのものを実装する必要はない。
+
+**PASS**
+
+以下が局所化されており、将来型追加のためにMVP全体の大規模な構造変更を前提としていない。
+
+- Type / Control mapping
+- Validation
+- Value Formatter
+- Data Access
+- Renderer / Outlook Adapter責務
+
+Review Evidenceとして、影響Componentと変更箇所の想定を記録する。
+
+NFR-006は性能数値のTestではないが、Baseline RequirementであるためReview自体を省略可能なConditional Testとはしない。
 
 ---
 
@@ -1757,10 +2037,10 @@ MVP実装完了をBlockingする定量性能Testとはしない。
 |---|---|
 | AC-001 | MTS-TPL-001 / 002 / 003 |
 | AC-002 | MTS-SCAN-001 / 003 |
-| AC-003 | MTS-SCAN-004 / MTS-SYNC-010 |
+| AC-003 | MTS-SCAN-004 / MTS-SYNC-010 / MTS-SAFE-002 |
 | AC-004 | MTS-SYNC-002 / 003 / 004 / 007 |
 | AC-005 | MTS-SYNC-002 / MTS-CFG-001 |
-| AC-006 | MTS-UI-001 / 002 / 003 |
+| AC-006 | MTS-UI-001 / 002 / 003 / 005 |
 | AC-007 | MTS-CFG-002 / 003 |
 | AC-008 | MTS-UI-002 |
 | AC-009 | MTS-VAL-003 |
@@ -1809,19 +2089,19 @@ MVP実装完了をBlockingする定量性能Testとはしない。
 | FR-TYPE-SELECT-001 | MTS-UI-004 |
 | FR-OPT-001 | MTS-UI-004 |
 | FR-OPT-002 | MTS-CFG-005 / 006 |
-| FR-UI-001 | MTS-UI-001 |
+| FR-UI-001 | MTS-UI-001 / MTS-UI-005 |
 | FR-UI-002 | MTS-UI-002 |
 | FR-UI-003 | MTS-CFG-002 / 003 |
 | FR-UI-004 | MTS-UI-003 |
-| FR-UI-CHECK-001 | MTS-CFG-001〜006 / MTS-TPL-003 / MTS-SCAN-004 |
-| FR-UI-CHECK-002 | MTS-CFG-001〜006 |
+| FR-UI-CHECK-001 | MTS-CFG-001〜008 / MTS-TPL-003 / MTS-SCAN-004 |
+| FR-UI-CHECK-002 | MTS-CFG-001〜008 / MTS-SCAN-004 |
 | FR-INPUT-001 | MTS-INPUT-001 |
 | FR-INPUT-002 | MTS-INPUT-002 |
-| FR-VAL-001 | MTS-VAL-001〜005 / MTS-SAFE-003 / 004 |
+| FR-VAL-001 | MTS-VAL-001〜005 / MTS-SAFE-003 |
 | FR-VAL-002 | MTS-VAL-006 |
 | FR-VAL-003 | MTS-VAL-007 |
 | FR-VAL-004 | MTS-VAL-008 |
-| FR-RENDER-SUB-001 | MTS-REN-001 |
+| FR-RENDER-SUB-001 | MTS-REN-001 / MTS-REN-003 |
 | FR-RENDER-BODY-001 | MTS-REN-002 / 003 |
 | FR-RENDER-BODY-002 | MTS-REN-005 / 006 |
 | FR-UNRESOLVED-001 | MTS-UNR-001 / 002 / 004 |
@@ -1830,7 +2110,11 @@ MVP実装完了をBlockingする定量性能Testとはしない。
 | FR-OUTLOOK-002 | MTS-MAIL-001 / 002 |
 | FR-OUTLOOK-003 | MTS-MAIL-002 |
 
-**Coverage：47 / 47 FR**
+**Traceability Mapping Coverage：47 / 47 FR**
+
+これは全47 FRが1件以上のTest Caseへ紐付いていることを示す。
+
+実行後のRequirement PASS Coverageは、各Mandatory Test Resultを基に判定する。
 
 ---
 
@@ -1846,6 +2130,8 @@ MVP実装完了をBlockingする定量性能Testとはしない。
 | NFR-006 拡張性 | MTS-NFR-006 |
 
 **Coverage：6 / 6 NFR**
+
+MTS-NFR-006はMandatory Design Reviewとする。
 
 ---
 
@@ -1919,15 +2205,19 @@ Test実施開始条件：
 MVP Test完了条件：
 
 1. Mandatory Testをすべて実施済み
-2. AC-001〜020がすべてPASS
-3. 47 FRのCoverageがすべてPASSまたは正当なN/A
-4. NFR-001〜005がPASS
-5. NFR-006はDesign Review結果を記録
-6. High / Blocking Failureが0件
-7. 未解決Variable防止、安全性TestがPASS
+2. Mandatory TestにFAIL / BLOCKEDが残っていない
+3. Mandatory TestはすべてPASS、またはBaseline上適用外であることを明示した正当なN/Aである
+4. AC-001〜020がすべてPASS
+5. 47 FRのTraceability Mappingが維持され、適用対象RequirementのMandatory TestがPASSしている
+6. NFR-001〜006がすべてPASS
+7. Safety Summary Gate（MTS-NFR-004）がPASS
 8. Technical Spike A Regression項目がPASS
 9. Test Evidenceを保存済み
-10. FAILが存在する場合、MVP Release可否判断を記録済み
+10. Requirement Gap / Design Gapが発生した場合、Baseline側で解決済み
+
+Mandatory TestのN/Aは、Baseline上そのRequirement / Design Ruleが当該Buildへ適用されないことを明示できる場合のみ使用できる。
+
+「実施困難」「未実装」「時間不足」はN/A理由としない。
 
 ---
 
@@ -1952,11 +2242,18 @@ MVP Test完了条件：
 - Input:
 - Actual Result:
 - Evidence:
+- Evidence Reference:
+- N/A Reason:
 - Finding:
 - Requirement Impact:
 - Design Impact:
 - Retest:
 ```
+
+ルール：
+
+- PASS / FAIL判定時はEvidence Referenceを記録する
+- N/A選択時はN/A Reasonを必須とする
 
 ---
 
@@ -1986,23 +2283,26 @@ Requirementsへ戻して判断する。
 
 以下をすべて満たす。
 
-- Mandatory Test実施済み
+- Mandatory TestにFAIL / BLOCKEDが残っていない
+- Mandatory TestはすべてPASS、または正当なN/A
 - AC-001〜020 PASS
-- Blocking Failureなし
-- Safety Test PASS
+- NFR-001〜006 PASS
+- MTS-NFR-004 Safety Summary Gate PASS
 - Technical Spike A Regression PASS
 - Requirement / Design Gap未解決なし
 
 ## CONDITIONAL PASS
 
-- Mandatory Requirementは満たす
-- Scope外またはNon-BlockingのIssueのみ残存
-- Issueと対応方針を明示済み
+- Product Requirement / Acceptance Criteria / Mandatory Safety条件はすべて満たす
+- Mandatory TestにFAIL / BLOCKEDは残っていない
+- Scope外またはNon-BlockingなDocumentation / Environment Issueのみ残存
+- IssueとMVP Releaseへの影響を記録済み
 
 ## FAIL
 
 以下のいずれか。
 
+- Mandatory TestにFAIL / BLOCKEDが1件以上残存する
 - ACを満たせない
 - 不完全なメールをDisplayできてしまう
 - Invalid Variable / Configuration / Input / UnresolvedをFail Fastできない
@@ -2015,9 +2315,9 @@ Requirementsへ戻して判断する。
 # 27. 次工程
 
 ```text
-MVP Test Specification v0.1
+MVP Test Specification v0.1.1
         ↓
-Test Specificationレビュー
+Test Specification最終整合性確認
         ↓
 Technical Spike B / C 要否確認
         ↓
@@ -2034,4 +2334,4 @@ MVP判定
 
 Technical Spike B / Cの具体内容は、既存計画またはImplementation Plan作成時に確認する。
 
-本Test Specification v0.1の作成によって、新しいRequirement / Design Decisionは追加しない。
+本Test Specification v0.1.1および本Patchによって、新しい利用者向けRequirement / Design Decisionは追加していない。
