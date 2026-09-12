@@ -1,4 +1,4 @@
-# MVP Design v0.1.4 日本語版
+# MVP Design v0.1.5 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Design |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.4 |
+| バージョン | v0.1.5 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 要件文書 | MVP Requirements v0.1.6 日本語版 |
@@ -14,6 +14,18 @@
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.5 更新概要
+
+`MVP Requirements v0.1.6` × `MVP Design v0.1.4` × `Technical Spike A v0.2 CLOSED` の最終整合性再確認で残ったFCR-001 / FCR-002を反映した。
+
+1. メール生成時のInput Validatorが、生成時点のCurrent VariableDefinition / OptionMasterを使用することを明示
+2. Mail生成シーケンスでVariableDefinition / OptionMaster取得をInput Validation前へ移動
+3. Input Stateの保持期間表現を「Workbookを閉じるまで」へ統一
+
+本変更は既存RequirementをDesignへ正確に反映するための局所修正であり、新規Requirement Gapおよび追加Technical Spikeは発生していない。
 
 ---
 
@@ -222,7 +234,7 @@ Template ScannerおよびUnresolved CheckerがBodyを評価する場合は、Out
 | Sync Engine | Template / VariableDefinitionの差分判定 |
 | Configuration Validator | 設定整合性の一元チェック |
 | UserForm Generator | VariableDefinitionに基づく入力Control生成 |
-| Input State | Excel終了までの入力値保持 |
+| Input State | Workbookを閉じるまでの入力値保持 |
 | Input Validator | Required / Date / Selectの入力妥当性判定 |
 | Value Formatter | Type / Formatに基づくメール出力文字列化 |
 | Subject Renderer | Subject変数置換 |
@@ -914,10 +926,16 @@ MVPではBinding専用クラスを導入しない。
 
 Input Validatorは判定のみ担当し、UserFormは表示のみ担当する。
 
+Input Validatorは、メール生成時点でData Accessから取得したCurrent VariableDefinition / OptionMasterをValidation定義として使用する。
+
+UserForm生成時に使用した過去のVariableDefinition / OptionMaster Snapshotを、メール生成時Validationの根拠として無条件に再利用しない。
+
 ```text
-UserForm
-↓
 InputValues
++
+Current VariableDefinition
++
+Current OptionMaster
 ↓
 Input Validator
 ↓
@@ -943,6 +961,16 @@ UserForm
 - 値が存在するSelect型で、OptionMasterの有効Optionに存在しない値
 
 したがって、`Required=False` のDate空欄およびSelect未選択は正常とする。
+
+メール生成時のValidationでは、以下をCurrent Dataから判定する。
+
+- Required：Current VariableDefinition.Required
+- Type：Current VariableDefinition.Type
+- Select有効値：Current OptionMasterのActive Option
+
+Select型では、入力値がメール生成時点のCurrent Active Optionに存在しない場合はErrorとする。
+
+Input Validator自身はExcel Tableを直接読み取らず、Application層がData Accessから取得したCurrent VariableDefinition / OptionMasterを入力として渡す。
 
 ### 19.3 UI側責務
 
@@ -1329,7 +1357,9 @@ Configuration ValidatorはOFTを直接開かず、Template ScannerのRegex処理
 
 UserForm起動時のConfiguration Check結果をメール生成時まで無条件に信用しない。
 
-メール生成では生成用MailItemのCurrent OFT内容を再Scanし、Render前にConfiguration Validatorを再実行する。
+メール生成では、生成開始時にCurrent VariableDefinition / OptionMasterをData Accessから取得してInput Validatorへ渡す。
+
+その後、生成用MailItemのCurrent OFT内容を再Scanし、Render前にConfiguration Validatorを再実行する。
 
 ```text
 User
@@ -1337,6 +1367,12 @@ User
 メール作成
 ↓
 Control値 → InputValues
+↓
+VariableDefinition Data Access
++
+OptionMaster Data Access
+↓
+Current VariableDefinition / OptionMaster取得
 ↓
 Input Validator
 ↓
@@ -1368,8 +1404,6 @@ Subject / BodyText取得
 Template Scanner
     ↓
 TemplateScanResult
-    ↓
-VariableDefinition / OptionMaster取得
     ↓
 Configuration Validator
     ↓
@@ -1411,6 +1445,22 @@ Display
     ↓
 ツール責任範囲終了
 ```
+
+メール生成時のInput Validatorは、生成開始時にData Accessから取得したCurrent VariableDefinition / OptionMasterを使用する。
+
+このCurrent Dataは、同一メール生成処理内のConfiguration Validatorでも再利用する。
+
+これにより、UserForm表示後に以下が変更された場合でもCurrent設定でFail Fastできる。
+
+- Required
+- Type
+- SelectのActive Option
+- VariableDefinition設定
+- OptionMaster設定
+
+Current Dataを保持するための新しい永続Snapshot / Version管理はMVPでは導入しない。
+
+1回のメール生成処理内で取得したCurrent Dataを、その処理中のInput Validation / Configuration Validationで共有する。
 
 目的は、UserForm表示後にOFTが変更された場合でも以下を保証することである。
 
@@ -1642,7 +1692,7 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 31. MVP Design完了条件
 
-本Design v0.1.4は、以下を満たした時点で基本設計完了とする。
+本Design v0.1.5は、以下を満たした時点で基本設計完了とする。
 
 - Requirements v0.1.6の主要要件に対応するコンポーネントが定義されている
 - UI / Core / Excel / Outlook / WordEditorの責務境界が定義されている
@@ -1660,15 +1710,17 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 - VariableDefinition自動管理列のSync更新規則が定義されている
 - Unused Variableの通常非表示 / 必要時確認方針が定義されている
 - 新規Requirement Gapが残っていない
+- メール生成時のInput ValidatorがCurrent VariableDefinition / OptionMasterを使用することが定義されている
+- Input State保持期間が「Workbookを閉じるまで」で統一されている
 
 ## 32. 次工程
 
-`MVP Requirements v0.1.6` と本 `MVP Design v0.1.4`、および `Technical Spike A v0.2 CLOSED` の最終整合性を再確認した後、`MVP Test Specification v0.1` を作成する。
+`MVP Requirements v0.1.6` と本 `MVP Design v0.1.5`、および `Technical Spike A v0.2 CLOSED` の最終整合性を確認した後、`MVP Test Specification v0.1` を作成する。
 
 ```text
 MVP Requirements v0.1.6
         +
-MVP Design v0.1.4
+MVP Design v0.1.5
         +
 Technical Spike A v0.2 CLOSED
         ↓
