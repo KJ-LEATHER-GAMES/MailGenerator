@@ -12,9 +12,11 @@
 | 起点リスク | RISK-DES-001 HTMLBody内のVariable表現 |
 | 主な関連要件 | FR-RENDER-BODY-001 / FR-RENDER-BODY-002 / FR-UNRESOLVED-001 / AC-016 / AC-017 / AC-018 / AC-019 |
 | 主な関連Design | Outlook Adapter / Template Scanner / Body Renderer / Unresolved Checker |
-| ステータス | 実施前 |
+| ステータス | **CLOSED（Technical Spike A：PASS）** |
+| Close日 | 2026-09-11 |
+| 採用技術方針 | **Route W：WordEditor** |
 | 本Spikeの決定対象 | MVPで採用するBody処理技術方針 |
-| 次工程 | Spike実施 → 技術方針決定 → Requirements / Design影響判定 → 必要文書改訂 → MVP Test Specification v0.1 |
+| 次工程 | Requirements Document Consistency Patch → Design Reopen / 改訂 → 整合性確認 → MVP Test Specification v0.1 |
 
 ---
 
@@ -287,23 +289,25 @@ Route Wが採用され、HTML Encode責務自体が不要となる場合は、�
 
 ## 8. 検証環境
 
-最低限、以下を記録してから実施する。
+本SpikeはMVP対象であるClassic Outlook上で実施済みである。OS / Excel / Outlookの詳細バージョン等は後日確認し、本節へ追記する。
+
+これらの未記入項目は再現性を高めるための環境メタデータであり、今回のTechnical DecisionをBlockingする条件とはしない。後日確認した環境情報がMVP対象環境との不整合を示した場合のみ、影響を再評価する。
 
 | 項目 | 実績記入欄 |
 |---|---|
-| OS |  |
-| Excelバージョン |  |
-| Excel 32bit / 64bit |  |
-| Classic Outlookバージョン |  |
-| Outlook 32bit / 64bit |  |
-| WordEditor利用可否 |  |
-| VBA実行元ブック |  |
-| OFT保存場所 |  |
-| OFTファイル名 |  |
-| 実施日 |  |
-| 実施者 |  |
+| OS | 後日確認 |
+| Excelバージョン | 後日確認 |
+| Excel 32bit / 64bit | 後日確認 |
+| Classic Outlookバージョン | 後日確認 |
+| Outlook 32bit / 64bit | 後日確認 |
+| WordEditor利用可否 | **利用可（Display前に `Inspector.WordEditor` 取得成功）** |
+| VBA実行元ブック | 後日確認 |
+| OFT保存場所 | `C:\Users\monsi\OneDrive\ドキュメント\MailGenerator` |
+| OFTファイル名 | `temp.oft` |
+| 実施日 | 2026-09-10 |
+| 実施者 | 後日確認 |
 
-New Outlookではなく、MVP対象であるClassic Outlookを使用する。
+New Outlookではなく、MVP対象であるClassic Outlookを使用した。
 
 ---
 
@@ -993,30 +997,116 @@ Requirement Gap例：
 
 | Test ID | Route H | Route W | Finding |
 |---|---|---|---|
-| TSA-001 | 未実施 | 未実施 |  |
-| TSA-002 | 未実施 | 未実施 |  |
-| TSA-003 | 未実施 | 未実施 |  |
-| TSA-004 | 未実施 | 未実施 |  |
-| TSA-005 | 未実施 | 未実施 |  |
-| TSA-006 | 未実施 | 未実施 |  |
-| TSA-007 | 未実施 | 未実施 |  |
-| TSA-008 | 未実施 | 未実施 |  |
-| TSA-009 | 未実施 | 未実施 |  |
-| TSA-010 | 未実施 | 未実施 |  |
-| TSA-011 | 未実施 | 未実施 |  |
+| TSA-001 | PASS | PASS | 同一OFTから両Route用MailItemを生成できた。 |
+| TSA-002 | PASS | PASS | Route HはSubject / HTMLBody取得成功（HTMLBody length：48894）。Route WはSubject / Inspector / WordEditor / Word Document取得成功（Word Content length：238）。Display前のWordEditorアクセスも成立した。 |
+| TSA-003 | **FAIL** | **PASS** | Route Hでは `{{ModelName}}` / `{{GateDate}}` がHTMLタグにより分断され、連続文字列として検索不能。Route Wでは全Variableを表示文字列として検出できた。 |
+| TSA-004 | **FAIL** | **PASS** | Route H Scannerはタグ分断VariableをInvalid Candidateとして扱い、通常OFTのVariable一覧を正しく構成できなかった。Route WはModelName / GateDate / DepartmentをCase Insensitiveで正しく統合・Location判定できた。 |
+| TSA-005 | **FAIL** | **PASS** | Route Hの自動判定はPASS表示だったがFalse Positive。Outlook表示上、Bodyに未置換Variableが残存したため最終評価をFAILへ補正。Route Wは `Range.Find` + `Range.Text` で全出現箇所を置換した。 |
+| TSA-006 | PASS | PASS | Route Hでは `A&B <TEST>` を `A&amp;B &lt;TEST&gt;` へEncodeできた。Route WではHTML Encodeなしで `A&B <TEST>` を意図した表示文字列として設定できた。 |
+| TSA-007 | **N/A（評価不能）** | **PASS** | Route HはBody置換自体が成立せず、置換後書式維持を評価できないためN/A。Route Wは改行・段落・フォント・文字サイズ・太字・文字色・箇条書き・表の維持を目視確認した。 |
+| TSA-008 | **FAIL** | **PASS** | Route Hの自動判定はPASS表示だったが、タグ分断した未置換Variableを検出できないFalse Negativeを確認。Route Wは正常系0件、異常系3件を検出した。 |
+| TSA-009 | PASS | PASS | 両RouteでMailItem.Display成功。自動送信は発生しなかった。Route Hは表示自体は可能だがBody未置換が残存。 |
+| TSA-010 | PASS | PASS | Scan用MailItemを保存せず破棄できた。Route WではDrafts 15→15、Inspectors 1→1で、Inspector / WordEditor取得による残存副作用なし。 |
+| TSA-011 | N/A | N/A | Non-Gating探索試験。Route HがMandatory / Critical Testで不成立、Route WのみがMandatory Gateを満たしたためRoute選定に追加Evidenceは不要と判断し、実施しない。 |
+
+#### TSA-003 Route H Raw HTML Evidence
+
+Outlook画面上では連続したVariableとして見える一部文字列が、HTMLBody内部では次のように分断されていた。
+
+```html
+{{<span class=SpellE>ModelName</span>}}
+{{<span class=SpellE>GateDate</span>}}
+```
+
+Route Hでの検索結果例：
+
+```text
+{{ModelName}} : NOT FOUND
+{{MODELNAME}} : FOUND
+{{GateDate}} : NOT FOUND
+{{Department}} : FOUND
+{{department}} : FOUND
+```
+
+Route Wでは同一OFT上の全対象Variableを検出できた。
+
+```text
+{{ModelName}} : FOUND
+{{MODELNAME}} : FOUND
+{{GateDate}} : FOUND
+{{Department}} : FOUND
+{{department}} : FOUND
+```
+
+#### TSA-004 Scanner Evidence
+
+Route H：
+
+```text
+ValidVariables:
+  ModelName [Both]
+  GateDate [Subject]
+  Department [Body]
+
+InvalidCandidates: 4
+  Body: {{<span class=SpellE>ModelName</span>}}
+  Body: {{<span class=SpellE>GateDate</span>}}
+  Body: {{<span class=SpellE>ModelName</span>}}
+  Body: {{<span class=SpellE>GateDate</span>}}
+```
+
+Route W：
+
+```text
+ValidVariables:
+  ModelName [Both]
+  GateDate [Both]
+  Department [Body]
+
+InvalidCandidates: 0
+```
+
+#### TSA-005 Route W Replacement Evidence
+
+```text
+{{ModelName}} : before=5 / after=0
+{{GateDate}} : before=3 / after=0
+{{Department}} : before=2 / after=0
+```
+
+#### TSA-008 Route W Unresolved Check Evidence
+
+```text
+Route W full     : 0
+Route W negative : 3
+```
+
+#### TSA-010 Route W Lifecycle Evidence
+
+```text
+Drafts before     : 15
+Inspectors before : 1
+
+Drafts after scan     : 15
+Inspectors after scan : 1
+```
 
 ### 20.2 Route比較
 
 | 判断軸 | Route H | Route W | 優位 |
 |---|---|---|---|
-| Requirements適合性 |  |  |  |
-| 通常利用時の安定性 |  |  |  |
-| 書式維持 |  |  |  |
-| Template制約 |  |  |  |
-| Lifecycle / 副作用 |  |  |  |
-| Unresolved Check |  |  |  |
-| 実装・保守複雑性 |  |  |  |
-| Scope外ケース頑健性 |  |  |  |
+| Requirements適合性 | **不適合**。通常OFTでVariable検出・置換・Unresolved Checkが成立しない。 | **適合**。TSA-001〜010のMandatory Gateを満たす。 | **Route W** |
+| 通常利用時の安定性 | **低い**。通常入力したVariableでもOutlook / Word由来HTMLタグにより分断され得る。 | **高い**。Word Document上の表示文字列として全Variableを安定して検出・置換できた。 | **Route W** |
+| 書式維持 | **評価不能**。Body置換自体が成立しなかった。 | **成立**。Requirements対象の基本書式を維持した。 | **Route W** |
+| Template制約 | HTMLBody方式を維持するには、タグ分断回避等の追加制約または複雑な正規化処理が必要になる可能性がある。 | 今回の通常OFTでは新しい利用者向けTemplate制約を要求しない。 | **Route W** |
+| Lifecycle / 副作用 | 問題なし。 | 問題なし。Display前WordEditor取得後もDraft / Inspector残存なし。 | 同等 |
+| Unresolved Check | **不成立**。タグ分断Variableを検出できずFalse Negativeが発生。 | **成立**。正常系0件、異常系で残存Variable検出。 | **Route W** |
+| 実装・保守複雑性 | String / Regex中心で相対的に単純。ただし通常OFTを安定処理するには追加対策が必要となり、単純性の利点が失われる。 | Word Object Model依存が増えるが、Scanner / Renderer / Unresolved Checkerを同一Bodyモデルで統一できる。 | Route Hは表面的には単純。ただし**採用判断ではWを優先** |
+| Scope外ケース頑健性 | TSA-011未実施。 | TSA-011未実施。 | N/A |
+
+**総合評価**
+
+仕様書§13の優先順位に従い、Requirements適合性、通常利用時の安定性、書式維持を実装の単純さより優先する。Route HはCriticalなMandatory Testで不成立であり、Route WのみがMandatory Gateを満たすため、Route Wを採用する。
 
 ### 20.3 Technical Decision
 
@@ -1024,34 +1114,69 @@ Requirement Gap例：
 Body処理技術方針：
 
 [ ] Route H：HTMLBody
-[ ] Route W：WordEditor
+[x] Route W：WordEditor
 [ ] 採用方式なし
 ```
 
 **判断根拠**
 
 ```text
+1. Route Hでは通常作成したOFTでVariable内部にHTMLタグが挿入され、
+   Scanner / Renderer / Unresolved Checkerが安定して成立しなかった。
 
+2. Route HのTSA-005 / TSA-008では、検出不能なVariableを「残存0件」と扱う
+   False Positive / False Negativeが発生し、通常利用時の信頼性を満たさない。
+
+3. Route WではWord Document上の表示文字列を基準に、Variable検出、
+   Case Insensitive処理、Range置換、特殊文字、Unresolved Checkが成立した。
+
+4. Route WではRequirements対象の基本書式を維持でき、
+   Display前のInspector / WordEditor取得によるDraft残存等の副作用も確認されなかった。
+
+5. Route WはWord Object Model依存により実装複雑性が増えるが、
+   §13で定義した優先順位ではRequirements適合性・安定性・書式維持を
+   実装の単純さより優先するため、Route WをMVPのBody処理方式として採用する。
 ```
 
 ### 20.4 Technical Findings
 
 | Finding ID | 内容 | 分類 | 影響 | 対応 |
 |---|---|---|---|---|
-| TF-A-001 |  |  |  |  |
+| **TF-A-001** | Classic Outlookで通常作成したOFTにおいて、画面上は連続して見える `{{VariableName}}` の内部へ `<span class=SpellE>...</span>` 等のHTMLタグが挿入され、HTMLBody上ではVariable文字列が分断されるケースを確認した。 | **Design Finding** | HTMLBodyを直接扱うTemplate Scanner / Body Renderer / Unresolved Checkerでは、通常利用ケースでもVariableの検出・置換・残存確認が不安定になる。現行RISK-DES-001が実発生したEvidenceとなる。 | Route Hを不採用としRoute Wを採用。MVP Design v0.1.2をReopenし、Body処理をWordEditor前提へ改訂する。 |
+| **TF-A-002** | Route HのSpikeコードでは、タグ分断により最初から検出できないVariableを評価母集団に含められず、TSA-005 / TSA-008がコード上PASSとなるFalse Positiveを確認した。 | **Observation** | 「残存0件」と「検出不能」を区別しない判定ではEvidenceを誤解するリスクがある。 | TSA-005 / TSA-008の最終結果をRaw HTML / Outlook表示Evidenceに基づきFAILへ補正。Route H不採用のためSpikeコード自体の修正は行わない。今後のTest Specificationでは検出成立性と残存0件を分離して確認する。 |
 
 ### 20.5 Requirements / Design Impact
 
 ```text
 Requirements：
 [ ] 変更不要
-[ ] Document Consistency Patch必要
+[x] Document Consistency Patch必要
 [ ] Requirement Gapあり
 
 Design：
 [ ] Current Design維持
-[ ] Design Reopen必要
+[x] Design Reopen必要
 ```
+
+**Requirements判定**
+
+- HTMLBody → WordEditorは内部技術方式の変更であり、利用者から見たMVPの要求振る舞い自体は変更しない。
+- Route W成立のための新しい利用者向けTemplate制約は確認されていない。
+- よってRequirement Gapは発生しない。
+- `HTMLBody` / `HTML Encode` 等のDesign / Implementation固有表現は、Requirement内容を維持したまま技術非依存表現へ修正するため、Document Consistency Patchとする。
+
+**Design判定**
+
+Route W採用は現行MVP Design v0.1.2のHTMLBody直接処理方式と不一致であるため、Design Reopenを必須とする。少なくとも以下を改訂対象として確認する。
+
+- Outlook Adapter
+- Template Scanner
+- Render Engine
+- Body Renderer
+- Unresolved Checker
+- MailItem / Inspector / WordEditor取得シーケンス
+- HTML Encode責務
+- RISK-DES-001
 
 ---
 
@@ -1060,7 +1185,7 @@ Design：
 ```text
 Technical Spike A Result：
 
-[ ] PASS
+[x] PASS
 [ ] CONDITIONAL PASS
 [ ] FAIL
 ```
@@ -1068,20 +1193,50 @@ Technical Spike A Result：
 ### 採用技術方針
 
 ```text
+Route W：WordEditor
 
+BodyのScanner / Renderer / Unresolved Checkerは、
+Inspector.WordEditor / Word Document / Rangeを利用する方式を採用する。
+
+Subjectは従来どおりPlain Textとして処理する。
 ```
 
 ### 判定根拠
 
 ```text
+- TSA-001〜TSA-010をRoute H / Route Wで実施した。
+- Route HはTSA-003 / TSA-004 / TSA-005 / TSA-008で不成立となり、
+  Critical Testを含むMandatory Gateを満たさない。
+- Route WはTSA-001〜TSA-010のMandatory Gateをすべて満たした。
+- Route Wは新しい利用者向け制約を追加せず、Requirementsで保証する
+  Variable置換・基本書式維持・Unresolved Check・Lifecycleを成立させた。
+- §13判断軸ではRequirements適合性、通常利用時の安定性、書式維持で
+  Route Wが明確に優位である。
+- 技術方針の根拠となるRaw HTML、Scanner、置換件数、Unresolved Check、
+  Draft / Inspector数のEvidenceが残っている。
+- Requirements / Designへの影響範囲を特定できた。
 
+以上によりTechnical Spike AをPASSとし、Closeする。
+```
+
+### TSA-011の扱い
+
+```text
+TSA-011：N/A（実施不要）
+
+TSA-011はNon-Gatingの探索試験である。
+Route HはMandatory / Critical Testで既に不成立となり、
+Route WのみがMandatory Gateを満たしたため、Route選定に追加Evidenceを必要としない。
+
+Scope外ケースの頑健性確認はMVP技術方針決定には不要と判断し、
+必要最小限のSpikeとするため実施しない。
 ```
 
 ### Requirements
 
 ```text
 [ ] 維持
-[ ] Document Consistency Patch
+[x] Document Consistency Patch
 [ ] Requirement Gap
 ```
 
@@ -1089,32 +1244,56 @@ Technical Spike A Result：
 
 ```text
 [ ] 維持
-[ ] Reopen
+[x] Reopen
 ```
 
 ### 次アクション
 
 ```text
+1. MVP Requirements v0.1.4の技術固有表現を確認し、
+   利用者要求を変更しないDocument Consistency Patchを作成する。
 
+2. MVP Design v0.1.2をReopenし、
+   HTMLBody方式からWordEditor方式へ必要最小限のDesign改訂を行う。
+
+3. Requirements / Design / Technical Spike A間の整合性を確認する。
+
+4. 整合性確認完了後、MVP Test Specification v0.1を作成する。
+
+5. §8のOS / Excel / Classic Outlook等の詳細環境情報は後日追記する。
+   環境情報追記は本SpikeのCloseをBlockingしない。
+```
+
+### Close記録
+
+```text
+Status     : CLOSED
+Result     : PASS
+Route      : Route W / WordEditor
+Close Date : 2026-09-11
 ```
 
 ---
 
 ## 22. 完了条件
 
-以下をすべて満たした時点でTechnical Spike Aを完了とする。
+以下をすべて満たしたため、Technical Spike Aを完了とする。
 
-- TSA-001〜TSA-010をRoute H / Route Wで実施済み
-- TSA-011を探索試験として実施済み、または実施不要理由を記録済み
-- 同一OFT / 同一入力値による比較Evidenceが残っている
-- Route H / Route Wを判断軸で比較済み
-- Body処理技術方針を決定済み
-- Technical Findingを分類済み
-- PASS / CONDITIONAL PASS / FAILを判定済み
-- Requirements影響を判定済み
-- Design維持 / Reopenを判定済み
-- Requirement Gap有無を判定済み
-- 次アクションを記録済み
+- [x] TSA-001〜TSA-010をRoute H / Route Wで実施済み
+- [x] TSA-011は実施不要理由を記録済み
+- [x] 同一OFT / 同一入力値による比較Evidenceが残っている
+- [x] Route H / Route Wを判断軸で比較済み
+- [x] Body処理技術方針を決定済み
+- [x] Technical Findingを分類済み
+- [x] PASS / CONDITIONAL PASS / FAILを判定済み
+- [x] Requirements影響を判定済み
+- [x] Design維持 / Reopenを判定済み
+- [x] Requirement Gap有無を判定済み
+- [x] 次アクションを記録済み
+
+**Technical Spike A：CLOSED / PASS**
+
+> §8のOS / Excel / Classic Outlook等の詳細バージョンは後日追記する。これは再現性メタデータの補完であり、今回のTechnical DecisionおよびClose判定をBlockingしない。
 
 Spike完了後の標準フローは以下とする。
 
