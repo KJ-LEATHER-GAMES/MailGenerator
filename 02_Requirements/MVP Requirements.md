@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.2 日本語版
+# MVP Requirements v0.1.3 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.2 |
+| バージョン | v0.1.3 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +15,15 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.3 更新概要
+
+v0.1.3では、MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで検出した文書責務上の不整合を修正した。利用者向けの新規Requirementは追加していない。
+
+1. §32の引き継ぎ事項を、MVP Design / Implementation / MVP Test Specificationの3工程へ再分類した
+2. FR-OUTLOOK-001から内部的なMailItem生成タイミングの制約を外し、ユーザーへDisplayするための成功条件を明確化した
+
+---
 
 ### v0.1.2 更新概要
 
@@ -856,7 +865,9 @@ SubjectまたはBodyに `{{VariableName}}` 形式の未置換変数が1件でも
 
 ### FR-OUTLOOK-001
 
-すべてのValidationおよび未置換変数チェックに成功した場合、指定されたOFTを基にOutlook MailItemを生成する。
+メール生成処理では、指定されたOFTを基にOutlook MailItemを利用する。内部的なMailItem生成タイミングはMVP Designに委ねる。
+
+Validation、Render、未置換変数チェックに成功した場合のみ、生成結果をClassic Outlook上へDisplayする。
 
 OFTが存在しない場合はFR-TPL-002に従い、メール生成を開始しない。
 
@@ -1176,9 +1187,11 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ---
 
-## 32. MVP Designへ引き継ぐ事項
+## 32. 後続工程へ引き継ぐ事項
 
-以下は本Requirementsでは決定せず、MVP Designで具体化する。
+本Requirementsでは利用者から見た振る舞いまでを定義し、具体的な実現方式は責務に応じて後続工程へ引き継ぐ。
+
+### 32.1 MVP Designで具体化する事項
 
 1. VBAモジュール構成
 2. クラス構成
@@ -1191,21 +1204,27 @@ MVP完了後、必要性を評価して以下を検討する。
 9. Dictionary等の内部データ構造
 10. 動的UserForm生成方式
 11. コントロールとVariableNameの関連付け方法
-12. Validationエラー強調方式
-13. Date変換処理
-14. 定義済みDate Formatの実装方法
-15. 曜日表記生成方法
-16. HTMLBody置換方式
-17. HTML Encode方式
-18. OFT読み込み処理
-19. Outlook Object Model利用方法
-20. エラーコード・例外処理
-21. Unused表示切替方法
-22. 設定完了状態の内部判定方式
-23. SortOrder同順位時のVariableDefinition行順取得方式
-24. 同期結果UI
-25. OFT不存在時の復旧UI
-26. テストケース設計
+12. Date変換処理
+13. 定義済みDate Formatの実装方法
+14. HTMLBody置換方式
+15. OFT読み込み処理
+16. Outlook Object Model利用方法
+17. 設定完了状態の内部判定方式
+18. SortOrder同順位時のVariableDefinition行順取得方式
+
+### 32.2 Implementationで具体化する事項
+
+1. Validationエラー強調の具体的な表示方式・色
+2. 曜日表記生成の具体的なVBA実装
+3. HTML Encode関数の具体実装
+4. エラーコード体系および例外捕捉の具体コード
+5. Unused表示切替の具体的なUI実装
+6. 同期結果UIの具体表示
+7. OFT不存在時の具体的な復旧UI
+
+### 32.3 MVP Test Specificationで具体化する事項
+
+1. Acceptance Criteriaを検証するテストケース設計
 
 ---
 

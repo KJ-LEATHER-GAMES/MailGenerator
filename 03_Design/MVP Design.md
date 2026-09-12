@@ -1,4 +1,4 @@
-# MVP Design v0.1.1 日本語版
+# MVP Design v0.1.2 日本語版
 
 ## 1. 文書情報
 
@@ -6,14 +6,23 @@
 |---|---|
 | 文書名 | MVP Design |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.1 |
+| バージョン | v0.1.2 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.2 日本語版 |
+| 要件文書 | MVP Requirements v0.1.3 日本語版 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.2 更新概要
+
+MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで残ったDesign側の2件を局所修正し、MVP Requirements v0.1.3との文書参照を更新した。新しいDesign Decisionは追加していない。
+
+1. `Required=False` かつ空欄 / 未選択の入力値はValue Formatterで空文字列 `""` とし、RendererがVariableを空文字列へ置換する規則を明示
+2. 手動同期およびUserForm起動シーケンスで、OFT不存在時にError Resultを返して後続処理を停止するFail Fast分岐を明示
 
 ---
 
@@ -30,7 +39,7 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.2` を満たすためのMVP基本設計を定義する。
+本書は、`MVP Requirements v0.1.3` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -829,6 +838,10 @@ Value Formatter
 Formatted Value
 ```
 
+`Required=False` かつRaw Inputが空欄 / 未選択の場合は、Date変換やSelect値変換を行わず、Formatted Valueとして空文字列 `""` を返す。Rendererは対象の `{{VariableName}}` をこの空文字列で置換する。
+
+これにより、任意項目が未入力でも未置換Variableを残さず、Unresolved Checkerのエラー対象としない。
+
 ### 21.2 Type別
 
 Text：入力文字列を出力値とする。
@@ -985,6 +998,10 @@ TemplatePath取得
 ↓
 OFT存在確認
 ↓
+OFT存在？
+├─ No → Error Result → UI通知 → Stop
+└─ Yes
+    ↓
 Outlook Adapter
 ↓
 Scan用MailItem生成
@@ -1029,6 +1046,10 @@ TemplatePath取得
 ↓
 OFT存在確認
 ↓
+OFT存在？
+├─ No → Error Result → UI通知 → Stop
+└─ Yes
+    ↓
 Outlook Adapter
 ↓
 Scan用MailItem生成
@@ -1259,7 +1280,7 @@ MVP実装時に、実際のOFTで以下を確認する。
 - 通常入力した `{{VariableName}}` がHTMLBody内で連続文字列として保持されること
 - 書式設定により変数文字列が分断されないこと
 
-MVP Requirements v0.1.2では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
+MVP Requirements v0.1.3では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
 
 上記を超える新しい利用者向けテンプレート記述制約が必要になった場合は、Design内で決定せずRequirement Gapとして扱う。
 
@@ -1277,9 +1298,9 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 31. MVP Design完了条件
 
-本Design v0.1.1は、以下を満たした時点で基本設計完了とする。
+本Design v0.1.2は、以下を満たした時点で基本設計完了とする。
 
-- Requirements v0.1.2の主要要件に対応するコンポーネントが定義されている
+- Requirements v0.1.3の主要要件に対応するコンポーネントが定義されている
 - UI / Core / Excel / Outlookの責務境界が定義されている
 - Template Scan / Sync / UserForm / Render / Outlook Displayの主要フローが定義されている
 - Excelテーブル構造が定義されている
@@ -1293,12 +1314,12 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 32. 次工程
 
-MVP Design v0.1.1への修正後は、以下の順を推奨する。
+MVP Design v0.1.2への修正後は、以下の順を推奨する。
 
 ```text
-MVP Requirements v0.1.2
+MVP Requirements v0.1.3
         ↓
-MVP Design v0.1.1
+MVP Design v0.1.2
         ↓
 Design / Requirements 最終整合性レビュー
         ↓
