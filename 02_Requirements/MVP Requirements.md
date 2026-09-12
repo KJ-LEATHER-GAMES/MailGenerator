@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.1 日本語版
+# MVP Requirements v0.1.2 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.1 |
+| バージョン | v0.1.2 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +15,15 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.2 更新概要
+
+v0.1.2では、MVP Requirements v0.1.1 × MVP Design v0.1 の整合性レビューで検出した2件のRequirement Gapを確定し、関連箇所へ反映した。
+
+1. `Required=False` の場合、Date / Selectを含め空欄・未選択を有効とし、値が入力されている場合のみTypeに応じたValidationを行う
+2. Body置換後に保証する本文書式の範囲を、代表的な基本書式へ明確化し、MVP保証対象外を定義する
+
+---
 
 ### v0.1.1 更新概要
 
@@ -723,12 +732,24 @@ UserFormに「入力クリア」機能を設ける。
 
 メール生成前にすべての入力値をValidationする。
 
+`Required` と `Type` のValidation責務を以下のとおり分離する。
+
+- `Required=True` の場合、未入力または未選択はValidation Errorとする
+- `Required=False` の場合、Date / Selectを含め、空欄または未選択を有効とする
+- `Required=False` でも値が入力・選択されている場合は、Typeに応じたValidationを行う
+
 MVPでは少なくとも以下を対象とする。
 
-- Required項目の未入力
-- Date型として解釈できない値
-- Select型の未選択
-- Select型の無効値
+- Required項目の未入力 / 未選択
+- 値が存在するDate型で、日付として解釈できない値
+- 値が存在するSelect型で、OptionMasterの有効Optionに存在しない値
+
+したがって、以下は正常入力として扱う。
+
+```text
+Type = Date   / Required = False / Value = 空欄
+Type = Select / Required = False / Value = 未選択
+```
 
 ### FR-VAL-002 エラー一括表示
 
@@ -781,9 +802,25 @@ VariableNameの照合はFR-VAR-004に従い、大文字・小文字を区別し�
 
 ### FR-RENDER-BODY-002
 
-OFTの本文書式を可能な限り維持する。
+Body内のVariable置換では、入力値によってHTML構造を破壊せず、Variable置換部分以外の代表的な基本書式を維持する。
 
-HTML Bodyを扱う場合、入力値によってHTML構造を破壊しないことを要件とする。
+MVPで書式維持の確認対象とする代表的な基本書式は以下とする。
+
+- 改行
+- 段落
+- フォント
+- 文字サイズ
+- 太字
+- 文字色
+- 箇条書き
+- 表
+
+以下はMVPでの書式維持保証対象外とする。
+
+- 埋め込み画像
+- 複雑なHTML構造
+- 特殊なOutlook固有書式
+- `{{VariableName}}` の文字列途中がHTMLタグ等によって分断されるケース
 
 HTML Encode等の具体的な処理方式はMVP Designで決定する。
 
@@ -1078,9 +1115,11 @@ Subject内の全変数を正しく置換できる。
 
 ### AC-017 Body置換
 
-Body内の全変数を正しく置換でき、OFTの主要な本文書式が維持される。
+代表的なOFTを用いたテストにおいて、Body内の全変数を正しく置換でき、Variable置換部分以外についてFR-RENDER-BODY-002で定義した基本書式が維持される。
 
 大文字・小文字のみが異なる記述も、同一VariableNameとして置換できる。
+
+埋め込み画像、複雑なHTML構造、特殊なOutlook固有書式、およびVariable文字列途中がHTMLタグ等で分断されるケースは、本Acceptance CriteriaのPass判定対象外とする。
 
 ### AC-018 未置換防止
 
@@ -1211,9 +1250,9 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ## 34. 次工程
 
-本Requirements確定後、次工程としてMVP Designを作成する。
+本Requirements確定後、次工程としてMVP Designへ変更内容を反映し、Requirements / Designの最終整合性を確認する。
 
-MVP Designでは、特に以下を優先して設計する。
+MVP Designでは、特に以下の責務・処理経路との整合を確認する。
 
 ```text
 VariableDefinition

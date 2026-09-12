@@ -1,4 +1,4 @@
-# MVP Design v0.1 日本語版
+# MVP Design v0.1.1 日本語版
 
 ## 1. 文書情報
 
@@ -6,10 +6,10 @@
 |---|---|
 | 文書名 | MVP Design |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1 |
+| バージョン | v0.1.1 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.1 日本語版 |
+| 要件文書 | MVP Requirements v0.1.2 日本語版 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
@@ -17,9 +17,20 @@
 
 ---
 
+### v0.1.1 更新概要
+
+MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果、およびRequirements v0.1.2で確定したRequirement Gapを反映した。
+
+1. UserForm起動前にOFTを再取得・再Scanし、その `TemplateScanResult` をConfiguration Validatorへ渡す処理経路を明示
+2. VariableName Syntaxの判定責務をTemplate Scannerへ一本化し、Configuration ValidatorはScan結果を評価する責務へ整理
+3. `Required=False` の空欄 / 未選択を有効とし、値が存在する場合のみType ValidationするルールをInput Validatorへ反映
+4. Body置換時に維持する代表的な基本書式とMVP保証対象外をRequirements v0.1.2に合わせて明示
+
+---
+
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.1` を満たすためのMVP基本設計を定義する。
+本書は、`MVP Requirements v0.1.2` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -88,7 +99,7 @@ MVPでは、Requirementsを満たすために必要な構造のみ実装する�
 
 Design検討中に、実装方法ではなく利用者から見た新しい振る舞いを決める必要が生じた場合、その論点をDesign内で決定せず、`Requirement Gap` としてRequirements側へ切り出す。
 
-本v0.1作成時点で、Design Questions 15件から新規Requirement Gapは発生していない。
+Design Questions 15件の検討時点では新規Requirement Gapは発生していなかった。後続のRequirements / Design整合性レビューで検出したRequirement Gap 2件は、MVP Requirements v0.1.2で解消済みとする。
 
 ---
 
@@ -500,6 +511,25 @@ VariableNameはCase Insensitiveとする。
 
 同一Variableが、SubjectのみならSubject、BodyのみならBody、双方ならBothとして統合される。
 
+### 14.6 TemplateScanResult
+
+Template Scannerは、後続処理がOutlook Object Modelや正規表現処理へ依存せず判定できるよう、Scan結果を軽量なデータとして返す。
+
+概念上、少なくとも以下を保持可能とする。
+
+```text
+TemplateScanResult
+├─ ValidVariables
+├─ InvalidCandidates
+└─ Locations
+```
+
+- `ValidVariables`：命名規則を満たしたVariable一覧
+- `InvalidCandidates`：`{{...}}` 候補のうち命名規則違反となった一覧
+- `Locations`：各VariableのSubject / Body / Both情報
+
+VariableName Syntaxの判定責務はTemplate Scannerに置き、Configuration ValidatorではRegex等による再判定を行わない。
+
 ---
 
 ## 15. Sync Engine設計
@@ -572,16 +602,31 @@ Configuration Validationは一元管理する。
 
 ```text
 ValidateTemplate()
-ValidateVariableSyntax()
+ValidateTemplateScanResult()
 ValidateVariableDefinition()
 ValidateDateConfiguration()
 ValidateOptionMaster()
 ```
 
-### 16.3 主な確認内容
+`ValidateTemplateScanResult()` はTemplate Scannerが返したScan結果を評価する。
+
+Configuration Validator自身は、OFTを開く処理、Subject / HTMLBodyを取得する処理、Variable候補の抽出、VariableName SyntaxのRegex判定を行わない。
+
+### 16.3 入力と主な確認内容
+
+Configuration Validatorは、Application層から少なくとも以下の現在値を受け取って整合性を判定する。
+
+```text
+TemplatePath / OFT存在確認結果
+TemplateScanResult
+VariableDefinition
+OptionMaster
+```
+
+主な確認内容：
 
 - OFT存在
-- 不正Variable記法なし
+- `TemplateScanResult.InvalidCandidates` が0件であること
 - Template / VariableDefinition整合
 - Active変数のType
 - Active変数のDisplayName
@@ -590,6 +635,8 @@ ValidateOptionMaster()
 - Date型Format
 - Select型OptionSource
 - Active Option有無
+
+TemplateのVariable Syntaxを判定する責務はTemplate Scanner、Scan結果をConfiguration Errorとして扱い後続処理を停止するか判断する責務はConfiguration Validator / Application層とする。
 
 ### 16.4 SortOrder
 
@@ -705,10 +752,19 @@ UserForm
 
 ### 19.2 Validation項目
 
-- Required未入力
-- Date型として解釈不能
-- Select未選択
-- Select無効値
+`Required` と `Type` のValidationを以下の順で扱う。
+
+1. `Required=True` で未入力 / 未選択の場合はError
+2. `Required=False` で空欄 / 未選択の場合は正常としてType Validationを行わない
+3. 値が存在する場合のみTypeに応じたValidationを行う
+
+対象：
+
+- Required=Trueの未入力 / 未選択
+- 値が存在するDate型で、日付として解釈不能
+- 値が存在するSelect型で、OptionMasterの有効Optionに存在しない値
+
+したがって、`Required=False` のDate空欄およびSelect未選択は正常とする。
 
 ### 19.3 UI側責務
 
@@ -807,6 +863,21 @@ Formatted ValueをSubject内の対象VariableへCase Insensitiveで全出現箇�
 ### 22.3 Body Renderer
 
 Formatted ValueをHTML Encodeした後、HTMLBody内の対象VariableへCase Insensitiveで全出現箇所置換する。
+
+置換はVariable文字列を対象とした局所置換とし、Variable置換部分以外のHTMLBodyを意図的に再構築・再整形しない。
+
+MVPでは、Requirements FR-RENDER-BODY-002に従い、代表的なOFTを用いて以下の基本書式がVariable置換後も維持されることを確認する。
+
+- 改行
+- 段落
+- フォント
+- 文字サイズ
+- 太字
+- 文字色
+- 箇条書き
+- 表
+
+埋め込み画像、複雑なHTML構造、特殊なOutlook固有書式、およびVariable文字列途中がHTMLタグ等で分断されるケースはMVPの書式維持保証対象外とする。
 
 ### 22.4 HTML Encode
 
@@ -945,14 +1016,40 @@ UI通知
 
 ### 25.2 UserForm起動
 
+UserForm起動前には、現在のOFT内容を必ず再取得・再Scanし、その結果と現在のExcel設定をConfiguration Validatorへ渡す。
+
 ```text
 User
 ↓
 メール作成開始
 ↓
+Settings Data Access
+↓
+TemplatePath取得
+↓
+OFT存在確認
+↓
+Outlook Adapter
+↓
+Scan用MailItem生成
+↓
+Subject / HTMLBody取得
+↓
+Template Scanner
+↓
+Candidate Scan
+↓
+VariableName Validation
+↓
+TemplateScanResult
+↓
+Scan用MailItemを保存せず終了 / COM参照解放
+↓
+VariableDefinition Data Access / OptionMaster Data Access
+↓
 Configuration Validator
 ↓
-OFT / Template / VariableDefinition / OptionMaster確認
+OFT / TemplateScanResult / VariableDefinition / OptionMaster整合確認
 ↓
 Errorあり？
 ├─ Yes → UserForm起動せずUI通知
@@ -970,6 +1067,8 @@ InputValues復元
     ↓
 UserForm表示
 ```
+
+Configuration ValidatorはOFTを直接開かず、Template ScannerのRegex処理も再実行しない。Application層がOutlook Adapter、Template Scanner、Data Accessの結果を収集し、Configuration Validatorへ渡す。
 
 ### 25.3 メール生成
 
@@ -1160,7 +1259,9 @@ MVP実装時に、実際のOFTで以下を確認する。
 - 通常入力した `{{VariableName}}` がHTMLBody内で連続文字列として保持されること
 - 書式設定により変数文字列が分断されないこと
 
-利用者向けの新しいテンプレート記述制約を追加する必要が生じた場合は、Design内で決定せずRequirement Gapとして扱う。
+MVP Requirements v0.1.2では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
+
+上記を超える新しい利用者向けテンプレート記述制約が必要になった場合は、Design内で決定せずRequirement Gapとして扱う。
 
 ### RISK-DES-002 Outlook COM
 
@@ -1176,9 +1277,9 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 31. MVP Design完了条件
 
-本Design v0.1は、以下を満たした時点で基本設計完了とする。
+本Design v0.1.1は、以下を満たした時点で基本設計完了とする。
 
-- Requirements v0.1.1の主要要件に対応するコンポーネントが定義されている
+- Requirements v0.1.2の主要要件に対応するコンポーネントが定義されている
 - UI / Core / Excel / Outlookの責務境界が定義されている
 - Template Scan / Sync / UserForm / Render / Outlook Displayの主要フローが定義されている
 - Excelテーブル構造が定義されている
@@ -1192,18 +1293,22 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 32. 次工程
 
-MVP Design v0.1確定後は、以下の順を推奨する。
+MVP Design v0.1.1への修正後は、以下の順を推奨する。
 
 ```text
-MVP Requirements v0.1.1
+MVP Requirements v0.1.2
         ↓
-MVP Design v0.1
+MVP Design v0.1.1
         ↓
-Design / Requirements 整合性レビュー
+Design / Requirements 最終整合性レビュー
+        ↓
+Technical Spike A：OFT / HTMLBody
         ↓
 MVP Test Specification v0.1
         ↓
-Implementation Plan
+Technical Spike B / C
+        ↓
+Implementation Plan v0.1
         ↓
 VBA実装
 ```
