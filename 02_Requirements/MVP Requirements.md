@@ -1,4 +1,4 @@
-# MVP Requirements v0.1 日本語版
+# MVP Requirements v0.1.1 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1 |
+| バージョン | v0.1.1 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -16,17 +16,27 @@
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
 
+### v0.1.1 更新概要
+
+v0.1.1では、MVP Design開始前に残っていた以下の要件を確定し、関連箇所へ反映した。
+
+1. VariableNameの大文字・小文字は区別しない
+2. 命名規則違反の `{{...}}` をConfiguration Errorとして扱い、テンプレート依存処理を停止する
+3. Date型の出力Formatを6種類に確定する
+4. SortOrder未設定はConfiguration Error、重複は許可し、同順位ではVariableDefinitionテーブルの行順を使用する
+5. OFT不存在時はテンプレート依存処理を停止するが、設定確認・編集は可能とする
+
 ---
 
-# 2. 文書目的
+## 2. 文書目的
 
 本書は、定型メール作成ツールのMVPとして実装する機能、制約、振る舞い、および完了条件を定義する。
 
 本書では、
 
-- **MVPとして何を実現するか**
-- **利用者から見てどのように振る舞うか**
-- **何をMVP対象外とするか**
+- MVPとして何を実現するか
+- 利用者から見てどのように振る舞うか
+- 何をMVP対象外とするか
 
 を明確化する。
 
@@ -34,7 +44,7 @@ VBAのクラス構成、モジュール構成、具体的な制御実装等の�
 
 ---
 
-# 3. MVPの目的
+## 3. MVPの目的
 
 MVPでは、Outlookの定型メールテンプレートに含まれる変数をExcel上で管理し、UserFormから入力された値によってSubjectおよびBodyを置換し、安全に送信用メールを生成できることを確認する。
 
@@ -50,7 +60,7 @@ MVPで特に検証する価値は以下とする。
 
 ---
 
-# 4. システム概要
+## 4. システム概要
 
 基本処理フローを以下とする。
 
@@ -93,9 +103,9 @@ Unresolved Variable Check
 
 ---
 
-# 5. MVPスコープ
+## 5. MVPスコープ
 
-## 5.1 対象
+### 5.1 対象
 
 MVPでは以下を対象とする。
 
@@ -107,7 +117,7 @@ MVPでは以下を対象とする。
 - 1 Excelファイルにつき1 OFTテンプレート
 - Subjectの変数置換
 - Bodyの変数置換
-- `{{VariableName}}`形式の変数
+- `{{VariableName}}` 形式の変数
 - テンプレートからの変数抽出
 - VariableDefinitionとの差分同期
 - Text型
@@ -118,9 +128,7 @@ MVPでは以下を対象とする。
 - 未置換変数チェック
 - Outlook MailItemのDisplay
 
----
-
-## 5.2 MVP対象外
+### 5.2 MVP対象外
 
 以下はMVP対象外とする。
 
@@ -140,9 +148,9 @@ MVPでは以下を対象とする。
 
 ---
 
-# 6. テンプレート管理要件
+## 6. テンプレート管理要件
 
-## FR-TPL-001 OFTファイルの参照
+### FR-TPL-001 OFTファイルの参照
 
 MVPでは、Excelファイルからの相対パスによってOFTテンプレートを参照する。
 
@@ -162,17 +170,36 @@ Settings：
 TemplatePath = Templates\GateMail.oft
 ```
 
-### Acceptance Criteria
+**Acceptance Criteria**
 
 - Excelファイルの格納場所を基準にOFTを特定できる
 - Excelと関連フォルダ一式を別フォルダへ移動しても、相対関係が維持されていれば参照できる
-- OFTが存在しない場合は、処理を中止してユーザーへ通知する
+
+### FR-TPL-002 OFTファイル不存在時の動作
+
+Settingsに設定された相対パス上にOFTファイルが存在しない場合は、Configuration Errorとして扱う。
+
+OFTが存在しない状態では、テンプレートとの整合性を保証できないため、以下のテンプレート依存処理を実行不可とする。
+
+- 手動テンプレート同期
+- UserForm起動
+- メール生成
+
+一方で、復旧に必要な以下の確認・編集操作は可能とする。
+
+- Settingsの確認・編集
+- VariableDefinitionの確認・編集
+- OptionMasterの確認・編集
+
+OFT不存在時は、ユーザーが原因と必要な確認内容を理解できる形で通知する。
+
+OFT再指定専用UIやファイル選択ダイアログをMVP必須要件とはしない。具体的な復旧UIはMVP Designで決定する。
 
 ---
 
-# 7. 変数記法要件
+## 7. 変数記法要件
 
-## FR-VAR-001 変数表現
+### FR-VAR-001 変数表現
 
 テンプレート変数は以下の形式とする。
 
@@ -188,9 +215,7 @@ TemplatePath = Templates\GateMail.oft
 {{Department}}
 ```
 
----
-
-## FR-VAR-002 変数名命名規則
+### FR-VAR-002 変数名命名規則
 
 VariableNameは以下を満たすこと。
 
@@ -200,7 +225,7 @@ VariableNameは以下を満たすこと。
 
 基本ルール：
 
-```text
+```regex
 ^[A-Za-z][A-Za-z0-9_]*$
 ```
 
@@ -220,19 +245,64 @@ NG:
 
 DisplayNameはVariableNameとは分離し、日本語表示を許可する。
 
----
-
-## FR-VAR-003 同一変数の重複
+### FR-VAR-003 同一変数の重複
 
 同一VariableNameがSubjectまたはBody内に複数回存在しても、VariableDefinition上では1件として扱う。
 
 メール生成時には、該当するすべての出現箇所を同一値で置換する。
 
+### FR-VAR-004 VariableNameの大文字・小文字
+
+VariableNameの比較では、大文字・小文字を区別しない。
+
+以下は同一VariableNameとして扱う。
+
+```text
+{{ModelName}}
+{{modelname}}
+{{MODELNAME}}
+```
+
+VariableDefinitionに既存のVariableNameが存在する場合は、そのVariableNameの表記を正式な表記として保持する。
+
+少なくとも以下の処理では同一のCase Insensitiveルールを適用する。
+
+- Template Scanner
+- Template Sync
+- VariableDefinition照合
+- Subject / Body置換
+- 未置換変数チェック
+
+大文字・小文字のみが異なる別変数を定義することはできない。
+
+### FR-VAR-005 命名規則違反の変数記法
+
+テンプレート内に `{{...}}` 形式の記述が存在し、その内容がFR-VAR-002の命名規則を満たさない場合は、Configuration Errorとして扱う。
+
+例：
+
+```text
+{{123Name}}
+{{User-Name}}
+{{ユーザー名}}
+{{ UserName }}
+```
+
+命名規則違反を1件以上検出した場合、以下を実行不可とする。
+
+- 手動テンプレート同期
+- UserForm起動
+- メール生成
+
+エラー発生時は、検出した不正記述をユーザーが確認できるようにする。
+
+具体的なエラー表示方式、メッセージ形式、エラーコード等はMVP Designで決定する。
+
 ---
 
-# 8. 変数抽出要件
+## 8. 変数抽出要件
 
-## FR-SCAN-001 抽出対象
+### FR-SCAN-001 抽出対象
 
 変数抽出対象は以下とする。
 
@@ -241,9 +311,7 @@ DisplayNameはVariableNameとは分離し、日本語表示を許可する。
 
 To、CC、BCCは対象外とする。
 
----
-
-## FR-SCAN-002 抽出結果
+### FR-SCAN-002 抽出結果
 
 抽出処理では、
 
@@ -254,29 +322,33 @@ To、CC、BCCは対象外とする。
 
 出現位置は以下のいずれかとして扱う。
 
-```text
-Subject
-Body
-Both
-```
+- Subject
+- Body
+- Both
+
+### FR-SCAN-003 不正記法の検出
+
+変数抽出処理では、有効なVariableNameだけでなく、`{{...}}` 形式で記述されている命名規則違反の記述も検出できること。
+
+不正記法を検出した場合はFR-VAR-005に従う。
 
 ---
 
-# 9. テンプレート同期要件
+## 9. テンプレート同期要件
 
-## FR-SYNC-001 同期方式
+### FR-SYNC-001 同期方式
 
-テンプレート同期は自動ではなく、ユーザーが明示的に実行する**手動同期方式**とする。
+テンプレート同期は自動ではなく、ユーザーが明示的に実行する手動同期方式とする。
 
 同期処理では、テンプレートから抽出した変数と既存VariableDefinitionを比較し、差分を反映する。
 
----
+VariableNameの比較はFR-VAR-004に従い、大文字・小文字を区別しない。
 
-## FR-SYNC-002 新規変数
+### FR-SYNC-002 新規変数
 
 テンプレートに存在し、VariableDefinitionに存在しない変数は、新規変数として自動追加する。
 
-新規変数は**設定未完了状態**として扱う。
+新規変数は設定未完了状態として扱う。
 
 新規追加時点では、少なくとも以下は未設定とする。
 
@@ -286,9 +358,7 @@ Both
 
 設定完了まではUserForm利用対象としない。
 
----
-
-## FR-SYNC-003 継続変数
+### FR-SYNC-003 継続変数
 
 テンプレートにもVariableDefinitionにも存在する変数については、既存設定を保持する。
 
@@ -302,9 +372,7 @@ Both
 - SortOrder
 - Format
 
----
-
-## FR-SYNC-004 削除変数
+### FR-SYNC-004 削除変数
 
 VariableDefinitionに存在するがテンプレートから削除された変数は、削除せず `Unused` とする。
 
@@ -312,17 +380,15 @@ VariableDefinitionに存在するがテンプレートから削除された変�
 
 通常の設定表示ではUnused変数を非表示とし、必要時に確認可能とする。
 
----
-
-## FR-SYNC-005 Unused変数の復活
+### FR-SYNC-005 Unused変数の復活
 
 Unused変数と同一VariableNameがテンプレートへ再登場した場合は、Activeへ復帰させる。
 
 復帰時は既存設定を再利用する。
 
----
+VariableNameの同一性判定はFR-VAR-004に従う。
 
-## FR-SYNC-006 変数名変更
+### FR-SYNC-006 変数名変更
 
 変数名変更は自動推測しない。
 
@@ -343,9 +409,7 @@ PersonInCharge → New
 
 として扱う。
 
----
-
-## FR-SYNC-007 同期結果通知
+### FR-SYNC-007 同期結果通知
 
 手動同期完了後、少なくとも以下の分類で同期結果をユーザーへ通知する。
 
@@ -369,9 +433,18 @@ PersonInCharge → New
 - Department
 ```
 
+### FR-SYNC-008 同期開始前チェック
+
+以下の場合は手動同期を開始しない。
+
+- OFTファイルが存在しない
+- テンプレート内にFR-VAR-005に該当する命名規則違反の変数記法が存在する
+
+対象エラーをユーザーへ通知し、修正後に再実行できること。
+
 ---
 
-# 10. VariableDefinition要件
+## 10. VariableDefinition要件
 
 MVPでは、各変数について少なくとも以下の情報を保持する。
 
@@ -394,9 +467,9 @@ MVPでは、各変数について少なくとも以下の情報を保持する�
 
 ---
 
-# 11. Required設定要件
+## 11. Required設定要件
 
-## FR-REQ-001 Requiredの初期状態
+### FR-REQ-001 Requiredの初期状態
 
 新規変数についてRequiredの初期値を自動設定しない。
 
@@ -417,21 +490,19 @@ False = 任意と明示的に判断した結果
 
 ---
 
-# 12. 変数型要件
+## 12. 変数型要件
 
 MVPでサポートする型は以下とする。
 
-```text
-Text
-Date
-Select
-```
+- Text
+- Date
+- Select
 
 ---
 
-# 13. Text型要件
+## 13. Text型要件
 
-## FR-TYPE-TEXT-001
+### FR-TYPE-TEXT-001
 
 MVPのText型は1行入力のみとする。
 
@@ -439,9 +510,9 @@ MVPのText型は1行入力のみとする。
 
 ---
 
-# 14. Date型要件
+## 14. Date型要件
 
-## FR-TYPE-DATE-001 入力形式
+### FR-TYPE-DATE-001 入力形式
 
 Date型は4桁年を必須とする。
 
@@ -463,11 +534,9 @@ Date型は4桁年を必須とする。
 9/8
 ```
 
----
+### FR-TYPE-DATE-002 Validation
 
-## FR-TYPE-DATE-002 Validation
-
-日付入力は、文字列形式そのものではなく、**有効な日付として解釈可能であること**をValidation基準とする。
+日付入力は、文字列形式そのものではなく、有効な日付として解釈可能であることをValidation基準とする。
 
 例：
 
@@ -476,35 +545,38 @@ Date型は4桁年を必須とする。
 2028/2/29 → OK
 ```
 
----
-
-## FR-TYPE-DATE-003 内部値
+### FR-TYPE-DATE-003 内部値
 
 入力された日付は、Validation後に日付値として扱う。
 
 ユーザーが入力したゼロ埋めやセパレータは、出力形式には直接引き継がない。
 
----
-
-## FR-TYPE-DATE-004 出力Format
+### FR-TYPE-DATE-004 出力Format
 
 Date型のメール出力形式は、VariableDefinitionのFormatによって設定する。
 
-候補例：
+MVPで利用可能なFormatは以下の6種類とする。
 
 ```text
 yyyy/mm/dd
+yyyy-mm-dd
 yyyy年m月d日
 m月d日
+yyyy年m月d日(aaa)
+m月d日(aaa)
 ```
 
-MVPでは自由記述よりも、定義済みFormatからの選択を基本とする。
+MVPではDate Formatの自由記述を許可しない。
+
+Date型Variableでは、上記6種類からFormatを選択する。
+
+曜日表記を含むFormatの具体的な生成方法はMVP Designで決定する。
 
 ---
 
-# 15. Select型要件
+## 15. Select型要件
 
-## FR-TYPE-SELECT-001
+### FR-TYPE-SELECT-001
 
 Select型は一覧からの選択のみ許可する。
 
@@ -514,9 +586,9 @@ Select型は一覧からの選択のみ許可する。
 
 ---
 
-# 16. OptionMaster要件
+## 16. OptionMaster要件
 
-## FR-OPT-001
+### FR-OPT-001
 
 Select型の選択肢は、VariableDefinition内に直接保持せず、`OptionMaster` で管理する。
 
@@ -530,25 +602,21 @@ Select型の選択肢は、VariableDefinition内に直接保持せず、`OptionM
 
 VariableDefinitionからはOptionSourceによって参照する。
 
----
-
-## FR-OPT-002
+### FR-OPT-002
 
 Select型でOptionSourceが未設定、または有効な選択肢を取得できない場合は、UserFormを利用可能状態としない。
 
 ---
 
-# 17. UserForm生成要件
+## 17. UserForm生成要件
 
-## FR-UI-001
+### FR-UI-001
 
 UserFormはVariableDefinitionに基づいて入力項目を生成する。
 
 テンプレートごとの個別UserForm作成を基本方式としない。
 
----
-
-## FR-UI-002 コントロール対応
+### FR-UI-002 コントロール対応
 
 MVPでは以下を基本とする。
 
@@ -560,17 +628,38 @@ MVPでは以下を基本とする。
 
 具体的なコントロール生成方式はMVP Designで決定する。
 
----
+### FR-UI-003 表示順
 
-## FR-UI-003 表示順
+UserFormの表示順は、以下の順序規則に従う。
 
-UserFormの表示順はVariableDefinitionの `SortOrder` 昇順とする。
+1. `SortOrder` 昇順
+2. `SortOrder` が同一の場合は、VariableDefinitionテーブル上の行順
 
-テンプレート内の出現順やExcel上の行順には依存しない。
+`SortOrder` が未設定のActive変数はConfiguration Errorとし、UserFormを起動しない。
 
----
+同一`SortOrder`を複数変数で使用することは許可する。
 
-## FR-UI-004 補助情報
+例：
+
+| VariableName | SortOrder |
+|---|---:|
+| ModelName | 10 |
+| StageName | 20 |
+| GateDate | 20 |
+| OwnerName | 30 |
+
+この場合のUserForm表示順は以下とする。
+
+```text
+ModelName
+StageName
+GateDate
+OwnerName
+```
+
+同一SortOrder内では、VariableDefinitionテーブルの行を並べ替えるとUserForm表示順も変更される。
+
+### FR-UI-004 補助情報
 
 UserFormでは各入力項目について以下を表示する。
 
@@ -582,25 +671,29 @@ Descriptionは入力補助用の短い説明を想定する。
 
 ---
 
-# 18. UserForm起動時整合性チェック
+## 18. UserForm起動時整合性チェック
 
-## FR-UI-CHECK-001
+### FR-UI-CHECK-001
 
 UserForm起動前に、テンプレートとVariableDefinitionの整合性チェックを実施する。
 
 MVPでは少なくとも以下を確認する。
 
+- OFTファイルが存在する
+- テンプレート内に命名規則違反の変数記法が存在しない
 - テンプレートに未登録変数が存在しない
 - テンプレートから削除された変数がActiveのまま残っていない
 - Active変数のTypeが設定されている
 - Active変数のDisplayNameが設定されている
 - Active変数のRequiredが明示設定されている
+- Active変数のSortOrderが設定されている
+- Date型のFormatが定義済み6形式のいずれかである
 - Select型のOptionSourceが設定されている
 - Select型のOptionSourceから有効な選択肢を取得できる
 
----
+SortOrderの重複自体は不整合としない。
 
-## FR-UI-CHECK-002
+### FR-UI-CHECK-002
 
 不整合が存在する場合はUserFormを起動せず、不整合内容をユーザーへ通知する。
 
@@ -608,17 +701,15 @@ MVPでは少なくとも以下を確認する。
 
 ---
 
-# 19. 入力値保持要件
+## 19. 入力値保持要件
 
-## FR-INPUT-001
+### FR-INPUT-001
 
 UserFormで入力した値は、Excelファイルを閉じるまで保持する。
 
 Excel終了後に入力値を永続保存しない。
 
----
-
-## FR-INPUT-002 入力クリア
+### FR-INPUT-002 入力クリア
 
 UserFormに「入力クリア」機能を設ける。
 
@@ -626,9 +717,9 @@ UserFormに「入力クリア」機能を設ける。
 
 ---
 
-# 20. Validation要件
+## 20. Validation要件
 
-## FR-VAL-001
+### FR-VAL-001
 
 メール生成前にすべての入力値をValidationする。
 
@@ -639,9 +730,7 @@ MVPでは少なくとも以下を対象とする。
 - Select型の未選択
 - Select型の無効値
 
----
-
-## FR-VAL-002 エラー一括表示
+### FR-VAL-002 エラー一括表示
 
 Validationでは、最初のエラーのみで停止せず、検出されたすべてのエラーをまとめてユーザーへ表示する。
 
@@ -654,9 +743,7 @@ Validationでは、最初のエラーのみで停止せず、検出されたす�
 ・担当部署：選択してください
 ```
 
----
-
-## FR-VAL-003 入力欄強調
+### FR-VAL-003 入力欄強調
 
 Validationエラーが存在する入力コントロールは、UserForm上で視覚的に識別できるよう強調する。
 
@@ -664,35 +751,35 @@ MVPでは背景色変更等の方式を想定する。
 
 具体的な色、Tag利用等の実装方式はMVP Designで定義する。
 
----
-
-## FR-VAL-004
+### FR-VAL-004
 
 再Validation時には、以前のエラー表示状態をリセットしたうえで現在のValidation結果を反映する。
 
 ---
 
-# 21. Subject置換要件
+## 21. Subject置換要件
 
-## FR-RENDER-SUB-001
+### FR-RENDER-SUB-001
 
 Subject内の有効な変数を、UserFormで入力・選択された値へ置換する。
 
 同一変数が複数回存在する場合はすべて置換する。
 
+VariableNameの照合はFR-VAR-004に従い、大文字・小文字を区別しない。
+
 ---
 
-# 22. Body置換要件
+## 22. Body置換要件
 
-## FR-RENDER-BODY-001
+### FR-RENDER-BODY-001
 
 Body内の有効な変数を、UserFormで入力・選択された値へ置換する。
 
 同一変数が複数回存在する場合はすべて置換する。
 
----
+VariableNameの照合はFR-VAR-004に従い、大文字・小文字を区別しない。
 
-## FR-RENDER-BODY-002
+### FR-RENDER-BODY-002
 
 OFTの本文書式を可能な限り維持する。
 
@@ -702,15 +789,15 @@ HTML Encode等の具体的な処理方式はMVP Designで決定する。
 
 ---
 
-# 23. 未置換変数チェック
+## 23. 未置換変数チェック
 
-## FR-UNRESOLVED-001
+### FR-UNRESOLVED-001
 
 SubjectまたはBodyに `{{VariableName}}` 形式の未置換変数が1件でも残っている場合、メール生成を中止する。
 
----
+未置換変数の判定では、FR-VAR-004のCase Insensitiveルールを適用する。
 
-## FR-UNRESOLVED-002
+### FR-UNRESOLVED-002
 
 未置換変数が存在する場合は、対象変数を一覧表示する。
 
@@ -728,23 +815,21 @@ SubjectまたはBodyに `{{VariableName}}` 形式の未置換変数が1件でも
 
 ---
 
-# 24. Outlookメール生成要件
+## 24. Outlookメール生成要件
 
-## FR-OUTLOOK-001
+### FR-OUTLOOK-001
 
 すべてのValidationおよび未置換変数チェックに成功した場合、指定されたOFTを基にOutlook MailItemを生成する。
 
----
+OFTが存在しない場合はFR-TPL-002に従い、メール生成を開始しない。
 
-## FR-OUTLOOK-002
+### FR-OUTLOOK-002
 
 生成したメールはClassic Outlook上で表示する。
 
 MVPではメールを自動送信しない。
 
----
-
-## FR-OUTLOOK-003
+### FR-OUTLOOK-003
 
 ツールの責任範囲はOutlook MailItemを `Display` した時点までとする。
 
@@ -759,7 +844,7 @@ MVPではメールを自動送信しない。
 
 ---
 
-# 25. エラー処理要件
+## 25. エラー処理要件
 
 MVPでは少なくとも以下の異常系をユーザーが理解できる形で通知する。
 
@@ -767,6 +852,8 @@ MVPでは少なくとも以下の異常系をユーザーが理解できる形�
 - OFTを読み込めない
 - テンプレート変数の命名規則違反
 - VariableDefinitionの設定不足
+- SortOrder未設定
+- Date Format不正
 - SelectのOptionSource不備
 - 入力Validationエラー
 - 未置換変数の残存
@@ -776,47 +863,41 @@ MVPでは少なくとも以下の異常系をユーザーが理解できる形�
 
 ---
 
-# 26. 非機能要件
+## 26. 非機能要件
 
-## NFR-001 標準化
+### NFR-001 標準化
 
 テンプレート固有の処理をVBAコードへ大量に埋め込まず、VariableDefinitionおよびOptionMasterの設定によって利用範囲を変更できる構造とする。
 
----
-
-## NFR-002 保守性
+### NFR-002 保守性
 
 テンプレート変更と変数設定を分離し、テンプレート変更時にも既存設定を可能な限り保持できること。
 
----
-
-## NFR-003 可観測性
+### NFR-003 可観測性
 
 同期、設定不整合、Validationエラー等について、ユーザーが「何が問題なのか」を把握できること。
 
 処理をブラックボックス化しない。
 
----
-
-## NFR-004 安全性
+### NFR-004 安全性
 
 不完全な状態でメール生成を続行させない。
 
 特に以下の場合は処理を停止する。
 
+- OFT不存在
+- テンプレート変数の命名規則違反
 - 設定不整合
 - Validationエラー
 - 未置換変数残存
 
----
+ただし、設定不備を修正するためのSettings、VariableDefinition、OptionMasterの確認・編集まで禁止しない。
 
-## NFR-005 操作性
+### NFR-005 操作性
 
 メール本文を直接修正しなくても、UserFormへの必要情報入力のみでメールを生成できること。
 
----
-
-## NFR-006 拡張性
+### NFR-006 拡張性
 
 MVPの設計は、将来以下を追加する際に大規模な構造変更を必要としないことを目標とする。
 
@@ -830,7 +911,7 @@ MVPの設計は、将来以下を追加する際に大規模な構造変更を�
 
 ---
 
-# 27. MVP画面・操作フロー
+## 27. MVP画面・操作フロー
 
 想定される基本操作は以下とする。
 
@@ -862,9 +943,11 @@ MVPの設計は、将来以下を追加する際に大規模な構造変更を�
 13. ユーザー確認・送信
 ```
 
+OFT不存在、命名規則違反、設定不整合が存在する場合は、該当するテンプレート依存処理へ進まず、ユーザーへ修正対象を通知する。
+
 ---
 
-# 28. 想定Excel構成
+## 28. 想定Excel構成
 
 MVPでは以下を基本候補とする。
 
@@ -885,23 +968,29 @@ LogシートはMVP対象外とする。
 
 ---
 
-# 29. MVP Acceptance Criteria
+## 29. MVP Acceptance Criteria
 
 MVP完了時には、少なくとも以下をすべて満たすこと。
 
-## AC-001 テンプレート参照
+### AC-001 テンプレート参照
 
 相対パスで指定されたOFTを正常に読み込める。
 
----
+OFTが存在しない場合は、手動同期、UserForm起動、メール生成を実行せず、ユーザーへ通知できる。
 
-## AC-002 変数抽出
+Settings、VariableDefinition、OptionMasterの確認・編集は継続できる。
+
+### AC-002 変数抽出
 
 SubjectおよびBodyから有効な `{{VariableName}}` を抽出できる。
 
----
+VariableNameの大文字・小文字は区別しない。
 
-## AC-003 手動同期
+### AC-003 命名規則違反検出
+
+テンプレート内に命名規則違反の `{{...}}` が存在する場合、それを検出し、手動同期、UserForm起動、メール生成を停止できる。
+
+### AC-004 手動同期
 
 テンプレート変更後に手動同期を実行すると、
 
@@ -911,33 +1000,29 @@ SubjectおよびBodyから有効な `{{VariableName}}` を抽出できる。
 
 が正しく実行される。
 
----
+VariableNameの比較は大文字・小文字を区別しない。
 
-## AC-004 新規変数設定
+### AC-005 新規変数設定
 
 新規変数について必要設定が完了していない場合、UserFormを起動できない。
 
----
-
-## AC-005 UserForm生成
+### AC-006 UserForm生成
 
 Activeかつ設定完了したVariableDefinitionに従って、入力項目を表示できる。
 
----
+### AC-007 表示順
 
-## AC-006 表示順
+入力項目がSortOrder昇順に表示される。
 
-入力項目がSortOrder順に表示される。
+同一SortOrderの場合は、VariableDefinitionテーブルの行順で表示される。
 
----
+SortOrder未設定のActive変数が存在する場合、UserFormを起動できない。
 
-## AC-007 Text入力
+### AC-008 Text入力
 
 Text型に1行文字列を入力できる。
 
----
-
-## AC-008 Date入力
+### AC-009 Date入力
 
 以下の入力を有効な日付として扱える。
 
@@ -948,75 +1033,70 @@ Text型に1行文字列を入力できる。
 2026-9-8
 ```
 
----
-
-## AC-009 Date Format
+### AC-010 Date Format
 
 Date型の出力をVariableDefinitionのFormatに従って変換できる。
 
----
+以下の6種類を選択できる。
 
-## AC-010 Select入力
+```text
+yyyy/mm/dd
+yyyy-mm-dd
+yyyy年m月d日
+m月d日
+yyyy年m月d日(aaa)
+m月d日(aaa)
+```
+
+定義外Formatは有効な設定として扱わない。
+
+### AC-011 Select入力
 
 OptionMasterの有効な値から選択でき、自由入力はできない。
 
----
-
-## AC-011 入力保持
+### AC-012 入力保持
 
 UserFormを再表示しても、Excelを閉じるまでは入力値を保持できる。
 
----
-
-## AC-012 入力クリア
+### AC-013 入力クリア
 
 入力クリア操作によって保持値をリセットできる。
 
----
-
-## AC-013 Validation
+### AC-014 Validation
 
 複数の入力エラーがある場合、すべてをまとめて表示できる。
 
----
-
-## AC-014 エラー強調
+### AC-015 エラー強調
 
 Validationエラーのある入力欄を視覚的に識別できる。
 
----
-
-## AC-015 Subject置換
+### AC-016 Subject置換
 
 Subject内の全変数を正しく置換できる。
 
----
+大文字・小文字のみが異なる記述も、同一VariableNameとして置換できる。
 
-## AC-016 Body置換
+### AC-017 Body置換
 
 Body内の全変数を正しく置換でき、OFTの主要な本文書式が維持される。
 
----
+大文字・小文字のみが異なる記述も、同一VariableNameとして置換できる。
 
-## AC-017 未置換防止
+### AC-018 未置換防止
 
 未置換変数が1つでも残っている場合、Outlookメールを表示しない。
 
----
-
-## AC-018 Outlook表示
+### AC-019 Outlook表示
 
 すべてのチェックに成功した場合、Classic Outlook上に送信用メールを表示できる。
 
----
-
-## AC-019 自動送信防止
+### AC-020 自動送信防止
 
 ツール操作のみでメールが自動送信されない。
 
 ---
 
-# 30. v0.2候補
+## 30. v0.2候補
 
 MVP完了後、必要性を評価して以下を検討する。
 
@@ -1033,11 +1113,11 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ---
 
-# 31. 明示的な最終対象外方針
+## 31. 明示的な最終対象外方針
 
 現時点では、MVPだけでなく最終版についても以下を実装しない方針とする。
 
-## 条件分岐
+### 条件分岐
 
 以下のようなテンプレート構文は導入しない。
 
@@ -1047,21 +1127,17 @@ MVP完了後、必要性を評価して以下を検討する。
 {{/if}}
 ```
 
----
-
-## 添付ファイル自動処理
+### 添付ファイル自動処理
 
 ファイル選択、パス指定、添付自動化等は対象外とする。
 
----
-
-## 自動送信
+### 自動送信
 
 ツール自身によるメール自動送信は行わない。
 
 ---
 
-# 32. MVP Designへ引き継ぐ事項
+## 32. MVP Designへ引き継ぐ事項
 
 以下は本Requirementsでは決定せず、MVP Designで具体化する。
 
@@ -1071,42 +1147,55 @@ MVP完了後、必要性を評価して以下を検討する。
 4. OptionMasterの詳細テーブル構造
 5. Settings構造
 6. 変数抽出ロジック
-7. Dictionary等の内部データ構造
-8. 動的UserForm生成方式
-9. コントロールとVariableNameの関連付け方法
-10. Validationエラー強調方式
-11. Date変換・Format処理
-12. HTMLBody置換方式
-13. HTML Encode方式
-14. OFT読み込み処理
-15. Outlook Object Model利用方法
-16. エラーコード・例外処理
-17. Unused表示切替方法
-18. 設定完了状態の内部判定方式
-19. 同期結果UI
-20. テストケース設計
+7. Case Insensitive比較の具体的な実装方式
+8. 不正変数記法検出の具体的な正規表現・判定方式
+9. Dictionary等の内部データ構造
+10. 動的UserForm生成方式
+11. コントロールとVariableNameの関連付け方法
+12. Validationエラー強調方式
+13. Date変換処理
+14. 定義済みDate Formatの実装方法
+15. 曜日表記生成方法
+16. HTMLBody置換方式
+17. HTML Encode方式
+18. OFT読み込み処理
+19. Outlook Object Model利用方法
+20. エラーコード・例外処理
+21. Unused表示切替方法
+22. 設定完了状態の内部判定方式
+23. SortOrder同順位時のVariableDefinition行順取得方式
+24. 同期結果UI
+25. OFT不存在時の復旧UI
+26. テストケース設計
 
 ---
 
-# 33. Requirements決定サマリー
+## 33. Requirements決定サマリー
 
 | 項目 | 決定 |
 |---|---|
 | Outlook | Classic Outlook |
 | MVPテンプレート数 | 1 Excel = 1 OFT |
 | OFT参照 | Excel基準の相対パス |
+| OFT不存在 | テンプレート依存処理停止、設定確認・編集は可能 |
 | 同期 | 手動 |
 | UserForm起動時 | 整合性チェック |
 | 新規変数 | 自動追加＋設定未完了 |
 | 削除変数 | Unused保持＋通常非表示 |
 | VariableName | 英字始まり、英数字＋ `_` |
+| VariableName大文字小文字 | 区別しない |
+| 命名規則違反 | Configuration Errorとして処理停止 |
 | Required | 初期値なし、明示設定 |
 | Text | 1行のみ |
-| Date | 4桁年必須、`/`・`-`許可、ゼロ埋め任意 |
+| Date入力 | 4桁年必須、`/`・`-`許可、ゼロ埋め任意 |
+| Date Format | 定義済み6形式 |
 | Number | MVP対象外 |
 | Select | OptionMaster参照 |
 | Select自由入力 | 不可 |
-| UserForm順序 | SortOrder |
+| UserForm順序 | SortOrder昇順 |
+| SortOrder未設定 | Configuration Error |
+| SortOrder重複 | 許可 |
+| SortOrder同順位 | VariableDefinitionテーブルの行順 |
 | UserForm補助情報 | DisplayName＋Required＋Description |
 | 入力値保持 | Excel終了まで |
 | 入力クリア | あり |
@@ -1120,9 +1209,9 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ---
 
-# 34. 次工程
+## 34. 次工程
 
-本Requirements確定後、次工程として **MVP Design** を作成する。
+本Requirements確定後、次工程としてMVP Designを作成する。
 
 MVP Designでは、特に以下を優先して設計する。
 
