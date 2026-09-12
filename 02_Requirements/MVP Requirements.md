@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.4 日本語版
+# MVP Requirements v0.1.5 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.4 |
+| バージョン | v0.1.5 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +15,23 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.5 更新概要
+
+v0.1.5では、Technical Spike A v0.2の結果に基づき、Requirements内に残っていたHTMLBody方式固有の表現を技術非依存表現へ整理した。
+
+Technical Spike AではRoute W：WordEditorをMVPのBody処理技術方針として採用したが、本Requirementsでは具体的な実現方式そのものではなく、利用者から見た要求・保証範囲を定義する。
+
+1. FR-RENDER-BODY-002からHTML構造 / HTML Encode等の技術固有表現を除去し、本文の置換結果と書式維持に関する要求へ整理した
+2. HTMLタグによるVariable分断の保証対象外表現を、Variable文字列途中へ部分的に異なる書式を設定したケースとして技術非依存化した
+3. AC-017の保証対象外記述をFR-RENDER-BODY-002参照へ一本化した
+4. §32.1の「HTMLBody置換方式」を技術非依存のBody処理方式へ変更した
+5. §32.2からRoute H固有で不要となったHTML Encode関数の実装引継ぎを削除した
+6. Technical Spike A完了後の現在地に合わせて§34「次工程」を更新した
+
+本変更はDocument Consistency Patchであり、利用者向けRequirementの追加・削除およびRequirement Gapは発生していない。
+
+---
 
 ### v0.1.4 更新概要
 
@@ -823,7 +840,7 @@ VariableNameの照合はFR-VAR-004に従い、大文字・小文字を区別し�
 
 ### FR-RENDER-BODY-002
 
-Body内のVariable置換では、入力値によってHTML構造を破壊せず、Variable置換部分以外の代表的な基本書式を維持する。
+Body内のVariable置換では、入力値を意図した文字列として反映し、本文を破損させることなく、Variable置換部分以外の代表的な基本書式を維持する。
 
 MVPで書式維持の確認対象とする代表的な基本書式は以下とする。
 
@@ -839,11 +856,11 @@ MVPで書式維持の確認対象とする代表的な基本書式は以下と�
 以下はMVPでの書式維持保証対象外とする。
 
 - 埋め込み画像
-- 複雑なHTML構造
+- 上記の代表的な基本書式を超える複雑な本文レイアウト・装飾
 - 特殊なOutlook固有書式
-- `{{VariableName}}` の文字列途中がHTMLタグ等によって分断されるケース
+- `{{VariableName}}` の文字列途中の一部分だけに異なる書式を設定したケース
 
-HTML EncodeをBody Renderer側で適用する責務はMVP Designで定義し、具体的なEncode関数はImplementationで具体化する。
+具体的なBody処理・置換方式はMVP Designで定義する。
 
 ---
 
@@ -1142,7 +1159,7 @@ Subject内の全変数を正しく置換できる。
 
 大文字・小文字のみが異なる記述も、同一VariableNameとして置換できる。
 
-埋め込み画像、複雑なHTML構造、特殊なOutlook固有書式、およびVariable文字列途中がHTMLタグ等で分断されるケースは、本Acceptance CriteriaのPass判定対象外とする。
+FR-RENDER-BODY-002で書式維持保証対象外としたケースは、本Acceptance CriteriaのPass判定対象外とする。
 
 ### AC-018 未置換防止
 
@@ -1218,7 +1235,7 @@ MVP完了後、必要性を評価して以下を検討する。
 11. コントロールとVariableNameの関連付け方法
 12. Date変換処理
 13. 定義済みDate Formatの実装方法
-14. HTMLBody置換方式
+14. Body処理方式（変数抽出・置換・未置換チェック）
 15. OFT読み込み処理
 16. Outlook Object Model利用方法
 17. 設定完了状態の内部判定方式
@@ -1228,11 +1245,10 @@ MVP完了後、必要性を評価して以下を検討する。
 
 1. Validationエラー強調の具体的な表示方式・色
 2. 曜日表記生成の具体的なVBA実装
-3. HTML Encode関数の具体実装
-4. エラーコード体系および例外捕捉の具体コード
-5. Unused表示切替の具体的なUI実装
-6. 同期結果UIの具体表示
-7. OFT不存在時の具体的な復旧UI
+3. エラーコード体系および例外捕捉の具体コード
+4. Unused表示切替の具体的なUI実装
+5. 同期結果UIの具体表示
+6. OFT不存在時の具体的な復旧UI
 
 ### 32.3 MVP Test Specificationで具体化する事項
 
@@ -1281,9 +1297,27 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ## 34. 次工程
 
-本Requirements確定後、次工程としてMVP Designへ変更内容を反映し、Requirements / Designの最終整合性を確認する。
+Technical Spike A v0.2はPASSで完了し、MVPのBody処理技術方針としてRoute W：WordEditorを採用した。
 
-MVP Designでは、特に以下の責務・処理経路との整合を確認する。
+本RequirementsへのDocument Consistency Patch反映後、Technical Spike AのTechnical DecisionをDesignへ反映するため、`MVP Design v0.1.2` をReopenする。
+
+次工程は以下とする。
+
+```text
+MVP Requirements v0.1.5
+        ↓
+MVP Design v0.1.2 Reopen / 改訂
+        ↓
+Technical Spike A Technical Decision反映
+Route W：WordEditor
+        ↓
+Requirements / Design / Technical Spike
+最終整合性レビュー
+        ↓
+MVP Test Specification v0.1
+```
+
+MVP Design改訂では、特に以下の責務・処理経路との整合を確認する。
 
 ```text
 VariableDefinition
@@ -1303,4 +1337,4 @@ Render Engine
 Outlook Adapter
 ```
 
-RequirementsとDesignを分離し、本書のAcceptance Criteriaを満たすための最小構成を設計する。
+Requirementsでは利用者から見た要求・保証範囲を維持し、WordEditor / Word Object Model等の具体的なBody処理方式はMVP Designで定義する。

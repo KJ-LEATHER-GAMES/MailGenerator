@@ -1,4 +1,4 @@
-# MVP Design v0.1.2 日本語版
+# MVP Design v0.1.3 日本語版
 
 ## 1. 文書情報
 
@@ -6,10 +6,10 @@
 |---|---|
 | 文書名 | MVP Design |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.2 |
+| バージョン | v0.1.3 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.4 日本語版 |
+| 要件文書 | MVP Requirements v0.1.5 日本語版 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
@@ -17,9 +17,29 @@
 
 ---
 
+### v0.1.3 更新概要
+
+Technical Spike A v0.2の比較検証結果を反映し、MVPのBody処理方式をRoute H：HTMLBodyからRoute W：WordEditorへ変更した。
+
+主な変更は以下である。
+
+1. `Inspector.WordEditor` / Word Document / Rangeを利用するBody処理方式を採用
+2. WordEditor / Word Object ModelへのアクセスをOutlook Adapterへ集約
+3. Template Scanner / Unresolved CheckerのBody入力をHTMLBodyから表示文字列ベースのBodyTextへ変更
+4. HTMLBody直接置換、HTML Encode、および独立Body Rendererを廃止
+5. Word `Range.Find` + `Range.Text` によるCase Insensitiveな全出現箇所置換を採用
+6. MailItem / Inspector / WordEditorを含むScan・Mail生成Lifecycleを更新
+7. Technical Spike Aで実発生したRISK-DES-001をCLOSEDとし、Evidenceを記録
+8. Requirements参照をMVP Requirements v0.1.5へ更新
+9. 次工程をRequirements / Design / Technical Spike A整合性レビュー → MVP Test Specification v0.1へ更新
+
+本変更は内部技術方式の変更であり、新しい利用者向けRequirement Gapは発生していない。
+
+---
+
 ### v0.1.2 更新概要
 
-MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで残ったDesign側の2件を局所修正し、MVP Requirements v0.1.4との文書参照を更新した。新しいDesign Decisionは追加していない。
+MVP Requirements v0.1.2 × MVP Design v0.1.1 の最終整合性レビューで残ったDesign側の2件を局所修正し、MVP Requirements v0.1.3との文書参照を更新した。新しいDesign Decisionは追加していない。
 
 1. `Required=False` かつ空欄 / 未選択の入力値はValue Formatterで空文字列 `""` とし、RendererがVariableを空文字列へ置換する規則を明示
 2. 手動同期およびUserForm起動シーケンスで、OFT不存在時にError Resultを返して後続処理を停止するFail Fast分岐を明示
@@ -35,11 +55,9 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 3. `Required=False` の空欄 / 未選択を有効とし、値が存在する場合のみType ValidationするルールをInput Validatorへ反映
 4. Body置換時に維持する代表的な基本書式とMVP保証対象外をRequirements v0.1.2に合わせて明示
 
----
-
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.4` を満たすためのMVP基本設計を定義する。
+本書は、`MVP Requirements v0.1.5` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -62,8 +80,6 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 
 詳細なプロシージャ実装、VBAコード、個別テストケースは後続工程で定義する。
 
----
-
 ## 3. 設計原則
 
 ### 3.1 MVP最小負荷
@@ -81,7 +97,7 @@ MVPでは、Requirementsを満たすために必要な構造のみ実装する�
 
 ### 3.2 責務分離
 
-機能単位で責務を分離し、UI、Excel、Outlook、Validation、Renderingの依存を局所化する。
+機能単位で責務を分離し、UI、Excel、Outlook / WordEditor、Validation、Renderingの依存を局所化する。
 
 ただし、DDDやHexagonal Architectureを厳格に適用するのではなく、VBAで保守可能な軽量構成とする。
 
@@ -139,7 +155,8 @@ Design Questions 15件の検討時点では新規Requirement Gapは発生して�
 │ - Configuration Validator          │
 │ - Input Validator                  │
 │ - Value Formatter                  │
-│ - Renderer                         │
+│ - Subject Renderer                 │
+│ - Unresolved Checker               │
 └────────────────┬───────────────────┘
                  │
                  ▼
@@ -147,6 +164,9 @@ Design Questions 15件の検討時点では新規Requirement Gapは発生して�
 │ Infrastructure                     │
 │ - Excel Data Access                │
 │ - Outlook Adapter                  │
+│   - MailItem / Inspector           │
+│   - WordEditor / Word Document     │
+│   - Word Range Body Rendering      │
 └────────────────────────────────────┘
 ```
 
@@ -164,9 +184,11 @@ Core Logic
 Infrastructure
 ```
 
-Core LogicからExcelセルやOutlook Object Modelを直接操作しない。
+Core LogicからExcelセル、Outlook Object Model、Word Object Modelを直接操作しない。
 
----
+MailItem / Inspector / WordEditor / Word Document / Word Rangeへの依存はInfrastructureのOutlook Adapterへ集約する。
+
+Template ScannerおよびUnresolved CheckerがBodyを評価する場合は、Outlook AdapterがWord Documentから取得した表示文字列ベースのBodyTextを入力として使用する。
 
 ## 5. コンポーネント責務
 
@@ -176,8 +198,8 @@ Core LogicからExcelセルやOutlook Object Modelを直接操作しない。
 | VariableDefinition Data Access | VariableDefinitionテーブルの読み書き |
 | OptionMaster Data Access | OptionMasterテーブルの読み取り |
 | Settings Data Access | Settingsテーブルの読み取り |
-| Outlook Adapter | OFT読込、MailItem生成、Subject / HTMLBody設定、Display |
-| Template Scanner | `{{...}}` 候補抽出、VariableName妥当性判定、出現位置統合 |
+| Outlook Adapter | OFT読込、MailItem生成、Subject取得・設定、Inspector / WordEditor取得、BodyText取得、Word RangeによるBody変数置換、Display、保存なしClose |
+| Template Scanner | Subject / BodyTextからの `{{...}}` 候補抽出、VariableName妥当性判定、出現位置統合 |
 | Sync Engine | Template / VariableDefinitionの差分判定 |
 | Configuration Validator | 設定整合性の一元チェック |
 | UserForm Generator | VariableDefinitionに基づく入力Control生成 |
@@ -185,11 +207,8 @@ Core LogicからExcelセルやOutlook Object Modelを直接操作しない。
 | Input Validator | Required / Date / Selectの入力妥当性判定 |
 | Value Formatter | Type / Formatに基づくメール出力文字列化 |
 | Subject Renderer | Subject変数置換 |
-| Body Renderer | HTMLBody変数置換、HTML Encode |
-| Unresolved Checker | Render後の未置換変数検出 |
+| Unresolved Checker | Render後のSubject / BodyTextから未置換変数検出 |
 | Error / Result Model | 予見可能なエラー情報の受け渡し |
-
----
 
 ## 6. Excel構成
 
@@ -405,7 +424,11 @@ OFT
 ↓
 Scan用 MailItem生成
 ↓
-Subject / HTMLBody取得
+Outlook Adapter
+↓
+Inspector / WordEditor取得
+↓
+Subject / BodyText取得
 ↓
 Template Scanner
 ↓
@@ -414,6 +437,8 @@ Scan用 MailItemを保存せず終了
 COM参照解放
 ```
 
+`BodyText` は `Word.Document.Content.Text` 相当の表示文字列Snapshotとし、Word Document Object自体をTemplate Scannerへ渡さない。
+
 ### 12.2 Mail生成時
 
 ```text
@@ -421,11 +446,21 @@ OFT
 ↓
 生成用 MailItem生成
 ↓
-Subject / HTMLBody取得
+Outlook Adapter
 ↓
-Render
+Inspector / WordEditor取得
 ↓
-Subject / HTMLBody設定
+Value Format
+↓
+Subject Render
+↓
+Subject設定
+↓
+Word Range Body Render
+↓
+Subject / BodyText再取得
+↓
+Unresolved Check
 ↓
 Display
 ```
@@ -436,48 +471,75 @@ Scan用MailItemと生成用MailItemは使い回さない。
 
 常に元OFTから新しいMailItemを生成し、処理間でMailItem状態を持ち越さない。
 
----
+Inspector / WordEditorはOutlook Adapter内部で取得し、Core LogicへCOM Objectを公開しない。
+
+Technical Spike Aでは、Display前のWordEditor取得、Scan後の保存なしClose、およびDraft / Inspector残存なしを確認済みである。
+
+BodyのWord Range編集は生成用MailItemそのものへ反映されるため、HTMLBody方式のような「Body文字列を再設定する」工程は持たない。
 
 ## 13. Outlook Adapter設計
 
 ### 13.1 方針
 
-Classic Outlook Object Modelへの依存は軽量Adapterへ集約する。
+Classic Outlook Object Modelおよび、OutlookのWordEditor経由で利用するWord Object Modelへの依存は軽量なOutlook Adapterへ集約する。
 
-MVPではPort / Interfaceは設けない。
+MVPではPort / Interfaceを設けず、新しいWordEditor専用Adapterも追加しない。
+
+MailItem LifecycleとBodyのWord Range操作を既存Outlook Adapterへまとめる。
 
 ### 13.2 責務候補
 
 ```text
 CreateMailFromTemplate()
-ReadTemplateSubject()
-ReadTemplateHtmlBody()
+ReadSubject()
+ReadBodyText()
 SetSubject()
-SetHtmlBody()
+ReplaceBodyVariables()
 DisplayMail()
 CloseWithoutSave()
 ```
 
-具体的なFunction / Sub名はImplementation時に確定する。
+`ReadBodyText()` はOutlook Adapter内部でInspector / WordEditor / Word Documentを取得し、表示文字列ベースのBodyTextを返す。
+
+`ReplaceBodyVariables()` はFormatted Valuesを受け取り、Word Document上で対象VariableをCase Insensitiveに検索し、全出現箇所を置換する。
+
+Body置換の技術方式はTechnical Spike Aで成立した以下を採用する。
+
+```text
+Word Document
+↓
+Range.Find
+↓
+Found Range
+↓
+Range.Text = replacement
+↓
+次の出現箇所を検索
+```
+
+WordのReplaceAllはMVPの採用方式としない。
+
+具体的なFunction / Sub名、Range更新ループ、COM参照解放コードはImplementation時に確定する。
 
 ### 13.3 禁止事項
 
-以下のコンポーネントからOutlook Object Modelを直接操作しない。
+以下のコンポーネントからOutlook Object Model / Word Object Modelを直接操作しない。
 
 - Template Scanner
 - Configuration Validator
 - Input Validator
 - Value Formatter
-- Renderer
+- Subject Renderer
+- Unresolved Checker
 
----
+Inspector / WordEditor / Word Document / Word RangeはOutlook Adapter内部に閉じ込める。
 
 ## 14. Template Scanner設計
 
 ### 14.1 2段階処理
 
 ```text
-Subject / HTMLBody
+Subject / BodyText
         ↓
 Candidate Scan
         ↓
@@ -495,6 +557,12 @@ Valid / Invalid
 ```regex
 \{\{([^{}]*)\}\}
 ```
+
+BodyのCandidate ScanはHTMLBodyではなく、Outlook AdapterがWord Documentから取得したBodyTextを対象とする。
+
+BodyTextは表示文字列ベースであり、HTMLタグを含む内部HTML表現をScanner入力としない。
+
+Technical Spike Aでは、HTMLBody上でタグ分断されたVariableもWord Documentの表示文字列では連続して検出できることを確認済みである。
 
 ### 14.3 VariableName Validation
 
@@ -522,7 +590,7 @@ VariableNameはCase Insensitiveとする。
 
 ### 14.6 TemplateScanResult
 
-Template Scannerは、後続処理がOutlook Object Modelや正規表現処理へ依存せず判定できるよう、Scan結果を軽量なデータとして返す。
+Template Scannerは、後続処理がOutlook Object ModelやWord Object Model、正規表現処理へ依存せず判定できるよう、Scan結果を軽量なデータとして返す。
 
 概念上、少なくとも以下を保持可能とする。
 
@@ -539,7 +607,9 @@ TemplateScanResult
 
 VariableName Syntaxの判定責務はTemplate Scannerに置き、Configuration ValidatorではRegex等による再判定を行わない。
 
----
+Template ScannerはWord Document Objectを保持しない。
+
+Scanner入力はSubject / BodyTextという文字列Snapshotとし、後続処理へOutlook / Word COM依存を伝播させない。
 
 ## 15. Sync Engine設計
 
@@ -619,7 +689,7 @@ ValidateOptionMaster()
 
 `ValidateTemplateScanResult()` はTemplate Scannerが返したScan結果を評価する。
 
-Configuration Validator自身は、OFTを開く処理、Subject / HTMLBodyを取得する処理、Variable候補の抽出、VariableName SyntaxのRegex判定を行わない。
+Configuration Validator自身は、OFTを開く処理、Subject / BodyTextを取得する処理、Variable候補の抽出、VariableName SyntaxのRegex判定を行わない。
 
 ### 16.3 入力と主な確認内容
 
@@ -838,7 +908,9 @@ Value Formatter
 Formatted Value
 ```
 
-`Required=False` かつRaw Inputが空欄 / 未選択の場合は、Date変換やSelect値変換を行わず、Formatted Valueとして空文字列 `""` を返す。Rendererは対象の `{{VariableName}}` をこの空文字列で置換する。
+`Required=False` かつRaw Inputが空欄 / 未選択の場合は、Date変換やSelect値変換を行わず、Formatted Valueとして空文字列 `""` を返す。
+
+SubjectではSubject Renderer、BodyではOutlook AdapterのBody Renderingが、対象の `{{VariableName}}` をこの空文字列で置換する。
 
 これにより、任意項目が未入力でも未置換Variableを残さず、Unresolved Checkerのエラー対象としない。
 
@@ -850,9 +922,9 @@ Date：Date値とVariableDefinition.FormatからFormatted Date Stringを生成�
 
 Select：選択されたValueを出力値とする。
 
-HTML EncodeはValue Formatterの責務に含めない。
+Outlook / Word Object Modelへの反映処理はValue Formatterの責務に含めない。
 
----
+Value Formatterは、Subject / Bodyへ共通して使用可能な表示用文字列の生成までを責務とする。
 
 ## 22. Render Engine設計
 
@@ -865,19 +937,41 @@ Value Formatter
 ↓
 Formatted Values
 ├────────────→ Subject Renderer
+│                    ↓
+│               Subject設定
 │
-└→ HTML Encode → Body Renderer
+└────────────→ Outlook Adapter
+                     ↓
+               WordEditor
+                     ↓
+               Word Document
+                     ↓
+          Range.Find / Range.Text
+                     ↓
+                 Body反映
 ```
 
 ### 22.2 Subject Renderer
 
 Formatted ValueをSubject内の対象VariableへCase Insensitiveで全出現箇所置換する。
 
-### 22.3 Body Renderer
+Subject RendererはPlain Text文字列としてSubjectを処理し、完成したSubjectをOutlook Adapter経由でMailItemへ設定する。
 
-Formatted ValueをHTML Encodeした後、HTMLBody内の対象VariableへCase Insensitiveで全出現箇所置換する。
+### 22.3 Body Rendering / WordEditor
 
-置換はVariable文字列を対象とした局所置換とし、Variable置換部分以外のHTMLBodyを意図的に再構築・再整形しない。
+Bodyの物理置換はOutlook AdapterがWordEditor / Word Document / Rangeを使用して実施する。
+
+Formatted Valuesの各Variableについて、Word `Range.Find` をCase Insensitiveで実行し、Found Rangeへ `Range.Text = replacement` として値を設定する。
+
+同一Variableが複数箇所に存在する場合は全出現箇所を置換する。
+
+Body全体をPlain TextやHTML文字列として再構築・再設定しない。
+
+これによりVariable置換部分以外のWord Document構造・書式を維持する。
+
+Bodyへ設定するFormatted ValueにはHTML Encodeを適用しない。
+
+Technical Spike Aでは `A&B <TEST>` をHTML EncodeせずRangeへ設定し、意図した表示文字列となることを確認済みである。
 
 MVPでは、Requirements FR-RENDER-BODY-002に従い、代表的なOFTを用いて以下の基本書式がVariable置換後も維持されることを確認する。
 
@@ -890,21 +984,18 @@ MVPでは、Requirements FR-RENDER-BODY-002に従い、代表的なOFTを用い�
 - 箇条書き
 - 表
 
-埋め込み画像、複雑なHTML構造、特殊なOutlook固有書式、およびVariable文字列途中がHTMLタグ等で分断されるケースはMVPの書式維持保証対象外とする。
+以下はFR-RENDER-BODY-002で定義したMVP書式維持保証対象外とする。
 
-### 22.4 HTML Encode
-
-少なくともユーザー入力によってHTML構造が破壊されないようにする。
-
-具体的なEncode関数はImplementation時に定義する。
-
----
+- 埋め込み画像
+- 上記の代表的な基本書式を超える複雑な本文レイアウト・装飾
+- 特殊なOutlook固有書式
+- `{{VariableName}}` の文字列途中の一部分だけに異なる書式を設定したケース
 
 ## 23. 未置換変数チェック設計
 
 ### 23.1 独立チェック
 
-未置換変数チェックはRenderer内部へ埋め込まず、Render後段の独立処理とする。
+未置換変数チェックはRender処理内部へ埋め込まず、Render後段の独立処理とする。
 
 ```text
 Render
@@ -918,13 +1009,24 @@ Unresolved Checker
 ### 23.2 対象
 
 - Subject
-- HTMLBody
+- BodyText
 
 ### 23.3 判定
 
 `{{VariableName}}` 形式の残存を検出し、1件でも存在すればメール生成を停止する。
 
----
+BodyTextは、Body置換後にOutlook AdapterがWord Documentから再取得した表示文字列Snapshotを使用する。
+
+Unresolved Checker自身はWord Document / Rangeを直接検索しない。
+
+Template ScannerとUnresolved Checkerで同じ表示文字列モデルを使用することで、
+
+```text
+検出時：BodyText
+置換後確認：BodyText
+```
+
+の一貫性を持たせる。
 
 ## 24. エラー設計
 
@@ -979,7 +1081,7 @@ VBA実装では、小規模なResult / ErrorInfoクラスまたは同等の軽�
 
 ### 24.5 予期しない技術エラー
 
-COMエラーや想定外のVBA Runtime Errorは、`On Error` 等で捕捉し、`UnexpectedError` または `OutlookError` 等へ変換してUIへ返却する。
+Outlook / Word COMエラーや想定外のVBA Runtime Errorは、`On Error` 等で捕捉し、`UnexpectedError` または `OutlookError` 等へ変換してUIへ返却する。
 
 ---
 
@@ -1006,11 +1108,19 @@ Outlook Adapter
 ↓
 Scan用MailItem生成
 ↓
+Inspector / WordEditor取得
+↓
+Subject / BodyText取得
+↓
 Template Scanner
 ↓
 Candidate Scan
 ↓
 VariableName Validation
+↓
+TemplateScanResult
+↓
+Scan用MailItemを保存せず終了 / COM参照解放
 ↓
 不正あり？
 ├─ Yes → Error Result → UI
@@ -1054,7 +1164,9 @@ Outlook Adapter
 ↓
 Scan用MailItem生成
 ↓
-Subject / HTMLBody取得
+Inspector / WordEditor取得
+↓
+Subject / BodyText取得
 ↓
 Template Scanner
 ↓
@@ -1115,26 +1227,39 @@ Outlook Adapter
     ↓
 生成用MailItem作成
     ↓
+Inspector / WordEditor取得
+    ↓
 Value Formatter
     ↓
 Subject Renderer
     ↓
-Body Renderer + HTML Encode
+Subject設定
+    ↓
+Outlook Adapter
+    ↓
+Word Range Body Render
+    ↓
+Subject / BodyText再取得
     ↓
 Unresolved Checker
     ↓
 未置換あり？
-├─ Yes → MailItem表示せずError
+├─ Yes
+│   ↓
+│ MailItem表示せずError
+│   ↓
+│ 保存せずClose
+│
 └─ No
-    ↓
-Subject / HTMLBody設定
     ↓
 Display
     ↓
 ツール責任範囲終了
 ```
 
----
+BodyはWord Range編集によって生成用MailItemへ直接反映されるため、Render後にBody全文をMailItemへ再設定する処理は行わない。
+
+未置換Variableが検出された場合は利用者へMailItemをDisplayせず、生成用MailItemを保存せず終了する。
 
 ## 26. VBA構成案
 
@@ -1163,7 +1288,6 @@ modConfigurationValidator
 modInputValidator
 modValueFormatter
 modSubjectRenderer
-modBodyRenderer
 modUnresolvedChecker
 ```
 
@@ -1175,6 +1299,8 @@ modOptionMasterData
 modSettingsData
 modOutlookAdapter
 ```
+
+新しいWordEditor専用ModuleはMVPでは追加しない。
 
 ### 26.5 Shared / State
 
@@ -1189,18 +1315,11 @@ modResult
 
 実装開始前に上記Module数が処理量に対して過剰と判断した場合は、責務を崩さない範囲で近接Moduleを統合してよい。
 
-例：
+Outlook Adapter内部のWordEditor関連処理がImplementation時に過大化した場合のみ、責務を再評価する。
 
-```text
-modSubjectRenderer
-+
-modBodyRenderer
-→ modRenderer
-```
+ただし、将来の複雑化を先取りしてMVP段階からWordEditor専用Class / Adapterを追加しない。
 
-ただし、Value FormatterとOutlook Adapterは責務が異なるため分離を維持する。
-
----
+Value FormatterとOutlook Adapterは責務が異なるため分離を維持する。
 
 ## 27. Design Decision一覧
 
@@ -1218,11 +1337,49 @@ modBodyRenderer
 | D10 | UserForm | 固定Form + 動的Input Controls |
 | D11 | Binding | Tag + InputValues Dictionary |
 | D12 | Input Validation | Validator分離、表示はUI |
-| D13 | Render | Formatterと出力先処理を分離 |
-| D14 | Outlook | 軽量Adapter |
+| D13 | Render | Formatter / Subject文字列処理 / WordEditor Body反映を分離 |
+| D14 | Outlook | 軽量AdapterへOutlook / Word Object Model依存を集約 |
 | D15 | Error | Result返却 + UI表示 |
+| D16 | Body処理方式 | Route W：Inspector.WordEditor + Word Range.Find / Range.Text |
 
----
+### D16 Body処理方式
+
+Technical Spike A v0.2の結果、Route W：WordEditorを採用する。
+
+採用方式：
+
+```text
+MailItem
+↓
+Inspector.WordEditor
+↓
+Word Document
+↓
+Range.Find（Case Insensitive）
+↓
+Found Range
+↓
+Range.Text = replacement
+```
+
+採用理由：
+
+- 通常OFTの全Variableを表示文字列として検出できた
+- Case Insensitiveな全出現箇所置換が成立した
+- HTML Encodeなしで特殊文字を安全に表示できた
+- Requirements対象の基本書式を維持した
+- Render後のUnresolved Checkが成立した
+- Display前WordEditor取得によるDraft / Inspector残存を確認しなかった
+
+不採用方式：
+
+```text
+Route H：HTMLBody直接処理
+```
+
+不採用理由：
+
+通常作成したOFTでもVariable内部へHTMLタグが挿入され、Scanner / Renderer / Unresolved Checkerが安定して成立しなかったため。
 
 ## 28. Requirements Traceability
 
@@ -1230,7 +1387,7 @@ modBodyRenderer
 |---|---|
 | OFT参照 | Settings Data / Outlook Adapter |
 | Variable記法 | Template Scanner |
-| Case Insensitive | Scanner / Dictionary / Renderer |
+| Case Insensitive | Scanner / Dictionary / Subject Renderer / Outlook Adapter |
 | Template同期 | Sync Engine |
 | New / Existing / Unused / Reactivated | Sync Engine |
 | VariableDefinition | VariableDefinition Data |
@@ -1241,14 +1398,12 @@ modBodyRenderer
 | SortOrder | VariableDefinition Data / UserForm Generator |
 | 入力保持 | Input State |
 | Validation | Input Validator |
-| Subject置換 | Subject Renderer |
-| Body置換 | Body Renderer |
-| HTML保護 | Body Renderer |
-| 未置換チェック | Unresolved Checker |
+| Subject置換 | Subject Renderer / Outlook Adapter |
+| Body置換 | Outlook Adapter |
+| Body書式維持 | Outlook Adapter / WordEditor Body Rendering |
+| 未置換チェック | Unresolved Checker / Outlook Adapter（BodyText取得） |
 | Outlook Display | Outlook Adapter |
 | エラー通知 | Result Model / UI |
-
----
 
 ## 29. 実装時の確認事項
 
@@ -1260,33 +1415,54 @@ modBodyRenderer
 - UserFormの具体的な寸法・スクロール方式
 - Descriptionの具体的表示方法
 - Validation強調色
-- HTML Encode関数
-- Outlook COM参照解放の具体コード
+- Word Object Modelの参照設定 / Late Binding方針
+- `Range.Find` の具体的な検索Range更新ループ
+- Outlook / Word COM参照解放の具体コード
+- WordEditor取得失敗時のError捕捉・Result変換
 - 同期結果画面の具体表示
 - Unused確認UI
 - エラーコード体系の採否
 - Module統合の最終調整
 
----
-
 ## 30. 設計上のリスク
 
-### RISK-DES-001 HTMLBody内のVariable表現
+### RISK-DES-001 HTMLBody内のVariable表現 — CLOSED
 
-OFTのHTMLBody内部で `{{VariableName}}` がHTMLタグ等により分断された場合、単純な文字列検索・置換では検出できない可能性がある。
+Technical Spike A v0.2で本リスクの実発生を確認した。
 
-MVP実装時に、実際のOFTで以下を確認する。
+通常作成したOFTにおいて、Outlook画面上では連続して見えるVariableがHTMLBody内部では以下のように分断された。
 
-- 通常入力した `{{VariableName}}` がHTMLBody内で連続文字列として保持されること
-- 書式設定により変数文字列が分断されないこと
+```html
+{{<span class=SpellE>ModelName</span>}}
+{{<span class=SpellE>GateDate</span>}}
+```
 
-MVP Requirements v0.1.4では、Variable文字列途中がHTMLタグ等で分断されるケースをMVP保証対象外としている。Technical Spikeでは、通常入力したVariableが実OFTのHTMLBody内で連続文字列として保持され、現在のScanner / Renderer方式が通常利用ケースで成立することを確認する。
+その結果、HTMLBody直接処理では以下が安定して成立しなかった。
 
-上記を超える新しい利用者向けテンプレート記述制約が必要になった場合は、Design内で決定せずRequirement Gapとして扱う。
+- Template Scanner
+- Body Renderer
+- Unresolved Checker
 
-### RISK-DES-002 Outlook COM
+Technical Finding `TF-A-001` としてDesign Findingに分類し、Route H：HTMLBodyを不採用とした。
 
-Outlook MailItemの生成・解放・Displayに関するCOMエラーをInfrastructure層で適切に捕捉する必要がある。
+MVP Body処理方式をRoute W：WordEditorへ変更したため、本リスクは採用Design上のActive RiskではなくCLOSEDとする。
+
+新しい利用者向けTemplate制約は追加していない。
+
+### RISK-DES-002 Outlook / Word COM
+
+Outlook MailItemの生成・解放・Displayに加え、Inspector / WordEditor / Word Document / Range操作に関するCOMエラーをInfrastructure層で適切に捕捉する必要がある。
+
+Technical Spike Aでは以下を確認済みである。
+
+- Display前のWordEditor取得成功
+- Scan用MailItemの保存なしClose成功
+- Draft残存なし
+- Inspector残存なし
+
+したがってWordEditor採用自体をBlocking Riskとはしない。
+
+Implementationでは、Object取得失敗、Range操作失敗、COM参照解放失敗をError / Result Modelへ変換する。
 
 ### RISK-DES-003 動的UserForm
 
@@ -1294,36 +1470,34 @@ Outlook MailItemの生成・解放・Displayに関するCOMエラーをInfrastru
 
 MVPでは実使用テンプレートの変数数を基準に確認する。
 
----
-
 ## 31. MVP Design完了条件
 
-本Design v0.1.2は、以下を満たした時点で基本設計完了とする。
+本Design v0.1.3は、以下を満たした時点で基本設計完了とする。
 
-- Requirements v0.1.3の主要要件に対応するコンポーネントが定義されている
-- UI / Core / Excel / Outlookの責務境界が定義されている
+- Requirements v0.1.5の主要要件に対応するコンポーネントが定義されている
+- UI / Core / Excel / Outlook / WordEditorの責務境界が定義されている
 - Template Scan / Sync / UserForm / Render / Outlook Displayの主要フローが定義されている
 - Excelテーブル構造が定義されている
 - Case Insensitive処理方針が定義されている
 - Input State保持方式が定義されている
 - Error伝播方針が定義されている
 - Design Questions 15件が反映されている
+- Technical Spike AのRoute W：WordEditor Technical Decisionが反映されている
+- TF-A-001へのDesign対応が反映されている
 - 新規Requirement Gapが残っていない
-
----
 
 ## 32. 次工程
 
-MVP Design v0.1.2への修正後は、以下の順を推奨する。
+MVP Design v0.1.3への改訂後は、Requirements / Design / Technical Spike Aの最終整合性を確認し、MVP Test Specification v0.1を作成する。
 
 ```text
-MVP Requirements v0.1.4
+MVP Requirements v0.1.5
         ↓
-MVP Design v0.1.2
+MVP Design v0.1.3
+Route W：WordEditor反映
         ↓
-Design / Requirements 最終整合性レビュー
-        ↓
-Technical Spike A：OFT / HTMLBody
+Requirements / Design / Technical Spike A
+最終整合性レビュー
         ↓
 MVP Test Specification v0.1
         ↓
@@ -1352,6 +1526,9 @@ VBA実装
 - OFT不存在
 - Input保持 / クリア
 - Subject / Body置換
-- HTML Encode
-- 未置換Variable
+- Case InsensitiveなBody全出現箇所置換
+- Body特殊文字表示
+- Body基本書式維持
+- 未置換Variable正常系 / 異常系
+- WordEditor / MailItem Lifecycle
 - Outlook Display成功 / 失敗
