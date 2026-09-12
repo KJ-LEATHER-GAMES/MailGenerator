@@ -1,4 +1,4 @@
-# MVP Design v0.1.3 日本語版
+# MVP Design v0.1.4 日本語版
 
 ## 1. 文書情報
 
@@ -6,14 +6,33 @@
 |---|---|
 | 文書名 | MVP Design |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.3 |
+| バージョン | v0.1.4 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.5 日本語版 |
+| 要件文書 | MVP Requirements v0.1.6 日本語版 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.4 更新概要
+
+`MVP Requirements v0.1.6` を上位Baselineとし、`MVP Requirements v0.1.5` × `MVP Design v0.1.3` × `Technical Spike A v0.2 CLOSED` の最終整合性レビューで確認したDesign completeness / clarification事項を反映した。
+
+主な変更は以下である。
+
+1. メール生成直前にCurrent OFTを再Scanし、Configuration Validatorを再実行するFail Fast経路を追加
+2. Unresolved Checkerが未置換Variable一覧を返す `UnresolvedCheckResult` を明示
+3. Select型ComboBoxを選択専用とし、自由入力不可をDesignへ明示
+4. `TemplateLocation` / `FirstDetectedAt` / `LastDetectedAt` のSync更新規則を明示
+5. Unused Variableの通常非表示 / 必要時確認方針を明示
+6. InputValuesをWorkbook Session中のみ保持し、永続保存しないことを明示
+7. Requirements参照を `MVP Requirements v0.1.6` へ更新
+8. Technical Spike Aの `TF-A-002` をMVP Test Specificationへの引継ぎ事項として明示
+
+これらは既存RequirementをDesignへ完全に落とし込むための補完であり、新しい利用者向けRequirement Gapは発生していない。
 
 ---
 
@@ -57,7 +76,7 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.5` を満たすためのMVP基本設計を定義する。
+本書は、`MVP Requirements v0.1.6` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -207,7 +226,7 @@ Template ScannerおよびUnresolved CheckerがBodyを評価する場合は、Out
 | Input Validator | Required / Date / Selectの入力妥当性判定 |
 | Value Formatter | Type / Formatに基づくメール出力文字列化 |
 | Subject Renderer | Subject変数置換 |
-| Unresolved Checker | Render後のSubject / BodyTextから未置換変数検出 |
+| Unresolved Checker | Render後のSubject / BodyTextから未置換変数を検出し、一覧Resultを生成 |
 | Error / Result Model | 予見可能なエラー情報の受け渡し |
 
 ## 6. Excel構成
@@ -278,6 +297,41 @@ Select
 ```
 
 ---
+
+
+### 7.4 自動管理列の更新規則
+
+`TemplateLocation`、`Status`、`FirstDetectedAt`、`LastDetectedAt` はユーザー設定値ではなく、Template Scan / Sync結果からシステムが更新する。
+
+同期処理開始時に1つの `SyncTimestamp` を取得し、同一Sync内では共通して使用する。
+
+| Sync状態 | TemplateLocation | Status | FirstDetectedAt | LastDetectedAt |
+|---|---|---|---|---|
+| New | 現在のScan結果 | Active | SyncTimestamp | SyncTimestamp |
+| Existing | 現在のScan結果へ更新 | Active維持 | 既存値保持 | SyncTimestamp |
+| Reactivated | 現在のScan結果へ更新 | Activeへ更新 | 既存値保持 | SyncTimestamp |
+| Unused化 | 最終検出Locationを保持 | Unusedへ更新 | 既存値保持 | 既存値保持 |
+| 既にUnused | 既存値保持 | Unused維持 | 既存値保持 | 既存値保持 |
+
+`LastDetectedAt` は「最後にTemplate上で存在を確認した時刻」であり、Unused化した時刻ではない。
+
+### 7.5 Unused表示方針
+
+通常の設定・処理対象は `Status = Active` のVariableとする。
+
+Unused Variableは通常の設定表示対象から除外するが、確認操作ではActive / Unusedを含む全件を取得可能とする。
+
+概念上のData Access利用は以下とする。
+
+```text
+通常表示
+→ Active変数取得
+
+Unused確認
+→ 全変数取得
+```
+
+具体的なExcel Filter、表示切替Button等はImplementationで決定する。
 
 ## 8. OptionMaster設計
 
@@ -365,11 +419,12 @@ modSettingsData
 `modVariableDefinitionData`
 
 - Active変数取得
-- 全変数取得
+- 全変数取得（Unused確認用）
 - VariableName検索
 - 新規変数追加
 - Status更新
 - TemplateLocation更新
+- FirstDetectedAt初期設定
 - LastDetectedAt更新
 
 `modOptionMasterData`
@@ -450,11 +505,17 @@ Outlook Adapter
 ↓
 Inspector / WordEditor取得
 ↓
+Subject / BodyText取得
+↓
+Template Scanner
+↓
+Configuration Validator
+↓
+Current Template / Configuration確認
+↓
 Value Format
 ↓
-Subject Render
-↓
-Subject設定
+Subject Render / Subject設定
 ↓
 Word Range Body Render
 ↓
@@ -464,6 +525,8 @@ Unresolved Check
 ↓
 Display
 ```
+
+UserForm起動時のScan結果をメール生成時まで無条件に信用せず、生成用MailItemのCurrent OFT内容をRender前に再確認する。
 
 ### 12.3 設計原則
 
@@ -646,17 +709,39 @@ VariableDefinition Dictionary B
 
 StatusはActiveとする。
 
+`TemplateLocation` にはTemplateScanResultの現在Locationを設定する。
+
+`FirstDetectedAt` / `LastDetectedAt` には当該Syncの `SyncTimestamp` を設定する。
+
 ### 15.4 Existing
 
 既存ユーザー設定を保持し、同期処理で上書きしない。
+
+DisplayName / Type / Required / Description / OptionSource / SortOrder / Format等のユーザー設定は保持する。
+
+`TemplateLocation` は現在のTemplateScanResultへ更新する。
+
+`FirstDetectedAt` は保持し、`LastDetectedAt` は `SyncTimestamp` へ更新する。
+
+VariableNameの表記は既存VariableDefinition側を正式表記として保持する。
 
 ### 15.5 Reactivated
 
 StatusをActiveへ戻し、既存設定を再利用する。
 
+`FirstDetectedAt` は保持する。
+
+`TemplateLocation` は現在のTemplateScanResultへ更新し、`LastDetectedAt` は `SyncTimestamp` へ更新する。
+
 ### 15.6 Unused
 
 StatusのみUnusedへ変更し、設定値は保持する。
+
+`TemplateLocation` は最終検出時の値を保持する。
+
+`FirstDetectedAt` / `LastDetectedAt` も保持し、Unused化時刻で `LastDetectedAt` を上書きしない。
+
+既にUnusedのVariableも同様に管理情報を保持する。
 
 ### 15.7 Rename
 
@@ -747,11 +832,21 @@ frmMailGenerator
 
 ### 17.2 Type / Control対応
 
-| Type | Control |
-|---|---|
-| Text | TextBox |
-| Date | TextBox |
-| Select | ComboBox |
+| Type | Control | 入力規則 |
+|---|---|---|
+| Text | TextBox | 1行入力 |
+| Date | TextBox | 1行入力 |
+| Select | ComboBox | OptionMasterの有効Optionからの選択のみ |
+
+Text / Date用TextBoxは複数行入力を許可しない。
+
+Select用ComboBoxは自由入力できない選択専用設定とする。
+
+VBAでは `fmStyleDropDownList` 相当を使用する。
+
+OptionはOptionMaster Data Accessが取得したActive OptionをSortOrder順に設定する。
+
+具体的なControl Property設定コードはImplementationで確定する。
 
 ### 17.3 表示順
 
@@ -785,6 +880,10 @@ VariableName → Value
 ```
 
 DictionaryはCase Insensitiveとする。
+
+InputValuesはWorkbook Session中のメモリ上の状態とし、Excelシートや外部ファイルへ永続保存しない。
+
+Workbookを閉じた時点で保持対象外となる。
 
 ### 18.3 UserForm再表示
 
@@ -1002,8 +1101,9 @@ Render
 ↓
 Unresolved Checker
 ↓
-0件 → Outlook Display
-1件以上 → Error
+UnresolvedCheckResult
+├─ 0件 → Outlook Display
+└─ 1件以上 → Error Result → UI一覧表示
 ```
 
 ### 23.2 対象
@@ -1027,6 +1127,24 @@ Template ScannerとUnresolved Checkerで同じ表示文字列モデルを使用�
 ```
 
 の一貫性を持たせる。
+
+Unresolved Checkerは件数だけでなく、残存したVariableを後続UIへ渡す。
+
+概念構造：
+
+```text
+UnresolvedCheckResult
+├─ HasUnresolved
+└─ Variables[]
+```
+
+`Variables[]` はVariableNameをCase Insensitiveで重複統合する。
+
+同一Variableが複数箇所、大文字・小文字違いで残存しても、ユーザー通知上は同一Variableとして扱う。
+
+UIは `Variables[]` からFR-UNRESOLVED-002の未置換Variable一覧を表示する。
+
+警告のみで処理継続せず、1件以上でFailとする。
 
 ## 24. エラー設計
 
@@ -1068,6 +1186,10 @@ Target
 ```
 
 `Target` はVariableNameやTemplatePath等、問題箇所を特定する補助情報として使用する。
+
+`Message` は技術例外文字列をそのまま格納することを目的とせず、ユーザーが問題と次に確認すべき対象を理解できる内容とする。
+
+複数Targetを通知する必要がある場合は、`Errors[]` または専用Resultの一覧情報をUIで集約表示する。
 
 ### 24.4 Resultモデル
 
@@ -1205,6 +1327,10 @@ Configuration ValidatorはOFTを直接開かず、Template ScannerのRegex処理
 
 ### 25.3 メール生成
 
+UserForm起動時のConfiguration Check結果をメール生成時まで無条件に信用しない。
+
+メール生成では生成用MailItemのCurrent OFT内容を再Scanし、Render前にConfiguration Validatorを再実行する。
+
 ```text
 User
 ↓
@@ -1214,20 +1340,47 @@ Control値 → InputValues
 ↓
 Input Validator
 ↓
-Errorあり？
+Input Errorあり？
 ├─ Yes
 │   ↓
-│ Error一覧
-│   ↓
-│ UserFormでControl強調
+│ Error一覧 / Control強調
 │
 └─ No
+    ↓
+Settings Data Access
+    ↓
+TemplatePath取得
+    ↓
+OFT存在確認
+    ↓
+OFT存在？
+├─ No → Error Result → UI通知 → Stop
+└─ Yes
     ↓
 Outlook Adapter
     ↓
 生成用MailItem作成
     ↓
 Inspector / WordEditor取得
+    ↓
+Subject / BodyText取得
+    ↓
+Template Scanner
+    ↓
+TemplateScanResult
+    ↓
+VariableDefinition / OptionMaster取得
+    ↓
+Configuration Validator
+    ↓
+Current Template / Configuration Errorあり？
+├─ Yes
+│   ↓
+│ 生成用MailItemを保存せずClose
+│   ↓
+│ UI通知 → Stop
+│
+└─ No
     ↓
 Value Formatter
     ↓
@@ -1243,12 +1396,14 @@ Subject / BodyText再取得
     ↓
 Unresolved Checker
     ↓
+UnresolvedCheckResult
+    ↓
 未置換あり？
 ├─ Yes
 │   ↓
-│ MailItem表示せずError
+│ 未置換Variable一覧 → Error Result / UI
 │   ↓
-│ 保存せずClose
+│ MailItem表示せず保存せずClose
 │
 └─ No
     ↓
@@ -1257,9 +1412,17 @@ Display
 ツール責任範囲終了
 ```
 
+目的は、UserForm表示後にOFTが変更された場合でも以下を保証することである。
+
+- OFT不存在で生成を開始しない
+- Invalid Variable Syntaxを含むメールを生成しない
+- Template / VariableDefinition不整合状態でRenderしない
+
+新しいValidatorは追加せず、UserForm起動時と同じTemplate Scanner / Configuration Validatorを再利用する。
+
 BodyはWord Range編集によって生成用MailItemへ直接反映されるため、Render後にBody全文をMailItemへ再設定する処理は行わない。
 
-未置換Variableが検出された場合は利用者へMailItemをDisplayせず、生成用MailItemを保存せず終了する。
+未置換Variableが検出された場合は利用者へMailItemをDisplayせず、未置換Variable一覧を通知し、生成用MailItemを保存せず終了する。
 
 ## 26. VBA構成案
 
@@ -1404,6 +1567,11 @@ Route H：HTMLBody直接処理
 | 未置換チェック | Unresolved Checker / Outlook Adapter（BodyText取得） |
 | Outlook Display | Outlook Adapter |
 | エラー通知 | Result Model / UI |
+| VariableDefinition自動管理列 | Sync Engine / VariableDefinition Data |
+| Unused通常非表示 / 確認 | VariableDefinition Data / UI |
+| Select自由入力禁止 | UserForm Generator / OptionMaster Data |
+| 未置換Variable一覧 | Unresolved Checker / Result Model / UI |
+| メール生成直前Template整合性 | Template Scanner / Configuration Validator / Outlook Adapter |
 
 ## 29. 実装時の確認事項
 
@@ -1413,6 +1581,8 @@ Route H：HTMLBody直接処理
 - `VBScript.RegExp` の生成方式
 - Result / ErrorInfoをClassにするか軽量構造にするか
 - UserFormの具体的な寸法・スクロール方式
+- Select用ComboBoxの具体的なProperty設定コード
+- SyncTimestamp取得・更新処理の具体コード
 - Descriptionの具体的表示方法
 - Validation強調色
 - Word Object Modelの参照設定 / Late Binding方針
@@ -1472,9 +1642,9 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 31. MVP Design完了条件
 
-本Design v0.1.3は、以下を満たした時点で基本設計完了とする。
+本Design v0.1.4は、以下を満たした時点で基本設計完了とする。
 
-- Requirements v0.1.5の主要要件に対応するコンポーネントが定義されている
+- Requirements v0.1.6の主要要件に対応するコンポーネントが定義されている
 - UI / Core / Excel / Outlook / WordEditorの責務境界が定義されている
 - Template Scan / Sync / UserForm / Render / Outlook Displayの主要フローが定義されている
 - Excelテーブル構造が定義されている
@@ -1484,20 +1654,25 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 - Design Questions 15件が反映されている
 - Technical Spike AのRoute W：WordEditor Technical Decisionが反映されている
 - TF-A-001へのDesign対応が反映されている
+- メール生成直前のCurrent OFT / Configuration再確認経路が定義されている
+- Unresolved Variable一覧をUIへ渡す経路が定義されている
+- Select自由入力禁止が定義されている
+- VariableDefinition自動管理列のSync更新規則が定義されている
+- Unused Variableの通常非表示 / 必要時確認方針が定義されている
 - 新規Requirement Gapが残っていない
 
 ## 32. 次工程
 
-MVP Design v0.1.3への改訂後は、Requirements / Design / Technical Spike Aの最終整合性を確認し、MVP Test Specification v0.1を作成する。
+`MVP Requirements v0.1.6` と本 `MVP Design v0.1.4`、および `Technical Spike A v0.2 CLOSED` の最終整合性を再確認した後、`MVP Test Specification v0.1` を作成する。
 
 ```text
-MVP Requirements v0.1.5
+MVP Requirements v0.1.6
+        +
+MVP Design v0.1.4
+        +
+Technical Spike A v0.2 CLOSED
         ↓
-MVP Design v0.1.3
-Route W：WordEditor反映
-        ↓
-Requirements / Design / Technical Spike A
-最終整合性レビュー
+最終整合性再確認
         ↓
 MVP Test Specification v0.1
         ↓
@@ -1508,7 +1683,17 @@ Implementation Plan v0.1
 VBA実装
 ```
 
-実装前に、Acceptance CriteriaとDesignコンポーネントを対応付けたテストケースを作成する。
+MVP Test Specification v0.1では、以下のTraceabilityを追跡可能とする。
+
+```text
+Requirement
+↓
+Acceptance Criteria
+↓
+Design Component / Design Rule
+↓
+Test Case
+```
 
 特に以下を優先する。
 
@@ -1523,12 +1708,23 @@ VBA実装
 - SortOrder未設定 / 重複
 - Date Validation / Format
 - Select OptionSource
+- Select自由入力禁止
 - OFT不存在
+- UserForm表示後にOFTを変更した場合の生成直前再チェック
+- Invalid Variable Syntaxの生成直前Block
 - Input保持 / クリア
 - Subject / Body置換
 - Case InsensitiveなBody全出現箇所置換
 - Body特殊文字表示
 - Body基本書式維持
 - 未置換Variable正常系 / 異常系
+- 未置換Variable一覧表示
+- Template Variable検出成立性とUnresolved 0件判定の独立確認（TF-A-002）
+- TemplateLocation / FirstDetectedAt / LastDetectedAt更新
+- Unused通常非表示 / 必要時確認
 - WordEditor / MailItem Lifecycle
 - Outlook Display成功 / 失敗
+
+Technical Spike AはCLOSED済みであるため再実施しない。
+
+具体的なRangeループ、COM解放、Control Property等はImplementation Detailとして後続工程で確定する。

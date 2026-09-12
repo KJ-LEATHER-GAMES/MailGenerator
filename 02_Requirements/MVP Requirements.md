@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.5 日本語版
+# MVP Requirements v0.1.6 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.5 |
+| バージョン | v0.1.6 |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +15,19 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.6 更新概要
+
+v0.1.6では、`MVP Requirements v0.1.5` × `MVP Design v0.1.3` × `Technical Spike A v0.2 CLOSED` の最終整合性レビュー結果を反映した。
+
+利用者向けRequirement、Acceptance Criteria、およびMVP保証範囲は変更していない。
+
+1. §34の次工程を、Design v0.1.3反映後の現在地に合わせて更新した
+2. 最終整合性レビューで確認したCR-001〜CR-005は、既存Requirementに対するDesign completeness / clarificationとして `MVP Design v0.1.4` で補完する方針とした
+3. CR-006として確認した旧Design Reopen記述を解消し、Requirements v0.1.6 → Design v0.1.4 → 最終整合性確認 → MVP Test Specification v0.1 の順序を明確化した
+4. 新規Requirement Gapは発生していない
+
+---
 
 ### v0.1.5 更新概要
 
@@ -1297,44 +1310,69 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ## 34. 次工程
 
-Technical Spike A v0.2はPASSで完了し、MVPのBody処理技術方針としてRoute W：WordEditorを採用した。
+Technical Spike A v0.2はCLOSED / PASSで完了し、MVPのBody処理技術方針としてRoute W：WordEditorを採用した。
 
-本RequirementsへのDocument Consistency Patch反映後、Technical Spike AのTechnical DecisionをDesignへ反映するため、`MVP Design v0.1.2` をReopenする。
+Technical Spike AのTechnical Decisionは、`MVP Requirements v0.1.5` および `MVP Design v0.1.3` へ反映済みである。
+
+その後の最終整合性レビューにより、利用者向けRequirementの変更は不要である一方、既存RequirementをDesignへ完全に落とし込むためのDesign completeness / clarification事項（CR-001〜CR-005）が確認された。
+
+本v0.1.6ではRequirement本文・Acceptance Criteria・保証範囲を変更せず、次工程とBaselineの現在地のみを更新する。
+
+現在地は以下とする。
+
+```text
+MVP Requirements v0.1.6
+        +
+MVP Design v0.1.3
+        +
+Technical Spike A v0.2 CLOSED
+```
 
 次工程は以下とする。
 
 ```text
-MVP Requirements v0.1.5
+MVP Requirements v0.1.6
         ↓
-MVP Design v0.1.2 Reopen / 改訂
+MVP Design v0.1.4
+最終整合性修正
         ↓
-Technical Spike A Technical Decision反映
-Route W：WordEditor
-        ↓
-Requirements / Design / Technical Spike
-最終整合性レビュー
+Requirements / Design / Technical Spike A
+最終整合性再確認
         ↓
 MVP Test Specification v0.1
 ```
 
-MVP Design改訂では、特に以下の責務・処理経路との整合を確認する。
+`MVP Design v0.1.4` では、最終整合性レビューで確認した以下の既存RequirementへのDesign補完を行う。
+
+- メール生成直前のCurrent OFT再確認
+- 未置換Variable一覧をUIへ渡すResult設計
+- Select型の自由入力禁止
+- `TemplateLocation` / `FirstDetectedAt` / `LastDetectedAt` のSync更新規則
+- Unused Variableの通常非表示 / 必要時確認方針
+
+これらは新しい利用者向けRequirementではなく、既存Requirementに対するDesign completeness / clarificationとして扱う。
+
+`MVP Design v0.1.4` 反映後の最終Baselineは以下を想定する。
 
 ```text
-VariableDefinition
-        ↓
-Template Scanner
-        ↓
-Sync Engine
-        ↓
-Configuration Validator
-        ↓
-UserForm Generator
-        ↓
-Input Validator
-        ↓
-Render Engine
-        ↓
-Outlook Adapter
+MVP Requirements v0.1.6
+        +
+MVP Design v0.1.4
+        +
+Technical Spike A v0.2 CLOSED
 ```
 
-Requirementsでは利用者から見た要求・保証範囲を維持し、WordEditor / Word Object Model等の具体的なBody処理方式はMVP Designで定義する。
+MVP Test Specification v0.1では、以下のTraceabilityを追跡可能とする。
+
+```text
+Requirement
+↓
+Acceptance Criteria
+↓
+Design Component / Design Rule
+↓
+Test Case
+```
+
+また、Technical Spike Aの `TF-A-002` を踏まえ、Template Variableの検出成立性とRender後の未置換Variable 0件判定を別Testとして扱う。
+
