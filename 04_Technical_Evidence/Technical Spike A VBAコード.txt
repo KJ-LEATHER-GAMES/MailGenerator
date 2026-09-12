@@ -1,413 +1,1141 @@
 Option Explicit
 
 ' ============================================================
-' Technical Spike A
-' OFT / HTMLBody Feasibility Verification
+' Technical Spike A v0.2
+'
+' Route H : HTMLBody
+' Route W : WordEditor
 '
 ' 対象:
 '   TSA-001 ～ TSA-010
 '
 ' 注意:
-'   - 本番実装ではなくTechnical Spike用コード
-'   - 外部参照設定不要（Late Binding）
-'   - TSA-007のみOutlook画面で手動確認
+'   - 本番実装ではなくTechnical Spike用
+'   - Outlook / WordともLate Binding
+'   - 参照設定不要
+'   - Route H / Wは別MailItemで検証
 ' ============================================================
 
 
 ' ------------------------------------------------------------
 ' ★ 実環境に合わせて変更
 ' ------------------------------------------------------------
-Private Const OFT_PATH As String = "C:\Temp\TechnicalSpikeA.oft"
+Private Const OFT_PATH As String = _
+    "C:\Temp\TechnicalSpikeA.oft"
 
 
 ' ------------------------------------------------------------
 ' Outlook constants
-' Late Bindingのため数値定義
 ' ------------------------------------------------------------
 Private Const OL_DISCARD As Long = 1
 Private Const OL_FOLDER_DRAFTS As Long = 16
 
 
 ' ------------------------------------------------------------
-' Result counter
+' Word constants
+' Late Binding用
 ' ------------------------------------------------------------
-Private mPassCount As Long
-Private mFailCount As Long
-Private mManualCount As Long
+Private Const WD_FIND_STOP As Long = 0
+
+
+' ------------------------------------------------------------
+' Result counters
+' ------------------------------------------------------------
+Private mPassH As Long
+Private mFailH As Long
+Private mManualH As Long
+
+Private mPassW As Long
+Private mFailW As Long
+Private mManualW As Long
 
 
 ' ============================================================
 ' Entry Point
 ' ============================================================
-Public Sub RunTechnicalSpikeA()
+Public Sub RunTechnicalSpikeA_v02()
 
     Dim olApp As Object
-    Dim scanItem As Object
-    Dim renderItem As Object
 
-    Dim originalSubject As String
-    Dim originalHtml As String
+    ' ----- Scan用 -----
+    Dim scanItemH As Object
+    Dim scanItemW As Object
 
-    Dim renderedSubject As String
-    Dim renderedHtml As String
+    Dim scanInspectorW As Object
+    Dim scanWordDocW As Object
 
-    Dim variables As Object
-    Dim locations As Object
-    Dim invalidCandidates As Collection
-    Dim values As Object
+    Dim subjectH As String
+    Dim htmlH As String
 
+    Dim subjectW As String
+    Dim wordTextW As String
+
+    Dim varsH As Object
+    Dim locationsH As Object
+    Dim invalidH As Collection
+
+    Dim varsW As Object
+    Dim locationsW As Object
+    Dim invalidW As Collection
+
+    Dim wordScanAvailable As Boolean
+
+    ' ----- Lifecycle -----
     Dim draftsBefore As Long
     Dim draftsAfter As Long
 
-    Dim closeErr As Long
-    Dim displayErr As Long
+    Dim inspectorsBefore As Long
+    Dim inspectorsAfter As Long
 
-    Dim unresolvedPositive As Long
-    Dim unresolvedNegative As Long
+    Dim closeErrH As Long
+    Dim closeErrW As Long
 
-    Dim negativeSubject As String
-    Dim negativeHtml As String
+    Dim sideEffectAnswer As VbMsgBoxResult
+    Dim lifecycleVisualOK As Boolean
 
-    Dim result As VbMsgBoxResult
+
+    ' ----- Render用 -----
+    Dim renderItemH As Object
+    Dim renderItemW As Object
+
+    Dim renderInspectorW As Object
+    Dim renderWordDocW As Object
+
+    Dim originalSubjectH As String
+    Dim originalHtmlH As String
+
+    Dim originalSubjectW As String
+    Dim originalWordTextW As String
+
+    Dim renderedSubjectH As String
+    Dim renderedHtmlH As String
+
+    Dim renderedSubjectW As String
+
+    Dim values As Object
+
+    Dim wordRenderAvailable As Boolean
+
+    Dim replaceCountH As Long
+    Dim replaceCountW As Long
+
+
+    ' ----- Unresolved -----
+    Dim unresolvedFullH As Long
+    Dim unresolvedFullW As Long
+
+    Dim unresolvedNegativeH As Long
+    Dim unresolvedNegativeW As Long
+
+
+    ' ----- Negative test用 -----
+    Dim negativeItemH As Object
+    Dim negativeItemW As Object
+
+    Dim negativeInspectorW As Object
+    Dim negativeWordDocW As Object
+
+    Dim negativeSubjectH As String
+    Dim negativeHtmlH As String
+
+    Dim negativeSubjectW As String
+
+    Dim negativeWordAvailable As Boolean
+
+
+    ' ----- Display / Manual -----
+    Dim displayErrH As Long
+    Dim displayErrW As Long
+
+    Dim visualH As VbMsgBoxResult
+    Dim visualW As VbMsgBoxResult
+
 
     On Error GoTo FatalError
 
-    ResetResultCounters
+    ResetCounters
 
-    Debug.Print String(70, "=")
-    Debug.Print "Technical Spike A START"
-    Debug.Print "OFT: " & OFT_PATH
-    Debug.Print String(70, "=")
+    PrintHeader
 
 
     ' ========================================================
     ' Precondition
     ' ========================================================
     If Len(Dir$(OFT_PATH)) = 0 Then
-        Debug.Print
-        Debug.Print "[FATAL] OFT not found."
+
+        Debug.Print "[FATAL] OFT not found:"
         Debug.Print OFT_PATH
+
         Exit Sub
+
     End If
 
 
     Set olApp = GetOutlookApplication()
 
     If olApp Is Nothing Then
-        Debug.Print "[FATAL] Outlook.Application could not be created."
+
+        Debug.Print _
+            "[FATAL] Outlook.Application could not be created."
+
         Exit Sub
+
     End If
 
 
-    ' ========================================================
-    ' Draft count before Scan MailItem
-    ' TSA-010 Evidence
-    ' ========================================================
     draftsBefore = GetDraftCount(olApp)
+    inspectorsBefore = GetInspectorCount(olApp)
 
     Debug.Print
-    Debug.Print "Draft count before scan: " & draftsBefore
+    Debug.Print "Drafts before     : " & draftsBefore
+    Debug.Print "Inspectors before : " & inspectorsBefore
 
 
     ' ========================================================
     ' TSA-001
     ' OFT読込
     ' ========================================================
-    Set scanItem = olApp.CreateItemFromTemplate(OFT_PATH)
 
-    LogResult _
+    Set scanItemH = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+    Set scanItemW = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+
+    LogRouteResult _
         "TSA-001", _
-        Not scanItem Is Nothing, _
-        "CreateItemFromTemplateでMailItemを取得"
+        "H", _
+        Not scanItemH Is Nothing, _
+        "Route H用MailItemを生成"
 
 
-    If scanItem Is Nothing Then
-        GoTo FatalError
-    End If
+    LogRouteResult _
+        "TSA-001", _
+        "W", _
+        Not scanItemW Is Nothing, _
+        "Route W用MailItemを生成"
 
 
     ' ========================================================
     ' TSA-002
-    ' Subject / HTMLBody取得
+    ' Body Access
     ' ========================================================
-    originalSubject = CStr(scanItem.Subject)
-    originalHtml = CStr(scanItem.HTMLBody)
 
-    LogResult _
-        "TSA-002", _
-        (Len(originalSubject) > 0 And Len(originalHtml) > 0), _
-        "Subject / HTMLBodyを取得"
+    ' --------------------------------------------------------
+    ' Route H
+    ' --------------------------------------------------------
+    If Not scanItemH Is Nothing Then
+
+        subjectH = SafeString(scanItemH.Subject)
+        htmlH = SafeString(scanItemH.HTMLBody)
+
+        LogRouteResult _
+            "TSA-002", _
+            "H", _
+            (Len(subjectH) > 0 And Len(htmlH) > 0), _
+            "Subject / HTMLBody取得"
+
+        Debug.Print
+        Debug.Print "----- Route H -----"
+        Debug.Print "Subject:"
+        Debug.Print subjectH
+        Debug.Print "HTMLBody length: " & Len(htmlH)
+
+    Else
+
+        LogRouteResult _
+            "TSA-002", _
+            "H", _
+            False, _
+            "TSA-001失敗のためBody Access不可"
+
+    End If
 
 
-    Debug.Print
-    Debug.Print "----- Subject -----"
-    Debug.Print originalSubject
+    ' --------------------------------------------------------
+    ' Route W
+    ' --------------------------------------------------------
+    If Not scanItemW Is Nothing Then
 
-    Debug.Print
-    Debug.Print "HTMLBody length = " & Len(originalHtml)
+        subjectW = SafeString(scanItemW.Subject)
+
+        wordScanAvailable = _
+            TryGetWordEditor( _
+                scanItemW, _
+                scanInspectorW, _
+                scanWordDocW)
+
+        If wordScanAvailable Then
+
+            wordTextW = _
+                SafeString(scanWordDocW.Content.Text)
+
+        End If
+
+        LogRouteResult _
+            "TSA-002", _
+            "W", _
+            (wordScanAvailable And _
+             Len(subjectW) > 0 And _
+             Len(wordTextW) > 0), _
+            "Subject / Inspector / WordEditor / Word Document取得"
+
+        Debug.Print
+        Debug.Print "----- Route W -----"
+        Debug.Print "Subject:"
+        Debug.Print subjectW
+
+        If wordScanAvailable Then
+            Debug.Print _
+                "Word Content length: " & Len(wordTextW)
+        Else
+            Debug.Print _
+                "WordEditor unavailable before Display."
+        End If
+
+    Else
+
+        LogRouteResult _
+            "TSA-002", _
+            "W", _
+            False, _
+            "TSA-001失敗のためWordEditor Access不可"
+
+    End If
 
 
     ' ========================================================
     ' TSA-003
-    ' HTMLBody内Variable連続性
+    ' Variable検出・表現
     ' ========================================================
-    LogResult _
-        "TSA-003", _
-        CheckBodyVariableContinuity(originalHtml), _
-        "通常入力したVariableがHTMLBody内で連続文字列として存在"
+
+    If Not scanItemH Is Nothing Then
+
+        LogRouteResult _
+            "TSA-003", _
+            "H", _
+            CheckExpectedBodyTokens( _
+                htmlH, _
+                "Route H / HTMLBody"), _
+            "HTMLBody上でVariableが連続文字列として存在"
+
+    Else
+
+        LogRouteResult _
+            "TSA-003", _
+            "H", _
+            False, _
+            "Route H MailItemなし"
+
+    End If
+
+
+    If wordScanAvailable Then
+
+        LogRouteResult _
+            "TSA-003", _
+            "W", _
+            CheckExpectedBodyTokens( _
+                wordTextW, _
+                "Route W / WordEditor"), _
+            "Word Document上でVariableを検索可能"
+
+    Else
+
+        LogRouteResult _
+            "TSA-003", _
+            "W", _
+            False, _
+            "WordEditor取得不可"
+
+    End If
 
 
     ' ========================================================
     ' TSA-004
     ' Scanner / Case Insensitive
     ' ========================================================
-    ScanTemplate _
-        originalSubject, _
-        originalHtml, _
-        variables, _
-        locations, _
-        invalidCandidates
 
-    PrintScanResult variables, locations, invalidCandidates
+    ' --------------------------------------------------------
+    ' Route H
+    ' --------------------------------------------------------
+    If Len(subjectH) > 0 And Len(htmlH) > 0 Then
 
-    LogResult _
-        "TSA-004", _
-        VerifyExpectedScanResult(variables, locations, invalidCandidates), _
-        "Scanner / Case Insensitive / Location判定"
+        ScanTemplateText _
+            subjectH, _
+            htmlH, _
+            varsH, _
+            locationsH, _
+            invalidH
+
+        PrintScanResult _
+            "Route H", _
+            varsH, _
+            locationsH, _
+            invalidH
+
+        LogRouteResult _
+            "TSA-004", _
+            "H", _
+            VerifyExpectedScan( _
+                varsH, _
+                locationsH, _
+                invalidH), _
+            "HTMLBody Scanner / Case Insensitive / Location"
+
+    Else
+
+        LogRouteResult _
+            "TSA-004", _
+            "H", _
+            False, _
+            "Scanner入力取得不可"
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Route W
+    ' --------------------------------------------------------
+    If wordScanAvailable Then
+
+        ScanTemplateText _
+            subjectW, _
+            wordTextW, _
+            varsW, _
+            locationsW, _
+            invalidW
+
+        PrintScanResult _
+            "Route W", _
+            varsW, _
+            locationsW, _
+            invalidW
+
+        LogRouteResult _
+            "TSA-004", _
+            "W", _
+            VerifyExpectedScan( _
+                varsW, _
+                locationsW, _
+                invalidW), _
+            "WordEditor Scanner / Case Insensitive / Location"
+
+    Else
+
+        LogRouteResult _
+            "TSA-004", _
+            "W", _
+            False, _
+            "WordEditor Scannerを実施できず"
+
+    End If
 
 
     ' ========================================================
     ' TSA-010
-    ' Scan MailItem破棄
+    ' Scan用MailItem Lifecycle
     '
-    ' UserForm起動前Scanを想定。
-    ' Displayせず、保存せず破棄する。
+    ' Render前にScan MailItemを破棄する。
     ' ========================================================
+
     On Error Resume Next
 
-    Err.Clear
-    scanItem.Close OL_DISCARD
-    closeErr = Err.Number
 
-    Set scanItem = Nothing
+    If Not scanItemH Is Nothing Then
+
+        Err.Clear
+
+        scanItemH.Close OL_DISCARD
+
+        closeErrH = Err.Number
+
+    Else
+
+        closeErrH = -1
+
+    End If
+
+
+    If Not scanItemW Is Nothing Then
+
+        Err.Clear
+
+        scanItemW.Close OL_DISCARD
+
+        closeErrW = Err.Number
+
+    Else
+
+        closeErrW = -1
+
+    End If
+
+
+    Set scanWordDocW = Nothing
+    Set scanInspectorW = Nothing
+
+    Set scanItemH = Nothing
+    Set scanItemW = Nothing
+
 
     Err.Clear
 
     On Error GoTo FatalError
 
+
     DoEvents
 
+
     draftsAfter = GetDraftCount(olApp)
+    inspectorsAfter = GetInspectorCount(olApp)
 
     Debug.Print
-    Debug.Print "Draft count after scan : " & draftsAfter
+    Debug.Print "Drafts after scan     : " & draftsAfter
+    Debug.Print "Inspectors after scan : " & inspectorsAfter
 
-    LogResult _
+
+    ' --------------------------------------------------------
+    ' VBAから完全判定できない
+    ' 「画面が勝手に開かなかったか」を確認
+    ' --------------------------------------------------------
+    sideEffectAnswer = MsgBox( _
+        "ここまでがScan処理です。" & vbCrLf & vbCrLf & _
+        "この時点ではRender結果のメールを" & _
+        "意図的にはDisplayしていません。" & vbCrLf & vbCrLf & _
+        "Scan中にOutlookのメール編集画面や" & _
+        "保存確認ダイアログが勝手に表示されましたか？" & _
+        vbCrLf & vbCrLf & _
+        "Yes = 表示された" & vbCrLf & _
+        "No  = 表示されていない", _
+        vbYesNo + vbQuestion, _
+        "TSA-010 Lifecycle確認")
+
+    lifecycleVisualOK = _
+        (sideEffectAnswer = vbNo)
+
+
+    LogRouteResult _
         "TSA-010", _
-        (closeErr = 0 And draftsAfter = draftsBefore), _
-        "Scan用MailItemを保存せず破棄。Draft件数 " & _
-        draftsBefore & " -> " & draftsAfter
+        "H", _
+        (closeErrH = 0 And _
+         draftsAfter = draftsBefore And _
+         lifecycleVisualOK), _
+        "Scan用MailItemをDisplayせず破棄"
+
+
+    LogRouteResult _
+        "TSA-010", _
+        "W", _
+        (closeErrW = 0 And _
+         draftsAfter = draftsBefore And _
+         inspectorsAfter = inspectorsBefore And _
+         lifecycleVisualOK), _
+        "WordEditor取得後もMailItemを安全に破棄"
 
 
     ' ========================================================
-    ' Render用MailItemを新規生成
+    ' Render用MailItem生成
     ' ========================================================
-    Set renderItem = olApp.CreateItemFromTemplate(OFT_PATH)
 
-    If renderItem Is Nothing Then
-        Err.Raise vbObjectError + 1000, , _
-                  "Render用MailItemを生成できません。"
+    Set renderItemH = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+    Set renderItemW = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+
+    If renderItemH Is Nothing Then
+
+        Debug.Print _
+            "[Route H] Render MailItem creation failed."
+
     End If
 
-    originalSubject = CStr(renderItem.Subject)
-    originalHtml = CStr(renderItem.HTMLBody)
+
+    If renderItemW Is Nothing Then
+
+        Debug.Print _
+            "[Route W] Render MailItem creation failed."
+
+    End If
 
 
-    ' ========================================================
-    ' Test values
-    '
-    ' TSA-006も同時確認するため、
-    ' ModelNameにはHTML特殊文字を含む値を使用。
-    ' ========================================================
     Set values = CreateTestValues()
 
 
     ' ========================================================
-    ' TSA-005
-    ' Case Insensitive / 全出現箇所の局所置換
+    ' Route H Render preparation
     ' ========================================================
-    renderedSubject = originalSubject
-    renderedHtml = originalHtml
 
-    RenderAllVariables _
-        renderedSubject, _
-        renderedHtml, _
-        values
+    If Not renderItemH Is Nothing Then
 
-    LogResult _
-        "TSA-005", _
-        VerifyAllVariablesReplaced( _
-            originalSubject, _
-            originalHtml, _
-            renderedSubject, _
-            renderedHtml, _
-            values), _
-        "Subject / HTMLBodyのVariableをCase Insensitiveで全置換"
+        originalSubjectH = _
+            SafeString(renderItemH.Subject)
+
+        originalHtmlH = _
+            SafeString(renderItemH.HTMLBody)
+
+        renderedSubjectH = originalSubjectH
+        renderedHtmlH = originalHtmlH
+
+    End If
+
+
+    ' ========================================================
+    ' Route W Render preparation
+    ' ========================================================
+
+    If Not renderItemW Is Nothing Then
+
+        originalSubjectW = _
+            SafeString(renderItemW.Subject)
+
+        wordRenderAvailable = _
+            TryGetWordEditor( _
+                renderItemW, _
+                renderInspectorW, _
+                renderWordDocW)
+
+        If wordRenderAvailable Then
+
+            originalWordTextW = _
+                SafeString(renderWordDocW.Content.Text)
+
+        End If
+
+        renderedSubjectW = originalSubjectW
+
+    End If
+
+
+    ' ========================================================
+    ' TSA-005
+    ' Body置換比較
+    ' ========================================================
+
+    ' --------------------------------------------------------
+    ' Route H
+    ' --------------------------------------------------------
+    If Not renderItemH Is Nothing Then
+
+        RenderSubject _
+            renderedSubjectH, _
+            values, _
+            vbNullString
+
+        replaceCountH = _
+            RenderHtmlBody( _
+                renderedHtmlH, _
+                values, _
+                vbNullString)
+
+        renderItemH.Subject = renderedSubjectH
+        renderItemH.HTMLBody = renderedHtmlH
+
+        LogRouteResult _
+            "TSA-005", _
+            "H", _
+            VerifyTokenReplacement( _
+                originalSubjectH, _
+                originalHtmlH, _
+                renderedSubjectH, _
+                renderedHtmlH, _
+                values), _
+            "HTMLBody局所置換 / replacements=" & _
+            replaceCountH
+
+    Else
+
+        LogRouteResult _
+            "TSA-005", _
+            "H", _
+            False, _
+            "Render MailItemなし"
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Route W
+    ' --------------------------------------------------------
+    If wordRenderAvailable Then
+
+        RenderSubject _
+            renderedSubjectW, _
+            values, _
+            vbNullString
+
+        renderItemW.Subject = renderedSubjectW
+
+        replaceCountW = _
+            RenderWordBody( _
+                renderWordDocW, _
+                values, _
+                vbNullString)
+
+        LogRouteResult _
+            "TSA-005", _
+            "W", _
+            VerifyTokenReplacement( _
+                originalSubjectW, _
+                originalWordTextW, _
+                renderedSubjectW, _
+                SafeString(renderWordDocW.Content.Text), _
+                values), _
+            "Word Range置換 / replacements=" & _
+            replaceCountW
+
+    Else
+
+        LogRouteResult _
+            "TSA-005", _
+            "W", _
+            False, _
+            "WordEditor Render不可"
+
+    End If
 
 
     ' ========================================================
     ' TSA-006
-    ' HTML Encode成立性
+    ' 特殊文字安全性
+    '
+    ' ModelName = A&B <TEST>
     ' ========================================================
-    LogResult _
-        "TSA-006", _
-        VerifyHtmlEncoding(renderedHtml), _
-        "A&B <TEST> をHTML EncodeしてBodyへ挿入"
+
+    ' --------------------------------------------------------
+    ' Route H
+    ' HTML Encodeされた文字列がHTML上にあるか
+    ' --------------------------------------------------------
+    If Not renderItemH Is Nothing Then
+
+        LogRouteResult _
+            "TSA-006", _
+            "H", _
+            VerifyHtmlEncodedValue( _
+                SafeString(renderItemH.HTMLBody), _
+                "A&B <TEST>"), _
+            "HTML Encode後にHTMLBodyへ設定"
+
+    Else
+
+        LogRouteResult _
+            "TSA-006", _
+            "H", _
+            False, _
+            "Route H Render不可"
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Route W
+    ' Raw文字列としてWord文書上に存在するか
+    ' --------------------------------------------------------
+    If wordRenderAvailable Then
+
+        LogRouteResult _
+            "TSA-006", _
+            "W", _
+            (InStr( _
+                1, _
+                SafeString(renderWordDocW.Content.Text), _
+                "A&B <TEST>", _
+                vbBinaryCompare) > 0), _
+            "HTML EncodeなしでWord Rangeへ文字列設定"
+
+    Else
+
+        LogRouteResult _
+            "TSA-006", _
+            "W", _
+            False, _
+            "WordEditor Render不可"
+
+    End If
 
 
     ' ========================================================
     ' TSA-008
     ' Unresolved Check
-    '
-    ' Positive:
-    '   全Variable置換後 -> 0
-    '
-    ' Negative:
-    '   GateDateだけ意図的に残す -> 1件以上
     ' ========================================================
-    unresolvedPositive = _
-        CountValidUnresolved(renderedSubject) + _
-        CountValidUnresolved(renderedHtml)
 
-    CreateNegativeRender _
-        originalSubject, _
-        originalHtml, _
-        values, _
-        negativeSubject, _
-        negativeHtml
+    ' --------------------------------------------------------
+    ' Full Render
+    ' --------------------------------------------------------
+    If Not renderItemH Is Nothing Then
 
-    unresolvedNegative = _
-        CountValidUnresolved(negativeSubject) + _
-        CountValidUnresolved(negativeHtml)
+        unresolvedFullH = _
+            CountValidUnresolved( _
+                SafeString(renderItemH.Subject)) + _
+            CountValidUnresolved( _
+                SafeString(renderItemH.HTMLBody))
+
+    Else
+
+        unresolvedFullH = -1
+
+    End If
+
+
+    If wordRenderAvailable Then
+
+        unresolvedFullW = _
+            CountValidUnresolved( _
+                SafeString(renderItemW.Subject)) + _
+            CountValidUnresolved( _
+                SafeString(renderWordDocW.Content.Text))
+
+    Else
+
+        unresolvedFullW = -1
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Negative Route H
+    ' GateDateのみ意図的に未置換
+    ' --------------------------------------------------------
+    Set negativeItemH = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+    If Not negativeItemH Is Nothing Then
+
+        negativeSubjectH = _
+            SafeString(negativeItemH.Subject)
+
+        negativeHtmlH = _
+            SafeString(negativeItemH.HTMLBody)
+
+        RenderSubject _
+            negativeSubjectH, _
+            values, _
+            "GateDate"
+
+        Call RenderHtmlBody( _
+            negativeHtmlH, _
+            values, _
+            "GateDate")
+
+        negativeItemH.Subject = negativeSubjectH
+        negativeItemH.HTMLBody = negativeHtmlH
+
+        unresolvedNegativeH = _
+            CountValidUnresolved(negativeSubjectH) + _
+            CountValidUnresolved(negativeHtmlH)
+
+    Else
+
+        unresolvedNegativeH = -1
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Negative Route W
+    ' --------------------------------------------------------
+    Set negativeItemW = _
+        TryCreateItemFromTemplate(olApp, OFT_PATH)
+
+    If Not negativeItemW Is Nothing Then
+
+        negativeWordAvailable = _
+            TryGetWordEditor( _
+                negativeItemW, _
+                negativeInspectorW, _
+                negativeWordDocW)
+
+        If negativeWordAvailable Then
+
+            negativeSubjectW = _
+                SafeString(negativeItemW.Subject)
+
+            RenderSubject _
+                negativeSubjectW, _
+                values, _
+                "GateDate"
+
+            negativeItemW.Subject = negativeSubjectW
+
+            Call RenderWordBody( _
+                negativeWordDocW, _
+                values, _
+                "GateDate")
+
+            unresolvedNegativeW = _
+                CountValidUnresolved(negativeSubjectW) + _
+                CountValidUnresolved( _
+                    SafeString(negativeWordDocW.Content.Text))
+
+        Else
+
+            unresolvedNegativeW = -1
+
+        End If
+
+    Else
+
+        unresolvedNegativeW = -1
+
+    End If
+
 
     Debug.Print
-    Debug.Print "Unresolved after full render : " & unresolvedPositive
-    Debug.Print "Unresolved negative test     : " & unresolvedNegative
+    Debug.Print "----- Unresolved Check -----"
+    Debug.Print _
+        "Route H full     : " & unresolvedFullH
+    Debug.Print _
+        "Route H negative : " & unresolvedNegativeH
+    Debug.Print _
+        "Route W full     : " & unresolvedFullW
+    Debug.Print _
+        "Route W negative : " & unresolvedNegativeW
 
-    LogResult _
+
+    LogRouteResult _
         "TSA-008", _
-        (unresolvedPositive = 0 And unresolvedNegative > 0), _
-        "全置換後=0 / GateDate未置換時=>0"
+        "H", _
+        (unresolvedFullH = 0 And _
+         unresolvedNegativeH > 0), _
+        "Full=0 / GateDate未置換=>0"
 
 
-    ' ========================================================
-    ' MailItemへRender結果反映
-    ' ========================================================
-    renderItem.Subject = renderedSubject
-    renderItem.HTMLBody = renderedHtml
+    LogRouteResult _
+        "TSA-008", _
+        "W", _
+        (unresolvedFullW = 0 And _
+         unresolvedNegativeW > 0), _
+        "Full=0 / GateDate未置換=>0"
 
 
-    ' ========================================================
-    ' TSA-009
-    ' Outlook Display
-    ' ========================================================
+    ' Negative MailItemを破棄
     On Error Resume Next
 
-    Err.Clear
-    renderItem.Display
-    displayErr = Err.Number
+    If Not negativeItemH Is Nothing Then
+        negativeItemH.Close OL_DISCARD
+    End If
+
+    If Not negativeItemW Is Nothing Then
+        negativeItemW.Close OL_DISCARD
+    End If
+
+    Set negativeWordDocW = Nothing
+    Set negativeInspectorW = Nothing
+
+    Set negativeItemH = Nothing
+    Set negativeItemW = Nothing
 
     On Error GoTo FatalError
 
-    LogResult _
-        "TSA-009", _
-        (displayErr = 0), _
-        "Render済みMailItemをClassic OutlookへDisplay"
+
+    ' ========================================================
+    ' TSA-009 + TSA-007
+    '
+    ' Route Hを先に表示・確認
+    ' Route Wを次に表示・確認
+    ' ========================================================
+
+    ' --------------------------------------------------------
+    ' Route H Display
+    ' --------------------------------------------------------
+    If Not renderItemH Is Nothing Then
+
+        On Error Resume Next
+
+        Err.Clear
+
+        renderItemH.Display
+
+        displayErrH = Err.Number
+
+        On Error GoTo FatalError
 
 
-    If displayErr <> 0 Then
-        GoTo Finish
+        LogRouteResult _
+            "TSA-009", _
+            "H", _
+            (displayErrH = 0), _
+            "Route H MailItem.Display"
+
+    Else
+
+        displayErrH = -1
+
+        LogRouteResult _
+            "TSA-009", _
+            "H", _
+            False, _
+            "Route H Render MailItemなし"
+
     End If
 
-    DoEvents
+
+    If displayErrH = 0 Then
+
+        DoEvents
+
+        visualH = AskFormattingResult( _
+            "Route H：HTMLBody")
+
+        Select Case visualH
+
+            Case vbYes
+
+                LogRouteResult _
+                    "TSA-007", _
+                    "H", _
+                    True, _
+                    "基本書式維持を目視確認"
+
+            Case vbNo
+
+                LogRouteResult _
+                    "TSA-007", _
+                    "H", _
+                    False, _
+                    "基本書式維持に問題あり"
+
+            Case Else
+
+                LogRouteManual _
+                    "TSA-007", _
+                    "H", _
+                    "目視確認未完了"
+
+        End Select
+
+    Else
+
+        LogRouteResult _
+            "TSA-007", _
+            "H", _
+            False, _
+            "Display不可のため目視確認不能"
+
+    End If
+
+
+    ' --------------------------------------------------------
+    ' Route W Display
+    ' --------------------------------------------------------
+    If Not renderItemW Is Nothing Then
+
+        On Error Resume Next
+
+        Err.Clear
+
+        renderItemW.Display
+
+        displayErrW = Err.Number
+
+        On Error GoTo FatalError
+
+
+        LogRouteResult _
+            "TSA-009", _
+            "W", _
+            (displayErrW = 0), _
+            "Route W MailItem.Display"
+
+    Else
+
+        displayErrW = -1
+
+        LogRouteResult _
+            "TSA-009", _
+            "W", _
+            False, _
+            "Route W Render MailItemなし"
+
+    End If
+
+
+    If displayErrW = 0 Then
+
+        DoEvents
+
+        visualW = AskFormattingResult( _
+            "Route W：WordEditor")
+
+        Select Case visualW
+
+            Case vbYes
+
+                LogRouteResult _
+                    "TSA-007", _
+                    "W", _
+                    True, _
+                    "基本書式維持を目視確認"
+
+            Case vbNo
+
+                LogRouteResult _
+                    "TSA-007", _
+                    "W", _
+                    False, _
+                    "基本書式維持に問題あり"
+
+            Case Else
+
+                LogRouteManual _
+                    "TSA-007", _
+                    "W", _
+                    "目視確認未完了"
+
+        End Select
+
+    Else
+
+        LogRouteResult _
+            "TSA-007", _
+            "W", _
+            False, _
+            "Display不可のため目視確認不能"
+
+    End If
 
 
     ' ========================================================
-    ' TSA-007
-    ' 基本書式維持
-    '
-    ' これは画面確認が必要なので手動判定。
+    ' Final result
     ' ========================================================
-    result = MsgBox( _
-        "TSA-007 基本書式維持を確認してください。" & vbCrLf & vbCrLf & _
-        "Outlookで表示されたメールについて、" & vbCrLf & _
-        "Variable置換部分以外の以下を確認します。" & vbCrLf & vbCrLf & _
-        "・改行" & vbCrLf & _
-        "・段落" & vbCrLf & _
-        "・フォント" & vbCrLf & _
-        "・文字サイズ" & vbCrLf & _
-        "・太字" & vbCrLf & _
-        "・文字色" & vbCrLf & _
-        "・箇条書き" & vbCrLf & _
-        "・表" & vbCrLf & vbCrLf & _
-        "また、ModelNameが" & vbCrLf & _
-        "  A&B <TEST>" & vbCrLf & _
-        "と文字列として表示されていることも確認してください。" & vbCrLf & vbCrLf & _
-        "すべて問題なし = Yes" & vbCrLf & _
-        "問題あり       = No" & vbCrLf & _
-        "後で確認       = Cancel", _
-        vbYesNoCancel + vbQuestion, _
-        "Technical Spike A - TSA-007")
 
-    Select Case result
-
-        Case vbYes
-            LogResult _
-                "TSA-007", _
-                True, _
-                "基本書式維持を目視確認"
-
-        Case vbNo
-            LogResult _
-                "TSA-007", _
-                False, _
-                "基本書式維持に問題あり"
-
-        Case Else
-            LogManual _
-                "TSA-007", _
-                "Outlook画面での目視確認が未完了"
-
-    End Select
-
-
-Finish:
+    PrintFinalResult
 
     Debug.Print
-    Debug.Print String(70, "=")
-    Debug.Print "Technical Spike A RESULT"
-    Debug.Print "PASS   : " & mPassCount
-    Debug.Print "FAIL   : " & mFailCount
-    Debug.Print "MANUAL : " & mManualCount
+    Debug.Print _
+        "NOTE:"
+    Debug.Print _
+        "PASS件数だけでRouteを選定しないこと。"
+    Debug.Print _
+        "v0.2仕様書 §13 の判断軸に従って比較すること。"
 
-    If mFailCount = 0 And mManualCount = 0 Then
-        Debug.Print "Overall preliminary result: PASS"
-    ElseIf mFailCount = 0 Then
-        Debug.Print "Overall preliminary result: MANUAL CHECK REMAINS"
-    Else
-        Debug.Print "Overall preliminary result: FAIL / FINDING REQUIRED"
-    End If
 
-    Debug.Print String(70, "=")
+Cleanup:
 
-    ' Render用MailItemはEvidence確認のため閉じない。
-    ' 検証終了後、ユーザーがOutlook上で送信せず閉じる。
+    ' Displayした2通はEvidence確認のため、
+    ' ここでは自動Closeしない。
+    '
+    ' 検証後、送信せず手動で閉じる。
 
     Set values = Nothing
-    Set variables = Nothing
-    Set locations = Nothing
-    Set invalidCandidates = Nothing
-    Set renderItem = Nothing
+
+    Set varsH = Nothing
+    Set locationsH = Nothing
+    Set invalidH = Nothing
+
+    Set varsW = Nothing
+    Set locationsW = Nothing
+    Set invalidW = Nothing
+
+    Set renderWordDocW = Nothing
+    Set renderInspectorW = Nothing
+
+    Set renderItemH = Nothing
+    Set renderItemW = Nothing
+
     Set olApp = Nothing
 
     Exit Sub
@@ -416,26 +1144,31 @@ Finish:
 FatalError:
 
     Debug.Print
+    Debug.Print "========================================"
     Debug.Print "[FATAL ERROR]"
     Debug.Print "Number      : " & Err.Number
     Debug.Print "Description : " & Err.Description
+    Debug.Print "========================================"
 
     On Error Resume Next
 
-    If Not scanItem Is Nothing Then
-        scanItem.Close OL_DISCARD
+    If Not scanItemH Is Nothing Then
+        scanItemH.Close OL_DISCARD
     End If
 
-    If Not renderItem Is Nothing Then
-        ' Display前の異常時だけ破棄を試みる
-        If displayErr <> 0 Then
-            renderItem.Close OL_DISCARD
-        End If
+    If Not scanItemW Is Nothing Then
+        scanItemW.Close OL_DISCARD
     End If
 
-    Set scanItem = Nothing
-    Set renderItem = Nothing
-    Set olApp = Nothing
+    If Not negativeItemH Is Nothing Then
+        negativeItemH.Close OL_DISCARD
+    End If
+
+    If Not negativeItemW Is Nothing Then
+        negativeItemW.Close OL_DISCARD
+    End If
+
+    Resume Cleanup
 
 End Sub
 
@@ -450,10 +1183,14 @@ Private Function GetOutlookApplication() As Object
 
     On Error Resume Next
 
-    Set app = GetObject(, "Outlook.Application")
+    Set app = _
+        GetObject(, "Outlook.Application")
 
     If app Is Nothing Then
-        Set app = CreateObject("Outlook.Application")
+
+        Set app = _
+            CreateObject("Outlook.Application")
+
     End If
 
     On Error GoTo 0
@@ -463,7 +1200,65 @@ Private Function GetOutlookApplication() As Object
 End Function
 
 
-Private Function GetDraftCount(ByVal olApp As Object) As Long
+Private Function TryCreateItemFromTemplate( _
+    ByVal olApp As Object, _
+    ByVal oftPath As String) As Object
+
+    Dim item As Object
+
+    On Error Resume Next
+
+    Set item = _
+        olApp.CreateItemFromTemplate(oftPath)
+
+    On Error GoTo 0
+
+    Set TryCreateItemFromTemplate = item
+
+End Function
+
+
+Private Function TryGetWordEditor( _
+    ByVal mailItem As Object, _
+    ByRef inspector As Object, _
+    ByRef wordDocument As Object) As Boolean
+
+    On Error GoTo Failed
+
+    Set inspector = mailItem.GetInspector
+
+    If inspector Is Nothing Then
+        GoTo Failed
+    End If
+
+    ' Outlook InspectorがWordMailか確認
+    If Not inspector.IsWordMail Then
+        GoTo Failed
+    End If
+
+    Set wordDocument = inspector.WordEditor
+
+    If wordDocument Is Nothing Then
+        GoTo Failed
+    End If
+
+    TryGetWordEditor = True
+
+    Exit Function
+
+
+Failed:
+
+    Set wordDocument = Nothing
+    Set inspector = Nothing
+
+    TryGetWordEditor = False
+
+End Function
+
+
+Private Function GetDraftCount( _
+    ByVal olApp As Object) As Long
 
     Dim folder As Object
 
@@ -478,6 +1273,7 @@ Private Function GetDraftCount(ByVal olApp As Object) As Long
 
     Exit Function
 
+
 Failed:
 
     GetDraftCount = -1
@@ -485,20 +1281,40 @@ Failed:
 End Function
 
 
+Private Function GetInspectorCount( _
+    ByVal olApp As Object) As Long
+
+    On Error GoTo Failed
+
+    GetInspectorCount = _
+        olApp.Inspectors.Count
+
+    Exit Function
+
+
+Failed:
+
+    GetInspectorCount = -1
+
+End Function
+
+
 ' ============================================================
 ' TSA-003
-' Variable continuity
+' Variable continuity / visibility
 ' ============================================================
 
-Private Function CheckBodyVariableContinuity( _
-    ByVal htmlBody As String) As Boolean
+Private Function CheckExpectedBodyTokens( _
+    ByVal bodyText As String, _
+    ByVal routeLabel As String) As Boolean
 
-    Dim expectedTokens As Variant
+    Dim tokens As Variant
     Dim token As Variant
+
     Dim found As Boolean
     Dim allFound As Boolean
 
-    expectedTokens = Array( _
+    tokens = Array( _
         "{{ModelName}}", _
         "{{MODELNAME}}", _
         "{{GateDate}}", _
@@ -509,85 +1325,67 @@ Private Function CheckBodyVariableContinuity( _
     allFound = True
 
     Debug.Print
-    Debug.Print "----- TSA-003 HTML Variable Context -----"
+    Debug.Print _
+        "----- TSA-003 " & routeLabel & " -----"
 
-    For Each token In expectedTokens
+    For Each token In tokens
 
         found = _
-            (InStr(1, htmlBody, CStr(token), vbBinaryCompare) > 0)
+            (InStr( _
+                1, _
+                bodyText, _
+                CStr(token), _
+                vbBinaryCompare) > 0)
 
-        Debug.Print CStr(token) & _
-                    " : " & _
-                    IIf(found, "FOUND", "NOT FOUND")
+        Debug.Print _
+            CStr(token) & _
+            " : " & _
+            IIf(found, "FOUND", "NOT FOUND")
 
-        If found Then
-            PrintHtmlContext htmlBody, CStr(token)
-        Else
+        If Not found Then
             allFound = False
         End If
 
     Next token
 
-    CheckBodyVariableContinuity = allFound
+    CheckExpectedBodyTokens = allFound
 
 End Function
 
 
-Private Sub PrintHtmlContext( _
-    ByVal htmlBody As String, _
-    ByVal token As String)
-
-    Dim pos As Long
-    Dim startPos As Long
-    Dim contextLength As Long
-    Dim contextText As String
-
-    pos = InStr(1, htmlBody, token, vbBinaryCompare)
-
-    If pos = 0 Then Exit Sub
-
-    startPos = pos - 80
-
-    If startPos < 1 Then
-        startPos = 1
-    End If
-
-    contextLength = 160
-
-    If startPos + contextLength - 1 > Len(htmlBody) Then
-        contextLength = Len(htmlBody) - startPos + 1
-    End If
-
-    contextText = _
-        Mid$(htmlBody, startPos, contextLength)
-
-    contextText = Replace(contextText, vbCr, " ")
-    contextText = Replace(contextText, vbLf, " ")
-
-    Debug.Print "    ..." & contextText & "..."
-
-End Sub
-
-
 ' ============================================================
 ' TSA-004
-' Template Scanner
+' Common Scanner
+'
+' Route H:
+'   Subject + HTMLBody
+'
+' Route W:
+'   Subject + Word Document.Content.Text
+'
+' Candidate/Syntaxルールは同じにして比較する。
 ' ============================================================
 
-Private Sub ScanTemplate( _
+Private Sub ScanTemplateText( _
     ByVal subjectText As String, _
-    ByVal htmlBody As String, _
+    ByVal bodyText As String, _
     ByRef variables As Object, _
     ByRef locations As Object, _
     ByRef invalidCandidates As Collection)
 
-    Set variables = CreateObject("Scripting.Dictionary")
-    Set locations = CreateObject("Scripting.Dictionary")
-    Set invalidCandidates = New Collection
+    Set variables = _
+        CreateObject("Scripting.Dictionary")
 
-    ' Case Insensitive
+    Set locations = _
+        CreateObject("Scripting.Dictionary")
+
+    Set invalidCandidates = _
+        New Collection
+
+
     variables.CompareMode = vbTextCompare
     locations.CompareMode = vbTextCompare
+
 
     ScanOneText _
         subjectText, _
@@ -596,8 +1394,9 @@ Private Sub ScanTemplate( _
         locations, _
         invalidCandidates
 
+
     ScanOneText _
-        htmlBody, _
+        bodyText, _
         "Body", _
         variables, _
         locations, _
@@ -622,45 +1421,65 @@ Private Sub ScanOneText( _
     Dim variableName As String
     Dim currentLocation As String
 
-    Set candidateRegex = CreateObject("VBScript.RegExp")
+
+    Set candidateRegex = _
+        CreateObject("VBScript.RegExp")
 
     With candidateRegex
+
         .Pattern = "\{\{([^{}]*)\}\}"
         .Global = True
         .IgnoreCase = True
+
     End With
 
-    Set syntaxRegex = CreateObject("VBScript.RegExp")
+
+    Set syntaxRegex = _
+        CreateObject("VBScript.RegExp")
 
     With syntaxRegex
+
         .Pattern = "^[A-Za-z][A-Za-z0-9_]*$"
         .Global = False
         .IgnoreCase = False
+
     End With
 
-    Set matches = candidateRegex.Execute(sourceText)
+
+    Set matches = _
+        candidateRegex.Execute(sourceText)
+
 
     For Each match In matches
 
-        variableName = CStr(match.SubMatches(0))
+        variableName = _
+            CStr(match.SubMatches(0))
+
 
         If syntaxRegex.Test(variableName) Then
 
             If Not variables.Exists(variableName) Then
 
-                variables.Add variableName, variableName
-                locations.Add variableName, locationName
+                variables.Add _
+                    variableName, _
+                    variableName
+
+                locations.Add _
+                    variableName, _
+                    locationName
 
             Else
 
-                currentLocation = CStr(locations(variableName))
+                currentLocation = _
+                    CStr(locations(variableName))
 
                 If StrComp( _
                     currentLocation, _
                     locationName, _
                     vbTextCompare) <> 0 Then
 
-                    locations(variableName) = "Both"
+                    locations(variableName) = _
+                        "Both"
 
                 End If
 
@@ -669,7 +1488,10 @@ Private Sub ScanOneText( _
         Else
 
             invalidCandidates.Add _
-                locationName & ": {{" & variableName & "}}"
+                locationName & _
+                ": {{" & _
+                variableName & _
+                "}}"
 
         End If
 
@@ -679,6 +1501,7 @@ End Sub
 
 
 Private Sub PrintScanResult( _
+    ByVal routeLabel As String, _
     ByVal variables As Object, _
     ByVal locations As Object, _
     ByVal invalidCandidates As Collection)
@@ -687,7 +1510,9 @@ Private Sub PrintScanResult( _
     Dim i As Long
 
     Debug.Print
-    Debug.Print "----- TemplateScanResult -----"
+    Debug.Print _
+        "----- TemplateScanResult " & _
+        routeLabel & " -----"
 
     Debug.Print "ValidVariables:"
 
@@ -702,16 +1527,24 @@ Private Sub PrintScanResult( _
 
     Next key
 
-    Debug.Print "InvalidCandidates: " & invalidCandidates.Count
+
+    Debug.Print _
+        "InvalidCandidates: " & _
+        invalidCandidates.Count
+
 
     For i = 1 To invalidCandidates.Count
-        Debug.Print "  " & CStr(invalidCandidates(i))
+
+        Debug.Print _
+            "  " & _
+            CStr(invalidCandidates(i))
+
     Next i
 
 End Sub
 
 
-Private Function VerifyExpectedScanResult( _
+Private Function VerifyExpectedScan( _
     ByVal variables As Object, _
     ByVal locations As Object, _
     ByVal invalidCandidates As Collection) As Boolean
@@ -720,65 +1553,99 @@ Private Function VerifyExpectedScanResult( _
 
     ok = True
 
-    If Not variables.Exists("ModelName") Then ok = False
-    If Not variables.Exists("GateDate") Then ok = False
-    If Not variables.Exists("Department") Then ok = False
+
+    If Not variables.Exists("ModelName") Then
+        ok = False
+    End If
+
+    If Not variables.Exists("GateDate") Then
+        ok = False
+    End If
+
+    If Not variables.Exists("Department") Then
+        ok = False
+    End If
+
 
     If variables.Exists("ModelName") Then
+
         If StrComp( _
             CStr(locations("ModelName")), _
             "Both", _
             vbTextCompare) <> 0 Then
 
             ok = False
+
         End If
+
     End If
 
+
     If variables.Exists("GateDate") Then
+
         If StrComp( _
             CStr(locations("GateDate")), _
             "Both", _
             vbTextCompare) <> 0 Then
 
             ok = False
+
         End If
+
     End If
 
+
     If variables.Exists("Department") Then
+
         If StrComp( _
             CStr(locations("Department")), _
             "Body", _
             vbTextCompare) <> 0 Then
 
             ok = False
+
         End If
+
     End If
+
 
     If invalidCandidates.Count <> 0 Then
         ok = False
     End If
 
-    VerifyExpectedScanResult = ok
+
+    VerifyExpectedScan = ok
 
 End Function
 
 
 ' ============================================================
-' Test data
+' Test Values
 ' ============================================================
 
 Private Function CreateTestValues() As Object
 
     Dim values As Object
 
-    Set values = CreateObject("Scripting.Dictionary")
+    Set values = _
+        CreateObject("Scripting.Dictionary")
 
     values.CompareMode = vbTextCompare
 
-    ' TSA-006も同時検証するため特殊文字を含める
-    values.Add "ModelName", "A&B <TEST>"
-    values.Add "GateDate", "2026/09/30"
-    values.Add "Department", "品質保証部"
+
+    ' TSA-006も同時確認
+    values.Add _
+        "ModelName", _
+        "A&B <TEST>"
+
+    values.Add _
+        "GateDate", _
+        "2026/09/30"
+
+    values.Add _
+        "Department", _
+        "品質保証部"
+
 
     Set CreateTestValues = values
 
@@ -786,67 +1653,263 @@ End Function
 
 
 ' ============================================================
-' TSA-005
-' Renderer
+' Subject Renderer
+' 共通処理
 ' ============================================================
 
-Private Sub RenderAllVariables( _
+Private Sub RenderSubject( _
     ByRef subjectText As String, _
-    ByRef htmlBody As String, _
-    ByVal values As Object)
+    ByVal values As Object, _
+    ByVal skipVariable As String)
 
     Dim key As Variant
     Dim token As String
-    Dim rawValue As String
-    Dim encodedValue As String
 
     For Each key In values.Keys
 
-        token = "{{" & CStr(key) & "}}"
-        rawValue = CStr(values(key))
+        If Len(skipVariable) = 0 Or _
+           StrComp( _
+               CStr(key), _
+               skipVariable, _
+               vbTextCompare) <> 0 Then
 
-        ' SubjectはPlain Textとして置換
-        subjectText = _
-            ReplaceAllCI( _
-                subjectText, _
-                token, _
-                rawValue)
+            token = _
+                "{{" & _
+                CStr(key) & _
+                "}}"
 
-        ' BodyはHTML Encodeして置換
-        encodedValue = HtmlEncodeSpike(rawValue)
+            subjectText = _
+                ReplaceAllCI( _
+                    subjectText, _
+                    token, _
+                    CStr(values(key)))
 
-        htmlBody = _
-            ReplaceAllCI( _
-                htmlBody, _
-                token, _
-                encodedValue)
+        End If
 
     Next key
 
 End Sub
 
 
-Private Function ReplaceAllCI( _
-    ByVal sourceText As String, _
-    ByVal token As String, _
-    ByVal replacementText As String) As String
+' ============================================================
+' Route H
+' HTMLBody Renderer
+' ============================================================
 
-    ReplaceAllCI = Replace( _
-        sourceText, _
-        token, _
-        replacementText, _
-        1, _
-        -1, _
-        vbTextCompare)
+Private Function RenderHtmlBody( _
+    ByRef htmlBody As String, _
+    ByVal values As Object, _
+    ByVal skipVariable As String) As Long
+
+    Dim key As Variant
+    Dim token As String
+
+    Dim encodedValue As String
+
+    Dim beforeCount As Long
+    Dim totalCount As Long
+
+
+    For Each key In values.Keys
+
+        If Len(skipVariable) = 0 Or _
+           StrComp( _
+               CStr(key), _
+               skipVariable, _
+               vbTextCompare) <> 0 Then
+
+
+            token = _
+                "{{" & _
+                CStr(key) & _
+                "}}"
+
+
+            beforeCount = _
+                CountOccurrencesCI( _
+                    htmlBody, _
+                    token)
+
+
+            encodedValue = _
+                HtmlEncodeSpike( _
+                    CStr(values(key)))
+
+
+            htmlBody = _
+                ReplaceAllCI( _
+                    htmlBody, _
+                    token, _
+                    encodedValue)
+
+
+            totalCount = _
+                totalCount + _
+                beforeCount
+
+        End If
+
+    Next key
+
+
+    RenderHtmlBody = totalCount
 
 End Function
 
 
-Private Function VerifyAllVariablesReplaced( _
+' ============================================================
+' Route W
+' WordEditor Renderer
+'
+' Range.Findで対象Rangeを特定し、
+' Range.Textで置換する。
+'
+' Word Find.ReplaceAllは使用しない。
+' ============================================================
+
+Private Function RenderWordBody( _
+    ByVal wordDocument As Object, _
+    ByVal values As Object, _
+    ByVal skipVariable As String) As Long
+
+    Dim key As Variant
+    Dim token As String
+
+    Dim count As Long
+    Dim totalCount As Long
+
+
+    For Each key In values.Keys
+
+        If Len(skipVariable) = 0 Or _
+           StrComp( _
+               CStr(key), _
+               skipVariable, _
+               vbTextCompare) <> 0 Then
+
+
+            token = _
+                "{{" & _
+                CStr(key) & _
+                "}}"
+
+
+            count = _
+                ReplaceAllWordCI( _
+                    wordDocument, _
+                    token, _
+                    CStr(values(key)))
+
+
+            totalCount = _
+                totalCount + _
+                count
+
+        End If
+
+    Next key
+
+
+    RenderWordBody = totalCount
+
+End Function
+
+
+Private Function ReplaceAllWordCI( _
+    ByVal wordDocument As Object, _
+    ByVal token As String, _
+    ByVal replacementText As String) As Long
+
+    Dim searchRange As Object
+    Dim found As Boolean
+
+    Dim nextStart As Long
+    Dim documentEnd As Long
+
+    Dim count As Long
+
+
+    Set searchRange = _
+        wordDocument.Content.Duplicate
+
+
+    Do
+
+        With searchRange.Find
+
+            .ClearFormatting
+
+            .Text = token
+
+            .Forward = True
+            .Wrap = WD_FIND_STOP
+            .Format = False
+
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+
+        End With
+
+
+        found = _
+            searchRange.Find.Execute
+
+
+        If Not found Then
+            Exit Do
+        End If
+
+
+        ' -----------------------------------------------
+        ' Find成功後、searchRangeはFound Rangeになる。
+        ' そのRangeだけを置換する。
+        ' -----------------------------------------------
+        searchRange.Text = _
+            replacementText
+
+        count = count + 1
+
+
+        ' -----------------------------------------------
+        ' 置換後のRange終端から再検索
+        ' -----------------------------------------------
+        nextStart = _
+            searchRange.End
+
+        documentEnd = _
+            wordDocument.Content.End
+
+
+        If nextStart >= documentEnd Then
+            Exit Do
+        End If
+
+
+        searchRange.SetRange _
+            nextStart, _
+            documentEnd
+
+    Loop
+
+
+    ReplaceAllWordCI = count
+
+End Function
+
+
+' ============================================================
+' Replacement verification
+'
+' BodyがHTMLかWord Textかに関係なく、
+' Variable Tokenが消えたかを比較する。
+' ============================================================
+
+Private Function VerifyTokenReplacement( _
     ByVal originalSubject As String, _
-    ByVal originalHtml As String, _
+    ByVal originalBody As String, _
     ByVal renderedSubject As String, _
-    ByVal renderedHtml As String, _
+    ByVal renderedBody As String, _
     ByVal values As Object) As Boolean
 
     Dim key As Variant
@@ -859,29 +1922,49 @@ Private Function VerifyAllVariablesReplaced( _
 
     ok = True
 
+
     Debug.Print
     Debug.Print "----- Replacement Evidence -----"
 
+
     For Each key In values.Keys
 
-        token = "{{" & CStr(key) & "}}"
+        token = _
+            "{{" & _
+            CStr(key) & _
+            "}}"
+
 
         beforeCount = _
-            CountOccurrencesCI(originalSubject, token) + _
-            CountOccurrencesCI(originalHtml, token)
+            CountOccurrencesCI( _
+                originalSubject, _
+                token) + _
+            CountOccurrencesCI( _
+                originalBody, _
+                token)
+
 
         afterCount = _
-            CountOccurrencesCI(renderedSubject, token) + _
-            CountOccurrencesCI(renderedHtml, token)
+            CountOccurrencesCI( _
+                renderedSubject, _
+                token) + _
+            CountOccurrencesCI( _
+                renderedBody, _
+                token)
+
 
         Debug.Print _
             token & _
-            " : before=" & beforeCount & _
-            " / after=" & afterCount
+            " : before=" & _
+            beforeCount & _
+            " / after=" & _
+            afterCount
+
 
         If beforeCount = 0 Then
             ok = False
         End If
+
 
         If afterCount <> 0 Then
             ok = False
@@ -889,7 +1972,29 @@ Private Function VerifyAllVariablesReplaced( _
 
     Next key
 
-    VerifyAllVariablesReplaced = ok
+
+    VerifyTokenReplacement = ok
+
+End Function
+
+
+' ============================================================
+' Case Insensitive string helpers
+' ============================================================
+
+Private Function ReplaceAllCI( _
+    ByVal sourceText As String, _
+    ByVal token As String, _
+    ByVal replacementText As String) As String
+
+    ReplaceAllCI = _
+        Replace( _
+            sourceText, _
+            token, _
+            replacementText, _
+            1, _
+            -1, _
+            vbTextCompare)
 
 End Function
 
@@ -904,6 +2009,7 @@ Private Function CountOccurrencesCI( _
 
     startPos = 1
 
+
     Do
 
         pos = _
@@ -913,15 +2019,19 @@ Private Function CountOccurrencesCI( _
                 token, _
                 vbTextCompare)
 
+
         If pos = 0 Then
             Exit Do
         End If
 
+
         count = count + 1
 
-        startPos = pos + Len(token)
+        startPos = _
+            pos + Len(token)
 
     Loop
+
 
     CountOccurrencesCI = count
 
@@ -930,10 +2040,10 @@ End Function
 
 ' ============================================================
 ' TSA-006
-' HTML Encode
+' Route H HTML Encode
 '
-' Technical Spike用の最小実装。
-' 正式なImplementation仕様を決定するものではない。
+' Spike用最小実装。
+' 本番Implementationの確定ではない。
 ' ============================================================
 
 Private Function HtmlEncodeSpike( _
@@ -943,36 +2053,51 @@ Private Function HtmlEncodeSpike( _
 
     result = value
 
-    ' & を最初にEncodeする
-    result = Replace(result, "&", "&amp;")
-    result = Replace(result, "<", "&lt;")
-    result = Replace(result, ">", "&gt;")
-    result = Replace(result, """", "&quot;")
-    result = Replace(result, "'", "&#39;")
+
+    ' & は必ず最初
+    result = _
+        Replace(result, "&", "&amp;")
+
+    result = _
+        Replace(result, "<", "&lt;")
+
+    result = _
+        Replace(result, ">", "&gt;")
+
+    result = _
+        Replace(result, """", "&quot;")
+
+    result = _
+        Replace(result, "'", "&#39;")
+
 
     HtmlEncodeSpike = result
 
 End Function
 
 
-Private Function VerifyHtmlEncoding( _
-    ByVal renderedHtml As String) As Boolean
+Private Function VerifyHtmlEncodedValue( _
+    ByVal htmlBody As String, _
+    ByVal rawValue As String) As Boolean
 
-    Dim expectedEncoded As String
+    Dim encoded As String
 
-    expectedEncoded = HtmlEncodeSpike("A&B <TEST>")
+    encoded = _
+        HtmlEncodeSpike(rawValue)
+
 
     Debug.Print
     Debug.Print "----- HTML Encode Evidence -----"
-    Debug.Print "Expected encoded value:"
-    Debug.Print expectedEncoded
+    Debug.Print "Raw     : " & rawValue
+    Debug.Print "Encoded : " & encoded
 
-    VerifyHtmlEncoding = _
+
+    VerifyHtmlEncodedValue = _
         (InStr( _
             1, _
-            renderedHtml, _
-            expectedEncoded, _
-            vbTextCompare) > 0)
+            htmlBody, _
+            encoded, _
+            vbBinaryCompare) > 0)
 
 End Function
 
@@ -980,6 +2105,14 @@ End Function
 ' ============================================================
 ' TSA-008
 ' Unresolved Checker
+'
+' Route H:
+'   HTMLBody文字列
+'
+' Route W:
+'   Word Document.Content.Text
+'
+' 同じSyntax判定を使用。
 ' ============================================================
 
 Private Function CountValidUnresolved( _
@@ -994,127 +2127,300 @@ Private Function CountValidUnresolved( _
     Dim variableName As String
     Dim count As Long
 
-    Set candidateRegex = CreateObject("VBScript.RegExp")
+
+    Set candidateRegex = _
+        CreateObject("VBScript.RegExp")
 
     With candidateRegex
+
         .Pattern = "\{\{([^{}]*)\}\}"
         .Global = True
         .IgnoreCase = True
+
     End With
 
-    Set syntaxRegex = CreateObject("VBScript.RegExp")
+
+    Set syntaxRegex = _
+        CreateObject("VBScript.RegExp")
 
     With syntaxRegex
-        .Pattern = "^[A-Za-z][A-Za-z0-9_]*$"
+
+        .Pattern = _
+            "^[A-Za-z][A-Za-z0-9_]*$"
+
         .Global = False
         .IgnoreCase = False
+
     End With
 
-    Set matches = candidateRegex.Execute(sourceText)
+
+    Set matches = _
+        candidateRegex.Execute(sourceText)
+
 
     For Each match In matches
 
-        variableName = CStr(match.SubMatches(0))
+        variableName = _
+            CStr(match.SubMatches(0))
+
 
         If syntaxRegex.Test(variableName) Then
+
             count = count + 1
+
         End If
 
     Next match
+
 
     CountValidUnresolved = count
 
 End Function
 
 
-Private Sub CreateNegativeRender( _
-    ByVal originalSubject As String, _
-    ByVal originalHtml As String, _
-    ByVal values As Object, _
-    ByRef negativeSubject As String, _
-    ByRef negativeHtml As String)
+' ============================================================
+' TSA-007
+' Manual formatting verification
+' ============================================================
 
-    Dim key As Variant
-    Dim token As String
-    Dim value As String
+Private Function AskFormattingResult( _
+    ByVal routeLabel As String) As VbMsgBoxResult
 
-    negativeSubject = originalSubject
-    negativeHtml = originalHtml
+    AskFormattingResult = _
+        MsgBox( _
+            routeLabel & _
+            " のメールを確認してください。" & _
+            vbCrLf & vbCrLf & _
+            "Variable置換部分以外について、" & _
+            "以下の基本書式を確認します。" & _
+            vbCrLf & vbCrLf & _
+            "・改行" & vbCrLf & _
+            "・段落" & vbCrLf & _
+            "・フォント" & vbCrLf & _
+            "・文字サイズ" & vbCrLf & _
+            "・太字" & vbCrLf & _
+            "・文字色" & vbCrLf & _
+            "・箇条書き" & vbCrLf & _
+            "・表" & vbCrLf & vbCrLf & _
+            "さらに ModelName が" & vbCrLf & _
+            "A&B <TEST>" & vbCrLf & _
+            "と表示されていることを確認してください。" & _
+            vbCrLf & vbCrLf & _
+            "Yes    = すべて問題なし" & vbCrLf & _
+            "No     = 問題あり" & vbCrLf & _
+            "Cancel = 後で確認", _
+            vbYesNoCancel + vbQuestion, _
+            "TSA-007 " & routeLabel)
 
-    For Each key In values.Keys
-
-        ' GateDateだけ意図的に未置換
-        If StrComp( _
-            CStr(key), _
-            "GateDate", _
-            vbTextCompare) <> 0 Then
-
-            token = "{{" & CStr(key) & "}}"
-            value = CStr(values(key))
-
-            negativeSubject = _
-                ReplaceAllCI( _
-                    negativeSubject, _
-                    token, _
-                    value)
-
-            negativeHtml = _
-                ReplaceAllCI( _
-                    negativeHtml, _
-                    token, _
-                    HtmlEncodeSpike(value))
-
-        End If
-
-    Next key
-
-End Sub
+End Function
 
 
 ' ============================================================
-' Result logging
+' Safe helper
 ' ============================================================
 
-Private Sub ResetResultCounters()
+Private Function SafeString( _
+    ByVal value As Variant) As String
 
-    mPassCount = 0
-    mFailCount = 0
-    mManualCount = 0
+    If IsNull(value) Or IsEmpty(value) Then
 
-End Sub
-
-
-Private Sub LogResult( _
-    ByVal testId As String, _
-    ByVal passed As Boolean, _
-    ByVal detail As String)
-
-    If passed Then
-
-        mPassCount = mPassCount + 1
-
-        Debug.Print _
-            "[" & testId & "] PASS  - " & detail
+        SafeString = vbNullString
 
     Else
 
-        mFailCount = mFailCount + 1
+        SafeString = CStr(value)
+
+    End If
+
+End Function
+
+
+' ============================================================
+' Result Logging
+' ============================================================
+
+Private Sub ResetCounters()
+
+    mPassH = 0
+    mFailH = 0
+    mManualH = 0
+
+    mPassW = 0
+    mFailW = 0
+    mManualW = 0
+
+End Sub
+
+
+Private Sub LogRouteResult( _
+    ByVal testId As String, _
+    ByVal routeName As String, _
+    ByVal passed As Boolean, _
+    ByVal detail As String)
+
+    Dim label As String
+
+    label = _
+        "[" & _
+        testId & _
+        "][" & _
+        routeName & _
+        "]"
+
+
+    If passed Then
 
         Debug.Print _
-            "[" & testId & "] FAIL  - " & detail
+            label & _
+            " PASS - " & _
+            detail
+
+        If UCase$(routeName) = "H" Then
+
+            mPassH = mPassH + 1
+
+        ElseIf UCase$(routeName) = "W" Then
+
+            mPassW = mPassW + 1
+
+        End If
+
+    Else
+
+        Debug.Print _
+            label & _
+            " FAIL - " & _
+            detail
+
+        If UCase$(routeName) = "H" Then
+
+            mFailH = mFailH + 1
+
+        ElseIf UCase$(routeName) = "W" Then
+
+            mFailW = mFailW + 1
+
+        End If
 
     End If
 
 End Sub
 
 
-Private Sub LogManual( _
+Private Sub LogRouteManual( _
     ByVal testId As String, _
+    ByVal routeName As String, _
     ByVal detail As String)
 
-    mManualCount = mManualCount + 1
+    Debug.Print _
+        "[" & _
+        testId & _
+        "][" & _
+        routeName & _
+        "] MANUAL - " & _
+        detail
+
+
+    If UCase$(routeName) = "H" Then
+
+        mManualH = mManualH + 1
+
+    ElseIf UCase$(routeName) = "W" Then
+
+        mManualW = mManualW + 1
+
+    End If
+
+End Sub
+
+
+Private Sub PrintHeader()
+
+    Debug.Print String(72, "=")
+    Debug.Print "Technical Spike A v0.2"
+    Debug.Print "Route H : HTMLBody"
+    Debug.Print "Route W : WordEditor"
+    Debug.Print "OFT     : " & OFT_PATH
+    Debug.Print String(72, "=")
+
+End Sub
+
+
+Private Sub PrintFinalResult()
+
+    Debug.Print
+    Debug.Print String(72, "=")
+    Debug.Print "Technical Spike A v0.2 RESULT"
+    Debug.Print String(72, "-")
 
     Debug.Print _
-        "[" & testId & "] MANUAL - " & detail
+        "Route H / HTMLBody"
+
+    Debug.Print _
+        "  PASS   : " & mPassH
+
+    Debug.Print _
+        "  FAIL   : " & mFailH
+
+    Debug.Print _
+        "  MANUAL : " & mManualH
+
+
+    Debug.Print
+    Debug.Print _
+        "Route W / WordEditor"
+
+    Debug.Print _
+        "  PASS   : " & mPassW
+
+    Debug.Print _
+        "  FAIL   : " & mFailW
+
+    Debug.Print _
+        "  MANUAL : " & mManualW
+
+
+    Debug.Print
+    Debug.Print _
+        "Preliminary Route Status:"
+
+
+    If mFailH = 0 And mManualH = 0 Then
+
+        Debug.Print _
+            "  Route H = Mandatory checks PASS"
+
+    ElseIf mFailH = 0 Then
+
+        Debug.Print _
+            "  Route H = Manual check remains"
+
+    Else
+
+        Debug.Print _
+            "  Route H = Finding exists"
+
+    End If
+
+
+    If mFailW = 0 And mManualW = 0 Then
+
+        Debug.Print _
+            "  Route W = Mandatory checks PASS"
+
+    ElseIf mFailW = 0 Then
+
+        Debug.Print _
+            "  Route W = Manual check remains"
+
+    Else
+
+        Debug.Print _
+            "  Route W = Finding exists"
+
+    End If
+
+
+    Debug.Print String(72, "=")
 
 End Sub
