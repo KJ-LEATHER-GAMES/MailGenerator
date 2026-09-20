@@ -9,7 +9,7 @@
 | バージョン | v0.1 |
 | 文書種別 | Implementation Plan |
 | 対象プロジェクト | 定型メール作成ツール MVP |
-| Status | Draft |
+| Status | Approved |
 | Execution Baseline | BL-MVP-001 |
 | Primary Gate | 各Phase Exit Criteria |
 | Formal Product Gate | DOC-MVP-TESTSPECによるMVP Test |
@@ -1275,7 +1275,7 @@ Implementation開始条件：
 - DOC-TS-AがCLOSED / PASS
 - DOC-MVP-TESTSPECがApproved
 - Technical Spike B / CがNOT REQUIRED
-- DOC-MVP-IMPL v0.1が実装計画としてReview可能な状態
+- 本Implementation PlanがApproved
 - VBA開発環境を利用可能
 - Classic Outlookを利用可能
 - Baseline文書へアクセス可能

@@ -1,15 +1,22 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.1
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.2
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.1 |
+| バージョン | v0.2 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 確定日 | 2026-09-12 |
+
+### v0.2 更新概要
+
+- DOC-MVP-IMPL / Implementation Plan v0.1を内容レビューPASS後にDocument Registryへ追加
+- DOC-MVP-IMPLのStatusをApprovedとして登録
+- DOC-MVP-IMPLはBL-MVP-001をExecution Baselineとして参照するが、BL-MVP-001の構成文書には追加しない
+- Current Approved Baseline `BL-MVP-001` のManifest / Version構成は変更なし
 
 ---
 
@@ -21,6 +28,7 @@
 | DOC-MVP-DES | MVP Design | v0.1.7 | Approved | v0.1.7 | Design |
 | DOC-TS-A | Technical Spike A 実施仕様書 | v0.4 | Closed | v0.4 | Technical Evidence |
 | DOC-MVP-TESTSPEC | MVP Test Specification | v0.1.3 | Approved | v0.1.3 | Test Definition |
+| DOC-MVP-IMPL | Implementation Plan | v0.1 | Approved | — | Implementation Plan |
 
 ### Registry Rule
 
@@ -30,6 +38,7 @@
 - 今後、新Revisionが作成されてもBaseline Approval完了まではBaseline Versionを自動更新しない。
 - Technical Documents間の通常参照はDocument IDを使用する。
 - Technical Spike実施時等のHistorical Execution Evidenceは、必要に応じて特定Versionを固定してよい。
+- DOC-MVP-IMPLはBL-MVP-001をExecution Baselineとして固定する実行計画であり、BL-MVP-001のBaseline Manifest構成文書ではないためBaseline Versionは `—` とする。
 
 ---
 
@@ -140,6 +149,7 @@ Pre-Registry Historical Baseline
 | Design | DOC-MVP-DES |
 | Technical Evidence | DOC-TS-A |
 | Test Definition | DOC-MVP-TESTSPEC |
+| Implementation Plan | DOC-MVP-IMPL |
 | Approved Version Combination | BL-MVP-001 / 本Baseline Manifest |
 | Current Project State | Project Overview |
 | Session Restart State | Latest Context Handoff |
@@ -166,6 +176,7 @@ Document Registry : ESTABLISHED
 Baseline ID       : BL-MVP-001
 Baseline Status   : APPROVED
 Baseline Ready    : YES
+Implementation Plan: DOC-MVP-IMPL v0.1 / APPROVED
 ```
 
 本Baselineを、今後のImplementation Planning、VBA Implementation、およびMVP Testの正式な基準とする。
