@@ -1,4 +1,4 @@
-# Technical Spike A 実施仕様書 v0.3 日本語版
+# Technical Spike A 実施仕様書 v0.4 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | Technical Spike A 実施仕様書 |
 | Document ID | DOC-TS-A |
-| バージョン | v0.3 |
+| バージョン | v0.4 |
 | 対象 | OFT Body処理方式比較検証（HTMLBody / WordEditor） |
 | 実施時Requirements | MVP Requirements v0.1.4 日本語版 |
 | 実施時Design | MVP Design v0.1.2 日本語版 |
@@ -21,6 +21,21 @@
 ---
 
 ## 2. 改訂理由
+
+### v0.4 更新概要
+
+v0.4では、Migration QAで確認した§8環境メタデータの未来Action表現をHistorical Factへ修正した。
+
+1. 「後日確認し、本節へ追記する」というCurrent / Future Actionを削除
+2. 未補完項目を `Close時点未記録` として明示
+3. Technical DecisionをBlockingしなかったという既存判断は維持
+
+Technical Test Result、Evidence、Finding、Route W採用、PASS / CLOSED判定には変更を加えていない。
+
+**Change Type：Editorial / Governance Correction**  
+**Semantic Change：None**
+
+---
 
 ### v0.3 更新概要
 
@@ -310,23 +325,23 @@ Route Wが採用され、HTML Encode責務自体が不要となる場合は、�
 
 ## 8. 検証環境
 
-本SpikeはMVP対象であるClassic Outlook上で実施済みである。OS / Excel / Outlookの詳細バージョン等は後日確認し、本節へ追記する。
+本SpikeはMVP対象であるClassic Outlook上で実施済みである。Close時点でOS / Excel / Outlookの詳細バージョン等の一部環境メタデータは未記録であった。
 
-これらの未記入項目は再現性を高めるための環境メタデータであり、今回のTechnical DecisionをBlockingする条件とはしない。後日確認した環境情報がMVP対象環境との不整合を示した場合のみ、影響を再評価する。
+これらの未記録項目は再現性を高めるための環境メタデータであり、今回のTechnical DecisionをBlockingする条件ではなかった。
 
 | 項目 | 実績記入欄 |
 |---|---|
-| OS | 後日確認 |
-| Excelバージョン | 後日確認 |
-| Excel 32bit / 64bit | 後日確認 |
-| Classic Outlookバージョン | 後日確認 |
-| Outlook 32bit / 64bit | 後日確認 |
+| OS | Close時点未記録 |
+| Excelバージョン | Close時点未記録 |
+| Excel 32bit / 64bit | Close時点未記録 |
+| Classic Outlookバージョン | Close時点未記録 |
+| Outlook 32bit / 64bit | Close時点未記録 |
 | WordEditor利用可否 | **利用可（Display前に `Inspector.WordEditor` 取得成功）** |
-| VBA実行元ブック | 後日確認 |
+| VBA実行元ブック | Close時点未記録 |
 | OFT保存場所 | `C:\Users\monsi\OneDrive\ドキュメント\MailGenerator` |
 | OFTファイル名 | `temp.oft` |
 | 実施日 | 2026-09-10 |
-| 実施者 | 後日確認 |
+| 実施者 | Close時点未記録 |
 
 New Outlookではなく、MVP対象であるClassic Outlookを使用した。
 

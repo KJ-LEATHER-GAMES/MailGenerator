@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.7 日本語版
+# MVP Requirements v0.1.8 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,7 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.7 |
+| バージョン | v0.1.8 |
 | Document ID | DOC-MVP-REQ |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
@@ -16,6 +16,20 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.8 更新概要
+
+v0.1.8では、Migration QAで確認した入力値保持期間の表現不一致をConsistency Clarificationとして修正した。
+
+1. §33 Requirements決定サマリーの `入力値保持` を `Excel終了まで` から `Workbookを閉じるまで` へ統一
+2. FR-INPUT-001本文、利用者向け挙動、Acceptance Criteria、NFRには変更なし
+
+FR-INPUT-001では既に「Excelファイルを閉じるまで保持する」と定義済みであり、Design / Test SpecificationもWorkbook単位で一致しているため、本変更は既存Requirementの要約表現を整合させるClarificationである。
+
+**Change Type：Consistency Clarification**  
+**Semantic Change：None**
+
+---
 
 ### v0.1.7 更新概要
 
@@ -1311,7 +1325,7 @@ MVP完了後、必要性を評価して以下を検討する。
 | SortOrder重複 | 許可 |
 | SortOrder同順位 | VariableDefinitionテーブルの行順 |
 | UserForm補助情報 | DisplayName＋Required＋Description |
-| 入力値保持 | Excel終了まで |
+| 入力値保持 | Workbookを閉じるまで |
 | 入力クリア | あり |
 | Validation | 全件表示＋対象欄強調 |
 | 未置換変数 | 生成停止 |

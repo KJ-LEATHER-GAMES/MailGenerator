@@ -1,4 +1,4 @@
-# MVP Test Specification v0.1.2 日本語版
+# MVP Test Specification v0.1.3 日本語版
 
 ## 1. 文書情報
 
@@ -7,7 +7,7 @@
 | 文書名 | MVP Test Specification |
 | Document ID | DOC-MVP-TESTSPEC |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.2 |
+| バージョン | v0.1.3 |
 | 文書種別 | MVPテスト仕様 |
 | Related Requirement | DOC-MVP-REQ |
 | Related Design | DOC-MVP-DES |
@@ -15,6 +15,21 @@
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | 対象テンプレート | Outlook Template File（`.oft`） |
 | 作成日 | 2026-09-11 |
+
+### v0.1.3 更新概要
+
+v0.1.3では、Migration QAで確認した§7 Test環境の実績記入欄をTest Result責務へ分離した。
+
+1. Test SpecificationではTest実行時に記録すべきEnvironment項目のみを定義
+2. `後日確認` 等の実績値・進捗表現を削除
+3. 実際のEnvironment値はTest Resultへ記録することを明示
+
+Test Case、Expected Result、Test Gate、Traceabilityの意味には変更を加えていない。
+
+**Change Type：Editorial / Governance Correction**  
+**Semantic Change：None**
+
+---
 
 ### v0.1.2 更新概要
 
@@ -276,19 +291,21 @@ Test Coverageを維持しながら、不要な再実行を避ける。
 
 ## 7. Test環境
 
-実施前に記録する。
+Test実行時は、Test Resultへ以下のEnvironment情報を記録する。
 
-| 項目 | 実績記入欄 |
+| 項目 | 記録要否 |
 |---|---|
-| OS | 後日確認 |
-| Excel Version | 後日確認 |
-| Excel 32bit / 64bit | 後日確認 |
-| Classic Outlook Version | 後日確認 |
-| Outlook 32bit / 64bit | 後日確認 |
-| VBA実行ブック |  |
-| Test用OFT保存場所 |  |
-| 実施日 |  |
-| 実施者 |  |
+| OS | 必須 |
+| Excel Version | 必須 |
+| Excel 32bit / 64bit | 必須 |
+| Classic Outlook Version | 必須 |
+| Outlook 32bit / 64bit | 必須 |
+| VBA実行ブック | 必須 |
+| Test用OFT保存場所 | 必須 |
+| 実施日 | 必須 |
+| 実施者 | 必須 |
+
+実際の値は本Test Specificationへ記録せず、Test Resultに保持する。
 
 New Outlookは対象外。
 

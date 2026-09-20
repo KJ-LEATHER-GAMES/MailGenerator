@@ -1,4 +1,4 @@
-# MVP Design v0.1.6 日本語版
+# MVP Design v0.1.7 日本語版
 
 ## 1. 文書情報
 
@@ -7,7 +7,7 @@
 | 文書名 | MVP Design |
 | Document ID | DOC-MVP-DES |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.6 |
+| バージョン | v0.1.7 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 要件文書 | DOC-MVP-REQ |
@@ -15,6 +15,21 @@
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.7 更新概要
+
+v0.1.7では、Migration QAで確認したActiveなTechnical Evidence参照をDocument IDベースへ統一した。
+
+1. D16 Body処理方式の `Technical Spike A v0.2` 参照を `DOC-TS-A` へ変更
+2. RISK-DES-001の `Technical Spike A v0.2` 参照を `DOC-TS-A` へ変更
+3. 過去の改訂履歴に含まれるVersion固定参照はHistorical Recordとして維持
+
+Design Decision、Route W、Architecture、Data Model、Validation Rule、Risk判定の意味には変更を加えていない。
+
+**Change Type：Editorial / Governance Correction**  
+**Semantic Change：None**
 
 ---
 
@@ -1571,7 +1586,7 @@ Value FormatterとOutlook Adapterは責務が異なるため分離を維持す�
 
 ### D16 Body処理方式
 
-Technical Spike A v0.2の結果、Route W：WordEditorを採用する。
+DOC-TS-AのTechnical Decisionに基づき、Route W：WordEditorを採用する。
 
 採用方式：
 
@@ -1662,7 +1677,7 @@ Route H：HTMLBody直接処理
 
 ### RISK-DES-001 HTMLBody内のVariable表現 — CLOSED
 
-Technical Spike A v0.2で本リスクの実発生を確認した。
+DOC-TS-Aで本リスクの実発生を確認した。
 
 通常作成したOFTにおいて、Outlook画面上では連続して見えるVariableがHTMLBody内部では以下のように分断された。
 
