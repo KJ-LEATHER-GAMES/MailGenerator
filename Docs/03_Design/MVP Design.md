@@ -1,19 +1,33 @@
-# MVP Design v0.1.5 日本語版
+# MVP Design v0.1.6 日本語版
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | MVP Design |
+| Document ID | DOC-MVP-DES |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.5 |
+| バージョン | v0.1.6 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
-| 要件文書 | MVP Requirements v0.1.6 日本語版 |
+| 要件文書 | DOC-MVP-REQ |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.6 更新概要
+
+`AI協働開発 文書管理・Baseline運用ルール v0.1` および `Baseline 4文書 文書管理ルール移行 Migration Patch v0.1` を適用し、文書管理上のEditorial / Governance Migrationを実施した。
+
+1. 固定Document ID `DOC-MVP-DES` を付与
+2. ActiveなRequirements参照をVersion固定参照から `DOC-MVP-REQ` 参照へ変更
+3. §31の自己Version固定表現およびRequirements Version固定表現をDocument IDベースへ変更
+4. §32「次工程」を削除し、進捗・Next Action・後続工程管理をProject Control / Context Handoff側へ分離
+
+本変更は文書管理方式の移行のみを目的とするEditorial / Governance Changeであり、Design Decision、Architecture、Component Responsibility、Data Model、Validation Rule、Route W：WordEditor Technical Decision、およびRequirement Traceabilityの意味は変更していない。
 
 ---
 
@@ -88,7 +102,7 @@ MVP Requirements v0.1.1 × MVP Design v0.1 の正式整合性レビュー結果�
 
 ## 2. 文書目的
 
-本書は、`MVP Requirements v0.1.6` を満たすためのMVP基本設計を定義する。
+本書は、`DOC-MVP-REQ` を満たすためのMVP基本設計を定義する。
 
 本書では、主に以下を定義する。
 
@@ -1692,9 +1706,9 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 
 ## 31. MVP Design完了条件
 
-本Design v0.1.5は、以下を満たした時点で基本設計完了とする。
+本Designは、以下を満たした時点で基本設計完了とする。
 
-- Requirements v0.1.6の主要要件に対応するコンポーネントが定義されている
+- DOC-MVP-REQの主要要件に対応するコンポーネントが定義されている
 - UI / Core / Excel / Outlook / WordEditorの責務境界が定義されている
 - Template Scan / Sync / UserForm / Render / Outlook Displayの主要フローが定義されている
 - Excelテーブル構造が定義されている
@@ -1712,71 +1726,3 @@ MVPでは実使用テンプレートの変数数を基準に確認する。
 - 新規Requirement Gapが残っていない
 - メール生成時のInput ValidatorがCurrent VariableDefinition / OptionMasterを使用することが定義されている
 - Input State保持期間が「Workbookを閉じるまで」で統一されている
-
-## 32. 次工程
-
-`MVP Requirements v0.1.6` と本 `MVP Design v0.1.5`、および `Technical Spike A v0.2 CLOSED` の最終整合性を確認した後、`MVP Test Specification v0.1` を作成する。
-
-```text
-MVP Requirements v0.1.6
-        +
-MVP Design v0.1.5
-        +
-Technical Spike A v0.2 CLOSED
-        ↓
-最終整合性再確認
-        ↓
-MVP Test Specification v0.1
-        ↓
-Technical Spike B / C
-        ↓
-Implementation Plan v0.1
-        ↓
-VBA実装
-```
-
-MVP Test Specification v0.1では、以下のTraceabilityを追跡可能とする。
-
-```text
-Requirement
-↓
-Acceptance Criteria
-↓
-Design Component / Design Rule
-↓
-Test Case
-```
-
-特に以下を優先する。
-
-- 新規Variable
-- Existing設定保持
-- Unused化
-- Reactivated
-- Rename
-- Case Insensitive
-- Invalid Variable Syntax
-- Required未設定
-- SortOrder未設定 / 重複
-- Date Validation / Format
-- Select OptionSource
-- Select自由入力禁止
-- OFT不存在
-- UserForm表示後にOFTを変更した場合の生成直前再チェック
-- Invalid Variable Syntaxの生成直前Block
-- Input保持 / クリア
-- Subject / Body置換
-- Case InsensitiveなBody全出現箇所置換
-- Body特殊文字表示
-- Body基本書式維持
-- 未置換Variable正常系 / 異常系
-- 未置換Variable一覧表示
-- Template Variable検出成立性とUnresolved 0件判定の独立確認（TF-A-002）
-- TemplateLocation / FirstDetectedAt / LastDetectedAt更新
-- Unused通常非表示 / 必要時確認
-- WordEditor / MailItem Lifecycle
-- Outlook Display成功 / 失敗
-
-Technical Spike AはCLOSED済みであるため再実施しない。
-
-具体的なRangeループ、COM解放、Control Property等はImplementation Detailとして後続工程で確定する。

@@ -1,4 +1,4 @@
-# MVP Requirements v0.1.6 日本語版
+# MVP Requirements v0.1.7 日本語版
 
 ## 1. 文書情報
 
@@ -6,7 +6,8 @@
 |---|---|
 | 文書名 | MVP Requirements |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.6 |
+| バージョン | v0.1.7 |
+| Document ID | DOC-MVP-REQ |
 | 文書種別 | MVP要件定義 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
@@ -15,6 +16,20 @@
 | 対象メール要素 | Subject / Body |
 | 最終処理 | Outlookメールを表示（Display） |
 | 自動送信 | 対象外 |
+
+### v0.1.7 更新概要
+
+v0.1.7では、`AI協働開発 文書管理・Baseline運用ルール v0.1` および `Baseline 4文書 文書管理ルール移行 Migration Patch v0.1` に基づき、文書管理上のEditorial / Governance Changeのみを反映した。
+
+利用者向けRequirement、Acceptance Criteria、NFR、MVP保証範囲、およびRequirements Decisionは変更していない。
+
+1. 固定Document ID `DOC-MVP-REQ` を付与した
+2. §2の詳細設計に関する記述を、工程順序ではなく `DOC-MVP-DES` との文書責務関係として整理した
+3. §32を「後続工程へ引き継ぐ事項」から「文書責務境界」へ変更し、Design / Implementation / Test Specificationの責務表現へ整理した
+4. §34「次工程」を削除し、現在地・次工程・Baseline状態の管理をProject Control / Context Handoff側へ分離した
+5. Semantic ChangeおよびRequirement Gapは発生していない
+
+---
 
 ### v0.1.6 更新概要
 
@@ -100,7 +115,7 @@ v0.1.1では、MVP Design開始前に残っていた以下の要件を確定し�
 
 を明確化する。
 
-VBAのクラス構成、モジュール構成、具体的な制御実装等の詳細設計は、本書では定義せず、後続のMVP Designで定義する。
+VBAのクラス構成、モジュール構成、具体的な制御実装等の詳細設計は、本書では定義せず、DOC-MVP-DESの責務とする。
 
 ---
 
@@ -1229,11 +1244,11 @@ MVP完了後、必要性を評価して以下を検討する。
 
 ---
 
-## 32. 後続工程へ引き継ぐ事項
+## 32. 文書責務境界
 
-本Requirementsでは利用者から見た振る舞いまでを定義し、具体的な実現方式は責務に応じて後続工程へ引き継ぐ。
+本Requirementsでは利用者から見た振る舞いまでを定義し、具体的な実現方式は以下の文書・工程責務へ分離する。
 
-### 32.1 MVP Designで具体化する事項
+### 32.1 DOC-MVP-DESの責務とする事項
 
 1. VBAモジュール構成
 2. クラス構成
@@ -1254,7 +1269,7 @@ MVP完了後、必要性を評価して以下を検討する。
 17. 設定完了状態の内部判定方式
 18. SortOrder同順位時のVariableDefinition行順取得方式
 
-### 32.2 Implementationで具体化する事項
+### 32.2 Implementationの責務とする事項
 
 1. Validationエラー強調の具体的な表示方式・色
 2. 曜日表記生成の具体的なVBA実装
@@ -1263,7 +1278,7 @@ MVP完了後、必要性を評価して以下を検討する。
 5. 同期結果UIの具体表示
 6. OFT不存在時の具体的な復旧UI
 
-### 32.3 MVP Test Specificationで具体化する事項
+### 32.3 DOC-MVP-TESTSPECの責務とする事項
 
 1. Acceptance Criteriaを検証するテストケース設計
 
@@ -1307,72 +1322,3 @@ MVP完了後、必要性を評価して以下を検討する。
 | 自動送信 | 対象外 |
 
 ---
-
-## 34. 次工程
-
-Technical Spike A v0.2はCLOSED / PASSで完了し、MVPのBody処理技術方針としてRoute W：WordEditorを採用した。
-
-Technical Spike AのTechnical Decisionは、`MVP Requirements v0.1.5` および `MVP Design v0.1.3` へ反映済みである。
-
-その後の最終整合性レビューにより、利用者向けRequirementの変更は不要である一方、既存RequirementをDesignへ完全に落とし込むためのDesign completeness / clarification事項（CR-001〜CR-005）が確認された。
-
-本v0.1.6ではRequirement本文・Acceptance Criteria・保証範囲を変更せず、次工程とBaselineの現在地のみを更新する。
-
-現在地は以下とする。
-
-```text
-MVP Requirements v0.1.6
-        +
-MVP Design v0.1.3
-        +
-Technical Spike A v0.2 CLOSED
-```
-
-次工程は以下とする。
-
-```text
-MVP Requirements v0.1.6
-        ↓
-MVP Design v0.1.4
-最終整合性修正
-        ↓
-Requirements / Design / Technical Spike A
-最終整合性再確認
-        ↓
-MVP Test Specification v0.1
-```
-
-`MVP Design v0.1.4` では、最終整合性レビューで確認した以下の既存RequirementへのDesign補完を行う。
-
-- メール生成直前のCurrent OFT再確認
-- 未置換Variable一覧をUIへ渡すResult設計
-- Select型の自由入力禁止
-- `TemplateLocation` / `FirstDetectedAt` / `LastDetectedAt` のSync更新規則
-- Unused Variableの通常非表示 / 必要時確認方針
-
-これらは新しい利用者向けRequirementではなく、既存Requirementに対するDesign completeness / clarificationとして扱う。
-
-`MVP Design v0.1.4` 反映後の最終Baselineは以下を想定する。
-
-```text
-MVP Requirements v0.1.6
-        +
-MVP Design v0.1.4
-        +
-Technical Spike A v0.2 CLOSED
-```
-
-MVP Test Specification v0.1では、以下のTraceabilityを追跡可能とする。
-
-```text
-Requirement
-↓
-Acceptance Criteria
-↓
-Design Component / Design Rule
-↓
-Test Case
-```
-
-また、Technical Spike Aの `TF-A-002` を踏まえ、Template Variableの検出成立性とRender後の未置換Variable 0件判定を別Testとして扱う。
-

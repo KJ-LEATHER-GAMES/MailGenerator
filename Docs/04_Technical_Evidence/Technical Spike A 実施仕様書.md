@@ -1,14 +1,15 @@
-# Technical Spike A 実施仕様書 v0.2 日本語版
+# Technical Spike A 実施仕様書 v0.3 日本語版
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | Technical Spike A 実施仕様書 |
-| バージョン | v0.2 |
+| Document ID | DOC-TS-A |
+| バージョン | v0.3 |
 | 対象 | OFT Body処理方式比較検証（HTMLBody / WordEditor） |
-| 上位Requirements | MVP Requirements v0.1.4 日本語版 |
-| 上位Design | MVP Design v0.1.2 日本語版 |
+| 実施時Requirements | MVP Requirements v0.1.4 日本語版 |
+| 実施時Design | MVP Design v0.1.2 日本語版 |
 | 起点リスク | RISK-DES-001 HTMLBody内のVariable表現 |
 | 主な関連要件 | FR-RENDER-BODY-001 / FR-RENDER-BODY-002 / FR-UNRESOLVED-001 / AC-016 / AC-017 / AC-018 / AC-019 |
 | 主な関連Design | Outlook Adapter / Template Scanner / Body Renderer / Unresolved Checker |
@@ -16,11 +17,31 @@
 | Close日 | 2026-09-11 |
 | 採用技術方針 | **Route W：WordEditor** |
 | 本Spikeの決定対象 | MVPで採用するBody処理技術方針 |
-| 次工程 | Requirements Document Consistency Patch → Design Reopen / 改訂 → 整合性確認 → MVP Test Specification v0.1 |
 
 ---
 
 ## 2. 改訂理由
+
+### v0.3 更新概要
+
+v0.3では、`AI協働開発 文書管理・Baseline運用ルール v0.1` に基づくGovernance Migrationを実施した。
+
+変更は以下に限定する。
+
+- 固定Document ID `DOC-TS-A` の付与
+- 実施時Requirements / Designの固定VersionをHistorical Execution Evidenceとして明確化
+- 文書情報から「次工程」を削除
+- §21の「次アクション」を削除
+- §22の完了条件からNext Action管理を削除
+- Spike完了後の標準フローを削除
+- Close時点で未補完だった環境メタデータを、Technical DecisionをBlockingしないHistorical Factとして整理
+
+Technical Test Result、Evidence、Finding、Requirements / Design Impact判定、Route W採用、PASS / CLOSED判定には変更を加えていない。
+
+**Change Type：Editorial / Governance**  
+**Semantic Change：None**
+
+### v0.2 改訂理由
 
 v0.1では、MVP Design v0.1.2で採用されているHTMLBody直接処理方式を前提に、OFT / HTMLBodyの成立性のみを確認対象としていた。
 
@@ -1247,23 +1268,6 @@ Scope外ケースの頑健性確認はMVP技術方針決定には不要と判断
 [x] Reopen
 ```
 
-### 次アクション
-
-```text
-1. MVP Requirements v0.1.4の技術固有表現を確認し、
-   利用者要求を変更しないDocument Consistency Patchを作成する。
-
-2. MVP Design v0.1.2をReopenし、
-   HTMLBody方式からWordEditor方式へ必要最小限のDesign改訂を行う。
-
-3. Requirements / Design / Technical Spike A間の整合性を確認する。
-
-4. 整合性確認完了後、MVP Test Specification v0.1を作成する。
-
-5. §8のOS / Excel / Classic Outlook等の詳細環境情報は後日追記する。
-   環境情報追記は本SpikeのCloseをBlockingしない。
-```
-
 ### Close記録
 
 ```text
@@ -1289,34 +1293,7 @@ Close Date : 2026-09-11
 - [x] Requirements影響を判定済み
 - [x] Design維持 / Reopenを判定済み
 - [x] Requirement Gap有無を判定済み
-- [x] 次アクションを記録済み
 
 **Technical Spike A：CLOSED / PASS**
 
-> §8のOS / Excel / Classic Outlook等の詳細バージョンは後日追記する。これは再現性メタデータの補完であり、今回のTechnical DecisionおよびClose判定をBlockingしない。
-
-Spike完了後の標準フローは以下とする。
-
-```text
-Technical Spike A v0.2
-        ↓
-比較検証コード実行
-        ↓
-Route H / Route W 技術方針決定
-        ↓
-Requirements / Design影響判定
-        │
-        ├─ 文書改訂不要
-        │      ↓
-        │  MVP Test Specification v0.1
-        │
-        └─ 文書改訂必要
-               ↓
-           必要文書のみ改訂
-               ↓
-           整合性確認
-               ↓
-           MVP Test Specification v0.1
-```
-
-Requirement Gapが発生した場合のみ、Requirementsの利用者仕様判断へ戻る。
+> §8のOS / Excel / Classic Outlook等の詳細環境情報はClose時点で未補完である。これは再現性メタデータの補完事項であり、Technical DecisionおよびClose判定をBlockingしない。

@@ -1,20 +1,39 @@
-# MVP Test Specification v0.1.1 日本語版
+# MVP Test Specification v0.1.2 日本語版
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | MVP Test Specification |
+| Document ID | DOC-MVP-TESTSPEC |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.1 |
+| バージョン | v0.1.2 |
 | 文書種別 | MVPテスト仕様 |
-| Requirements Baseline | `MVP Requirements v0.1.6 日本語版.md` |
-| Design Baseline | `MVP Design v0.1.5 日本語版.md` |
-| Technical Evidence | `Technical Spike A 実施仕様書 v0.2 日本語版_CLOSED.md` |
+| Related Requirement | DOC-MVP-REQ |
+| Related Design | DOC-MVP-DES |
+| Technical Evidence | DOC-TS-A |
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | 対象テンプレート | Outlook Template File（`.oft`） |
-| 実施状態 | 未実施 |
 | 作成日 | 2026-09-11 |
+
+### v0.1.2 更新概要
+
+`AI協働開発 文書管理・Baseline運用ルール v0.1` および `Baseline 4文書 文書管理ルール移行 Migration Patch v0.1` を適用し、文書管理上のEditorial / Governance Migrationを実施した。
+
+主な変更は以下である。
+
+1. 固定Document ID `DOC-MVP-TESTSPEC` を付与
+2. ActiveなRequirements / Design / Technical Evidence参照をVersion固定参照からDocument ID参照へ変更
+3. Test Specificationから実施状態および作成時点の `NOT RUN` 進捗記述を削除
+4. §3をRelated Documents / Baseline Resolutionへ変更し、具体Versionの解決をCurrent Approved Baselineへ分離
+5. `MTS-UNR-004` の削除済みDesign §32参照を、`DOC-TS-A / TF-A-002`、`DOC-MVP-DES §14`、`DOC-MVP-DES §23` へ修復
+6. §22 Entry Criteriaを固定Version指定からCurrent Approved Baselineベースへ変更
+7. §24 Test Result記録テンプレートへBaseline ID / Commit ID / Environmentの記録欄を追加
+8. §27「次工程」を削除し、進捗・Next ActionをProject Control / Context Handoff側へ分離
+
+本変更はEditorial / Governance Changeであり、Test Case、Expected Result、Test Gate、Requirement / Design / Technical DecisionおよびTraceabilityの意味は変更していない。
+
+---
 
 ### v0.1.1 更新概要
 
@@ -41,7 +60,7 @@
 
 ## 2. 目的
 
-本書は、MVP Requirements v0.1.6およびMVP Design v0.1.5に定義されたRequirement / Acceptance Criteria / Design Ruleが、MVP実装上で成立していることを確認するためのテスト仕様を定義する。
+本書は、DOC-MVP-REQおよびDOC-MVP-DESに定義されたRequirement / Acceptance Criteria / Design Ruleが、MVP実装上で成立していることを確認するためのテスト仕様を定義する。
 
 本書では以下を明確化する。
 
@@ -54,33 +73,32 @@
 
 本書はTest Resultではない。
 
-作成時点ではすべてのTest Caseを `NOT RUN` とする。
 
 ---
 
-## 3. Baseline
+## 3. Related Documents / Baseline Resolution
 
-本Test Specificationの入力Baselineは以下とする。
+本Test Specificationの論理参照先は以下とする。
 
-```text
-MVP Requirements v0.1.6
-        +
-MVP Design v0.1.5
-        +
-Technical Spike A v0.2 CLOSED
-```
+- DOC-MVP-REQ
+- DOC-MVP-DES
+- DOC-TS-A
+
+Test実行時に適用する具体的なVersion組合せは、Current Approved Baselineで解決する。
+
+実際にTestしたBaseline IDはTest Resultへ記録する。
 
 ### 3.1 Requirements
 
-利用者から見た振る舞い、MVP保証範囲、Acceptance Criteriaは `MVP Requirements v0.1.6` を正とする。
+Requirement / Acceptance CriteriaのSource of TruthはDOC-MVP-REQとする。
 
 ### 3.2 Design
 
-内部責務、データ構造、処理Sequence、WordEditor方式等のDesign Ruleは `MVP Design v0.1.5` を正とする。
+Design RuleのSource of TruthはDOC-MVP-DESとする。
 
 ### 3.3 Technical Spike A
 
-Technical Spike Aは以下のTechnical Decision / Evidenceを提供する。
+DOC-TS-Aは以下のTechnical Decision / Evidenceを提供する。
 
 ```text
 Body処理方式：
@@ -1685,8 +1703,9 @@ Render完了後、Valid Variable形式の残存0件。
 
 **Traceability**
 
-- Technical Spike TF-A-002
-- Design §32
+- DOC-TS-A / TF-A-002
+- DOC-MVP-DES §14
+- DOC-MVP-DES §23
 
 **Test A**
 
@@ -2190,9 +2209,11 @@ E2E / NFR Review
 
 Test実施開始条件：
 
-- MVP Requirements v0.1.6がBaseline
-- MVP Design v0.1.5がBaseline
-- Technical Spike A v0.2 CLOSED
+- Current Approved Baselineが定義されている
+- Current Approved BaselineにDOC-MVP-REQが含まれている
+- Current Approved BaselineにDOC-MVP-DESが含まれている
+- Current Approved BaselineにDOC-TS-AのCLOSED Technical Evidenceが含まれている
+- Current Approved BaselineにDOC-MVP-TESTSPECが含まれている
 - 実装対象Versionを識別可能
 - Test用Excel / OFTを準備済み
 - Classic Outlook環境が利用可能
@@ -2236,7 +2257,10 @@ Mandatory TestのN/Aは、Baseline上そのRequirement / Design Ruleが当該Bui
   - [ ] N/A
 - 実施日:
 - 実施者:
+- Baseline ID:
 - 対象Build:
+- Commit ID:
+- Environment:
 - 使用OFT:
 - Initial State:
 - Input:
@@ -2311,27 +2335,3 @@ Requirementsへ戻して判断する。
 - Blocking Requirement / Design Gapが未解決
 
 ---
-
-# 27. 次工程
-
-```text
-MVP Test Specification v0.1.1
-        ↓
-Test Specification最終整合性確認
-        ↓
-Technical Spike B / C 要否確認
-        ↓
-Implementation Plan v0.1
-        ↓
-VBA実装
-        ↓
-MVP Test実施
-        ↓
-Test Result / Finding
-        ↓
-MVP判定
-```
-
-Technical Spike B / Cの具体内容は、既存計画またはImplementation Plan作成時に確認する。
-
-本Test Specification v0.1.1および本Patchによって、新しい利用者向けRequirement / Design Decisionは追加していない。
