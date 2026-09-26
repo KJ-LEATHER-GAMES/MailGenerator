@@ -1,4 +1,4 @@
-# MVP Design v0.1.7 日本語版
+# MVP Design v0.1.8 日本語版
 
 ## 1. 文書情報
 
@@ -7,7 +7,7 @@
 | 文書名 | MVP Design |
 | Document ID | DOC-MVP-DES |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.7 |
+| バージョン | v0.1.8 |
 | 文書種別 | MVP基本設計 |
 | 上位文書 | 定型メール作成ツール 企画書 v0.1 |
 | 要件文書 | DOC-MVP-REQ |
@@ -15,6 +15,26 @@
 | メールテンプレート | Outlook Template File（`.oft`） |
 | MVP構成 | 1 Excelファイル = 1 OFTテンプレート |
 | 設計方針 | 軽量な責務分離 / MVP最小負荷 / 過剰設計回避 |
+
+---
+
+### v0.1.8 更新概要
+
+DF-P1-001およびTV-P1-001の検証結果を反映し、OneDrive Web URL環境におけるWorkbook Relative Path Resolution方式を更新した。
+
+1. `ThisWorkbook.Path` がWindows Local Pathの場合は従来方式を維持
+2. `https://d.docs.live.net/<CID>/...` の場合はOneDrive Local Rootへ解決
+3. OneDrive Root候補を環境変数から取得
+4. 実在するLocal Workbook Directoryを使用してRootを一意に特定
+5. `modSettingsData.ResolveWorkbookRelativePath` の責務を明確化
+6. OFTを利用する主要シーケンスへPath Resolutionを明示
+7. Design Decision D17 `Workbook Relative Path Resolution` を追加
+
+利用者から見た機能・操作・設定方式の変更はない。
+
+**Change Type：Semantic Design Change**  
+**Requirement Impact：None**  
+**Test Specification Impact：Needs Review**
 
 ---
 
@@ -419,13 +439,82 @@ MVPでは1 Excel = 1 OFTのため、Template管理用の追加階層は設けな
 
 ### 9.3 パス解決
 
-OFTの絶対パスは以下から導出する。
+OFTはWorkbook相対Pathで管理し、`TemplatePath`には以下のような相対Pathを保持する。
+
+```text
+Templates\MailTemplate.oft
+```
+
+絶対Pathは `ThisWorkbook.Path` の形式に応じて解決する。
+
+#### Windows Local Path
+
+`ThisWorkbook.Path` がWindows Local Pathの場合は、従来どおり以下で解決する。
 
 ```text
 ThisWorkbook.Path
 +
 TemplatePath
 ```
+
+#### OneDrive Web URL
+
+`ThisWorkbook.Path` が以下の形式の場合、
+
+```text
+https://d.docs.live.net/<CID>/...
+```
+
+Web URLをOFT Pathとして直接使用しない。
+
+以下の順でWindows Local Pathへ解決する。
+
+```text
+ThisWorkbook.Path
+↓
+<CID>より後ろの相対Pathを抽出
+↓
+OneDrive Local Root候補を取得
+↓
+Local Workbook Path候補を生成
+↓
+実在するWorkbook Directoryを確認
+↓
+Local Workbook Pathを一意に特定
+↓
+TemplatePathを結合
+↓
+Windows Local OFT Path
+```
+
+OneDrive Local Root候補は以下の環境変数から取得する。
+
+```text
+OneDrive
+OneDriveConsumer
+OneDriveCommercial
+```
+
+空欄および同一Pathの重複候補は除外する。
+
+候補判定は以下とする。
+
+```text
+実在候補 = 0
+→ ConfigurationError
+
+実在する異なる候補 = 1
+→ 採用
+
+実在する異なる候補 >= 2
+→ ConfigurationError
+```
+
+ユーザー名またはOneDrive Rootの固定Pathはハードコードしない。
+
+Path結合時はWindows PathとしてSeparatorを正規化する。
+
+Path Resolutionの責務は利用可能な絶対Pathの導出までとし、対象OFTファイル自体の存在確認は後続処理の責務とする。
 
 ---
 
@@ -476,6 +565,17 @@ modSettingsData
 `modSettingsData`
 
 - Keyによる設定値取得
+- Workbook相対PathからWindows絶対Pathへの解決
+- `d.docs.live.net`形式のOneDrive Web URLからLocal Workbook Pathへの解決
+
+`ResolveWorkbookRelativePath` の公開Interfaceは維持する。
+
+```vb
+ResolveWorkbookRelativePath( _
+    ByVal relativePath As String, _
+    ByRef absolutePath As String _
+) As COperationResult
+```
 
 Excel列位置・ListObject操作はData Access層の外へ漏らさない。
 
@@ -1277,8 +1377,16 @@ Settings Data Access
 ↓
 TemplatePath取得
 ↓
-OFT存在確認
+Workbook Relative Path解決
 ↓
+Path Resolution Errorあり？
+├─ Yes → Error Result → UI通知 → Stop
+└─ No
+    ↓
+Local OFT Path取得
+    ↓
+OFT存在確認
+    ↓
 OFT存在？
 ├─ No → Error Result → UI通知 → Stop
 └─ Yes
@@ -1333,8 +1441,16 @@ Settings Data Access
 ↓
 TemplatePath取得
 ↓
-OFT存在確認
+Workbook Relative Path解決
 ↓
+Path Resolution Errorあり？
+├─ Yes → Error Result → UI通知 → Stop
+└─ No
+    ↓
+Local OFT Path取得
+    ↓
+OFT存在確認
+    ↓
 OFT存在？
 ├─ No → Error Result → UI通知 → Stop
 └─ Yes
@@ -1415,6 +1531,14 @@ Input Errorあり？
 Settings Data Access
     ↓
 TemplatePath取得
+    ↓
+Workbook Relative Path解決
+    ↓
+Path Resolution Errorあり？
+├─ Yes → Error Result → UI通知 → Stop
+└─ No
+    ↓
+Local OFT Path取得
     ↓
 OFT存在確認
     ↓
@@ -1583,6 +1707,7 @@ Value FormatterとOutlook Adapterは責務が異なるため分離を維持す�
 | D14 | Outlook | 軽量AdapterへOutlook / Word Object Model依存を集約 |
 | D15 | Error | Result返却 + UI表示 |
 | D16 | Body処理方式 | Route W：Inspector.WordEditor + Word Range.Find / Range.Text |
+| D17 | Workbook Relative Path Resolution | Local Pathは直接結合。`d.docs.live.net`形式ではOneDrive環境変数と実在DirectoryからLocal Rootを一意に解決 |
 
 ### D16 Body処理方式
 
