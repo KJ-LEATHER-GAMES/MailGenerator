@@ -8,7 +8,7 @@
 | Document ID | DOC-MVP-TESTSPEC |
 | 対象プロジェクト | 定型メール作成ツール |
 | バージョン | v0.1.4 |
-| 文書状態 | Review / Candidate |
+| 文書状態 | Approved |
 | 文書種別 | MVPテスト仕様 |
 | Related Requirement | DOC-MVP-REQ |
 | Related Design | DOC-MVP-DES |

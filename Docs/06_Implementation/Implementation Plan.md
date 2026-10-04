@@ -1,4 +1,4 @@
-# Implementation Plan v0.1 日本語版
+# Implementation Plan v0.2 Candidate 日本語版
 
 ## 1. 文書情報
 
@@ -6,11 +6,11 @@
 |---|---|
 | 文書名 | Implementation Plan |
 | Document ID | DOC-MVP-IMPL |
-| バージョン | v0.1 |
+| バージョン | v0.2 |
 | 文書種別 | Implementation Plan |
 | 対象プロジェクト | 定型メール作成ツール MVP |
-| Status | Approved |
-| Execution Baseline | BL-MVP-001 |
+| Status | Review / Candidate |
+| Execution Baseline | BL-MVP-002 |
 | Primary Gate | 各Phase Exit Criteria |
 | Formal Product Gate | DOC-MVP-TESTSPECによるMVP Test |
 | Checkpoint | CP-P0 ～ CP-P7 |
@@ -26,6 +26,26 @@
 ### Supporting Decision
 
 - Technical Spike B-C 要否判定 v0.1：B / Cともに NOT REQUIRED
+
+### v0.2 Candidate 更新概要
+
+本Revisionは、`BL-MVP-002` のApproved化に伴う `DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1` の判定を反映し、Implementation PlanのExecution BaselineをCurrent Approved Baselineへ整合させるCandidateである。
+
+主な変更は以下である。
+
+1. Execution Baselineを `BL-MVP-001` から `BL-MVP-002` へ更新
+2. Baseline Manifestを `DOC-MVP-DES v0.1.8` / `DOC-MVP-TESTSPEC v0.1.4` を含む構成へ更新
+3. `IMP-R01 Baseline Driven`、P0 Input / Exit Criteria、Test Candidate Build、Implementation Entry Criteria、Appendix AのBaseline参照を更新
+4. Baseline変更ルールを特定Baseline ID依存から `Current Execution Baseline` ベースへ整理
+5. Technical Spike B / Cは `NOT REQUIRED` を維持
+6. Phase構成、Module構成、Route W / WordEditor、P1 Walking Skeleton、P1-02以降の実装方針は変更しない
+7. OneDrive Local Path Resolutionの詳細仕様は `DOC-MVP-DES` / `DOC-MVP-TESTSPEC` をSource of Truthとし、本書へ重複記載しない
+
+**Change Type：Execution Baseline Update / Plan-level Semantic Alignment**  
+**Requirement Impact：None**  
+**Additional Design Change：None**  
+**Technical Decision Impact：None**  
+**Additional Test Definition Change：None**
 
 ### v0.1 作成概要
 
@@ -45,7 +65,7 @@
 
 ## 2. 目的
 
-本書の目的は、BL-MVP-001で承認されたMVPを、確定済みDesignに従ってVBA実装へ安全に落とし込むため、実装順序、依存関係、Verification、および完了条件を定義することである。
+本書の目的は、BL-MVP-002で承認されたMVPを、確定済みDesignに従ってVBA実装へ安全に落とし込むため、実装順序、依存関係、Verification、および完了条件を定義することである。
 
 本書は「何を作るか」または「どのようなArchitectureを採用するか」を再決定する文書ではない。
 
@@ -122,30 +142,30 @@ DOC-MVP-REQ / DOC-MVP-DESでImplementation Detailとして残されている以�
 本Implementation Planの実行基準は以下とする。
 
 ```text
-Baseline ID : BL-MVP-001
+Baseline ID : BL-MVP-002
 Status      : Approved
 ```
 
 Baseline構成：
 
 ```text
-BL-MVP-001
+BL-MVP-002
 │
 ├─ DOC-MVP-REQ      MVP Requirements v0.1.8
-├─ DOC-MVP-DES      MVP Design v0.1.7
+├─ DOC-MVP-DES      MVP Design v0.1.8
 ├─ DOC-TS-A         Technical Spike A v0.4 CLOSED / PASS
-└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.3
+└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.4
 ```
 
 ### 4.2 Baseline変更ルール
 
-Implementation中に新しいRevisionが作成されても、BL-MVP-001を自動更新しない。
+Implementation中に新しいRevisionが作成されても、Current Execution Baselineを自動更新しない。
 
 Requirement Gap / Design Gap等によりBaseline変更が必要となった場合は、Implementation側だけで解釈を変更せず、文書管理ルールに従い新Baseline Approvalを行う。
 
 ### 4.3 Technical Spike B / C
 
-BL-MVP-001を基準とした要否判定により、Technical Spike B / CはともにNOT REQUIREDとする。
+BL-MVP-002を基準として再確認した結果、Technical Spike B / CはともにNOT REQUIREDを維持する。
 
 Implementation中に新たなTechnical Riskが発生した場合も、自動的にSpike B / Cを復活させない。
 
@@ -157,7 +177,7 @@ Implementation中に新たなTechnical Riskが発生した場合も、自動的�
 
 ### IMP-R01 Baseline Driven
 
-すべての実装判断はBL-MVP-001を基準とする。
+すべての実装判断はBL-MVP-002を基準とする。
 
 ### IMP-R02 Design Conformance
 
@@ -274,7 +294,7 @@ Phase Exit Criteriaを満たさない状態で、依存する次Phaseを正式�
 
 #### Input
 
-- BL-MVP-001
+- BL-MVP-002
 - DOC-MVP-DES §9～11、§24、§26、§29
 
 #### Implementation Scope
@@ -341,7 +361,7 @@ Error CodeがMVPに不要な場合、番号体系を作ること自体を目的�
 - 後続処理がExcel Tableへ直接依存せず必要データを取得できる
 - Result / Errorを共通形式で返却できる
 - Project全体がCompile可能
-- BL-MVP-001とのConflictがない
+- BL-MVP-002とのConflictがない
 - Blocking Implementation Findingがない
 
 ---
@@ -1197,7 +1217,7 @@ MVP-B002
 Formal Test Resultでは、以下を組み合わせて対象実装を一意化する。
 
 ```text
-Baseline ID : BL-MVP-001
+Baseline ID : BL-MVP-002
 Build ID    : MVP-Bxxx
 Commit ID   : <Git Commit ID>
 ```
@@ -1257,7 +1277,7 @@ Implementation都合だけでRequirementを変更しない。
 
 ### 13.6 Baseline変更
 
-Requirement Gap / Design Gap解消等でBaseline変更が必要となった場合、BL-MVP-001を直接書き換えない。
+Requirement Gap / Design Gap解消等でBaseline変更が必要となった場合、Current Execution Baselineを直接書き換えない。
 
 新Revision / Consistency Review / Baseline Approvalの正式手順へ戻る。
 
@@ -1269,7 +1289,7 @@ Requirement Gap / Design Gap解消等でBaseline変更が必要となった場�
 
 Implementation開始条件：
 
-- BL-MVP-001がApproved
+- BL-MVP-002がApproved
 - DOC-MVP-REQがApproved
 - DOC-MVP-DESがApproved
 - DOC-TS-AがCLOSED / PASS
@@ -1344,7 +1364,7 @@ Formal Product GateはDOC-MVP-TESTSPECをSource of Truthとする。
 # Appendix A. Implementation Phase Flow
 
 ```text
-BL-MVP-001
+BL-MVP-002
     ↓
 P0 Foundation
     ↓ CP-P0
