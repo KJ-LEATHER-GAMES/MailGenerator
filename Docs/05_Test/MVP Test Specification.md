@@ -1,4 +1,4 @@
-# MVP Test Specification v0.1.3 日本語版
+# MVP Test Specification v0.1.4 日本語版
 
 ## 1. 文書情報
 
@@ -7,7 +7,8 @@
 | 文書名 | MVP Test Specification |
 | Document ID | DOC-MVP-TESTSPEC |
 | 対象プロジェクト | 定型メール作成ツール |
-| バージョン | v0.1.3 |
+| バージョン | v0.1.4 |
+| 文書状態 | Review / Candidate |
 | 文書種別 | MVPテスト仕様 |
 | Related Requirement | DOC-MVP-REQ |
 | Related Design | DOC-MVP-DES |
@@ -15,6 +16,29 @@
 | 対象プラットフォーム | Microsoft Excel Desktop + VBA + Classic Outlook |
 | 対象テンプレート | Outlook Template File（`.oft`） |
 | 作成日 | 2026-09-11 |
+
+### v0.1.4 更新概要
+
+DF-P1-001およびDOC-MVP-DES v0.1.8のOneDrive Local Path Resolution対応について、
+`MVP Test Specification DF-P1-001 Impact Review v0.1` の判定を反映した。
+
+主な変更は以下である。
+
+1. `MTS-TPL-001` のExpectedを、単純な `ThisWorkbook.Path + TemplatePath` からWorkbook Relative Path Resolutionの結果確認へ更新
+2. `MTS-TPL-001` にWindows Local Path / OneDrive Web URLの正常系Execution Variantを追加
+3. `MTS-TPL-001` にOneDrive Local Root候補0件 / Local Workbook Path候補0件 / 異なる候補複数件のResolution Failure Variantを追加
+4. `MTS-TPL-001` のEvidenceへ `ThisWorkbook.Path`、`TemplatePath`、`Resolved Local Path` を追加
+5. `MTS-ERR-001` の代表Error確認対象へWorkbook Relative Path / OneDrive Local Path Resolution Errorを追加
+6. `MTS-ERR-001` にPath Resolution Error時の `ConfigurationError`、Message / Target、Fail Fast条件を明示
+7. 新規Test IDは追加せず、Test Case総数69件を維持
+
+Requirement / Acceptance Criteria、MVP Test Gate、既存Test ID、Traceabilityの基本構造は変更していない。
+
+**Change Type：Semantic Test Definition Update**  
+**Requirement Impact：None**  
+**Test Case Count：69（変更なし）**
+
+---
 
 ### v0.1.3 更新概要
 
@@ -531,22 +555,86 @@ WordEditor方式ではHTML Encodeせず、意図した文字列として表示�
 
 - Excelと `Templates\MailTemplate.oft` が相対関係を満たす
 - Settings.TemplatePathが正しい
+- OneDrive Web URL Variantでは、対象WorkbookとOFTがOneDriveローカル同期対象である
+
+**Execution Variants**
+
+### Variant A：Windows Local Path
+
+`ThisWorkbook.Path` がWindows Local Pathを返す環境で実施する。
+
+### Variant B：OneDrive Web URL
+
+`ThisWorkbook.Path` が以下の形式を返す環境で実施する。
+
+```text
+https://d.docs.live.net/<CID>/...
+```
 
 **Steps**
 
 1. Excelを起動する
-2. Template依存処理を開始する
-3. 解決したTemplatePathを記録する
+2. `ThisWorkbook.Path` を確認する
+3. Template依存処理を開始する
+4. Settingsの `TemplatePath` を記録する
+5. Workbook Relative Path Resolution後のPathを記録する
+6. Template読込結果を確認する
 
 **Expected**
 
-- `ThisWorkbook.Path + TemplatePath` から対象OFTを特定できる
-- Template読込に成功する
+- Workbook Relative Path Resolutionによって対象OFTのWindows絶対Pathを解決できる
+- Variant AではWindows Local Pathを基点として対象OFTを解決できる
+- Variant Bでは `d.docs.live.net` のWeb URLをOneDrive Local Sync Pathへ解決できる
+- Variant BではWeb URLをOFT File Pathとして直接使用しない
+- Settingsの `TemplatePath` はWorkbook相対Pathのまま維持される
+- 解決したWindows絶対PathからTemplate読込に成功する
+
+**Resolution Failure Variants**
+
+### Variant C：OneDrive Local Root候補なし
+
+**Expected**
+
+- Path Resolutionは失敗する
+- `ConfigurationError`を返す
+- OFT存在確認へ進まない
+- Outlook処理へ進まない
+
+### Variant D：Local Workbook Path候補なし
+
+**Expected**
+
+- Path Resolutionは失敗する
+- `ConfigurationError`を返す
+- OFT存在確認へ進まない
+- Outlook処理へ進まない
+
+### Variant E：異なるLocal Workbook Path候補が複数存在
+
+**Expected**
+
+- 先頭候補を自動採用しない
+- Path Resolutionは失敗する
+- `ConfigurationError`を返す
+- OFT存在確認へ進まない
+- Outlook処理へ進まない
 
 **Evidence**
 
-- 解決パス
-- 読込結果
+正常系では以下を記録する。
+
+- `ThisWorkbook.Path`
+- Settings `TemplatePath`
+- Resolved Local Path
+- Template Read Result
+
+Resolution Failure Variantでは以下を記録する。
+
+- 発生条件
+- `ErrorType`
+- `Message`
+- `Target`
+- 後続処理へ進んでいないことを確認できるEvidence
 
 ---
 
@@ -1877,11 +1965,14 @@ Mail生成時Current VariableDefinitionを使用してInput Validationする。
 
 - §25 エラー処理要件
 - NFR-003
+- Design §9.3
 - Design §24
+- Design §25.1〜25.3
 
 以下の代表Errorを確認する。
 
 - OFT不存在
+- Workbook Relative Path / OneDrive Local Path Resolution Error
 - Invalid Variable
 - Configuration不足
 - Input Validation
@@ -1896,6 +1987,13 @@ Mail生成時Current VariableDefinitionを使用してInput Validationする。
 - 何を確認すべきか
 
 が理解できる。
+
+Workbook Relative Path / OneDrive Local Path Resolution Errorでは、追加で以下を満たす。
+
+- `ConfigurationError`として返却される
+- 問題対象を特定できる `Message` / `Target` を持つ
+- Path Resolution失敗後にOFT存在確認へ進まない
+- Path Resolution失敗後にOutlook処理へ進まない
 
 ---
 
