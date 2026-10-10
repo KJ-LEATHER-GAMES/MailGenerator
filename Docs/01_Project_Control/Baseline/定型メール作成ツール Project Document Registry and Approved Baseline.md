@@ -1,30 +1,29 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.5
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.6
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.5 |
+| バージョン | v0.6 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-09-15 |
 
-### v0.5 更新概要
+### v0.6 更新概要
 
-- BL-MVP-002 CandidateのBaseline Manifestを確認
-- Baseline Approval Quality Gateを実施しPASSと判定
-- BL-MVP-002をApproved Baselineとして登録
-- Current Approved BaselineをBL-MVP-001からBL-MVP-002へ更新
-- BL-MVP-001をSupersededとしてHistorical Baselineへ移行
-- DOC-MVP-DESのBaseline Versionをv0.1.7からv0.1.8へ更新
-- DOC-MVP-TESTSPECのBaseline Versionをv0.1.3からv0.1.4へ更新
-- DOC-MVP-REQ / DOC-TS-AのBaseline Versionは変更なし
-- DOC-MVP-TESTSPEC v0.1.4の正式Approved Artifact確定を反映
-- Test Case総数69件を維持
-- BL-MVP-002 Baseline Approval Record v0.1をApproval Evidenceとして登録
-- DOC-MVP-IMPL v0.1がExecution BaselineとしてBL-MVP-001を固定している点をImplementation Plan Impact Review対象として明示
+- `DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1` を実施し、`AFFECTED / REVISION REQUIRED` と判定
+- Impact Reviewに基づき `Implementation Plan v0.2 Candidate` を最小差分で作成
+- `Implementation Plan v0.2 Plan Consistency Review v0.1` を実施し、PASSと判定
+- `DOC-MVP-IMPL v0.2` を正式Approved Artifactとして確定
+- DOC-MVP-IMPLのLatest Versionを `v0.1 → v0.2` へ更新
+- DOC-MVP-IMPLのExecution Baselineが `BL-MVP-002` と整合したことをProject Controlへ反映
+- BL-MVP-002のManifest自体は変更なし
+- BL-MVP-001はSupersededを維持
+- Implementation Plan Impact ReviewをOpen ItemからCompletedへ変更
+- P1-02開始前のBaseline / Plan Alignment Conflictを解消
+- 次Actionを「新Workbook P0 Integration Regression（推奨）」→「P1-02 Inspector / WordEditor Connection」へ更新
 
 ---
 
@@ -36,7 +35,7 @@
 | DOC-MVP-DES | MVP Design | v0.1.8 | Approved | v0.1.8 | Design |
 | DOC-TS-A | Technical Spike A 実施仕様書 | v0.4 | Closed | v0.4 | Technical Evidence |
 | DOC-MVP-TESTSPEC | MVP Test Specification | v0.1.4 | Approved | v0.1.4 | Test Definition |
-| DOC-MVP-IMPL | Implementation Plan | v0.1 | Approved | — | Implementation Plan |
+| DOC-MVP-IMPL | Implementation Plan | v0.2 | Approved | — | Implementation Plan |
 
 ### Registry Rule
 
@@ -248,39 +247,120 @@ Baseline管理上のBlocking Open Itemはなし。
 
 ---
 
-## 8. Implementation Plan Baseline Impact
+## 8. Implementation Plan Alignment Result
 
-### 現状
+### Impact Review
 
-DOC-MVP-IMPL v0.1はApprovedであるが、文書内のExecution Baselineを以下として固定している。
+`DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1` を実施した。
+
+判定：
+
+```text
+DOC-MVP-IMPL v0.1
+BL-MVP-002 Impact:
+
+AFFECTED
+REVISION REQUIRED
+```
+
+主な理由：
+
+- DOC-MVP-IMPL v0.1がExecution BaselineとしてBL-MVP-001を固定参照していた
+- `IMP-R01 Baseline Driven` がBL-MVP-001基準となっていた
+- BL-MVP-002でDOC-MVP-DES v0.1.8 / DOC-MVP-TESTSPEC v0.1.4が正式Baselineへ昇格した
+- P1-02以降の実装判断をCurrent Approved Baselineへ整合させる必要があった
+
+一方、以下はImpactなしと判定した。
+
+```text
+P0～P7 Phase構成
+Checkpoint構成
+Module Mapping
+Route W / WordEditor
+P1 Walking Skeleton
+P1-02 Inspector / WordEditor Connection方針
+Requirements
+Technical Spike A
+Technical Spike B / C要否
+```
+
+Technical Spike B / C：
+
+```text
+NOT REQUIRED維持
+```
+
+### Implementation Plan v0.2
+
+Impact Review結果に基づき、v0.1から最小差分で以下を更新した。
 
 ```text
 Execution Baseline:
 BL-MVP-001
-```
-
-また、Implementation Principle `IMP-R01 Baseline Driven` では、実装判断をBL-MVP-001基準とすることを定義している。
-
-一方、Current Approved Baselineは本v0.5で以下へ更新された。
-
-```text
+↓
 BL-MVP-002
 ```
 
-### 判定
+関連して以下を更新した。
 
-これはBL-MVP-002自体のApprovalを無効化する問題ではない。
+- Baseline Manifest
+- `IMP-R01 Baseline Driven`
+- P0 Input / Exit Criteria
+- Test Candidate BuildのBaseline ID
+- Implementation Entry Criteria
+- Appendix AのExecution Baseline起点
+- Baseline変更ルール
 
-ただし、P1-02以降のImplementationをどのBaseline基準で継続するかを曖昧にしないため、P1-02開始前にDOC-MVP-IMPLへの影響確認を行う。
+OneDrive Local Path Resolutionの詳細仕様はImplementation Planへ複製せず、DOC-MVP-DES / DOC-MVP-TESTSPECをSource of Truthとして維持した。
+
+### Plan Consistency Review
+
+`Implementation Plan v0.2 Plan Consistency Review v0.1` を実施した。
+
+結果：
+
+```text
+Plan Consistency Review : PASS
+Old Baseline Active Reference : NONE
+Blocking Requirement Conflict : NONE
+Blocking Design Conflict : NONE
+Blocking Test Conflict : NONE
+Broken Test Reference : NONE
+Broken Design Reference : NONE
+Unexpected Scope Expansion : NONE
+```
+
+Planが参照する20個のMTS Test IDは、すべてDOC-MVP-TESTSPEC v0.1.4に存在することを確認した。
+
+正式Artifact：
+
+```text
+DOC-MVP-IMPL
+Implementation Plan v0.2 日本語版.md
+Status: Approved
+Execution Baseline: BL-MVP-002
+```
+
+### Project Control判定
 
 ```text
 Implementation Plan Impact Review:
-REQUIRED BEFORE P1-02
+COMPLETE
+
+Implementation Plan Revision:
+COMPLETE
+
+Plan Consistency Review:
+PASS
+
+DOC-MVP-IMPL v0.2:
+APPROVED
+
+P1-02 Baseline / Plan Alignment Conflict:
+RESOLVED
 ```
 
-このv0.5ではDOC-MVP-IMPLの内容・Versionを推測で変更しない。
-
-Impact Review結果に基づき、必要な場合のみDOC-MVP-IMPLをRevisionする。
+DOC-MVP-IMPLはBL-MVP-002 Manifestの構成文書ではないため、BL-MVP-002そのもののManifestは変更しない。
 
 ---
 
@@ -298,8 +378,20 @@ TV-P1-001 = PASS
 Current Approved Baseline:
 BL-MVP-002
 
-Next Project Control Task:
-DOC-MVP-IMPL Baseline Impact Review
+DOC-MVP-IMPL:
+v0.2 / Approved
+
+Implementation Plan Execution Baseline:
+BL-MVP-002
+
+Implementation Plan Impact Review:
+COMPLETE
+
+Plan Consistency Review:
+PASS
+
+P1-02 Baseline / Plan Alignment:
+READY
 
 Recommended Implementation Health Check:
 New Workbook P0 Integration Regression
@@ -307,6 +399,8 @@ New Workbook P0 Integration Regression
 Next Implementation Task:
 P1-02 Inspector / WordEditor Connection
 ```
+
+P0 Integration Regressionは推奨するが、BL-MVP-002またはDOC-MVP-IMPL v0.2 ApprovalのBlocking条件ではない。
 
 ---
 
@@ -318,7 +412,9 @@ P1-02 Inspector / WordEditor Connection
 | Design | DOC-MVP-DES v0.1.8 / BL-MVP-002 |
 | Technical Evidence | DOC-TS-A v0.4 / BL-MVP-002 |
 | Test Definition | DOC-MVP-TESTSPEC v0.1.4 / BL-MVP-002 |
-| Implementation Plan | DOC-MVP-IMPL v0.1 |
+| Implementation Plan | DOC-MVP-IMPL v0.2 |
+| Implementation Plan Impact Review | DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1 |
+| Plan Consistency Evidence | Implementation Plan v0.2 Plan Consistency Review v0.1 |
 | DF-P1-001 Close Evidence | DF-P1-001 Close Record v0.1 |
 | P1-01 Completion Evidence | P1-01 OFT Path Outlook Connection Completion Record v0.1 |
 | Baseline Approval Evidence | BL-MVP-002 Baseline Approval Record v0.1 |
@@ -335,18 +431,26 @@ TV-P1-001                    : PASS
 P1-01                        : PASS / COMPLETE
 DOC-MVP-DES Latest           : v0.1.8 / Approved
 DOC-MVP-TESTSPEC Latest      : v0.1.4 / Approved
+DOC-MVP-IMPL Latest          : v0.2 / Approved
 DES × TESTSPEC Consistency   : PASS
+IMPL Plan Consistency        : PASS
 Test Case Count              : 69
 
 BL-MVP-001                   : SUPERSEDED
 BL-MVP-002                   : APPROVED
 Current Approved Baseline    : BL-MVP-002
 
+Implementation Plan Execution Baseline:
+BL-MVP-002
+
 Baseline Management Blocking Item:
 NONE
 
 Implementation Plan Impact Review:
-REQUIRED BEFORE P1-02
+COMPLETE / AFFECTED / REVISION APPLIED
+
+P1-02 Baseline / Plan Alignment:
+READY
 ```
 
 ---
@@ -356,12 +460,43 @@ REQUIRED BEFORE P1-02
 優先順：
 
 ```text
-1. DOC-MVP-IMPL v0.1に対するBL-MVP-002 Impact Review
-2. 必要に応じてImplementation Plan Revision
-3. 新Workbook P0 Integration Regression（推奨）
-4. P1-02 Inspector / WordEditor Connection
+1. 新Workbook P0 Integration Regression（推奨）
+2. P1-02 Inspector / WordEditor Connection
 ```
 
-P0 Integration RegressionはBL-MVP-002 ApprovalのBlocking条件ではない。
+### 新Workbook P0 Integration Regression
 
-P1-02開始前には、少なくともImplementation Planが参照するExecution BaselineとCurrent Approved Baselineの関係を明確化する。
+目的：
+
+```text
+Workbook再構築後のP0 Production Asset / Integration健全性確認
+```
+
+これはImplementation Health Checkであり、BL-MVP-002またはDOC-MVP-IMPL v0.2 ApprovalのBlocking条件ではない。
+
+実施する場合は、P1-02開始前に一度だけRegression確認する。
+
+### P1-02 Inspector / WordEditor Connection
+
+Production Vertical Slice：
+
+```text
+Settings
+↓
+TemplatePath
+↓
+ResolveWorkbookRelativePath
+↓
+Local OFT Path
+↓
+modOutlookAdapter
+↓
+MailItem
+↓
+Inspector
+↓
+WordEditor
+```
+
+Implementation PlanとCurrent Approved Baselineの不整合は解消済みであり、P1-02へ進むためのProject Control上のBlocking Itemはない。
+

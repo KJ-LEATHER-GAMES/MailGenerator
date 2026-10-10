@@ -1,4 +1,4 @@
-# Implementation Plan v0.2 Candidate 日本語版
+# Implementation Plan v0.2 日本語版
 
 ## 1. 文書情報
 
@@ -9,7 +9,7 @@
 | バージョン | v0.2 |
 | 文書種別 | Implementation Plan |
 | 対象プロジェクト | 定型メール作成ツール MVP |
-| Status | Review / Candidate |
+| Status | Approved |
 | Execution Baseline | BL-MVP-002 |
 | Primary Gate | 各Phase Exit Criteria |
 | Formal Product Gate | DOC-MVP-TESTSPECによるMVP Test |
@@ -27,9 +27,9 @@
 
 - Technical Spike B-C 要否判定 v0.1：B / Cともに NOT REQUIRED
 
-### v0.2 Candidate 更新概要
+### v0.2 更新概要
 
-本Revisionは、`BL-MVP-002` のApproved化に伴う `DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1` の判定を反映し、Implementation PlanのExecution BaselineをCurrent Approved Baselineへ整合させるCandidateである。
+本Revisionは、`BL-MVP-002` のApproved化に伴う `DOC-MVP-IMPL v0.1 / BL-MVP-002 Impact Review v0.1` の判定を反映し、Implementation PlanのExecution BaselineをCurrent Approved Baselineへ整合させる正式Revisionである。
 
 主な変更は以下である。
 
