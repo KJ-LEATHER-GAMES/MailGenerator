@@ -3,7 +3,7 @@
 ## 1. 目的と適用範囲
 
 この台帳は、`Folder_Structure_Proposal_v0.1` に基づくフォルダ構成移行の事前確認記録である。
-FS-00では移行対象の扱いを、移行実施前に確定できる状態にすることを目的とする。FS-01の配置先準備は第9節、FS-02の文書移動結果は第10節に記録する。第3節は移行元と予定先の対応表として保持し、実施状態は各工程の実施記録で確認する。
+FS-00では移行対象の扱いを、移行実施前に確定できる状態にすることを目的とする。FS-01の配置先準備は第9節、FS-02の文書移動結果は第10節、FS-03の検証記録・履歴整理は第11節に記録する。第3節は移行元と予定先の対応表として保持し、実施状態は各工程の実施記録で確認する。
 
 2026-10-10追記：ユーザー回答と現物確認を反映した。第4節は当初の検討履歴として保持し、決定と実行条件は第8節を優先する。今回は本台帳だけを更新し、移行・削除は実施しない。
 
@@ -226,3 +226,85 @@ FS-01の範囲である受入先準備は完了。既存追跡ファイルに差
 ### 次工程
 
 FS-03で検証記録・引継ぎ・履歴を整理する。R-13・R-16～19・R-24、Reviews直下の未整理資料、旧版・Patch等を対象とする。D-10の適用状況照合とD-07の配置案判断は継続課題。D-05の実Workbook確認とD-06のテスト選定はFS-04へ引き継ぐ。
+
+## 11. FS-03実施記録（2026-10-10）
+
+開始時HEAD：`92be434`（Complete FS-02）。開始時の作業ツリーはクリーン。確定対象の整理を完了し、35ファイルを移動、R-24の`tree.txt`を削除した。D-07は継続保留であり、移行全体の完了を意味しない。
+
+### 実施結果
+
+- 検証判定・技術知見2件を`Docs/03_verification/technical_validation/`へ移動。
+- P1-01のClose／Completion Record 2件をUnit配下へ移動。
+- Handoff 01～08の8件を`Docs/05_handoff/history/`へ移動。Currentの新規作成はFS-05。
+- Reviews直下のレビュー・要否判定7件を`Docs/00_project_control/reviews/`へ移動。Technical Spike B/C要否判定はBaselineを起点とするImplementation Entry Decisionのためここに分類した。
+- 旧Registry v0.2～v0.5、旧Test Specification、旧Implementation Planの6件を`Docs/90_archive/pre_git_revisions/`へ移動。既存台帳で指定された旧版保管先を使用し、内容の複製は作っていない。フォルダ名は今回の保管分類であり、各資料がGit導入前に作成されたという事実認定ではない。
+- Patch／差分整理10件を`Docs/90_archive/applied_patches/`へ移動。適用記録の照合根拠は下表。
+- `tree.txt`は削除直前に`23c553a:tree.txt`と現物のGit blobが`5545554a0653a05ad9c7faffb81083605556de0a`で一致することを再確認した。Archiveへの複製は作らず、第8節の方法で復元可能。
+
+### Patch分類と適用記録の照合
+
+これはフォルダ整理のための適用履歴確認であり、過去Patchの再適用や技術仕様の再承認ではない。Patch本文の変更目的・対象Revisionを、後続の更新概要およびレビュー記録と照合した。改訂で置換・削除された過去のNext Actionは現行本文へ復活させない。
+
+| Patch／差分整理 | 照合根拠 | 判定 |
+| --- | --- | --- |
+| Requirements v0.1 → v0.1.1 差分整理 | `MVP_Requirements.md`のv0.1.1更新概要に、大小文字、Invalid Syntax、Date 6 Format、SortOrder、OFT不存在の5項目が反映済みと記載 | 適用履歴として保管 |
+| Requirements v0.1.4 技術固有表現整理 | Requirements v0.1.5更新概要の技術非依存表現・AC-017・HTML Encode整理と一致 | 適用履歴として保管 |
+| Design v0.1.2 WordEditor対応 | `MVP_Design.md`のv0.1.3更新概要にRoute W、WordEditor、Range、Scanner入力変更等を反映 | 適用履歴として保管 |
+| Baseline 最終整合性修正 | Requirements v0.1.6、Design v0.1.4更新概要、最終整合性再確認のCR-001～006 Close記録 | 適用履歴として保管 |
+| Design v0.1.4→v0.1.5 最終整合性 | Design v0.1.5更新概要にFCR-001/002対応、Current設定取得とWorkbook単位の保持期間を反映 | 適用履歴として保管 |
+| Test Specification v0.1→v0.1.1 | `MVP_Test_Specification.md`のv0.1.1更新概要12項目、Baseline 4文書最終整合性チェックのPASS記録 | 適用履歴として保管 |
+| 文書管理ルール移行 Migration Patch | Requirements v0.1.7、Design v0.1.6、Spike A v0.3、Test Spec v0.1.2の更新概要にGovernance Migrationを明記 | D-10：A／適用履歴として保管 |
+| Migration QA Correction Patch | QA Governance Consistency Review v0.2が適用Correctionを明記しPASS。REQ v0.1.8、DES v0.1.7、Spike v0.4、Test Spec v0.1.3の更新概要とも整合 | D-10：A／適用履歴として保管 |
+| Design DF-P1-001対応 | Design v0.1.8更新概要にOneDrive Local Path Resolution対応。DES×TESTSPECレビュー、BL-MVP-002承認記録を保持 | 適用履歴として保管 |
+| Registry v0.5 Update Patch | 旧Registry v0.5の更新概要・ManifestにBL-MVP-002承認とBL-MVP-001 Supersededを反映。現行v0.6でも維持 | 適用履歴として保管 |
+
+D-10分類：Migrationフォルダ内の2件はいずれも変更指示を収めたPatchであり、ファイル名にQAが含まれてもQA Review本体とは区別する。QA Governance Consistency Review本体はFS-02で`Docs/00_project_control/reviews/`へ移動済み。D-10の今回対象2件の分類・履歴照合は完了。
+
+### 全移動対応表
+
+| 移動元（92be434） | 現在の移動先 |
+| --- | --- |
+| `Docs/04_Technical_Evidence/TV-P1-001の正式判定.md` | `Docs/03_verification/technical_validation/TV-P1-001_正式判定.md` |
+| `Docs/04_Technical_Evidence/DF-P1-001 Close Record v0.1.md` | `Docs/02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md` |
+| `Docs/04_Technical_Evidence/P1-01 OFT Path Outlook Connection Completion Record v0.1.md` | `Docs/02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md` |
+| `Docs/04_Technical_Evidence/OneDrive Cloud URL cannot be used directly as OFT file path.md` | `Docs/03_verification/technical_validation/OneDrive Cloud URL cannot be used directly as OFT file path.md` |
+| `Docs/01_Project_Control/Reviews/Baseline 最終整合性修正 差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/Baseline 最終整合性修正 差分パッチ v0.1.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_01.md` | `Docs/05_handoff/history/Context Handoff_01.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_02.md` | `Docs/05_handoff/history/Context Handoff_02.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_03.md` | `Docs/05_handoff/history/Context Handoff_03.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_04.md` | `Docs/05_handoff/history/Context Handoff_04.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_05.md` | `Docs/05_handoff/history/Context Handoff_05.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_06.md` | `Docs/05_handoff/history/Context Handoff_06.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_07.md` | `Docs/05_handoff/history/Context Handoff_07.md` |
+| `Docs/07_Handoff_Archive/Context Handoff_08.md` | `Docs/05_handoff/history/Context Handoff_08.md` |
+| `Docs/01_Project_Control/Baseline/Archive/定型メール作成ツール Project Document Registry and Approved Baseline v0.2.md` | `Docs/90_archive/pre_git_revisions/定型メール作成ツール Project Document Registry and Approved Baseline v0.2.md` |
+| `Docs/01_Project_Control/Baseline/Archive/定型メール作成ツール Project Document Registry and Approved Baseline v0.3.md` | `Docs/90_archive/pre_git_revisions/定型メール作成ツール Project Document Registry and Approved Baseline v0.3.md` |
+| `Docs/01_Project_Control/Baseline/Archive/定型メール作成ツール Project Document Registry and Approved Baseline v0.4.md` | `Docs/90_archive/pre_git_revisions/定型メール作成ツール Project Document Registry and Approved Baseline v0.4.md` |
+| `Docs/01_Project_Control/Baseline/Archive/定型メール作成ツール Project Document Registry and Approved Baseline v0.5.md` | `Docs/90_archive/pre_git_revisions/定型メール作成ツール Project Document Registry and Approved Baseline v0.5.md` |
+| `Docs/05_Test/old/MVP Test Specification v0.1.3.md` | `Docs/90_archive/pre_git_revisions/MVP Test Specification v0.1.3.md` |
+| `Docs/06_Implementation/old/Implementation Plan v0.1.md` | `Docs/90_archive/pre_git_revisions/Implementation Plan v0.1.md` |
+| `Docs/01_Project_Control/Baseline/patch/定型メール作成ツール Project Document Registry and Approved Baseline v0.5 Update Patch.md` | `Docs/90_archive/applied_patches/定型メール作成ツール Project Document Registry and Approved Baseline v0.5 Update Patch.md` |
+| `Docs/01_Project_Control/Reviews/Migration/Baseline 4文書 Migration QA Correction Patch v0.1.md` | `Docs/90_archive/applied_patches/Baseline 4文書 Migration QA Correction Patch v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Migration/Baseline 4文書 文書管理ルール移行 Migration Patch.md` | `Docs/90_archive/applied_patches/Baseline 4文書 文書管理ルール移行 Migration Patch.md` |
+| `Docs/02_Requirements/Defferences/MVP Requirements v0.1 → v0.1.1 差分整理.md` | `Docs/90_archive/applied_patches/MVP Requirements v0.1 → v0.1.1 差分整理.md` |
+| `Docs/02_Requirements/Defferences/MVP Requirements v0.1.4 技術固有表現整理 差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/MVP Requirements v0.1.4 技術固有表現整理 差分パッチ v0.1.md` |
+| `Docs/03_Design/Defferences/MVP Design DF-P1-001対応 最小差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/MVP Design DF-P1-001対応 最小差分パッチ v0.1.md` |
+| `Docs/03_Design/Defferences/MVP Design v0.1.2 WordEditor対応 差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/MVP Design v0.1.2 WordEditor対応 差分パッチ v0.1.md` |
+| `Docs/03_Design/Defferences/MVP Design v0.1.4→v0.1.5 最終整合性差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/MVP Design v0.1.4→v0.1.5 最終整合性差分パッチ v0.1.md` |
+| `Docs/05_Test/Defferences/MVP Test Specification v0.1→v0.1.1 差分パッチ v0.1.md` | `Docs/90_archive/applied_patches/MVP Test Specification v0.1→v0.1.1 差分パッチ v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Baseline 4文書 最終整合性チェック v0.1.md` | `Docs/00_project_control/reviews/Baseline 4文書 最終整合性チェック v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Baseline 最終整合性レビュー v0.1.md` | `Docs/00_project_control/reviews/Baseline 最終整合性レビュー v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Baseline 最終整合性再確認 v0.1.md` | `Docs/00_project_control/reviews/Baseline 最終整合性再確認 v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Implementation Plan v0.1 内容レビュー.md` | `Docs/00_project_control/reviews/Implementation Plan v0.1 内容レビュー.md` |
+| `Docs/01_Project_Control/Reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md` | `Docs/00_project_control/reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md` |
+| `Docs/01_Project_Control/Reviews/MVP Test Specification v0.1 Baseline整合性レビュー v0.1.md` | `Docs/00_project_control/reviews/MVP Test Specification v0.1 Baseline整合性レビュー v0.1.md` |
+| `Docs/01_Project_Control/Reviews/Technical Spike B and C 要否判定.md` | `Docs/00_project_control/reviews/Technical Spike B and C 要否判定.md` |
+
+### 検証と残課題
+
+- 全35件の移動先を事前に重複・上書き・ワークスペース外パスがないことを確認。移動前後のSHA-256が一致し、元パスが残っていないことを確認した。Version・Document ID・承認記録・履歴本文は不変。
+- 移動後、残る追跡済み44ファイルのハッシュが作業開始時と一致することを確認。その後、許可されたtree.txt削除と本台帳追記だけを行った。
+- 台帳以外の本文・文書内リンクは編集していない。リンク整備はFS-05、旧空フォルダの削除・ルート表記統一も後続で扱う。ステージング・コミットは未実施。
+- D-07：Technical Spike A VBAコード.txtは元の`Docs/04_Technical_Evidence/`に保持。testsへの配置変更案を継続課題とする。今回ユーザーが指定した保留条件を維持する。
+- D-05：実WorkbookのImport・呼出元確認、D-06：現行テストの選定はFS-04へ引継ぎ。Source配下の旧本番コードもFS-04で扱う。
+- 共通ルールはD-02どおり既存パスを保持。Current.mdはFS-05のOverview統合まで保持する。旧Handoffを最新進捗とは扱わない。
