@@ -403,3 +403,73 @@ Handoff_08のP0 Regression PASSは、当時の実行履歴として選定根拠�
 - Workbookに`modTemplateScanner`、`modSyncEngine`、`modSyncApplication`、P2系テスト等、現在のsrc／testsにないモジュールが存在した。Workbookとエクスポートソースの集合は一致していない。既存7本番ソースそれぞれの内容一致も今回の確認範囲外。FS-04の配置完了をコード同期済みCheckpointや実機テストPASSと扱わない。
 - FS-05の入口文書には実Workbook名`MailGeneratorNew.xlsm`、上記の同期未確認、P0-03の既存パスAssertion制限、D-07の保留を記載する。Workbookからのソース追加・上書き、実機Compile／回帰テストは別途範囲を確定して扱う。
 - 解析ライブラリは一時フォルダに取得し、プロジェクトに依存ライブラリや抽出コードのコピーを追加していない。ステージング・コミットは未実施。
+
+## 14. FS-05実施記録（2026-10-11）
+
+状態：FS-05完了。開始時HEADは`f310667`（Closed FS-04）、作業ツリーはクリーン。入口・正本への参照・現在地・再開手順を整備した。
+
+| 成果物 | 変更内容 |
+| --- | --- |
+| [README](../../README.md) | 新規作成。実Workbook名・OFT相対配置・保存場所・テスト入口・実行上の前提を案内 |
+| [Project Overview](../00_project_control/Project_Overview.md) | v0.1新規作成。現在地・Next Action・未解決事項の唯一の正本。現在の開発到達Unitは未確定と明示 |
+| [Current Handoff](../05_handoff/Current_Handoff.md) | v0.1新規作成。最新状態の再開手順を記載し、履歴01～08は維持 |
+| [Document Registry](../00_project_control/Document_Registry.md) | v0.6→v0.7のEditorial / Governance改訂。正本へのリンクと証跡索引を追加し、独立した現在進捗・Next Action欄をOverview参照へ置換 |
+| 旧Current.md | 過去P0・BL-MVP-001記録をOverviewで時点・出典付きで扱い、現行現在地文書としての旧ファイルを削除 |
+
+RegistryのBL-MVP-002／BL-MVP-001 Manifest、技術文書の登録Revision・Statusは維持。技術仕様書、承認記録、レビュー・過去Handoff、VBA、Workbook、OFTは編集していない。旧Current.mdのCompile PASSやFinding 0件は現在のWorkbookへ転載しない。
+
+### 参照の扱い
+
+- 新規の入口文書とRegistryは、移動後の実在パスへの相対リンクで接続した。
+- 移行台帳の移動元パス、過去資料にある旧名や固定Revisionは歴史的参照として保持する。技術文書のDocument ID参照はRegistryで現パスへ解決する。
+- 台帳以外の既存Markdown／テキストでは、検索したMarkdownリンク記法・Docs／Source／Evidenceのパス表記に該当する更新対象は検出されなかった。単なる文書名や同梱ファイル一覧は履歴を維持し、現行の入口をREADME／Registryで提供する。
+- Docs／Evidenceの表記統一・旧空フォルダ整理・D-07の配置判断はFS-06以降の残事項としてOverviewに集約した。D-02の共通ルール既存パス保持を継続。
+- P0 Regressionに関する旧Registryの未確認記載とHandoff_08のPASS履歴は、対象・時点の異なる記録としてOverviewで明示。現WorkbookのPASSは未確認。
+
+### 復元・検証
+
+旧Current.mdは削除前に`f310667:Docs/01_Project_Control/Reviews/CurrentPosition/Current.md`と現物のblobが`96c7f7e2bb5c0387945190dbb30fe3f8c1ebf995`で一致することを確認した。同コミットから復元可能。Registry旧v0.6も同コミットの`Docs/00_project_control/Document_Registry.md`で復元できる。複製Archiveは追加しない。
+
+検証結果：新規・更新文書のローカルリンク61件で実在・大文字小文字の一致を確認し、エラー0件。Registryの現行／過去Manifestと登録Revision／Statusの一致、その他の追跡済み78ファイルの内容不変を確認した。git diff --checkも問題なし。実機テストは未実施。ステージング・コミットは未実施。
+
+次工程：FS-06。継続課題と完了条件はProject Overviewを正本として参照する。
+
+## 15. FS-06最終検証（2026-10-11）
+
+判定：静的なフォルダ移行検証はPASS。FS-06の静的検証作業は完了したが、移行全体はD-07の配置判断と実機検証を保留する。アプリケーションの動作確認済みとは扱わない。
+
+### 実施時の状態とユーザー共有
+
+HEADは`f310667`（Closed FS-04）。FS-05のREADME／Overview／Current Handoff新規作成、Registry／台帳更新、旧Current.md削除が未コミットの状態で存在した。これらを保持して検証した。FS-06でもステージング・コミットは行っていない。
+
+ユーザー共有：プロジェクトは別PCでP2対応中。当地の文書整備はCurrent Handoffまでで、別PCの更新Modules・文書は未反映。Workbook／OFTだけをコピーしたため差分がある。この差分は移行欠落と区別する。Overview・Handoffをv0.2へ更新し、READMEにも同期状況を反映した。P2完了や詳細なUnit進捗は推定していない。
+
+### 静的検証結果
+
+| 検証 | 結果 | 根拠・範囲 |
+| --- | --- | --- |
+| 移行前資料の保存 | PASS | `23c553a`の78ファイルをGit blobで照合。意図した例外3件以外の75件は現作業ツリーに内容一致で各1件存在。欠落0・同内容の二重配置0 |
+| 意図した例外 | 確認済み | tree.txtはFS-03でGit履歴保持に変更、Current.mdはFS-05でOverviewへ統合して削除、RegistryはFS-05でv0.7へ改訂。いずれも元コミットから復元可能 |
+| 正式Baseline | PASS | FS-05で現行／過去Manifestと登録Revision／Statusの一致を確認。FS-06ではRegistryと技術文書を変更しない |
+| VBA配置 | PASS | FS-04で移動したソースの内容不変を今回の75件照合でも確認。srcは本番7件、testsは検証9件。Workbookと同じ集合であることは検証条件にしない |
+| 文書参照 | PASS | FS-06変更前の全Markdown内ローカルリンク61件で欠落0。変更後も同じリンクを再検証 |
+| Workbook／OFT | PASS（静的） | FS-04第13節のSHA-256と照合。Workbook親からTemplates/MailTemplate.oftが実在。内容・相対配置を維持 |
+| Git差分 | PASS | 変更範囲はFS-05文書変更とFS-06の状態・記録更新。技術仕様・VBA・Workbook／OFTの上書きなし |
+
+### 空フォルダ整理と保持例外
+
+各対象をワークスペース内絶対パスで確認し、ファイル・再解析ポイントがないことと削除直前の空状態を検査して、非再帰削除した。対象はルートArchive／Source、Docs配下の00_Proposal／07_Handoff_Archive／08_DecisionLog／02_Requirements／03_Design／05_Test／06_Implementation、および01_Project_Control配下のBaseline／Reviews／Findingsとその空の下位階層。ファイルは削除していない。空フォルダは必要なら再作成できる。
+
+保持したもの：Docs／Evidenceの大文字表記、共通ルールと台帳を持つ01_Project_Control、D-07を持つ04_Technical_Evidence、Templates、今後の生証跡保存先Evidence。D-02の既存位置維持とD-07保留を優先し、大文字小文字だけの別ルートや資料コピーは作らない。
+
+### NOT RUNと残課題
+
+| 項目 | 状態・理由 |
+| --- | --- |
+| D-07配置 | 保留。実行用検証コードをtestsへ移す案が未確定。現位置で保持し、リンクから到達可能 |
+| 別PC成果物受入 | 別作業。更新Modules・文書の受入範囲・時点は未確定。Workbookから推測で補完しない |
+| VBA Compile | NOT RUN。静的ファイル検証のみ実施 |
+| Path Resolution・OFT／WordEditor | NOT RUN。相対パス実在確認を動作PASSへ読み替えない |
+| Smoke／Regression（P2周辺を含む） | NOT RUN。別PC側の対応ソース・文書・実行環境を確認して対象を確定する |
+
+FS-06の残条件を満たすには、D-07確定後の配置・参照確認と、対象を特定した実機検証が必要。当地のsrcをWorkbookへ一括Importして差分を解消することは今回の作業に含めない。以降の現在地・Next ActionはProject Overviewを参照する。
