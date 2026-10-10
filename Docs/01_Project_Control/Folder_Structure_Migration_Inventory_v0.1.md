@@ -473,3 +473,17 @@ HEADは`f310667`（Closed FS-04）。FS-05のREADME／Overview／Current Handoff
 | Smoke／Regression（P2周辺を含む） | NOT RUN。別PC側の対応ソース・文書・実行環境を確認して対象を確定する |
 
 FS-06の残条件を満たすには、D-07確定後の配置・参照確認と、対象を特定した実機検証が必要。当地のsrcをWorkbookへ一括Importして差分を解消することは今回の作業に含めない。以降の現在地・Next ActionはProject Overviewを参照する。
+
+## 16. D-07配置確定・実施（2026-10-11）
+
+ユーザーがtestsへの移動を承認。開始時HEADは`2801b59`（Run FS-06）、作業ツリーはクリーン。D-07を完了とし、過去節の保留記述は当時の記録として保持する。
+
+| 移動元 | 移動先 |
+| --- | --- |
+| `Docs/04_Technical_Evidence/Technical Spike A VBAコード.txt` | `tests/vba/technical_spikes/Technical Spike A VBAコード.txt` |
+
+移動前後のSHA-256は`C9F03196F341F03BFEAD09CC19135B6FBAEFB9DA1A18003CECA500AE3741BC8A`で一致し、旧ファイル不存在を確認。本文・文字コード・拡張子・固定OFTパスを維持した。現行Smoke Testへの自動追加、bas変換、WorkbookへのImport、実行は行っていない。
+
+移動後に空となった旧`Docs/04_Technical_Evidence`を空状態確認後に非再帰削除した。資料は移動先にあり、空フォルダは必要なら再作成できる。READMEの検証コードリンクとOverview／Handoff（v0.3）の現在地を更新した。
+
+承認済みの配置変更は完了。実機Compile／回帰検証はNOT RUN、別PCのModules／文書受入は別作業として継続。D-02の暫定保持とDocs／Evidenceの表記例外は維持する。ステージング・コミットは未実施。

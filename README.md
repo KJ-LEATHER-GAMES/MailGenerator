@@ -18,6 +18,7 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 | OFT | [通常テンプレート](Templates/MailTemplate.oft)、[MTS-SCAN-005用](Templates/MailTemplate_MTS-SCAN-005.oft) |
 | エクスポート本番ソース | [標準モジュール](src/modules/)、[クラス](src/classes/) |
 | テスト | [P0](tests/vba/P0_Foundation/)、[P1](tests/vba/P1_Walking_Skeleton/) |
+| 既存Technical Spike検証コード | [Technical Spike A](<tests/vba/technical_spikes/Technical Spike A VBAコード.txt>)（本文・txt形式を維持。自動実行対象外） |
 | 仕様 | [仕様書](Docs/01_specifications/) |
 | 実装判断・完了記録 | [実装文書](Docs/02_implementation/) |
 | 検証判定 | [検証記録](Docs/03_verification/) |

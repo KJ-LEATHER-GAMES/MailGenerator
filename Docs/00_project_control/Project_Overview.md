@@ -2,11 +2,11 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v0.2 |
+| Revision | v0.3 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：FS-06静的検証完了 |
-| Project Status | フォルダ移行の静的検証PASS。全体はD-07の配置判断・実機検証を保留。P2詳細進捗と実行コードCheckpointは当地未反映 |
+| Project Status | 承認済みの配置変更・静的検証は完了。実機検証は保留。P2詳細進捗と実行コードCheckpointは当地未反映 |
 | Current Approved Baseline | BL-MVP-002。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
 
@@ -26,18 +26,18 @@
 | ID | 状態・対応 |
 | --- | --- |
 | D-02 | 共通標準の外部正本が未確認。既存[ルールv0.1](<../01_Project_Control/Rules/AI協働開発 文書管理・Baseline運用ルール.md>)を参照し、新しいコピーを作らない |
-| D-07 | [Technical Spike A VBAコード.txt](<../04_Technical_Evidence/Technical Spike A VBAコード.txt>)は実行用検証コード。testsへの移動案が未確定のため現位置保持 |
 | 別PC成果物の同期 | 当地の文書整備はCurrent Handoffまで。別PCの更新文書・Modulesは未反映で、Workbook／OFTのみコピー済み。共通名ソースの内容一致も未確認。別PCの成果物受入は別作業とし、推測による補完・上書きを行わない |
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
-| 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、D-02の共通ルール・移動台帳・D-07の検証コードの既存位置を保持する |
+| 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、D-02の共通ルール・移動台帳の既存位置を保持する |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
 
+D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコード.txt](<../../tests/vba/technical_spikes/Technical Spike A VBAコード.txt>)をtestsへ移動して完了。既存検証コードとして内容・拡張子を維持し、現行Smoke Testへの自動追加・実行は行っていない。追加記録は移動台帳第16節を参照する。
+
 ## Next Action / Done When
 
-1. D-07の配置方針を確定し、対象ファイルの移動・参照更新後に再検証する。未決のままフォルダ移行全体を完了扱いにしない。
-2. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
-3. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
+1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
+2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
