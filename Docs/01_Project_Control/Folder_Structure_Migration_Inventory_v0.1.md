@@ -311,6 +311,8 @@ D-10分類：Migrationフォルダ内の2件はいずれも変更指示を収め
 
 ## 12. FS-04実施記録（2026-10-10）
 
+2026-10-11追記：D-05を第13節の追加確認で解消し、FS-04を完了した。以下の保留記述は初回実施時点の記録として保持する。
+
 開始時HEAD：`a735c97`（Complete FS-03）。開始時の作業ツリーはクリーン。実施可能な範囲の19ファイルを移動した。D-05の実Workbook確認が未実施のため、FS-04全体は一部保留である。
 
 ### 結果とImport対象
@@ -365,3 +367,39 @@ Handoff_08のP0 Regression PASSは、当時の実行履歴として選定根拠�
 - D-07：`Docs/04_Technical_Evidence/Technical Spike A VBAコード.txt`は配置判断待ちとして保持。
 - D-02の共通標準保持、文書リンク・README等のFS-05整備、旧空フォルダ・大文字小文字統一は引き続き後続工程で扱う。
 - ステージング・コミットは未実施。FS-04完了にはD-05条件確認と当該1ファイルの扱い確定が必要。
+
+## 13. FS-04追加確認・完了（2026-10-11）
+
+状態：FS-04完了。開始時HEADは`88b19f3`（add workbook）、作業ツリーはクリーン。追加されたWorkbookを読み取り解析し、D-05の確認条件を解消した。
+
+### D-05確認結果
+
+- 対象実Workbook：ルートの`MailGeneratorNew.xlsm`。OFTは`Templates/MailTemplate.oft`および`Templates/MailTemplate_MTS-SCAN-005.oft`。
+- oletools 0.60.2でxlsm内のVBAソースを抽出・検査。ExcelやOutlookを起動せず、マクロ実行・Import・再保存は行っていない。
+- 抽出モジュール一覧に`modP1OneDrivePathVerification`は存在しない。全抽出ソースから当該モジュール名および`TestOneDriveLocalPathResolution`の参照も検出されなかった。未ImportのためWorkbook内コードとの一致比較は対象外。
+- VBAのApplication.Run、OnAction、OnTime、CallByName、Auto_Open、Workbook_Open、Evaluateの検索では、Workbook_Open／Auto_Openを追加しない旨のテストコメント1件のみ検出。該当する実行コードは検出されなかった。
+- Workbookパッケージ内のXML／VML／関連ファイルから、FmlaMacro、macro属性、onAction属性、対象モジュール名・入口名によるマクロ割当は検出されなかった。ZIP整合性検査でもエラーなし。
+- 上記は提供されたWorkbookの保存内容に対する静的確認。外部アドインや別Workbookからの呼出し、実行時に生成される参照の不存在まで保証しない。ただし今回の外部basファイル移動はWorkbook内のVBAやマクロ名を変更しない。
+- SettingsのTemplatePathは`Templates\MailTemplate.oft`。Workbookの親フォルダから参照先の実在を確認。追加のMTS-SCAN-005用OFTも同じ配置を維持した。Outlookでの読込成功を確認したという意味ではない。
+
+### 移動と検証
+
+| 移動元 | 移動先 |
+| --- | --- |
+| `Source/Production/Modules/modP1OneDrivePathVerification_CP932.bas` | `tests/vba/P1_Walking_Skeleton/modP1OneDrivePathVerification_CP932.bas` |
+
+移動前後のSHA-256一致と旧パス不存在を確認した。srcとtestsの計16ソースでVB_Name重複なし。初回19件と合わせてFS-04では計20ファイルを移動した。Workbook／OFTの位置・内容は維持し、ソース・テスト本文も変更していない。
+
+| 解析対象 | 解析時・作業後に一致したSHA-256 |
+| --- | --- |
+| `MailGeneratorNew.xlsm` | `07336d8779f27039822539895c38fc8570c82fefc206ed83fb04672cb091a22e` |
+| `Templates/MailTemplate.oft` | `8ca748f0729b0c010d53b3c8d2f392d05c56653dbd73738dc79e57fc1112faac` |
+| `Templates/MailTemplate_MTS-SCAN-005.oft` | `e8b0d637833027ce1663d1d20e54d3ec2b6eb3736d94b98f0b44bf4069e03a66` |
+
+### FS-05以降への引渡し
+
+- D-05：条件確認・移動完了。D-06：第12節で現行テスト選定済み。これによりFS-04の保留を解除する。
+- D-07：Technical Spike A VBAコード.txtの配置判断は従来どおり継続課題。
+- Workbookに`modTemplateScanner`、`modSyncEngine`、`modSyncApplication`、P2系テスト等、現在のsrc／testsにないモジュールが存在した。Workbookとエクスポートソースの集合は一致していない。既存7本番ソースそれぞれの内容一致も今回の確認範囲外。FS-04の配置完了をコード同期済みCheckpointや実機テストPASSと扱わない。
+- FS-05の入口文書には実Workbook名`MailGeneratorNew.xlsm`、上記の同期未確認、P0-03の既存パスAssertion制限、D-07の保留を記載する。Workbookからのソース追加・上書き、実機Compile／回帰テストは別途範囲を確定して扱う。
+- 解析ライブラリは一時フォルダに取得し、プロジェクトに依存ライブラリや抽出コードのコピーを追加していない。ステージング・コミットは未実施。
