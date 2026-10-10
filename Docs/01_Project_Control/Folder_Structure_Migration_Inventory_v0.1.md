@@ -308,3 +308,60 @@ D-10分類：Migrationフォルダ内の2件はいずれも変更指示を収め
 - D-07：Technical Spike A VBAコード.txtは元の`Docs/04_Technical_Evidence/`に保持。testsへの配置変更案を継続課題とする。今回ユーザーが指定した保留条件を維持する。
 - D-05：実WorkbookのImport・呼出元確認、D-06：現行テストの選定はFS-04へ引継ぎ。Source配下の旧本番コードもFS-04で扱う。
 - 共通ルールはD-02どおり既存パスを保持。Current.mdはFS-05のOverview統合まで保持する。旧Handoffを最新進捗とは扱わない。
+
+## 12. FS-04実施記録（2026-10-10）
+
+開始時HEAD：`a735c97`（Complete FS-03）。開始時の作業ツリーはクリーン。実施可能な範囲の19ファイルを移動した。D-05の実Workbook確認が未実施のため、FS-04全体は一部保留である。
+
+### 結果とImport対象
+
+- 現行本番ソース7件（標準モジュール5件・クラス2件）を`src/modules/`・`src/classes/`へ移動。
+- 現行テスト8件（P0 5件・P1 3件）を`tests/vba/P0_Foundation/`・`tests/vba/P1_Walking_Skeleton/`へ移動。
+- 旧Settings本番コード、旧P0-03テスト、旧P0-06テスト、P0-06 v0.1用READMEの4件を既存の旧版保管階層へ移動。拡張子、ファイル名、本文、文字コードを維持し、Archive内のVBAはImport対象外。
+- 本番Import対象のVB_Nameは`CErrorInfo`、`COperationResult`、`modResult`、`modSettingsData`、`modVariableDefinitionData`、`modOptionMasterData`、`modOutlookAdapter`。`modSettingsData_DF-P1-001_v0.1_CP932.bas`の内部名は`modSettingsData`である。ファイル名と内部名の違いは従来どおり維持。
+- `src/`と`tests/`内の計15ソースでVB_Nameの重複がないことを確認した。WorkbookへのImport・削除・Compile・マクロ実行は行っていない。
+
+### D-06：現行テスト選定を確定
+
+| 対象 | 採用 | 根拠・制限 |
+| --- | --- | --- |
+| P0-03 Settings | `modSettingsDataSmokeTest_v0.2_CP932.bas` | v0.2はFixture確認とFail-Fast判定を追加。Handoff_06のSettings対応記録にv0.2修正後のTestSettingsData PASS・Compile Errorなしと記載。旧版とはVB_Nameが同一のため同時Importを避ける |
+| P0-06 Integration | `modP0FoundationIntegrationSmokeTest_v0.2_CP932.bas` | 差分でOneDrive Web URL→WindowsローカルパスのAssertion対応を確認。Handoff_08第12・13節に同ファイル名、修正内容、MailGenerator3.xlsmでの再実行PASSを記録。旧版とVB_Nameが同一 |
+| P0-06 README | 旧版と同じArchiveへ保存 | 冒頭にv0.1と明記されるため、v0.2の現行手順として配置しない。FS-05で現行テストの実行条件を入口文書へ整理する |
+
+P0-03 v0.2には、返却パスが`ThisWorkbook.Path`を先頭に含むこと等のローカルパス前提が残っている。現行版として選定したことは、OneDrive Web URL環境での互換性・PASS保証を意味しない。既存制限として記録し、フォルダ整理ではコードを修正しない。OneDrive解決の検証にはP1のResolver Smoke TestとP0-06 v0.2が存在するが、今回その実行は行っていない。
+
+Handoff_08のP0 Regression PASSは、当時の実行履歴として選定根拠に使用した。Registry v0.6の「再実行未確認」とは記録時点が異なる可能性があるため、FS-05で出典・時点を区別して現在地を整理する。現在の実Workbookの状態を推定でPASSにしない。
+
+### 移動対応表
+
+| 移動元（a735c97） | 現在の移動先 |
+| --- | --- |
+| `Source/Production/Modules/old/modSettingsData_CP932.bas` | `Docs/90_archive/pre_git_revisions/source/modSettingsData_CP932.bas` |
+| `Source/SmokeTests/P0-03/modSettingsDataSmokeTest.bas` | `Docs/90_archive/pre_git_revisions/tests/P0-03/modSettingsDataSmokeTest.bas` |
+| `Source/SmokeTests/P0-06/modP0FoundationIntegrationSmokeTest_v0.1_CP932.bas` | `Docs/90_archive/pre_git_revisions/tests/P0-06/modP0FoundationIntegrationSmokeTest_v0.1_CP932.bas` |
+| `Source/SmokeTests/P0-06/P0-06 Integration Verification README.txt` | `Docs/90_archive/pre_git_revisions/tests/P0-06/P0-06 Integration Verification README.txt` |
+| `Source/Production/Classes/CErrorInfo.cls` | `src/classes/CErrorInfo.cls` |
+| `Source/Production/Classes/COperationResult.cls` | `src/classes/COperationResult.cls` |
+| `Source/Production/Modules/modOptionMasterData_CP932.bas` | `src/modules/modOptionMasterData_CP932.bas` |
+| `Source/Production/Modules/modOutlookAdapter_CP932.bas` | `src/modules/modOutlookAdapter_CP932.bas` |
+| `Source/Production/Modules/modResult.bas` | `src/modules/modResult.bas` |
+| `Source/Production/Modules/modSettingsData_DF-P1-001_v0.1_CP932.bas` | `src/modules/modSettingsData_DF-P1-001_v0.1_CP932.bas` |
+| `Source/Production/Modules/modVariableDefinitionData_CP932.bas` | `src/modules/modVariableDefinitionData_CP932.bas` |
+| `Source/SmokeTests/P0-02/TestResultModel.bas` | `tests/vba/P0_Foundation/TestResultModel.bas` |
+| `Source/SmokeTests/P0-03/modSettingsDataSmokeTest_v0.2_CP932.bas` | `tests/vba/P0_Foundation/modSettingsDataSmokeTest_v0.2_CP932.bas` |
+| `Source/SmokeTests/P0-04/modVariableDefinitionDataSmokeTest_v0.1_CP932.bas` | `tests/vba/P0_Foundation/modVariableDefinitionDataSmokeTest_v0.1_CP932.bas` |
+| `Source/SmokeTests/P0-05/modOptionMasterDataSmokeTest_v0.1_CP932.bas` | `tests/vba/P0_Foundation/modOptionMasterDataSmokeTest_v0.1_CP932.bas` |
+| `Source/SmokeTests/P0-06/modP0FoundationIntegrationSmokeTest_v0.2_CP932.bas` | `tests/vba/P0_Foundation/modP0FoundationIntegrationSmokeTest_v0.2_CP932.bas` |
+| `Source/SmokeTests/P1-01/modP1CreateMailFromTemplateSmokeTest_v0.1_CP932.bas` | `tests/vba/P1_Walking_Skeleton/modP1CreateMailFromTemplateSmokeTest_v0.1_CP932.bas` |
+| `Source/SmokeTests/P1-01/modP1OftConnectionSmokeTest_v0.1_CP932.bas` | `tests/vba/P1_Walking_Skeleton/modP1OftConnectionSmokeTest_v0.1_CP932.bas` |
+| `Source/SmokeTests/P1-01/modResolveWorkbookRelativePathSmokeTest.bas` | `tests/vba/P1_Walking_Skeleton/modResolveWorkbookRelativePathSmokeTest.bas` |
+
+### 検証と残課題
+
+- 全19件で、移動先非存在・重複なし・ワークスペース内パスを確認後に移動。移動前後のSHA-256一致、旧パス不存在を確認した。文字コード・改行を含めバイト単位で不変。
+- 移動後、その他の追跡済み59ファイルは開始時とハッシュ一致。その後、本台帳にのみ結果を追記した。
+- D-05：`Source/Production/Modules/modP1OneDrivePathVerification_CP932.bas`を既存位置に保持。用途は検証用だが、移動の前提である実WorkbookのImport状態・ボタン／イベント／動的呼出元を未確認。プロジェクト内にxlsm／xlsb／oftは確認できない。実Workbookの保存先をユーザーへ照会済み。過去HandoffのWorkbook名だけで現物を確定しない。
+- D-07：`Docs/04_Technical_Evidence/Technical Spike A VBAコード.txt`は配置判断待ちとして保持。
+- D-02の共通標準保持、文書リンク・README等のFS-05整備、旧空フォルダ・大文字小文字統一は引き続き後続工程で扱う。
+- ステージング・コミットは未実施。FS-04完了にはD-05条件確認と当該1ファイルの扱い確定が必要。
