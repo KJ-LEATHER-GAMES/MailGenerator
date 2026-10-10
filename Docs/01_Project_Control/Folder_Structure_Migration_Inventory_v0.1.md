@@ -3,7 +3,7 @@
 ## 1. 目的と適用範囲
 
 この台帳は、`Folder_Structure_Proposal_v0.1` に基づくフォルダ構成移行の事前確認記録である。
-FS-00では移行対象の扱いを、移行実施前に確定できる状態にすることを目的とする。FS-01の配置先準備は第9節に記録する。既存ファイルの移動・改名・削除・本文変更は未実施である。
+FS-00では移行対象の扱いを、移行実施前に確定できる状態にすることを目的とする。FS-01の配置先準備は第9節、FS-02の文書移動結果は第10節に記録する。第3節は移行元と予定先の対応表として保持し、実施状態は各工程の実施記録で確認する。
 
 2026-10-10追記：ユーザー回答と現物確認を反映した。第4節は当初の検討履歴として保持し、決定と実行条件は第8節を優先する。今回は本台帳だけを更新し、移行・削除は実施しない。
 
@@ -187,3 +187,42 @@ Overviewを現在地の唯一の正本とし、Registryの現在進捗欄とHand
 FS-01の範囲である受入先準備は完了。既存追跡ファイルに差分がないこと、ファイルの移動・削除がないことを確認した。台帳は未追跡のままであり、コミットは実施していない。
 
 次工程はFS-02。後続工程に残る条件は、D-05の実Workbook確認、D-06の現行テスト選定、D-07の配置変更案確定、D-10等のPatch適用・履歴照合である。D-02は既存パス保持という暫定措置を継続する。
+
+## 10. FS-02実施記録（2026-10-10）
+
+状態：完了。開始時のHEADは`41eec25`（Complete FS-01）、作業ツリーはクリーンだった。第3節のR-01～R-12・R-14・R-15、およびD-01のRegistryを対象として19ファイルを移動した。
+
+### 移動結果
+
+以下は実際の移動先。ディレクトリのみの記載では元のファイル名を維持した。ルートの大文字表記`Docs/`はFS-01とD-02の保持条件を継続する。
+
+| 台帳ID | 移動対象 | 件数 | 移動先 |
+| --- | --- | ---: | --- |
+| R-01 | 企画書 | 1 | `Docs/00_project_control/Proposal.md` |
+| D-01 | Document Registry and Approved Baseline | 1 | `Docs/00_project_control/Document_Registry.md` |
+| R-02 | BL-MVP-002承認記録 | 1 | `Docs/00_project_control/baselines/BL-MVP-002_Approval_Record_v0.1.md` |
+| R-03 | BL-MVP-002 Candidate | 1 | `Docs/00_project_control/baselines/BL-MVP-002_Candidate.md` |
+| R-04 | Consistency内の2レビュー | 2 | `Docs/00_project_control/reviews/` |
+| R-05 | Impact内の2レビュー | 2 | `Docs/00_project_control/reviews/` |
+| R-06 | Requirements | 1 | `Docs/01_specifications/MVP_Requirements.md` |
+| R-07 | Design | 1 | `Docs/01_specifications/MVP_Design.md` |
+| R-08 | Test Specification | 1 | `Docs/01_specifications/MVP_Test_Specification.md` |
+| R-09 | Implementation Plan | 1 | `Docs/02_implementation/Implementation_Plan.md` |
+| R-10 | P0実装開始準備 | 1 | `Docs/02_implementation/P0_Foundation/` |
+| R-11 | P1-01実施仕様、DF-P1-001実装仕様、README | 3 | `Docs/02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/` |
+| R-12 | P1-02実施仕様 | 1 | `Docs/02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/` |
+| R-14 | TV-P1-001作業手順書 | 1 | `Docs/01_specifications/technical_spikes/` |
+| R-15 | Technical Spike A実施仕様書 | 1 | `Docs/01_specifications/technical_spikes/` |
+
+### 検証・変更範囲
+
+- 移動前に全19件の移動元実在、移動先非存在、親フォルダ実在、ワークスペース内の絶対パスを確認した。
+- 移動前後のSHA-256が全19件で一致し、元パスが残っていないことを確認した。本文・文字コード・改行を含めバイト単位で不変であり、Document ID・Version・Status・Baseline Manifestも不変。
+- 共通ルール、Current.md、過去Handoff、旧版・Patch、Source、Templates、Evidence、tree.txtは今回の移動対象外。旧フォルダは削除していない。
+- 本台帳だけに実施結果を追記した。台帳のファイル名はFS-00からの作業台帳識別子として維持する。
+- 文書内リンク・RegistryのPath情報・入口文書の整備はFS-05で実施する。移行途中のため旧パス表記の解消やリンク検証の完了を意味しない。
+- Gitのステージング・コミットは実施していない。作業ツリーでは旧パス削除と新パス未追跡として表示される場合があるが、19件は内容を保持した移動である。
+
+### 次工程
+
+FS-03で検証記録・引継ぎ・履歴を整理する。R-13・R-16～19・R-24、Reviews直下の未整理資料、旧版・Patch等を対象とする。D-10の適用状況照合とD-07の配置案判断は継続課題。D-05の実Workbook確認とD-06のテスト選定はFS-04へ引き継ぐ。
