@@ -2,11 +2,11 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.6 |
+| Revision | v1.7 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | P1-02：PASS／COMPLETE（Completion Record）。P1-03 Template Snapshot Boundary：Approved／Production Implementation Entry READY。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
-| Project Status | P1-02のExecution EvidenceはPASS／COMPLETE。P1-03仕様はApprovedだが、Production実装・Verification・P1-03 COMPLETEは未実施。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
+| Current Phase / Focus | P1-01～P1-03：PASS／COMPLETE（Completion Record）。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Project Status | P1-03のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
 
@@ -33,8 +33,8 @@
 | BL-MVP-003実装計画整合 | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)はBL-MVP-003をExecution Baselineとし、[Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>)はPASS | DOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDは解消 |
 | P1-02完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>)はBL-MVP-003上でP1-02をPASS／COMPLETEと判定。Compile、Warm／Cold Start、P1-01 Regression、Explorer／Draft／Inspector LifecycleはPASS | BL-MVP-003は変更なし。当地の`src`／Workbookが同一実行環境であることは未確認 |
 | P1-02実装・Smoke Test資産 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)、[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)、[Smoke Test v0.2.2](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>)を保持 | 同一`VB_Name`の旧Smoke Testは二重Importしない。当地でのImport・再実行は未実施 |
-| P1-03 Template Snapshot Boundary | [実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>)はApproved。`ReadSubject()`追加と既存`ReadBodyText()`再利用により、Subject／BodyText文字列境界を定義し、[Consistency Review](<reviews/P1-03 Template Snapshot Boundary 実施仕様 v0.1 Consistency Review v0.1.md>)はPASS | Production Implementation EntryはREADY。実装・Workbook Import・Smoke／Regression Verification・P1-03 COMPLETEは未実施 |
-| P1-03 Production候補 | [ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>)、[Smoke Test v0.1](<../../tests/vba/P1_Walking_Skeleton/modP1_03TemplateSnapshotSmokeTest_v0.1_CP932.bas>)、[Static Review](<reviews/P1-03 Production Patch Static Review v0.1.md>)を追加。Static ReviewはPASS | 現行`src/modules/modOutlookAdapter_CP932.bas`は未更新。Workbook Import・Compile・Runtime Smoke・P1-02／P1-01 RegressionはNOT RUN |
+| P1-03 Template Snapshot Boundary | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary Completion Record v0.1.md>)によりBL-MVP-003上でPASS／COMPLETE。Subject／BodyText Snapshot Boundary、P1-03 Smoke、P1-02 Warm／Cold Regression、P1-01 Regression、および変更差分のRuntime ExecutionはPASS | CP-P1は未確立。当地の`src`／WorkbookがCompletion Recordの実行環境と一致することは未確認 |
+| P1-03 Production Patch | [Production Patch Review v0.2](<reviews/P1-03 Production Patch Review v0.2.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-03 Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | `Debug → Compile VBAProject`の今回ログは未記録だが、変更差分のRuntime ExecutionをCompile Gateの根拠としている |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -47,7 +47,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. [P1-03実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>)と[ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>)の適用元を照合し、Production Module・検証用Workbookへの受入範囲を別作業で判断する。受入後にCompile、P1-03 Smoke、P1-02 Warm／Cold Regression、P1-01 Regressionを実施する。
+3. P1-03 Completion Recordの実行環境と当地のProduction Module・Workbookを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 

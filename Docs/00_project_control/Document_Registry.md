@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.25
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.26
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.25 |
+| バージョン | v0.26 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.26 更新概要
+
+- [P1-03 Template Snapshot Boundary Completion Record v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary Completion Record v0.1.md>)、Production Patch Review v0.2（PASS）、Finding Assessment v0.1（PASS）および適用済みProject Control Update Patchを登録し、P1-03をBL-MVP-003上でPASS／COMPLETEとして反映。
+- Completion Recordの実行結果はP1-03 Smoke、P1-02 Warm／Cold Regression、P1-01 Regressionおよび変更差分のRuntime Executionに基づくCompile Gateを含む。BL-MVP-003のManifestは変更しない。当地の未同期`src`／Workbookとの内容一致は別途確認する。
 
 ### v0.25 更新概要
 
@@ -257,6 +262,10 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02完了Project Control更新 | [Applied Patch](<../90_archive/applied_patches/Project Control P1-02 Completion Update Patch v0.1.md>) |
 | P1-03実施仕様v0.1 | [Approved Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>) |
 | P1-03実施仕様v0.1整合性 | [Consistency Review](<reviews/P1-03 Template Snapshot Boundary 実施仕様 v0.1 Consistency Review v0.1.md>) |
+| P1-03完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary Completion Record v0.1.md>) |
+| P1-03 Production Patchレビュー | [Production Patch Review v0.2](<reviews/P1-03 Production Patch Review v0.2.md>) |
+| P1-03 Finding判定 | [Finding Assessment](<reviews/P1-03 Finding Assessment v0.1.md>) |
+| P1-03完了Project Control更新 | [Applied Patch](<../90_archive/applied_patches/Project Control P1-03 Completion Update Patch v0.1.md>) |
 | P1-03 Production Patch候補 | [ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>) |
 | P1-03 Smoke Test候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_03TemplateSnapshotSmokeTest_v0.1_CP932.bas>) |
 | P1-03 Production Patch静的レビュー | [Static Review](<reviews/P1-03 Production Patch Static Review v0.1.md>) |
