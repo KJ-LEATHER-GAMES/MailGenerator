@@ -1,0 +1,58 @@
+--- modOutlookAdapter_P1-07_v0.1_CP932.bas
++++ modOutlookAdapter_P1-07_v0.1.1_CP932.bas
+@@ -9,8 +9,13 @@
+ ' - P1-03 ReadSubject / ReadBodyText snapshot boundary
+ ' - P1-05 SetSubject / ReplaceBodyVariables
+ '
+-' P1-07 addition:
++' P1-07 additions:
+ ' - DisplayMail
++'
++' P1-07 v0.1.1 lifecycle correction:
++' - Release mOutlookApp after successful Display ownership transfer
++' - Clear mOutlookApp after readiness failure
++' - Prevent stale Outlook.Application COM references across runs
+ '
+ ' Outlook / Explorer / MailItem / WordEditor / Word Document / Word Range
+ ' COM objects remain inside this module.
+@@ -392,9 +397,16 @@
+     mMailItem.Display
+ 
+     ' P1-07 ownership transfer:
+-    ' Release only the Adapter-held COM reference.
+-    ' This does NOT close/save/send the displayed Outlook item.
++    ' Release Adapter-held COM references after Display succeeds.
++    ' This does NOT close/save/send the displayed Outlook item
++    ' and does NOT call Outlook.Application.Quit.
++    '
++    ' Releasing mOutlookApp here is required because the user may
++    ' close Classic Outlook after a successful run. Keeping a
++    ' module-level reference would leave a stale COM proxy that can
++    ' fail with Error 462 on the next Warm / Cold execution.
+     Set mMailItem = Nothing
++    Set mOutlookApp = Nothing
+ 
+     Set DisplayMail = CreateSuccessResult()
+     Exit Function
+@@ -562,6 +574,13 @@
+     Set explorer = Nothing
+     Set defaultFolder = Nothing
+     Set outlookNamespace = Nothing
++
++    ' A failed readiness attempt must not poison the next execution
++    ' with a stale or partially-initialized Outlook.Application proxy.
++    If Not readinessSucceeded Then
++        Set mOutlookApp = Nothing
++    End If
++
+     Exit Function
+ 
+ ErrorHandler:
+@@ -580,6 +599,7 @@
+     Set explorer = Nothing
+     Set defaultFolder = Nothing
+     Set outlookNamespace = Nothing
++    Set mOutlookApp = Nothing
+ 
+     Set EnsureOutlookReady = CreateFailureResult( _
+         ERROR_TYPE_OUTLOOK, _
