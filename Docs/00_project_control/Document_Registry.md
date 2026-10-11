@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.19
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.20
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.19 |
+| バージョン | v0.20 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.20 更新概要
+
+- P1-02 Smoke Test v0.2.1 Correction ReviewとCP932後継候補を追加。Cold StartのEvidence再取得失敗をProduction DefectではなくTest Defectとして扱い、Production Functional Path PASSとLifecycle Evidence BLOCKEDを分離する。
+- `modP102InspectorWordEditorTest`の現行候補はv0.2.1とする。v0.2はGit履歴と既存ファイルで保持するが、同一`VB_Name`のためv0.2とv0.2.1を同一Workbookへ二重Importしない。Compile／実行は未実施である。
 
 ### v0.19 更新概要
 
@@ -225,8 +230,9 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02実施仕様v0.2整合性 | [Consistency Review](<reviews/P1-02 Inspector WordEditor Connection 実施仕様 v0.2 Consistency Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
-| P1-02 Smoke Test v0.2候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2_CP932.bas>) |
+| P1-02 Smoke Test v0.2.1現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.1_CP932.bas>) |
 | P1-02 Smoke Test v0.2レビュー | [Smoke Test Review](<reviews/P1-02 Smoke Test v0.2 Review v0.1.md>) |
+| P1-02 Smoke Test v0.2.1修正レビュー | [Correction Review](<reviews/P1-02 Smoke Test v0.2.1 Correction Review v0.1.md>) |
 | Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |
