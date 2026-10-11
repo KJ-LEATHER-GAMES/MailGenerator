@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.10
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.11
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.10 |
+| バージョン | v0.11 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.11 更新概要
+
+- DOC-MVP-REQ v0.1.9 Candidateを最新存在版として登録。Current Approved BaselineのDOC-MVP-REQ v0.1.8は維持する。
+- v0.1.9はClassic Outlook Cold Start時の利用者向け挙動を確定するSemantic Changeであり、Review / Not Yet BaselineのCandidateである。
 
 ### v0.10 更新概要
 
@@ -54,7 +59,7 @@
 
 | Document ID | Document | Latest Version | Status | Baseline Version | Role |
 |---|---|---:|---|---:|---|
-| DOC-MVP-REQ | [MVP Requirements](../01_specifications/MVP_Requirements.md) | v0.1.8 | Approved | v0.1.8 | Requirement |
+| DOC-MVP-REQ | [MVP Requirements v0.1.9 Candidate](<../01_specifications/MVP Requirements v0.1.9 Candidate 日本語版.md>) | v0.1.9 | Candidate | v0.1.8 | Requirement |
 | DOC-MVP-DES | [MVP Design](../01_specifications/MVP_Design.md) | v0.1.8 | Approved | v0.1.8 | Design |
 | DOC-TS-A | [Technical Spike A 実施仕様書](../01_specifications/technical_spikes/Technical%20Spike%20A%20実施仕様書.md) | v0.4 | Closed | v0.4 | Technical Evidence |
 | DOC-MVP-TESTSPEC | [MVP Test Specification](../01_specifications/MVP_Test_Specification.md) | v0.1.4 | Approved | v0.1.4 | Test Definition |
