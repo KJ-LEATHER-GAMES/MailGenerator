@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v0.8 |
+| Revision | v0.9 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -31,7 +31,7 @@
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
 | BL-MVP-003実装計画整合 | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)はBL-MVP-003をExecution Baselineとし、[Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>)はPASS | DOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDは解消 |
-| P1-02仕様整合 | [P1-02実施仕様v0.2](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection 実施仕様 v0.2.md>)はBL-MVP-003とCold Start対応を反映し、[Consistency Review](<reviews/P1-02 Inspector WordEditor Connection 実施仕様 v0.2 Consistency Review v0.1.md>)はPASS | 本仕様の承認だけではProduction Module・Workbook・実機Evidenceの受入、P1-02 COMPLETEを意味しない |
+| P1-02 Production Patch候補 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)と[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)を追加。Static [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>)はPASS | 現行`src/modules/modOutlookAdapter_CP932.bas`は未置換。Compile・Runtime VerificationはNOT RUNで、P1-02 COMPLETEではない |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -44,7 +44,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. P1-02実施仕様v0.2に従うProduction Module・Workbook・Verification Evidenceの受入範囲を確認し、Cold Start Production ResolutionとWarm／Cold Start検証を別作業で実施する。
+3. P1-02 Cold Start Patch候補の適用元を現行`modOutlookAdapter`と照合し、Production Module／Workbookへの受入を明示的に判断する。受入後にVBA Compile、Warm／Cold Start Smoke、Explorer／Draft／Inspector Lifecycle Evidence、P1-01 Regressionを別作業で実施する。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
