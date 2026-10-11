@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.15
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.16
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.15 |
+| バージョン | v0.16 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.16 更新概要
+
+- DOC-MVP-IMPL v0.3をApproved Artifactとして最新存在版へ登録。Execution BaselineはBL-MVP-003である。
+- v0.3 CandidateのPlan Consistency ReviewはPASS。BL-MVP-003に対するDOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDはv0.3により解消した。
+- P1-02 Implementation Unit Specificationのv0.2改訂は別成果物として未受入であり、本Revisionに含めない。
 
 ### v0.15 更新概要
 
@@ -85,7 +91,7 @@
 | DOC-MVP-DES | [MVP Design v0.1.9](<../01_specifications/MVP Design v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.8 | Design |
 | DOC-TS-A | [Technical Spike A 実施仕様書](../01_specifications/technical_spikes/Technical%20Spike%20A%20実施仕様書.md) | v0.4 | Closed | v0.4 | Technical Evidence |
 | DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.5](<../01_specifications/MVP Test Specification v0.1.5 日本語版.md>) | v0.1.5 | Approved | v0.1.4 | Test Definition |
-| DOC-MVP-IMPL | [Implementation Plan](../02_implementation/Implementation_Plan.md) | v0.2 | Approved | — | Implementation Plan |
+| DOC-MVP-IMPL | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>) | v0.3 | Approved | — | Implementation Plan |
 
 ### Registry Rule
 
@@ -204,6 +210,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |
 | BL-MVP-003のImplementation影響 | [Impact Review](<reviews/DOC-MVP-IMPL v0.2 BL-MVP-003 Impact Review v0.1.md>) |
+| Implementation Plan v0.3整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>) |
 | Design／Test整合性 | [Cross-document Review](<reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md>) |
 | Implementation Plan Impact | [Impact Review](<reviews/DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md>) |
 | Implementation Plan整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.2 Plan Consistency Review v0.1.md>) |

@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v0.6 |
+| Revision | v0.7 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -30,7 +30,7 @@
 | 別PC成果物の同期 | 当地の文書整備はCurrent Handoffまで。別PCの更新文書・Modulesは未反映で、Workbook／OFTのみコピー済み。共通名ソースの内容一致も未確認。別PCの成果物受入は別作業とし、推測による補完・上書きを行わない |
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
-| BL-MVP-003実装計画整合 | [Impact Review](<reviews/DOC-MVP-IMPL v0.2 BL-MVP-003 Impact Review v0.1.md>)はDOC-MVP-IMPL v0.2をAFFECTED / REVISION REQUIREDと判定 | v0.3 Candidateと整合性確認が必要。P1-02実施仕様もCold Start対応・Baseline更新の影響を受けるが、改訂版は未受入 |
+| BL-MVP-003実装計画整合 | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)はBL-MVP-003をExecution Baselineとし、[Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>)はPASS | DOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDは解消。P1-02実施仕様はCold Start対応・Baseline更新の影響を受けるが、v0.2改訂版は未受入 |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -43,7 +43,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. BL-MVP-003を基準に実装を継続する前に、DOC-MVP-IMPL v0.3 CandidateとP1-02実施仕様の必要な改訂を受入れ、整合性確認を行う。
+3. BL-MVP-003を基準にP1-02を継続する前に、Cold Start Production Resolutionを反映したP1-02実施仕様v0.2を受入れ、対応するProduction／Verification範囲を確認する。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
