@@ -1,13 +1,13 @@
 # Current Handoff
 
-Revision: v0.4 / 更新日: 2026-10-11
+Revision: v0.5 / 更新日: 2026-10-11
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
 ## Read First
 
 1. [Project Overview](../00_project_control/Project_Overview.md)で現在地と保留条件を確認する。
-2. [移動台帳](../01_Project_Control/Folder_Structure_Migration_Inventory_v0.1.md)の第17節でフォルダ整備の完了範囲・保持例外・後続作業を確認する。詳細検証は第13～16節を参照する。
+2. [移動台帳](../00_project_control/Folder_Structure_Migration_Inventory_v0.1.md)の第17・18節でフォルダ整備の完了範囲・保持例外・管理フォルダ統合・後続作業を確認する。詳細検証は第13～16節を参照する。
 3. [README](../../README.md)から対象資産とテストの入口を確認する。仕様が必要ならRegistryから対象文書へ進む。
 
 ## 再開手順
@@ -19,3 +19,5 @@ Revision: v0.4 / 更新日: 2026-10-11
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。
+
+管理文書はDocs/00_project_controlへ統合済み。旧01_Project_Controlを再作成せず、共通ルールは同配下のrules、移動台帳は同配下のファイルを参照する。過去の移動元・Git復元パスは当時の記録として読む。

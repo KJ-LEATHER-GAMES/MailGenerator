@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v0.4 |
+| Revision | v0.5 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -14,7 +14,7 @@
 
 | 対象 | 確認済みの事実 | 意味・制限 |
 | --- | --- | --- |
-| フォルダ移行 | [移動台帳](../01_Project_Control/Folder_Structure_Migration_Inventory_v0.1.md)第17節でクロージング。検証対象コミット`e54b5e0` | フォルダ整備PASS／CLOSED。実機動作やコード同期の完了を意味しない |
+| フォルダ移行 | [移動台帳](Folder_Structure_Migration_Inventory_v0.1.md)第17節でクロージング。検証対象コミット`e54b5e0` | フォルダ整備PASS／CLOSED。実機動作やコード同期の完了を意味しない |
 | P0 | 過去Current.mdにCP-P0確立・P0-06 PASSの記録。原本は`f310667:Docs/01_Project_Control/Reviews/CurrentPosition/Current.md` | BL-MVP-001時点の記録。今回のWorkbookの判定には転用しない |
 | P1-01／DF-P1-001 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>)、[Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>)に完了・Closeを記録 | 旧Current.mdのOneDrive課題を新たな未解決課題として登録しない |
 | P0再構築後の回帰 | Registry旧v0.6は未確認と記載。[Handoff_08](<../05_handoff/history/Context Handoff_08.md>)第12・13節にはv0.2テストとMailGenerator3.xlsmでのPASS出力あり | 後続実施を示す履歴として保持。MailGeneratorNew.xlsmに対する再実行結果ではない |
@@ -25,11 +25,11 @@
 
 | ID | 状態・対応 |
 | --- | --- |
-| D-02（保持例外） | 共通標準の外部正本が未確認。既存[ルールv0.1](<../01_Project_Control/Rules/AI協働開発 文書管理・Baseline運用ルール.md>)を参照する暫定運用を採用。今回の完了を妨げず、新しいコピーを作らない |
+| D-02（保持例外） | 共通標準の外部正本が未確認。既存[ルールv0.1](<rules/AI協働開発 文書管理・Baseline運用ルール.md>)をプロジェクト内の単一ファイルとして保持する暫定運用を採用。今回の統合で既存パス保持条件を解除し、00_project_control/rulesへ移動。外部正本への移管は別件 |
 | 別PC成果物の同期 | 当地の文書整備はCurrent Handoffまで。別PCの更新文書・Modulesは未反映で、Workbook／OFTのみコピー済み。共通名ソースの内容一致も未確認。別PCの成果物受入は別作業とし、推測による補完・上書きを行わない |
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
-| 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、D-02の共通ルール・移動台帳の既存位置を保持する |
+| 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
 
@@ -43,3 +43,5 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
+
+管理フォルダ統合（2026-10-11）：旧01_Project_Controlを廃止し、00_project_controlへ統合した。詳細・検証は移動台帳第18節に記録。フォルダ整備のCLOSEDとBaselineは維持する。

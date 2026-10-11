@@ -1,0 +1,145 @@
+フォルダー パスの一覧
+ボリューム シリアル番号は 2273-903E です
+C:.
+|   MailGeneratorNew.xlsm
+|   README.md
+|   tree.txt
+|   
++---Docs
+|   +---00_project_control
+|   |   |   Document_Registry.md
+|   |   |   Folder_Structure_Migration_Inventory_v0.1.md
+|   |   |   Project_Overview.md
+|   |   |   Proposal.md
+|   |   |   
+|   |   +---baselines
+|   |   |       BL-MVP-002_Approval_Record_v0.1.md
+|   |   |       BL-MVP-002_Candidate.md
+|   |   |       
+|   |   +---reviews
+|   |   |       Baseline 4文書 Migration QA Governance Consistency Review.md
+|   |   |       Baseline 4文書 最終整合性チェック v0.1.md
+|   |   |       Baseline 最終整合性レビュー v0.1.md
+|   |   |       Baseline 最終整合性再確認 v0.1.md
+|   |   |       DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md
+|   |   |       Implementation Plan v0.1 内容レビュー.md
+|   |   |       Implementation Plan v0.2 Plan Consistency Review v0.1.md
+|   |   |       MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md
+|   |   |       MVP Test Specification DF-P1-001 Impact Review v0.1.md
+|   |   |       MVP Test Specification v0.1 Baseline整合性レビュー v0.1.md
+|   |   |       Technical Spike B and C 要否判定.md
+|   |   |       
+|   |   \---rules
+|   |           AI協働開発 文書管理・Baseline運用ルール.md
+|   |           
+|   +---01_specifications
+|   |   |   MVP_Design.md
+|   |   |   MVP_Requirements.md
+|   |   |   MVP_Test_Specification.md
+|   |   |   
+|   |   \---technical_spikes
+|   |           Technical Spike A 実施仕様書.md
+|   |           TV-P1-001 OneDrive Local Path Resolution 技術検証 作業手順書 v0.1.md
+|   |           
+|   +---02_implementation
+|   |   |   Implementation_Plan.md
+|   |   |   
+|   |   +---P0_Foundation
+|   |   |       P0 Foundation 実装開始準備.md
+|   |   |       
+|   |   \---P1_Walking_Skeleton
+|   |       +---P1-01_OFT_Outlook
+|   |       |       DF-P1-001 Close Record v0.1.md
+|   |       |       DF-P1-001対応 OneDrive Local Path Resolution Production実装仕様 v0.1.md
+|   |       |       P1-01 OFT Path Outlook Connection Completion Record v0.1.md
+|   |       |       P1-01 OFT Path Outlook Connection 実施仕様 v0.1.md
+|   |       |       P1-01 README.txt
+|   |       |       
+|   |       \---P1-02_WordEditor
+|   |               P1-02 Inspector WordEditor Connection 実施仕様 v0.1.md
+|   |               
+|   +---03_verification
+|   |   \---technical_validation
+|   |           OneDrive Cloud URL cannot be used directly as OFT file path.md
+|   |           TV-P1-001_正式判定.md
+|   |           
+|   +---05_handoff
+|   |   |   Current_Handoff.md
+|   |   |   
+|   |   \---history
+|   |           Context Handoff_01.md
+|   |           Context Handoff_02.md
+|   |           Context Handoff_03.md
+|   |           Context Handoff_04.md
+|   |           Context Handoff_05.md
+|   |           Context Handoff_06.md
+|   |           Context Handoff_07.md
+|   |           Context Handoff_08.md
+|   |           
+|   \---90_archive
+|       +---applied_patches
+|       |       Baseline 4文書 Migration QA Correction Patch v0.1.md
+|       |       Baseline 4文書 文書管理ルール移行 Migration Patch.md
+|       |       Baseline 最終整合性修正 差分パッチ v0.1.md
+|       |       MVP Design DF-P1-001対応 最小差分パッチ v0.1.md
+|       |       MVP Design v0.1.2 WordEditor対応 差分パッチ v0.1.md
+|       |       MVP Design v0.1.4→v0.1.5 最終整合性差分パッチ v0.1.md
+|       |       MVP Requirements v0.1 → v0.1.1 差分整理.md
+|       |       MVP Requirements v0.1.4 技術固有表現整理 差分パッチ v0.1.md
+|       |       MVP Test Specification v0.1→v0.1.1 差分パッチ v0.1.md
+|       |       定型メール作成ツール Project Document Registry and Approved Baseline v0.5 Update Patch.md
+|       |       
+|       \---pre_git_revisions
+|           |   Implementation Plan v0.1.md
+|           |   MVP Test Specification v0.1.3.md
+|           |   定型メール作成ツール Project Document Registry and Approved Baseline v0.2.md
+|           |   定型メール作成ツール Project Document Registry and Approved Baseline v0.3.md
+|           |   定型メール作成ツール Project Document Registry and Approved Baseline v0.4.md
+|           |   定型メール作成ツール Project Document Registry and Approved Baseline v0.5.md
+|           |   
+|           +---source
+|           |       modSettingsData_CP932.bas
+|           |       
+|           \---tests
+|               +---P0-03
+|               |       modSettingsDataSmokeTest.bas
+|               |       
+|               \---P0-06
+|                       modP0FoundationIntegrationSmokeTest_v0.1_CP932.bas
+|                       P0-06 Integration Verification README.txt
+|                       
++---Evidence
++---src
+|   +---classes
+|   |       CErrorInfo.cls
+|   |       COperationResult.cls
+|   |       
+|   \---modules
+|           modOptionMasterData_CP932.bas
+|           modOutlookAdapter_CP932.bas
+|           modResult.bas
+|           modSettingsData_DF-P1-001_v0.1_CP932.bas
+|           modVariableDefinitionData_CP932.bas
+|           
++---Templates
+|       MailTemplate.oft
+|       MailTemplate_MTS-SCAN-005.oft
+|       
+\---tests
+    \---vba
+        +---P0_Foundation
+        |       modOptionMasterDataSmokeTest_v0.1_CP932.bas
+        |       modP0FoundationIntegrationSmokeTest_v0.2_CP932.bas
+        |       modSettingsDataSmokeTest_v0.2_CP932.bas
+        |       modVariableDefinitionDataSmokeTest_v0.1_CP932.bas
+        |       TestResultModel.bas
+        |       
+        +---P1_Walking_Skeleton
+        |       modP1CreateMailFromTemplateSmokeTest_v0.1_CP932.bas
+        |       modP1OftConnectionSmokeTest_v0.1_CP932.bas
+        |       modP1OneDrivePathVerification_CP932.bas
+        |       modResolveWorkbookRelativePathSmokeTest.bas
+        |       
+        \---technical_spikes
+                Technical Spike A VBAコード.txt
+                

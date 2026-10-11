@@ -1,6 +1,6 @@
 # フォルダ構成移行台帳 v0.1（FS-00）
 
-**最終状態：PASS／CLOSED（2026-10-11）。** フォルダ整備の完了記録は第17節を参照する。第3節のREADYや過去節の保留・未実施記述は各時点の履歴であり、最終状態を上書きしない。ファイル名のv0.1は当初台帳の識別として維持し、実施・完了記録を追記する。
+**最終状態：PASS／CLOSED（2026-10-11）。** フォルダ整備の完了記録は第17節を参照する。第3節のREADYや過去節の保留・未実施記述は各時点の履歴であり、最終状態を上書きしない。ファイル名のv0.1は当初台帳の識別として維持し、実施・完了記録を追記する。管理フォルダ統合とD-02の現行保持条件は第18節を優先する。
 
 ## 1. 目的と適用範囲
 
@@ -413,9 +413,9 @@ Handoff_08のP0 Regression PASSは、当時の実行履歴として選定根拠�
 | 成果物 | 変更内容 |
 | --- | --- |
 | [README](../../README.md) | 新規作成。実Workbook名・OFT相対配置・保存場所・テスト入口・実行上の前提を案内 |
-| [Project Overview](../00_project_control/Project_Overview.md) | v0.1新規作成。現在地・Next Action・未解決事項の唯一の正本。現在の開発到達Unitは未確定と明示 |
+| [Project Overview](Project_Overview.md) | v0.1新規作成。現在地・Next Action・未解決事項の唯一の正本。現在の開発到達Unitは未確定と明示 |
 | [Current Handoff](../05_handoff/Current_Handoff.md) | v0.1新規作成。最新状態の再開手順を記載し、履歴01～08は維持 |
-| [Document Registry](../00_project_control/Document_Registry.md) | v0.6→v0.7のEditorial / Governance改訂。正本へのリンクと証跡索引を追加し、独立した現在進捗・Next Action欄をOverview参照へ置換 |
+| [Document Registry](Document_Registry.md) | v0.6→v0.7のEditorial / Governance改訂。正本へのリンクと証跡索引を追加し、独立した現在進捗・Next Action欄をOverview参照へ置換 |
 | 旧Current.md | 過去P0・BL-MVP-001記録をOverviewで時点・出典付きで扱い、現行現在地文書としての旧ファイルを削除 |
 
 RegistryのBL-MVP-002／BL-MVP-001 Manifest、技術文書の登録Revision・Statusは維持。技術仕様書、承認記録、レビュー・過去Handoff、VBA、Workbook、OFTは編集していない。旧Current.mdのCompile PASSやFinding 0件は現在のWorkbookへ転載しない。
@@ -524,8 +524,53 @@ D-02の共通標準は外部正本が確認できるまで既存位置を参照�
 | 実機Compile・Path Resolution・OFT／WordEditor・回帰テスト | NOT RUN。対象Workbook・対応ソース・環境を特定して別作業で検証 |
 | P0-03のローカルパス前提Assertion | 既存制限。今回コード変更なし。後続検証で適用環境を確認 |
 
-アプリケーション完成、P2完了、コード同期済みCheckpoint、新Baseline承認は宣言しない。以降の現在地と次作業は[Project Overview](../00_project_control/Project_Overview.md)を正本とし、[Current Handoff](../05_handoff/Current_Handoff.md)から再開する。
+アプリケーション完成、P2完了、コード同期済みCheckpoint、新Baseline承認は宣言しない。以降の現在地と次作業は[Project Overview](Project_Overview.md)を正本とし、[Current Handoff](../05_handoff/Current_Handoff.md)から再開する。
 
 ### 今回の記録更新
 
 Overview／Current Handoffをv0.4へ改訂し、READMEの保持例外・完了表現を更新。本台帳に最終状態と本節を追記した。技術仕様・Registry・VBA・Workbook／OFTは変更していない。新たなCompletion文書の重複作成、ステージング・コミットは行っていない。`e54b5e0`はフォルダ整備の検証対象であり、この追記自身を含むコミットではない。
+
+## 18. 管理フォルダ統合（2026-10-11）
+
+状態：完了。ユーザー承認の推奨方針に基づき、Docs/01_Project_ControlをDocs/00_project_controlへ統合した。開始時HEADは`26ba5ec`（Complete Folder_Structure_Migration_Inventory）。開始時に未追跡のtree.txtが存在したため、ユーザーのファイルとして保持した。
+
+| 移動元 | 移動先 |
+| --- | --- |
+| `Docs/01_Project_Control/Rules/AI協働開発 文書管理・Baseline運用ルール.md` | `Docs/00_project_control/rules/AI協働開発 文書管理・Baseline運用ルール.md` |
+| `Docs/01_Project_Control/Folder_Structure_Migration_Inventory_v0.1.md` | `Docs/00_project_control/Folder_Structure_Migration_Inventory_v0.1.md` |
+
+### D-02の保持条件の更新
+
+「既存パスに保持」から「プロジェクト内に単一ファイルとして保持」へ変更した。[共通ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>)の全プロジェクト共通標準としての位置付け、本文、v0.1は維持する。外部正本への移管は今回の統合に含めない。過去節の既存パス保持・旧階層例外の記述は当時の判断履歴として保持し、現在の運用条件とは区別する。
+
+### 参照更新と履歴
+
+README・Overview・Handoff・Registryから共通ルール／台帳へのリンクを更新し、本台帳の同一フォルダ参照も修正した。本文を編集したRegistryはv0.8、Overview／Handoffはv0.5へ改訂した。共通ルールは移動のみ。移動前後の2ファイルのSHA-256一致を確認した後、本台帳に参照修正と本節の追記を行った。
+
+過去の移動元パス、コミット付き復元パス、当時の実施結果は書き換えない。技術文書・承認Baseline・VBA・Workbook／OFTの変更はない。Docs／Evidenceのルート表記は維持する。
+
+### 検証・クロージング
+
+検証結果：共通ルールのGit blob一致、統合先での単一配置、全65リンクの実在、旧パスへの現行リンク0件、旧フォルダ不存在を確認。Registry登録内容・現行／過去Baseline Manifestも変更前と一致し、git diff --checkは問題なし。旧Rules／01_Project_Controlは空であることを確認後、非再帰削除した。旧フォルダ自体は必要なら再作成可能で、資料は統合先に保持される。
+
+フォルダ整備のPASS／CLOSEDを維持する。別PC成果物の同期と実機検証は引き続き別作業。ステージング・コミットは未実施。
+
+## 19. 再レビューv0.3の現地確認（2026-10-11）
+
+判定：構成・静的参照検証はPASS。変更管理の完了は統合コミット待ち。第18節の未コミット状態を継続する。
+
+| 指摘 | 確認結果 |
+| --- | --- |
+| FR-03-001 | CLOSED。Docs/01_Project_Controlは存在せず、2文書は00_project_control配下に単一配置 |
+| FR-03-002 | PASS。第18節でD-02の配置変更と旧階層例外解除を記録済み。第8・17節等は当時の判断履歴として保持。外部正本の所在未確定は継続し、共通標準の内容・Document ID・Version・承認状態は変更しない |
+| FR-03-003 | PASS。README、Project Overview、Document Registry、Current Handoff、本台帳のローカルリンク計65件を再検証し、参照先不存在0件・旧階層への現行リンク0件。過去の移動元・Git復元パスは保持 |
+| FR-03-004 | 差分確認済み／Git記録待ち。共通ルールのGit blobは移動元と一致（a3596ec5436afd70ff45ec988a8e13202678f9f7）。台帳は冒頭の現行条件案内・相対リンク修正・第18節以降の追記のみ。入口文書の変更は配置説明・リンク・管理文書Revisionに限定し、意図しない本文変更は確認されなかった |
+
+### 検証範囲・Git記録
+
+- 比較元HEAD：`26ba5ecc488022a91f9d4365722d4004d69e1400`（統合前）。これは統合変更を含むコミットIDではない。
+- Registryの登録表と現行／過去Baseline Manifestは比較元と一致。Workbook／OFT 2件のSHA-256は第13節の値と一致。VBA・技術文書・Baselineの変更なし。
+- `git diff --check`は問題なし。`git status`では入口文書4件の変更、移動元2件の削除、移動先2件の未追跡を確認。未ステージのため`git diff --summary`は移動元の削除のみを表示し、Gitのrename検出は未確認。
+- 対象を限定した`git add`は権限制約で失敗し、昇格承認も得られなかったため、ステージング・コミットは未実施。統合Commit IDは未発行。既存の未追跡tree.txtは変更せず、記録対象から除外する。
+- 残作業：本節を含む統合関連文書のみをステージし、`git diff --cached --summary`で2文書の移動、`git diff --cached --check`と`git status`で差分範囲を確認してコミットする。発行された統合Commit IDを記録すれば変更管理を完了できる。
+- PC間同期・P2成果物受入は別作業。VBA Compile、OFT／WordEditor、Smoke／RegressionはNOT RUN。本検証は実行機能のPASSや新Baseline承認を意味しない。

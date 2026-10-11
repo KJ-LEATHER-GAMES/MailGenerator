@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.7
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.8
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.7 |
+| バージョン | v0.8 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.8 更新概要
+
+- 管理フォルダ統合に伴い、共通ルールと台帳の現行リンクを更新（Editorial / Governance Change）。
+- 共通ルールはプロジェクト内の単一ファイルとして保持。共通標準v0.1の本文・位置付けを維持。
+- 登録文書Revision・Status、現行／過去Baseline Manifestは変更しない。
 
 ### v0.7 更新概要
 
@@ -130,13 +136,13 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
-| 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<../01_Project_Control/Rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
+| 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
 | TV-P1-001正式判定 | [技術検証記録](../03_verification/technical_validation/TV-P1-001_正式判定.md) |
 | Design／Test整合性 | [Cross-document Review](<reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md>) |
 | Implementation Plan Impact | [Impact Review](<reviews/DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md>) |
 | Implementation Plan整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.2 Plan Consistency Review v0.1.md>) |
-| フォルダ移行の履歴 | [移動台帳](../01_Project_Control/Folder_Structure_Migration_Inventory_v0.1.md) |
+| フォルダ移行の履歴 | [移動台帳](Folder_Structure_Migration_Inventory_v0.1.md) |
 
 各記録のPASSは当該記録の対象・時点に適用される。現在のWorkbookのCompile／Regression判定は、本RegistryのBaseline承認からは導出しない。

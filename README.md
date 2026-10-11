@@ -8,7 +8,7 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 2. [Document Registry](Docs/00_project_control/Document_Registry.md)：技術文書へのリンクと承認済みBaselineのRevision構成。
 3. [Current Handoff](Docs/05_handoff/Current_Handoff.md)：セッション再開の手順。
 
-[文書管理・Baseline運用ルールv0.1](<Docs/01_Project_Control/Rules/AI協働開発 文書管理・Baseline運用ルール.md>)は全プロジェクト共通標準として暫定的に既存位置で参照します。詳細な仕様はRegistryから辿り、READMEには複製しません。
+[文書管理・Baseline運用ルールv0.1](<Docs/00_project_control/rules/AI協働開発 文書管理・Baseline運用ルール.md>)は全プロジェクト共通標準として、プロジェクト内の単一ファイルを暫定参照します。詳細な仕様はRegistryから辿り、READMEには複製しません。
 
 ## 保存場所
 
@@ -25,7 +25,7 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 | 引継ぎ履歴 | [history](Docs/05_handoff/history/) |
 | 旧版・適用済みPatch | [Archive](Docs/90_archive/) |
 
-生ログ・画面・検証出力の保存先はルートの`Evidence/`です。現在は空でGit追跡されていないため、別チェックアウトでは必要時に作成します。`Docs`・`Evidence`の大文字表記と共通ルール・台帳の旧階層は、記録済みの保持例外です。
+生ログ・画面・検証出力の保存先はルートの`Evidence/`です。現在は空でGit追跡されていないため、別チェックアウトでは必要時に作成します。`Docs`・`Evidence`の大文字表記は、記録済みの保持例外です。管理文書・共通ルール・移動台帳は`Docs/00_project_control/`へ統合済みです。
 
 ## 実行環境とWorkbookの扱い
 
@@ -50,4 +50,4 @@ P0統合では保存済みWorkbook、Settings／tblSettingsのTemplatePath、Var
 
 実施時はVBEのCompileと対象テストの出力をそれぞれ記録し、対象Workbook・コミット・環境を紐付けます。ログ等はEvidence、判定文書はDocs/03_verificationへ配置します。実装検証とFormal MVP Testを区別します。今回のフォルダ整理では実機テストを実行していません。
 
-フォルダ整備は2026-10-11にPASS／CLOSEDとしました。完了記録・移動履歴・復元元コミットは[移動台帳](Docs/01_Project_Control/Folder_Structure_Migration_Inventory_v0.1.md)第17節を参照してください。別PC成果物の同期と実機検証は後続の別作業です。
+フォルダ整備は2026-10-11にPASS／CLOSEDとしました。完了記録・移動履歴・復元元コミットは[移動台帳](Docs/00_project_control/Folder_Structure_Migration_Inventory_v0.1.md)第17・18節を参照してください。別PC成果物の同期と実機検証は後続の別作業です。
