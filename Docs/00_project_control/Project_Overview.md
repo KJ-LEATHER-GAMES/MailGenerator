@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.22 |
+| Revision | v1.23 |
 | 更新日 | 2026-10-12 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | P1-01～P1-05：PASS／COMPLETE（Completion Record）。P1-06 Minimal Unresolved Checker：Approved／Production Implementation Entry READY。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -40,8 +40,9 @@
 | P1-05 Minimal Render | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render Completion Record v0.1.md>)によりBL-MVP-003上でPASS／COMPLETE。VBA Compile、Core、Warm／Cold Integration、Render後Snapshot、Negative Verification N1～N5、Required RegressionはPASS | CP-P1は未確立。当地の`src`／Workbook／OFTがCompletion Recordの実行環境と一致することは未確認 |
 | P1-05 Production Patch | [Production Patch Review v0.1](<reviews/P1-05 Minimal Render Production Patch Review v0.1.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-05 Minimal Render Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | TF-P1-05-001（Negative Verification Coverage Gap）はRESOLVED／NON-BLOCKING。N6 WordEditor FailureはP6へDEFERRED／NON-BLOCKING |
 | P1-06 Minimal Unresolved Checker | [Boundary Confirmation v0.1](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker Boundary Confirmation v0.1.md>)により、Render後Subject／BodyText Snapshotを入力とするCOM非依存のCore Logic境界をCONFIRMED。[実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker 実施仕様 v0.1.md>)はApproved | [Consistency Review v0.1](<reviews/P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Consistency Review v0.1.md>)のCorrection 3件は反映済み、最終PASS／Blocking Findingなし。Requirement・Design・Test Specification・Baselineへの影響なし。Production実装・Compile・検証・P1-06 PASS／COMPLETEは未実施 |
-| P1-06 Production候補 | [実装手順](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Production 実装手順 v0.1.md>)、[Unresolved Checker](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/modUnresolvedChecker_P1-06_v0.1_CP932.bas>)、[Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerCoreTest_v0.1_CP932.bas>)、[Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationTest_v0.1_CP932.bas>)を追加 | `RenderError`はP1 Interim Mappingであり、P6の正式分類を固定しない。現行`src/modules`は未更新。Workbook Import・Compile・Core／Integration実行・P1-06 PASS／COMPLETEはNOT RUN |
+| P1-06 Production候補 | [実装手順](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Production 実装手順 v0.1.md>)、[Unresolved Checker](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/modUnresolvedChecker_P1-06_v0.1_CP932.bas>)、[Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerCoreTest_v0.1_CP932.bas>)、[Integration Test v0.1.1](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationTest_v0.1.1_CP932.bas>)を追加 | `RenderError`はP1 Interim Mappingであり、P6の正式分類を固定しない。現行Integration Test候補はv0.1.1。現行`src/modules`は未更新。Workbook Import・Compile・Core／Integration実行・P1-06 PASS／COMPLETEはNOT RUN |
 | TF-P1-06-001 BodyText診断 | [診断手順](<../03_verification/technical_validation/TF-P1-06-001 Post-Render BodyText Diagnostic 実行手順 v0.1.md>)、[P1-05診断VBA](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationDiag_v0.1_CP932.bas>)、[P1-06診断VBA](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationDiag_v0.1_CP932.bas>)を追加 | P1-05のpost BodyText Length=202とP1-06の213の差をProduction変更なしで切り分ける。診断はNOT RUNであり、Production Defect・仕様／Baseline変更・P1-06 PASS／COMPLETEを意味しない |
+| TF-P1-06-001 Test Artifact Correction | [Correction v0.1](<../03_verification/technical_validation/TF-P1-06-001 P1-06 Integration Test Artifact Correction v0.1.md>)により、Integration Testの日本語Fixtureを`ChrW()`生成と長さGuardへ修正し、[v0.1.1](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationTest_v0.1.1_CP932.bas>)を現行候補とする | Test Artifactのみの変更。Production Module・Requirement・Design・Test Specification・Baselineへの影響なし。Import・Compile・再実行はNOT RUN |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -57,7 +58,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 3. P1-03 Completion Recordの実行環境と当地のProduction Module・Workbookを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 4. P1-04 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 5. P1-05 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
-6. [P1-06実装手順](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Production 実装手順 v0.1.md>)に従い、`modUnresolvedChecker`の現状と別PC成果物の受入範囲を確認する。Production候補のImport・Compile・Core／Integration Verification・P1-06判定は別作業として扱い、同名Moduleを二重Importしない。
+6. [P1-06実装手順](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Production 実装手順 v0.1.md>)に従い、`modUnresolvedChecker`の現状と別PC成果物の受入範囲を確認する。Integration Testは[現行候補v0.1.1](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationTest_v0.1.1_CP932.bas>)を使用し、v0.1と同一`VB_Name`のため二重Importしない。Production候補のImport・Compile・Core／Integration Verification・P1-06判定は別作業として扱う。
 7. TF-P1-06-001を実施する場合は、[診断手順](<../03_verification/technical_validation/TF-P1-06-001 Post-Render BodyText Diagnostic 実行手順 v0.1.md>)に従い、診断VBA 2件を正式Test Moduleと区別してImport・実行する。出力Evidenceを確認するまで原因やProduction変更を推定しない。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
