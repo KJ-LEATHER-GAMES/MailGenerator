@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.26
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.27
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.26 |
+| バージョン | v0.27 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.27 更新概要
+
+- P1-04 Minimal Template Scanner 実施仕様 v0.1をDraftのImplementation Unit Specificationとして登録。P1-03で成立したSubject／BodyText Snapshotを入力に、`modTemplateScanner`で最小Scanner境界を実装する候補を定義する。
+- Draft仕様の追加はProduction Module・Workbook・Smoke Testの追加、実装承認、P1-04 PASS／COMPLETE、Requirement／Design／Test Specification／Baselineの改訂を意味しない。
 
 ### v0.26 更新概要
 
@@ -269,6 +274,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-03 Production Patch候補 | [ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>) |
 | P1-03 Smoke Test候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_03TemplateSnapshotSmokeTest_v0.1_CP932.bas>) |
 | P1-03 Production Patch静的レビュー | [Static Review](<reviews/P1-03 Production Patch Static Review v0.1.md>) |
+| P1-04実施仕様v0.1 | [Draft Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-04_Minimal_Template_Scanner/P1-04 Minimal Template Scanner 実施仕様 v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
