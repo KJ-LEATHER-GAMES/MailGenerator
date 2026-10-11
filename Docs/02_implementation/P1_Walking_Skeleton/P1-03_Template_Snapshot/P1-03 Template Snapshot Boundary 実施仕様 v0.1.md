@@ -8,7 +8,7 @@
 | バージョン | v0.1 |
 | 対象プロジェクト | 定型メール作成ツール MVP |
 | 文書種別 | Implementation Unit Specification |
-| Status | Review Candidate |
+| Status | Approved |
 | Current Execution Baseline | BL-MVP-003 |
 | 対象Phase | P1 Walking Skeleton |
 | 対象Implementation Unit | P1-03 Template Snapshot Boundary |
@@ -24,9 +24,28 @@
 - `P1-02 Inspector WordEditor Connection 実施仕様 v0.2`
 - `P1-02 Inspector WordEditor Connection Completion Record v0.1`
 
+### v0.1 Consistency Review反映概要
+
+`P1-03 Template Snapshot Boundary 実施仕様 v0.1 Consistency Review v0.1` の結果を反映し、本v0.1をApprovedとした。
+
+ReviewではRequirement / Design / Test Specification / Implementation Plan / P1-02 Production BoundaryとのSemantic Conflict、Scope Expansion、Traceability Breakは確認されなかった。
+
+Approval前に以下のGovernance Correctionのみ実施した。
+
+1. 文書Statusを標準Statusへ整合し、Approval後の `Approved` とした
+2. Technical DocumentへProject Control情報を保持しない原則に合わせ、Completion後の現在状態・次Implementation Unit記述を静的なP1 Phase Boundary記述へ変更した
+3. Project Control Update Patch等のControl Artifactを本Technical SpecificationのDeliverablesから除外した
+
+本CorrectionによるRequirement / Design / Test Specification / BaselineへのSemantic Impactはない。
+
+**Consistency Review：PASS**
+**Blocking Finding：NONE**
+**Semantic Change：NONE**
+**Document Status：Approved**
+
 ### v0.1 作成概要
 
-P1-02で成立したProduction `modOutlookAdapter` のMailItem / WordEditor Boundaryを前提として、P1 Walking Skeletonの次段であるSubject / BodyText文字列Snapshot境界を確定する。
+P1-02で成立したProduction `modOutlookAdapter` のMailItem / WordEditor Boundaryを前提として、P1 Walking Skeleton内のSubject / BodyText文字列Snapshot境界を確定する。
 
 本Unitでは以下を行う。
 
@@ -36,7 +55,7 @@ P1-02で成立したProduction `modOutlookAdapter` のMailItem / WordEditor Boun
 4. Subject / BodyTextの両方が取得成功した場合のみSnapshot Boundary成立と扱う
 5. Outlook / Word COM ObjectをCore Logicへ公開しない
 6. Snapshot専用Class / DTO / Adapterを追加しない
-7. Template Scannerは本Unitでは実装せず、後続Unitへ接続可能な入力境界までを完成させる
+7. Template Scannerは本Unitでは実装せず、downstream Core Logicへ接続可能な入力境界までを完成させる
 8. P1-02で成立したWarm / Cold Start、MailItem Lifecycle、CloseWithoutSave経路をRegression確認する
 
 本仕様は既存Requirement / DesignをImplementation Detailへ具体化するものであり、新しい利用者向けRequirement、Design Decision、Test Definitionを追加しない。
@@ -597,7 +616,7 @@ CloseWithoutSave
 
 本UnitではSnapshot取得後にTemplate Scannerへは接続しない。
 
-後続Unitでは以下へ拡張する。
+Downstream処理との接続境界は以下とする。
 
 ```text
 Subject As String
@@ -1086,19 +1105,15 @@ Verification
 
 Review
 - P1-03 Production Patch Review
-
-Control
-- P1-03 Completion Record（PASS後）
-- Project Control Update Patch（必要な場合）
 ```
 
-P1-03実施仕様自体のReviewで変更が必要な場合は、本v0.1を直接Approved扱いせず、CorrectionまたはRevisionを行う。
+本Approved仕様のSemantic内容を変更する場合は、文書管理ルールに従って必要なRevision / Impact Analysisを行う。Project Control上の進捗更新は本Technical Specificationでは管理しない。
 
 ---
 
-# 20. Completion後の状態
+# 20. P1 Phase Boundaryとの関係
 
-P1-03 PASS / COMPLETE後のP1 Walking Skeleton到達点は以下とする。
+P1-03で成立させる技術境界は以下までとする。
 
 ```text
 Excel
@@ -1116,7 +1131,7 @@ Inspector / WordEditor
 Subject / BodyText Snapshot
 ```
 
-まだ成立していないもの：
+P1 Walking Skeleton全体のExit Criteriaを満たすためには、本Unitの外側で以下の経路が別途成立している必要がある。
 
 ```text
 Template Scanner
@@ -1128,28 +1143,16 @@ Unresolved Check
 Final Display
 ```
 
-したがってP1-03完了時点では、
+したがって、本UnitのApproval / CompletionはP1 Phase全体のExit Criteria成立を単独で意味しない。
 
-```text
-P1-03:
-PASS / COMPLETE
-
-CP-P1:
-NOT YET ESTABLISHED
-```
-
-とする。
-
-次のImplementation Unitでは、P1-03で確立した以下の文字列Boundaryを入力として使用する。
+P1-03が後続処理へ提供する静的なInterface Contractは以下とする。
 
 ```text
 Subject As String
 BodyText As String
-        ↓
-Template Scanner
 ```
 
-P1-03でOutlook / Word COM Boundaryへ戻って再実装しない。
+後続Core Logicはこの文字列Boundaryを利用し、Snapshot取得のためにOutlook / Word COM Boundaryを再実装してはならない。
 
 ---
 
@@ -1178,7 +1181,7 @@ Outlook / Word COM Exposure
 → PROHIBITED
 
 Template Scanner
-→ OUT OF SCOPE / NEXT UNIT
+→ OUT OF SCOPE / DOWNSTREAM COMPONENT
 
 Requirement Change
 → NONE
