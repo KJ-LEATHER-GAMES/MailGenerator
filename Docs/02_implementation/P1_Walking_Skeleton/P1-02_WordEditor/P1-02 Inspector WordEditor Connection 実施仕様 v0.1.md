@@ -8,7 +8,7 @@
 | バージョン | v0.1 |
 | 対象プロジェクト | 定型メール作成ツール MVP |
 | 文書種別 | Implementation Unit Specification |
-| Status | Review |
+| Status | Approved |
 | Current Execution Baseline | BL-MVP-002 |
 | 対象Phase | P1 Walking Skeleton |
 | 対象Implementation Unit | P1-02 Inspector / WordEditor Connection |
@@ -23,6 +23,22 @@
 - `DOC-MVP-TESTSPEC` — MVP Test Specification
 - `DOC-MVP-IMPL` — Implementation Plan
 - `DF-P1-001対応 OneDrive Local Path Resolution Production実装仕様 v0.1`
+
+### v0.1 Review Correction反映概要
+
+現行Production `modOutlookAdapter` Review結果を反映し、実装開始前のAPI / Lifecycle境界を確定した。
+
+主なCorrectionは以下である。
+
+1. 現行Adapterが `mMailItem` をPrivate Module Stateとして保持していることを明示
+2. Public `ReadBodyText()` から `mailItem` 引数を削除し、内部 `mMailItem` を使用する形へ修正
+3. P1-02でMailItemを含むCOM Objectを新規Public APIとして公開しないことを明確化
+4. `ReadBodyText()` 開始時に `bodyText = vbNullString` とし、Failure時に古いSnapshotを残さない
+5. P1-02では既存Error体系 `OutlookError` を使用し、新しいErrorTypeを追加しない
+6. `ReadBodyText()` Error時も `mMailItem` / `mOutlookApp` のOwnershipを維持し、Callerが `CloseWithoutSave()` でCleanupできるようにする
+7. Nothing MailItem Negative Testを、Public引数注入ではなく「Active MailItemが存在しないAdapter State」で確認する形へ修正
+
+本CorrectionはImplementation Specification上のClarificationであり、Requirement / Design / Baselineの変更を伴わない。
 
 ---
 
@@ -175,7 +191,7 @@ Application / Core Logic
         ▼
 modOutlookAdapter
         │
-        ├─ MailItem
+        ├─ MailItem         [Private Module State]
         ├─ Inspector        [Private]
         ├─ WordEditor       [Private]
         └─ Word Document    [Private]
@@ -192,16 +208,28 @@ COperationResult
 
 P1-01で既に成立しているMailItem生成・Close境界はP1-02で再設計しない。
 
-本仕様の「COM ObjectをAdapter外へ公開しない」という制約は、P1-02で新規に導入する以下のWordEditor接続Objectについて厳守する。
+現行Production `modOutlookAdapter` は以下をPrivate Module Stateとして保持する。
+
+```vb
+Private mOutlookApp As Object
+Private mMailItem As Object
+```
+
+したがってP1-02でも、MailItemを新たにPublic APIの引数または戻り値としてAdapter外へ公開しない。
+
+`ReadBodyText()` は内部 `mMailItem` を使用し、P1-02で新規に導入する以下のWordEditor接続Objectも同様にAdapter内部へ閉じ込める。
 
 ```text
+MailItem
 Inspector
 WordEditor
 Word Document
 Word Range
 ```
 
-P1-01の既存MailItem API形を変更する必要が生じた場合は、P1-02内で推測変更せずImplementation Findingとして切り出す。
+P1-01の既存Public APIである `CreateMailFromTemplate()` / `CloseWithoutSave()` は維持する。
+
+これら既存API形を変更する必要が生じた場合は、P1-02内で推測変更せずImplementation Findingとして切り出す。
 
 ---
 
@@ -239,19 +267,22 @@ Outlook Object Model側のBinding方式はP1-01で成立している既存実装
 
 ```vb
 Public Function ReadBodyText( _
-    ByVal mailItem As Object, _
     ByRef bodyText As String _
 ) As COperationResult
 ```
 
-※ `mailItem` の具体型・既存APIとの整合はP1-01実装を優先する。P1-01で既により具体的な型を使用している場合、P1-02だけを理由に型を変更しない。
+`ReadBodyText()` は現行Adapter内部のPrivate Module State `mMailItem` を使用する。
+
+MailItemをPublic APIの引数・戻り値として追加しない。
 
 ### 責務
 
 `ReadBodyText()` は以下だけを行う。
 
 ```text
-MailItem妥当性確認
+bodyText = vbNullString
+↓
+内部 mMailItem妥当性確認
 ↓
 Inspector取得
 ↓
@@ -283,6 +314,8 @@ User Message表示
 ```
 
 BodyTextが空文字であること自体はAPI Errorとしない。
+
+`ReadBodyText()` 開始時に `bodyText = vbNullString` とし、Failure時に呼出元へ過去のBodyText Snapshotを残さない。
 
 P1-02 Smoke TestではBaseline OFTを使用するため、Verification上は非空BodyTextを期待する。
 
@@ -334,9 +367,13 @@ Outlookの `Inspector.WordEditor` の戻り値をWord Documentとして使用す
 ## 9.3 `ReadBodyText()` 接続
 
 ```text
-ReadBodyText(mailItem)
+ReadBodyText()
 ↓
-TryGetWordDocument(mailItem)
+bodyText = vbNullString
+↓
+Private mMailItem
+↓
+TryGetWordDocument(mMailItem)
 ↓
 wordDocument.Content.Text
 ↓
@@ -365,15 +402,17 @@ Infrastructureから直接 `MsgBox` を表示しない。
 
 | 条件 | Result分類 | Target候補 |
 |---|---|---|
-| `mailItem Is Nothing` | OutlookError | `MailItem` |
+| `mMailItem Is Nothing` | OutlookError | `MailItem` |
 | Inspector取得失敗 | OutlookError | `Inspector` |
 | InspectorがNothing | OutlookError | `Inspector` |
 | WordEditor取得失敗 | OutlookError | `WordEditor` |
 | WordEditor / Word DocumentがNothing | OutlookError | `WordEditor` |
 | `Document.Content.Text`取得失敗 | OutlookError | `BodyText` |
-| 上記へ分類できない予期しないVBA Error | UnexpectedError | `ReadBodyText` |
+| `ReadBodyText()` 内の予期しないVBA Error | OutlookError | `ReadBodyText` |
 
-既存Result Modelの実装上、Outlook / Word COM Errorを `UnexpectedError` として扱う規則が既に確立している場合は既存規則を優先し、P1-02だけでErrorType体系を変更しない。
+現行 `modOutlookAdapter` では `TemplateError` / `OutlookError` を使用している。P1-02ではErrorType体系を拡張せず、Outlook / Word COM Boundary内のErrorは既存 `OutlookError` として返す。
+
+Error taxonomyの最終整理が必要な場合はP6で扱い、P1-02だけを理由に `UnexpectedError` 等の新規ErrorTypeを追加しない。
 
 ## 10.3 Message
 
@@ -423,6 +462,19 @@ P6で行う最終COM Release設計をP1-02で先回り実装しない。
 - Mail Generation Flowでは同一生成用MailItemを後続Renderへ使用する
 - MailItem Lifecycleの所有権をReaderへ混在させない
 
+現行AdapterのOwnershipは以下とする。
+
+| Object | Owner | P1-02 Cleanup |
+|---|---|---|
+| `mOutlookApp` | Adapter Lifecycle | `ReadBodyText()` では解放しない |
+| `mMailItem` | Adapter Lifecycle | `ReadBodyText()` では解放しない |
+| Inspector | `ReadBodyText()` / Private Helper | Local Referenceを `Nothing` |
+| Word Document | `ReadBodyText()` / Private Helper | Local Referenceを `Nothing` |
+
+`ReadBodyText()` がFailureを返した場合も、`mMailItem` / `mOutlookApp` を勝手に `Nothing` にしない。
+
+CallerはFailure Resultを受け取った後も、可能な範囲で既存 `CloseWithoutSave()` を実行してMailItem Lifecycleを終了できること。
+
 MailItemの終了は既存 `CloseWithoutSave()` または後続正式Lifecycleが担当する。
 
 ---
@@ -440,7 +492,7 @@ Local OFT Path
 ↓
 modOutlookAdapter.CreateMailFromTemplate
 ↓
-MailItem
+Private mMailItem
 ↓
 modOutlookAdapter.ReadBodyText
     ↓
@@ -598,17 +650,33 @@ P1-02ではP6相当の網羅的Error Testは行わない。
 
 ただしLocal Verificationとして、少なくとも以下の代表Error PathがResultとして返ることを確認する。
 
-## Case E1：Nothing MailItem
+## Case E1：Active MailItemなし
+
+Public APIからMailItemを注入せず、Adapter内部にActive MailItemが存在しないStateで確認する。
+
+代表手順：
 
 ```text
-Input:
-mailItem = Nothing
+CreateMailFromTemplate未実行
+↓
+ReadBodyText
+```
+
+または、独立したTest Runで以下を使用してよい。
+
+```text
+CreateMailFromTemplate
+↓
+CloseWithoutSave
+↓
+ReadBodyText
 ```
 
 Expected：
 
 ```text
 ReadBodyText = Failure
+bodyText = vbNullString
 Runtime Errorを呼出元へ未処理で伝播しない
 Error ResultからMailItem接続問題を識別可能
 ```
@@ -759,29 +827,27 @@ Technical Spike B / Cを自動的に復活させない。
 推奨実装順：
 
 ```text
-1. 現行 modOutlookAdapter Review
+1. 現行 modOutlookAdapter Boundary / Error Pattern確認
    ↓
-2. P1-01 Public API / Error Pattern確認
+2. Private TryGetWordDocument実装
    ↓
-3. Private TryGetWordDocument実装
+3. Public ReadBodyText接続
    ↓
-4. Public ReadBodyText接続
+4. Compile
    ↓
-5. Compile
+5. P1-02 Smoke Test作成
    ↓
-6. P1-02 Smoke Test作成
+6. Happy Path Verification
    ↓
-7. Happy Path Verification
+7. Lifecycle Evidence確認
    ↓
-8. Lifecycle Evidence確認
+8. Representative Error Verification
    ↓
-9. Representative Error Verification
+9. P1-01 Regression
    ↓
-10. P1-01 Regression
+10. Finding判定
    ↓
-11. Finding判定
-   ↓
-12. P1-02 PASS / FAIL判定
+11. P1-02 PASS / FAIL判定
 ```
 
 ---
