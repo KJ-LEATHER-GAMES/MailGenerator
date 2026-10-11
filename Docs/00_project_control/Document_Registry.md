@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.20
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.21
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.20 |
+| バージョン | v0.21 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.21 更新概要
+
+- P1-02 Smoke Test v0.2.1a中間成果物、v0.2.2 CP932後継候補、およびInspector Lifecycle Correction Reviewを追加。TF-P1-02-003は、Cold Start中に一時的に存在するInspectorを残留と誤分類したSmoke Test Expected Result Defectであり、Production Change RequiredはNOである。
+- `modP102InspectorWordEditorTest`の現行候補はv0.2.2とする。v0.2／v0.2.1aは履歴として保持するが、同一`VB_Name`のため同一Workbookへ二重Importしない。v0.2.2のImport・Compile・Warm／Cold Start再実行は未実施である。
 
 ### v0.20 更新概要
 
@@ -230,9 +235,11 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02実施仕様v0.2整合性 | [Consistency Review](<reviews/P1-02 Inspector WordEditor Connection 実施仕様 v0.2 Consistency Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
-| P1-02 Smoke Test v0.2.1現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.1_CP932.bas>) |
+| P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
 | P1-02 Smoke Test v0.2レビュー | [Smoke Test Review](<reviews/P1-02 Smoke Test v0.2 Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.1修正レビュー | [Correction Review](<reviews/P1-02 Smoke Test v0.2.1 Correction Review v0.1.md>) |
+| P1-02 Smoke Test v0.2.1a中間成果物 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.1a_CP932.bas>) |
+| P1-02 Smoke Test v0.2.2 Inspector修正レビュー | [Inspector Lifecycle Correction Review](<reviews/P1-02 Smoke Test v0.2.2 Inspector Lifecycle Correction Review v0.1.md>) |
 | Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |

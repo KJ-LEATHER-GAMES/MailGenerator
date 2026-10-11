@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.1 |
+| Revision | v1.2 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -32,7 +32,7 @@
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
 | BL-MVP-003実装計画整合 | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)はBL-MVP-003をExecution Baselineとし、[Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>)はPASS | DOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDは解消 |
 | P1-02 Production Patch候補 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)と[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)を追加。Static [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>)はPASS | 現行`src/modules/modOutlookAdapter_CP932.bas`は未置換。Compile・Runtime VerificationはNOT RUNで、P1-02 COMPLETEではない |
-| P1-02 Smoke Test v0.2.1現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.1_CP932.bas>)と[Correction Review](<reviews/P1-02 Smoke Test v0.2.1 Correction Review v0.1.md>)を追加。Cold StartのProduction Functional PathとLifecycle Evidenceを分離する | v0.2は履歴保持。両者は同じ`VB_Name`のため、v0.2.1だけをImport候補とする。Compile・実行はNOT RUN |
+| P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>)と[Inspector Lifecycle Correction Review](<reviews/P1-02 Smoke Test v0.2.2 Inspector Lifecycle Correction Review v0.1.md>)を追加。Cold StartのInspector一時生成を残留と誤判定しない | v0.2／v0.2.1aは履歴保持。3版は同じ`VB_Name`のため、v0.2.2だけをImport候補とする。Compile・再実行はNOT RUN |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -45,7 +45,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. P1-02 Cold Start PatchとSmoke Test v0.2.1候補の適用元・実行対象を照合し、Production Module／検証用Workbookへの受入を明示的に判断する。受入後にv0.2を二重ImportせずVBA Compile、Warm／Cold Start Smoke、Explorer／Draft／Inspector Lifecycle Evidence、P1-01 Regressionを別作業で実施する。
+3. P1-02 Cold Start PatchとSmoke Test v0.2.2候補の適用元・実行対象を照合し、Production Module／検証用Workbookへの受入を明示的に判断する。受入後に旧Smoke Testを二重ImportせずVBA Compile、Warm／Cold Start Smoke、Explorer／Draft／Inspector Lifecycle Evidence、P1-01 Regressionを別作業で実施する。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
