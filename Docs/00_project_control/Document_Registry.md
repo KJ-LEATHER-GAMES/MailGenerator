@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.12
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.13
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.12 |
+| バージョン | v0.13 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.13 更新概要
+
+- DOC-MVP-TESTSPEC v0.1.5 Candidateを最新存在版として登録。Current Approved BaselineのDOC-MVP-TESTSPEC v0.1.4は維持する。
+- v0.1.5はClassic Outlook Cold Start時のTest Variantを既存Test Caseへ反映するSemantic Test Definition Updateであり、Review / Not Yet BaselineのCandidateである。
 
 ### v0.12 更新概要
 
@@ -67,7 +72,7 @@
 | DOC-MVP-REQ | [MVP Requirements v0.1.9 Candidate](<../01_specifications/MVP Requirements v0.1.9 Candidate 日本語版.md>) | v0.1.9 | Candidate | v0.1.8 | Requirement |
 | DOC-MVP-DES | [MVP Design v0.1.9 Candidate](<../01_specifications/MVP Design v0.1.9 Candidate 日本語版.md>) | v0.1.9 | Candidate | v0.1.8 | Design |
 | DOC-TS-A | [Technical Spike A 実施仕様書](../01_specifications/technical_spikes/Technical%20Spike%20A%20実施仕様書.md) | v0.4 | Closed | v0.4 | Technical Evidence |
-| DOC-MVP-TESTSPEC | [MVP Test Specification](../01_specifications/MVP_Test_Specification.md) | v0.1.4 | Approved | v0.1.4 | Test Definition |
+| DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.5 Candidate](<../01_specifications/MVP Test Specification v0.1.5 Candidate 日本語版.md>) | v0.1.5 | Candidate | v0.1.4 | Test Definition |
 | DOC-MVP-IMPL | [Implementation Plan](../02_implementation/Implementation_Plan.md) | v0.2 | Approved | — | Implementation Plan |
 
 ### Registry Rule
