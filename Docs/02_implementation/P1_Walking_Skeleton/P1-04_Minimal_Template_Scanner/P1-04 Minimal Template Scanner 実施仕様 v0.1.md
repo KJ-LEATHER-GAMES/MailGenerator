@@ -8,7 +8,7 @@
 | バージョン | v0.1 |
 | 対象プロジェクト | 定型メール作成ツール MVP |
 | 文書種別 | Implementation Unit Specification |
-| Status | Draft |
+| Status | Approved |
 | Current Execution Baseline | BL-MVP-003 |
 | 対象Phase | P1 Walking Skeleton |
 | 対象Implementation Unit | P1-04 Minimal Template Scanner |
@@ -24,6 +24,24 @@
 - `DOC-MVP-IMPL` — Implementation Plan
 - `P1-03 Template Snapshot Boundary 実施仕様 v0.1`
 - `P1-03 Template Snapshot Boundary Completion Record v0.1`
+
+### v0.1 Consistency Review反映概要
+
+`P1-04 Minimal Template Scanner 実施仕様 v0.1 Consistency Review v0.1` の結果を反映し、本v0.1をApprovedとした。
+
+Reviewでは、`DOC-MVP-REQ` / `DOC-MVP-DES` / `DOC-MVP-TESTSPEC` / `DOC-MVP-IMPL` / P1-03 Completion Boundaryとの間に、Blocking Semantic Conflict、Scope Expansion、Traceability Breakは確認されなかった。
+
+Approval前に以下のConsistency Correctionのみ実施した。
+
+1. `InvalidCandidates` の重複保持をP1-04 Public Contractとして固定しないよう補正した
+2. P2でのPublic API Signatureについて「変更禁止」ではなく「原則維持。既存Design達成に変更が必要な場合はDesign Findingとして扱う」に統一した
+
+上記CorrectionはP1-04のScanner責務、Requirement、Design、Test Specification、Baselineを変更しない。
+
+**Consistency Review：PASS**
+**Blocking Finding：NONE**
+**Semantic Change：NONE**
+**Document Status：Approved**
 
 ### v0.1 作成概要
 
@@ -372,19 +390,19 @@ ValidVariables
 InvalidCandidates
 ```
 
-P2ではPublic Function Signatureを変更せず、必要に応じてResultへ以下を追加可能とする。
+P2では、原則としてPublic Function Signatureを維持したまま、必要に応じてResultへ以下を追加可能とする。
 
 ```text
 Locations
 ```
 
-したがってP1-04からP2への拡張時に、以下のPublic APIを変更しないことを基本方針とする。
+P1-04からP2への拡張では、以下のPublic APIを維持することを第一候補とする。
 
 ```vb
 ScanTemplate(subjectText, bodyText, scanResult)
 ```
 
-P2 Implementationで既存Designを満たすためにSignature変更が不可避であることが具体的に判明した場合は、通常のDesign Findingとして扱い、P1-04内で推測変更しない。
+ただし、P2 Implementationで既存Requirement / Designを満たすためにSignature変更が必要であることが具体的に判明した場合は、Design Findingとして扱う。P1-04の時点で将来のSignature不変を絶対条件として固定しない。
 
 ---
 
@@ -458,7 +476,7 @@ VariableName Syntax ValidationにFAILした元記述
 検出順
 
 重複:
-保持する
+P1-04 Public Contractでは固定しない
 ```
 
 例：
@@ -474,6 +492,8 @@ VariableName Syntax ValidationにFAILした元記述
 はそのままInvalidCandidatesへ保持する。
 
 Invalid Candidate内部文字列だけへ変換しない。
+
+同一Invalid Candidateが複数回出現した場合のResult内重複表現は、P1-04では利用者向け仕様として固定しない。Production実装が複数Occurrenceを保持してもよいが、後続UIの表示方式・重複集約方針まで本Unitで決定しない。
 
 ---
 
@@ -1448,6 +1468,7 @@ Production Module
 Public API
 → ScanTemplate(subjectText, bodyText, scanResult)
 → COperationResult
+→ P2でも原則維持、必要な変更はDesign Findingとして扱う
 
 Result Carrier
 → Late Bound Scripting.Dictionary
@@ -1464,7 +1485,7 @@ ValidVariables
 InvalidCandidates
 → Collection
 → 元Candidate文字列保持
-→ 重複保持
+→ 重複表現はP1-04 Public Contractでは固定しない
 
 Candidate Scan
 → P1-04 IN
