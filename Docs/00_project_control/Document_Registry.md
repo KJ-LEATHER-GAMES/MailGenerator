@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.9
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.10
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.9 |
+| バージョン | v0.10 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.10 更新概要
+
+- P1-02 Classic Outlook Cold Start Design / UX Impact Reviewを継続参照する影響レビューとして追加（Editorial / Governance Change）。
+- レビューが示すRequirements／Design／Test Specificationの影響判定は、当該文書を改訂またはBaselineへ採用したことを意味しない。
 
 ### v0.9 更新概要
 
@@ -146,6 +151,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
 | TV-P1-001正式判定 | [技術検証記録](../03_verification/technical_validation/TV-P1-001_正式判定.md) |
 | TV-P1-02-001結果記録 | [Technical Verification Result Record](<../03_verification/technical_validation/TV-P1-02-001 Result Record v0.1.md>) |
+| P1-02 Cold Start影響レビュー | [Design / UX Impact Review](<reviews/P1-02 Classic Outlook Cold Start Design UX Impact Review v0.1.md>) |
 | Design／Test整合性 | [Cross-document Review](<reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md>) |
 | Implementation Plan Impact | [Impact Review](<reviews/DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md>) |
 | Implementation Plan整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.2 Plan Consistency Review v0.1.md>) |
