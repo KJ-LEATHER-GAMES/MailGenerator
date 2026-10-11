@@ -2,11 +2,11 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.16 |
+| Revision | v1.17 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | P1-01～P1-04：PASS／COMPLETE（Completion Record）。P1-05 Minimal Render：Approved／Production Implementation Entry READY。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
-| Project Status | P1-04のExecution EvidenceはPASS／COMPLETE。P1-05仕様はApprovedだが、Production実装・Verification・P1-05 COMPLETEは未実施。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
+| Current Phase / Focus | P1-01～P1-05：PASS／COMPLETE（Completion Record）。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Project Status | P1-05のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
 
@@ -37,8 +37,8 @@
 | P1-03 Production Patch | [Production Patch Review v0.2](<reviews/P1-03 Production Patch Review v0.2.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-03 Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | `Debug → Compile VBAProject`の今回ログは未記録だが、変更差分のRuntime ExecutionをCompile Gateの根拠としている |
 | P1-04 Minimal Template Scanner | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-04_Minimal_Template_Scanner/P1-04 Minimal Template Scanner Completion Record v0.1.md>)によりBL-MVP-003上でPASS／COMPLETE。Core Smoke、P1-03 Snapshot→Scanner Integration、CloseWithoutSaveおよび変更差分のRuntime ExecutionはPASS | CP-P1は未確立。当地の`src`／WorkbookがCompletion Recordの実行環境と一致することは未確認 |
 | P1-04 Production Patch | [Production Patch Review v0.2](<reviews/P1-04 Production Patch Review v0.2.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-04 Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | TF-P1-04-001（OFT Fixture Drift）はRESOLVED、TF-P1-04-002（Workbook Artifact）はRESOLVED／NON-BLOCKING。`Debug → Compile VBAProject`の今回ログは未記録 |
-| P1-05 Minimal Render | [実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>)はApproved。[Consistency Review](<reviews/P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1.md>)の必須Correction 3件と推奨Correction 1件は反映済みで、Semantic Changeなし | Production Implementation EntryはREADY。`modSubjectRenderer`／`modOutlookAdapter`実装・Workbook／OFT受入・Compile・Smoke Test・P1-05 PASS／COMPLETEは未実施 |
-| P1-05 Production候補 | [Subject Renderer](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modSubjectRenderer_P1-05_v0.1_CP932.bas>)、[Outlook Adapter](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modOutlookAdapter_P1-05_v0.1_CP932.bas>)、[Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderCoreTest_v0.1_CP932.bas>)、[Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationTest_v0.1_CP932.bas>)、[Negative Test v0.2](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderNegativeTest_v0.2_CP932.bas>)、[Static Review](<reviews/P1-05 Minimal Render Production Patch Static Review v0.1.md>)を追加。Static ReviewはPASS | `TestP105MinimalRenderNegative`はv0.2を現行候補とし、Integration Test内の旧Entry Pointは除去。現行`src/modules`は未更新。Workbook Import・Compile・Core／Integration／Negative Verification・P1-01～P1-04 RegressionはNOT RUN |
+| P1-05 Minimal Render | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render Completion Record v0.1.md>)によりBL-MVP-003上でPASS／COMPLETE。VBA Compile、Core、Warm／Cold Integration、Render後Snapshot、Negative Verification N1～N5、Required RegressionはPASS | CP-P1は未確立。当地の`src`／Workbook／OFTがCompletion Recordの実行環境と一致することは未確認 |
+| P1-05 Production Patch | [Production Patch Review v0.1](<reviews/P1-05 Minimal Render Production Patch Review v0.1.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-05 Minimal Render Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | TF-P1-05-001（Negative Verification Coverage Gap）はRESOLVED／NON-BLOCKING。N6 WordEditor FailureはP6へDEFERRED／NON-BLOCKING |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -53,7 +53,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
 3. P1-03 Completion Recordの実行環境と当地のProduction Module・Workbookを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 4. P1-04 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
-5. [P1-05実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>)に従い、`modSubjectRenderer`／`modOutlookAdapter`の現状と別PC成果物の受入範囲を確認する。Production Patch・Smoke Test・Compile・Render後Snapshot・P1-05判定は別作業として扱う。
+5. P1-05 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
