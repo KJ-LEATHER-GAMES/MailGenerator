@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.43
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.44
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.43 |
+| バージョン | v0.44 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.44 更新概要
+
+- [P1-07 Display / E2E Integration Boundary Confirmation v0.1](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/P1-07 Display - E2E Integration Boundary Confirmation v0.1.md>)をDraft Artifactとして登録。P1-06までのProduction経路をDisplay Gateへ接続する責務境界を定義し、Requirement／Design／Test Specification／Baselineへの変更はない。
+- P1-07のUnit Specification、Production実装、Compile、Implementation VerificationおよびPASS／COMPLETEは未実施。P6のError／Safety／Lifecycle最終化を先取りしない。
 
 ### v0.43 更新概要
 
@@ -388,6 +393,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-06完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker Completion Record v0.1.md>) |
 | P1-06 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P1-06 Minimal Unresolved Checker Production Patch Review v0.1.md>) |
 | P1-06 Finding判定 | [Finding Assessment](<reviews/P1-06 Minimal Unresolved Checker Finding Assessment v0.1.md>) |
+| P1-07実装境界確認v0.1 | [Draft Implementation Boundary](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/P1-07 Display - E2E Integration Boundary Confirmation v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
