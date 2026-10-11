@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.22
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.23
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.22 |
+| バージョン | v0.23 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.23 更新概要
+
+- P1-03 Template Snapshot Boundary 実施仕様 v0.1をReview Candidateとして追加。P1-02で成立した`ReadBodyText()`を再利用し、`ReadSubject()`とSubject／BodyText文字列Snapshot境界を次Unitの対象として定義する。
+- 本仕様はRequirement／Design／Test Specification／Baselineの変更を伴わない候補であり、承認・Production実装・Workbook Import・Verification・P1-03 COMPLETEを意味しない。
 
 ### v0.22 更新概要
 
@@ -240,6 +245,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02実施仕様v0.2整合性 | [Consistency Review](<reviews/P1-02 Inspector WordEditor Connection 実施仕様 v0.2 Consistency Review v0.1.md>) |
 | P1-02完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>) |
 | P1-02完了Project Control更新 | [Applied Patch](<../90_archive/applied_patches/Project Control P1-02 Completion Update Patch v0.1.md>) |
+| P1-03実施仕様v0.1 | [Review Candidate](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
