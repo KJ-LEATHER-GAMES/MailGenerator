@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.29 / 更新日: 2026-10-12
+Revision: v0.30 / 更新日: 2026-10-12
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -20,7 +20,7 @@ Revision: v0.29 / 更新日: 2026-10-12
 - P1-05は[Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render Completion Record v0.1.md>)によりPASS／COMPLETE。[Production Patch Review v0.1](<../00_project_control/reviews/P1-05 Minimal Render Production Patch Review v0.1.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<../00_project_control/reviews/P1-05 Minimal Render Finding Assessment v0.1.md>)はBlocking Findingなしと判定。TF-P1-05-001はNegative Verification Coverage Gapとして解消済み・非ブロッキング。N6 WordEditor FailureはP6へ計画的に保留・非ブロッキング。ただしCP-P1は未確立で、Completion Recordの実行環境と当地の未同期`src`／Workbook／OFTを同一視しない。
 - P1-06は[Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker Completion Record v0.1.md>)によりPASS／COMPLETE。[Production Patch Review v0.1](<../00_project_control/reviews/P1-06 Minimal Unresolved Checker Production Patch Review v0.1.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<../00_project_control/reviews/P1-06 Minimal Unresolved Checker Finding Assessment v0.1.md>)はBlocking Findingなしと判定。TF-P1-06-001はTest Artifact DefectとしてRESOLVED／CLOSEDで、Production Defect・Requirement／Design／Baseline変更はない。`RenderError`はP1 Interim Mappingであり、正式なUnresolved Error分類はP6へ残す。ただしCP-P1は未確立で、Completion Recordの実行環境と当地の未同期`src`／Workbook／OFTを同一視しない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
-- [history](history/)の01～11は過去記録。11はP1-05完了・関連Finding・P1-06検討開始時点の再開用スナップショットであり、現在地はOverviewとCompletion Recordを正本として確認する。特に08をそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
+- [history](history/)の01～12は過去記録。12はP1-06完了・TF-P1-06-001解消・P1-07検討開始時点の再開用スナップショットであり、現在地はOverviewとCompletion Recordを正本として確認する。特に08をそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。
