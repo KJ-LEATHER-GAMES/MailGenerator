@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.16
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.17
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.16 |
+| バージョン | v0.17 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.17 更新概要
+
+- P1-02 Inspector WordEditor Connection 実施仕様 v0.2をApproved Artifactとして追加。BL-MVP-003、Cold Start Readiness、Explorer Lifecycle、Warm / Cold Start VerificationをUnit仕様へ反映する。
+- v0.2 CandidateのConsistency ReviewはPASS。P1-02のProduction実装・実機Verification・Completion判定は、本仕様の承認だけでは完了しない。
 
 ### v0.16 更新概要
 
@@ -206,6 +211,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | TV-P1-001正式判定 | [技術検証記録](../03_verification/technical_validation/TV-P1-001_正式判定.md) |
 | TV-P1-02-001結果記録 | [Technical Verification Result Record](<../03_verification/technical_validation/TV-P1-02-001 Result Record v0.1.md>) |
 | P1-02 Cold Start影響レビュー | [Design / UX Impact Review](<reviews/P1-02 Classic Outlook Cold Start Design UX Impact Review v0.1.md>) |
+| P1-02実施仕様v0.2 | [Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection 実施仕様 v0.2.md>) |
+| P1-02実施仕様v0.2整合性 | [Consistency Review](<reviews/P1-02 Inspector WordEditor Connection 実施仕様 v0.2 Consistency Review v0.1.md>) |
 | Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |
