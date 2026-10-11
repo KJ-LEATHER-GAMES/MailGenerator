@@ -1,0 +1,53 @@
+--- modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas
++++ modOutlookAdapter_P1-03_ReadSubject_CP932.bas
+@@
+ ' P1-02 v0.2:
+ ' - Warm Start: reuse an existing Outlook Explorer.
+ ' - Cold Start: create and display one Outlook Explorer before MailItem creation.
+ ' - Do not display scan/error MailItems.
+ ' - Do not close an Explorer after readiness succeeds.
++'
++' P1-03:
++' - Add ReadSubject() as the Subject String boundary.
++' - Reuse the existing ReadBodyText() without semantic change.
++' - Do not expose MailItem or any Outlook / Word COM object.
+@@
+ End Function
+
++Public Function ReadSubject( _
++    ByRef subjectText As String _
++) As COperationResult
++
++    subjectText = vbNullString
++    On Error GoTo ErrorHandler
++
++    If mMailItem Is Nothing Then
++        Set ReadSubject = CreateFailureResult( _
++            ERROR_TYPE_OUTLOOK, _
++            "There is no active MailItem to read.", _
++            "MailItem")
++        Exit Function
++    End If
++
++    subjectText = CStr(mMailItem.Subject)
++    Set ReadSubject = CreateSuccessResult()
++    Exit Function
++
++ErrorHandler:
++    Dim errorNumber As Long
++    Dim errorDescription As String
++
++    errorNumber = Err.Number
++    errorDescription = Err.Description
++    subjectText = vbNullString
++
++    Set ReadSubject = CreateFailureResult( _
++        ERROR_TYPE_OUTLOOK, _
++        "The Outlook mail subject could not be read: " & _
++            CStr(errorNumber) & " - " & errorDescription, _
++        "Subject")
++End Function
++
+ Public Function ReadBodyText( _
+     ByRef bodyText As String _
+ ) As COperationResult

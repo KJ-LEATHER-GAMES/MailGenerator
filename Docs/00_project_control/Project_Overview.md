@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.5 |
+| Revision | v1.6 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | P1-02：PASS／COMPLETE（Completion Record）。P1-03 Template Snapshot Boundary：Approved／Production Implementation Entry READY。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -34,6 +34,7 @@
 | P1-02完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>)はBL-MVP-003上でP1-02をPASS／COMPLETEと判定。Compile、Warm／Cold Start、P1-01 Regression、Explorer／Draft／Inspector LifecycleはPASS | BL-MVP-003は変更なし。当地の`src`／Workbookが同一実行環境であることは未確認 |
 | P1-02実装・Smoke Test資産 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)、[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)、[Smoke Test v0.2.2](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>)を保持 | 同一`VB_Name`の旧Smoke Testは二重Importしない。当地でのImport・再実行は未実施 |
 | P1-03 Template Snapshot Boundary | [実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>)はApproved。`ReadSubject()`追加と既存`ReadBodyText()`再利用により、Subject／BodyText文字列境界を定義し、[Consistency Review](<reviews/P1-03 Template Snapshot Boundary 実施仕様 v0.1 Consistency Review v0.1.md>)はPASS | Production Implementation EntryはREADY。実装・Workbook Import・Smoke／Regression Verification・P1-03 COMPLETEは未実施 |
+| P1-03 Production候補 | [ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>)、[Smoke Test v0.1](<../../tests/vba/P1_Walking_Skeleton/modP1_03TemplateSnapshotSmokeTest_v0.1_CP932.bas>)、[Static Review](<reviews/P1-03 Production Patch Static Review v0.1.md>)を追加。Static ReviewはPASS | 現行`src/modules/modOutlookAdapter_CP932.bas`は未更新。Workbook Import・Compile・Runtime Smoke・P1-02／P1-01 RegressionはNOT RUN |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -46,7 +47,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. [P1-03実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>)に従うProduction Module・検証用Workbookへの受入範囲を別作業で判断する。P1-02成果物を当地へ同期する場合は、実行時点・Production Module・Smoke Test v0.2.2を照合し、旧Smoke Testを二重Importしない。
+3. [P1-03実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/P1-03 Template Snapshot Boundary 実施仕様 v0.1.md>)と[ReadSubject Patch](<../02_implementation/P1_Walking_Skeleton/P1-03_Template_Snapshot/modOutlookAdapter_P1-03_ReadSubject.patch>)の適用元を照合し、Production Module・検証用Workbookへの受入範囲を別作業で判断する。受入後にCompile、P1-03 Smoke、P1-02 Warm／Cold Regression、P1-01 Regressionを実施する。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
