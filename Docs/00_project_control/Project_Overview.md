@@ -2,7 +2,7 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.15 |
+| Revision | v1.16 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | P1-01～P1-04：PASS／COMPLETE（Completion Record）。P1-05 Minimal Render：Approved／Production Implementation Entry READY。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
@@ -38,7 +38,7 @@
 | P1-04 Minimal Template Scanner | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-04_Minimal_Template_Scanner/P1-04 Minimal Template Scanner Completion Record v0.1.md>)によりBL-MVP-003上でPASS／COMPLETE。Core Smoke、P1-03 Snapshot→Scanner Integration、CloseWithoutSaveおよび変更差分のRuntime ExecutionはPASS | CP-P1は未確立。当地の`src`／WorkbookがCompletion Recordの実行環境と一致することは未確認 |
 | P1-04 Production Patch | [Production Patch Review v0.2](<reviews/P1-04 Production Patch Review v0.2.md>)はStatic＋Runtime VerificationでPASS、[Finding Assessment](<reviews/P1-04 Finding Assessment v0.1.md>)はBlocking Findingなしと判定 | TF-P1-04-001（OFT Fixture Drift）はRESOLVED、TF-P1-04-002（Workbook Artifact）はRESOLVED／NON-BLOCKING。`Debug → Compile VBAProject`の今回ログは未記録 |
 | P1-05 Minimal Render | [実施仕様v0.1](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>)はApproved。[Consistency Review](<reviews/P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1.md>)の必須Correction 3件と推奨Correction 1件は反映済みで、Semantic Changeなし | Production Implementation EntryはREADY。`modSubjectRenderer`／`modOutlookAdapter`実装・Workbook／OFT受入・Compile・Smoke Test・P1-05 PASS／COMPLETEは未実施 |
-| P1-05 Production候補 | [Subject Renderer](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modSubjectRenderer_P1-05_v0.1_CP932.bas>)、[Outlook Adapter](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modOutlookAdapter_P1-05_v0.1_CP932.bas>)、[Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderCoreTest_v0.1_CP932.bas>)、[Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationTest_v0.1_CP932.bas>)、[Static Review](<reviews/P1-05 Minimal Render Production Patch Static Review v0.1.md>)を追加。Static ReviewはPASS | 現行`src/modules`は未更新。Workbook Import・Compile・Core／Integration／Negative Verification・P1-01～P1-04 RegressionはNOT RUN |
+| P1-05 Production候補 | [Subject Renderer](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modSubjectRenderer_P1-05_v0.1_CP932.bas>)、[Outlook Adapter](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modOutlookAdapter_P1-05_v0.1_CP932.bas>)、[Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderCoreTest_v0.1_CP932.bas>)、[Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationTest_v0.1_CP932.bas>)、[Negative Test v0.2](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderNegativeTest_v0.2_CP932.bas>)、[Static Review](<reviews/P1-05 Minimal Render Production Patch Static Review v0.1.md>)を追加。Static ReviewはPASS | `TestP105MinimalRenderNegative`はv0.2を現行候補とし、Integration Test内の旧Entry Pointは除去。現行`src/modules`は未更新。Workbook Import・Compile・Core／Integration／Negative Verification・P1-01～P1-04 RegressionはNOT RUN |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。

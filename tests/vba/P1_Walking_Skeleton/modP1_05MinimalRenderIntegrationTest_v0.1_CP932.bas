@@ -213,46 +213,6 @@ EH:
     Resume Failed
 End Sub
 
-Public Sub TestP105MinimalRenderNegative()
-
-    Dim r As COperationResult
-    Dim cleanup As COperationResult
-    Dim ok As Boolean
-
-    Debug.Print "TestP105MinimalRenderNegative: START"
-    Debug.Print String$(72, "-")
-
-    ok = True
-
-    Set cleanup = modOutlookAdapter.CloseWithoutSave()
-    Set cleanup = Nothing
-
-    Set r = modOutlookAdapter.SetSubject("test")
-    If r Is Nothing Then
-        Debug.Print "N2 SetSubject without Active MailItem: FAIL - Result=Nothing"
-        ok = False
-    ElseIf r.Success Then
-        Debug.Print "N2 SetSubject without Active MailItem: FAIL - Expected Failure"
-        ok = False
-    Else
-        Debug.Print "N2 SetSubject without Active MailItem: PASS"
-    End If
-
-    Set r = modOutlookAdapter.ReplaceBodyVariables(Nothing)
-    If r Is Nothing Then
-        Debug.Print "N3 ReplaceBodyVariables(Nothing): FAIL - Result=Nothing"
-        ok = False
-    ElseIf r.Success Then
-        Debug.Print "N3 ReplaceBodyVariables(Nothing): FAIL - Expected Failure"
-        ok = False
-    Else
-        Debug.Print "N3 ReplaceBodyVariables(Nothing): PASS"
-    End If
-
-    Debug.Print String$(72, "-")
-    Debug.Print "TestP105MinimalRenderNegative: " & IIf(ok, "PASS", "FAIL")
-End Sub
-
 Private Function CreateFormattedValues() As Object
 
     Dim values As Object

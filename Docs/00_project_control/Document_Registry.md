@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.34
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.35
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.34 |
+| バージョン | v0.35 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.35 更新概要
+
+- P1-05 Minimal Render Negative Test v0.2 CP932を追加し、Integration Test v0.1に埋め込まれていた同名の簡易Negative Entry Pointを除去して、`TestP105MinimalRenderNegative`の実行対象を一意化した。
+- v0.2はN1～N5のNegative Verificationを拡張する候補であり、Workbook Import・Compile・Runtime実行・P1-05 PASS／COMPLETEは未実施である。
 
 ### v0.34 更新概要
 
@@ -323,6 +328,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-05 Production候補 | [Subject Renderer CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modSubjectRenderer_P1-05_v0.1_CP932.bas>)／[Outlook Adapter CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modOutlookAdapter_P1-05_v0.1_CP932.bas>) |
 | P1-05 Core Test候補 | [CP932 Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderCoreTest_v0.1_CP932.bas>) |
 | P1-05 Integration Test候補 | [CP932 Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationTest_v0.1_CP932.bas>) |
+| P1-05 Negative Test候補 | [CP932 Negative Test v0.2](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderNegativeTest_v0.2_CP932.bas>) |
 | P1-05 Production Patch静的レビュー | [Static Review](<reviews/P1-05 Minimal Render Production Patch Static Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
