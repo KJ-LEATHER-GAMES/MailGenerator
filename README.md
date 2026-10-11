@@ -12,6 +12,8 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 
 ## 保存場所
 
+ファイルを追加・更新・移動する前に、[フォルダ管理ルール](Docs/00_project_control/rules/Folder_Management_Rules.md)を参照してください。保存先の判断、命名・履歴の扱い、実行資産の保護、追加時のチェックリストをまとめています。
+
 | 保存物 | 場所 |
 | --- | --- |
 | 実行本体 | [MailGeneratorNew.xlsm](MailGeneratorNew.xlsm) |
