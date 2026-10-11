@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.37
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.38
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.37 |
+| バージョン | v0.38 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.38 更新概要
+
+- [P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Draft](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Draft.md>)を登録。Boundary Confirmationで確定したP1-06の責務を、`modUnresolvedChecker`のProduction実装可能なImplementation Detailへ展開した。
+- DraftはBL-MVP-003への影響なし。Consistency Review・Approved化・Production実装・Compile・検証・P1-06 PASS／COMPLETEは未実施である。
 
 ### v0.37 更新概要
 
@@ -344,6 +349,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-05 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P1-05 Minimal Render Production Patch Review v0.1.md>) |
 | P1-05 Finding判定 | [Finding Assessment](<reviews/P1-05 Minimal Render Finding Assessment v0.1.md>) |
 | P1-06実装境界確認v0.1 | [Confirmed Implementation Boundary](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker Boundary Confirmation v0.1.md>) |
+| P1-06実施仕様v0.1 | [Draft Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Draft.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
