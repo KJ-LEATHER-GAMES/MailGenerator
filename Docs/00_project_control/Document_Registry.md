@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.47
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.48
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.47 |
+| バージョン | v0.48 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.48 更新概要
+
+- [P1-07 Display E2E Verification手順書 v0.1](<../03_verification/technical_validation/P1-07 Display E2E Verification 手順書 v0.1.md>)と、[P1-07 Display E2E Integration Test v0.1 CP932](<../../tests/vba/P1_Walking_Skeleton/modP1_07DisplayE2EIntegrationTest_v0.1_CP932.bas>)を追加。Warm／Cold Start Normal E2EとUnresolved Fail Closedを、Formal MVP Testと区別したImplementation Verificationとして定義する。
+- Test候補のWorkbook Import、VBA Compile、Classic Outlook Runtime／Regression Verification、およびP1-07 PASS／COMPLETEは未実施。手順書・Test候補は実行結果ではない。
 
 ### v0.47 更新概要
 
@@ -415,6 +420,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-07 Production実装手順 | [Implementation Package](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/P1-07 Production 実装手順 v0.1.md>) |
 | P1-07 Production候補 | [Mail Application CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/modMailApplication_P1-07_v0.1_CP932.bas>)／[Outlook Adapter CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/modOutlookAdapter_P1-07_v0.1_CP932.bas>) |
 | P1-07 Production静的レビュー | [Static Review](<reviews/P1-07 Production Static Review v0.1.md>) |
+| P1-07 Verification手順 | [Display E2E Verification手順書 v0.1](<../03_verification/technical_validation/P1-07 Display E2E Verification 手順書 v0.1.md>) |
+| P1-07 Integration Test候補 | [CP932 Test Module](<../../tests/vba/P1_Walking_Skeleton/modP1_07DisplayE2EIntegrationTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |

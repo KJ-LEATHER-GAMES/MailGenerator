@@ -2,10 +2,10 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.28 |
+| Revision | v1.29 |
 | 更新日 | 2026-10-12 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | P1-01～P1-06：PASS／COMPLETE（Completion Record）。P1-07はDisplay／E2E Integration Boundary Confirmation、実施仕様v0.1（Approved）、Production候補およびStatic Review（PASS）を登録済み。候補のImport・実行検証は未実施。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Current Phase / Focus | P1-01～P1-06：PASS／COMPLETE（Completion Record）。P1-07はBoundary Confirmation、実施仕様v0.1（Approved）、Production／Test候補、Static Review（PASS）およびVerification手順を登録済み。候補のImport・実行検証は未実施。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
 | Project Status | P1-06のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
@@ -57,7 +57,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 4. P1-04 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 5. P1-05 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 6. P1-06 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
-7. P1-07を進める場合は、Approved Unit SpecificationとProduction候補を対象に、採用するWorkbook・Module時点を確認してから別作業でImport・VBA Compile・Implementation Verificationを行う。候補・Static ReviewからPASS／COMPLETEを推定しない。
+7. P1-07を進める場合は、Approved Unit Specification、Production候補、Verification手順およびTest候補を対象に、採用するWorkbook・Module時点を確認してから別作業でImport・VBA Compile・Implementation Verificationを行う。候補・Static Review・手順書からPASS／COMPLETEを推定しない。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
