@@ -8,7 +8,7 @@
 | バージョン | v0.1 |
 | 対象プロジェクト | 定型メール作成ツール MVP |
 | 文書種別 | Implementation Unit Specification |
-| Status | Draft |
+| Status | Approved |
 | Current Execution Baseline | BL-MVP-003 |
 | 対象Phase | P1 Walking Skeleton |
 | 対象Implementation Unit | P1-05 Minimal Render |
@@ -26,6 +26,31 @@
 - `P1-03 Template Snapshot Boundary 実施仕様 v0.1`
 - `P1-04 Minimal Template Scanner 実施仕様 v0.1`
 - `P1-05 Minimal Render Boundary Confirmation` — 本仕様作成時に確定したImplementation Boundary
+- `P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1`
+
+### v0.1 Consistency Review反映概要
+
+`P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1` の結果を反映し、本v0.1をApprovedとした。
+
+Reviewでは、DOC-MVP-REQ / DOC-MVP-DES / DOC-MVP-TESTSPEC / DOC-MVP-IMPL / P1-03 / P1-04とのSemantic Conflict、Traceability Break、Blocking Scope Expansionは確認されなかった。
+
+Approval前Correctionとして以下4件を本仕様へ反映した。
+
+1. `CR-P1-05-001` — Technical Specification内からProject State記述を削除し、文書Statusのみを保持するGovernanceへ整合
+2. `CR-P1-05-002` — Formatted Value内 `{{...}}` の利用者向け意味論をP1-05で新規定義しないよう修正
+3. `CR-P1-05-003` — `ReplaceBodyVariables()` 内Local COM ReferenceのP1基本Cleanup Boundaryを明示
+4. `CR-P1-05-004` — P1-04 Scanner Contractに合わせ、Integration Smoke Testで `InvalidCandidates.Count = 0` をRender開始前Preconditionとして明示
+
+本CorrectionによるRequirement / Design / Test Specification / Implementation Plan / BaselineへのSemantic Impactはない。
+
+**Consistency Review：PASS WITH CORRECTIONS → CORRECTIONS APPLIED**
+**Blocking Finding：NONE**
+**Semantic Conflict：NONE**
+**Requirement Gap：NONE**
+**Design Finding：NONE**
+**Technical Spike Reopen：NOT REQUIRED**
+**Baseline Change：NOT REQUIRED**
+**Document Status：Approved**
 
 ### v0.1 作成概要
 
@@ -891,7 +916,11 @@ Document末尾まで継続
 
 これにより、同一Occurrenceの再検索や無限Loopを避ける。
 
-P1-05ではFormatted Value内の特殊構文を再帰的に展開する機能を追加しない。
+Formatted Value内に `{{...}}` 形式の文字列を含むケースについて、その文字列を追加Variableとして解釈するかどうかの利用者向け意味論は、本P1-05で新規定義しない。
+
+P1-05 Smoke Test Fixtureでは当該ケースを使用しない。
+
+Production実装中に当該ケースの挙動確定が必要となった場合は、Implementation Detailとして暗黙決定せず、Requirement Gap要否を判定する。
 
 ## 11.7 Find 0件
 
@@ -1168,7 +1197,30 @@ Caller
 CloseWithoutSave
 ```
 
-## 14.5 Explorer
+## 14.5 Local COM Reference Cleanup
+
+`ReplaceBodyVariables()` 内で取得したLocal COM Referenceは、処理成功 / Failureの双方でFunction呼出しを越えて保持しない。
+
+対象：
+
+```text
+Inspector
+Word Document
+Word Range
+```
+
+P1では既存Outlook Adapterの基本COM Cleanup Patternへ従う。
+
+具体的なRelease Code、Error途中のCleanup順序、およびCOM Lifecycleの最終化はP6で行う。
+
+P1-05では少なくとも以下を満たす。
+
+```text
+Body Render完了後に不要なInspector / Word Document / Word Range Referenceを
+Adapter Module Stateとして新規保持しない
+```
+
+## 14.6 Explorer
 
 Cold Start時にOutlook Adapterが起動したExplorerはP1-02の方針を維持する。
 
@@ -1528,16 +1580,44 @@ Comment     = 確認お願いします
 4. ReadSubject
 5. ReadBodyText
 6. ScanTemplate
-7. ValidVariables / InvalidCandidates Evidence取得
-8. P1 FormattedValues Fixture生成
-9. RenderSubject
-10. SetSubject
-11. ReplaceBodyVariables
-12. ReadSubject
-13. ReadBodyText
-14. Render後Subject / BodyText確認
-15. CloseWithoutSave
+7. ScanTemplate Success確認
+8. InvalidCandidates.Count = 0確認
+9. Expected ValidVariables確認
+10. P1 FormattedValues Fixture生成
+11. RenderSubject
+12. SetSubject
+13. ReplaceBodyVariables
+14. ReadSubject
+15. ReadBodyText
+16. Render後Subject / BodyText確認
+17. CloseWithoutSave
 ```
+
+`ScanTemplate = Success` だけではRender開始条件を満たしたとみなさない。
+
+P1-04 Boundaryでは、
+
+```text
+ScanTemplate.Success = True
++
+InvalidCandidates.Count > 0
+```
+
+が成立し得るため、P1-05の正常Integration Smoke Testでは必ず、
+
+```text
+InvalidCandidates.Count = 0
+```
+
+を確認する。
+
+InvalidCandidatesが1件以上の場合はP1-05 Render Defectとして扱わず、
+
+```text
+Test Fixture / Precondition Finding
+```
+
+としてRender Verificationを開始しない。
 
 ## 17.6 Subject Expected
 
@@ -1959,6 +2039,9 @@ NONE
 COM Object Leakage:
 NONE
 
+Local COM Reference Residue:
+NONE（新規Adapter Module Stateとして保持しない）
+
 Unexpected Final MailItem Display:
 NONE
 
@@ -2107,48 +2190,76 @@ NOT REQUIRED
 
 ---
 
-# 30. Approval前Review観点
+# 30. Consistency Review結果
 
-本v0.1 DraftをProduction実装のSource of Truthとする前に、最低限以下をConsistency Reviewする。
-
-```text
-DOC-MVP-REQ Conflict
-DOC-MVP-DES Conflict
-DOC-MVP-TESTSPEC Conflict
-DOC-MVP-IMPL Conflict
-P1-03 Boundary Conflict
-P1-04 Boundary Conflict
-P1 / P4 / P5 Scope Conflict
-Error Model Conflict
-Lifecycle Conflict
-Requirement Gap
-Design Finding
-Technical Spike Reopen要否
-```
-
-Consistency ReviewでBlocking Conflictがないことを確認後、本v0.1をApproved化する。
-
----
-
-# 31. Draft判定
-
-本書作成時点：
+`P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1` により、以下を確認済みである。
 
 ```text
-P1-05 Minimal Render 実施仕様 v0.1
+DOC-MVP-REQ Conflict:
+NONE
 
-Status:
-Draft
+DOC-MVP-DES Conflict:
+NONE
 
-Boundary Confirmation:
-COMPLETE
+DOC-MVP-TESTSPEC Conflict:
+NONE
 
-Current Execution Baseline:
-BL-MVP-003
+DOC-MVP-IMPL Conflict:
+NONE
 
-Production Implementation:
-NOT STARTED
+P1-03 Boundary Conflict:
+NONE
 
-Consistency Review:
-NOT YET EXECUTED
+P1-04 Boundary Conflict:
+NONE
+
+P1 / P4 / P5 Scope Conflict:
+NONE
+
+Error Model Conflict:
+NONE
+
+Lifecycle Conflict:
+NONE
+
+Semantic Conflict:
+NONE
+
+Traceability Break:
+NONE
+
+Blocking Finding:
+NONE
+
+Requirement Gap:
+NONE
+
+Design Finding:
+NONE
+
+Technical Spike Reopen:
+NOT REQUIRED
+
+Baseline Change:
+NOT REQUIRED
 ```
+
+Reviewで確認した4件のLocal Correctionは本v0.1へ反映済みである。
+
+```text
+CR-P1-05-001:
+APPLIED
+
+CR-P1-05-002:
+APPLIED
+
+CR-P1-05-003:
+APPLIED
+
+CR-P1-05-004:
+APPLIED
+```
+
+したがって、本仕様をP1-05 Production ImplementationのTechnical Source of Truthとして使用してよい。
+
+Project Control上の実装進捗、Completion状態、Next Actionは本Technical Specificationでは管理しない。

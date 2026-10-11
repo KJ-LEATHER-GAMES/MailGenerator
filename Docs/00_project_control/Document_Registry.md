@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.32
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.33
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.32 |
+| バージョン | v0.33 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.33 更新概要
+
+- P1-05 Minimal Render 実施仕様 v0.1へConsistency Reviewの必須Correction 3件と推奨Correction 1件の反映を確認し、Approved Artifactへ更新。Requirement／Design／Test Specification／Implementation Plan／BaselineへのSemantic Impactはない。
+- P1-05はProduction Implementation EntryがREADYとなったが、`modSubjectRenderer`／`modOutlookAdapter`実装、Workbook／OFT受入、Compile、Smoke Test、P1-05 PASS／COMPLETEは未実施である。Draft本文はGit履歴に保持する。
 
 ### v0.32 更新概要
 
@@ -308,7 +313,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-04 Production Patchレビュー | [Production Patch Review v0.2](<reviews/P1-04 Production Patch Review v0.2.md>) |
 | P1-04 Finding判定 | [Finding Assessment](<reviews/P1-04 Finding Assessment v0.1.md>) |
 | P1-04完了Project Control更新 | [Applied Patch](<../90_archive/applied_patches/Project Control P1-04 Completion Update Patch v0.1.md>) |
-| P1-05実施仕様v0.1 | [Draft Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>) |
+| P1-05実施仕様v0.1 | [Approved Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>) |
 | P1-05実施仕様v0.1整合性 | [Consistency Review](<reviews/P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
