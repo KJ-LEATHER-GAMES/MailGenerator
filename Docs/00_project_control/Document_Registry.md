@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.49
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.50
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.49 |
+| バージョン | v0.50 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.50 更新概要
+
+- [P1-07 Completion Record v0.1](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/P1-07 Completion Record v0.1.md>)、[Production Patch Review v0.1](<reviews/P1-07 Production Patch Review v0.1.md>)、[Finding Assessment v0.1](<reviews/P1-07 Finding Assessment v0.1.md>)および[LF-P1-07-001 Closure v0.1](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/LF-P1-07-001 Closure v0.1.md>)を登録し、P1-07をBL-MVP-003上でPASS／COMPLETEとして反映。
+- v0.1.1 Correction後のVBA Compile、Warm／Cold E2E、Unresolved Fail Closed、再発確認およびP1-02 Warm／Cold RegressionはPASS。LF-P1-07-001はRESOLVED／CLOSED、Production Defect・Requirement／Design／Baseline変更はなし。当地の`src`／Workbook／OFTとの内容一致は別途確認する。
 
 ### v0.49 更新概要
 
@@ -428,8 +433,12 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-07 Verification手順 | [Display E2E Verification手順書 v0.1](<../03_verification/technical_validation/P1-07 Display E2E Verification 手順書 v0.1.md>) |
 | P1-07 Integration Test候補 | [CP932 Test Module](<../../tests/vba/P1_Walking_Skeleton/modP1_07DisplayE2EIntegrationTest_v0.1_CP932.bas>) |
 | LF-P1-07-001 Lifecycle Correction | [Correction Record](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/LF-P1-07-001 Outlook Application Stale Reference Correction v0.1.md>) |
-| LF-P1-07-001 Production候補 | [Outlook Adapter CP932 Module v0.1.1](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/modOutlookAdapter_P1-07_v0.1.1_CP932.bas>)／[Diff Patch](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/modOutlookAdapter_P1-07_v0.1_to_v0.1.1.patch>) |
+| LF-P1-07-001 Production候補 | [Outlook Adapter CP932 Module v0.1.1](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/modOutlookAdapter_P1-07_v0.1.1_CP932.bas>)／[Applied Diff Patch](<../90_archive/applied_patches/modOutlookAdapter_P1-07_v0.1_to_v0.1.1.patch>) |
 | LF-P1-07-001静的レビュー | [Correction Static Review](<reviews/LF-P1-07-001 Correction Static Review v0.1.md>) |
+| LF-P1-07-001 Closure | [Closure Record](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/LF-P1-07-001 Closure v0.1.md>) |
+| P1-07完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-07_Display_E2E_Integration/P1-07 Completion Record v0.1.md>) |
+| P1-07 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P1-07 Production Patch Review v0.1.md>) |
+| P1-07 Finding判定 | [Finding Assessment](<reviews/P1-07 Finding Assessment v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
