@@ -2,10 +2,10 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.36 |
+| Revision | v1.37 |
 | 更新日 | 2026-10-12 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | P1-01～P1-07：PASS／COMPLETE（Completion Record）。P1-07はLF-P1-07-001（Outlook stale reference／Error 462）をv0.1.1で解消し、Compile・Warm／Cold E2E・Unresolved Fail Closed・P1-02回帰はPASS。CP-P1は未確立。P2 Boundary／5 Unit分割／P2-01仕様v0.1（Approved）／Scanner候補は追加済みだがCP-P1 ESTABLISHEDを前提としており、当地ではP2実装開始不可。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Current Phase / Focus | P1-01～P1-07：PASS／COMPLETE（Completion Record）。P1-07はLF-P1-07-001（Outlook stale reference／Error 462）をv0.1.1で解消し、Compile・Warm／Cold E2E・Unresolved Fail Closed・P1-02回帰はPASS。CP-P1は未確立。P2 Boundary／5 Unit分割／P2-01仕様v0.1（Approved）／Scanner候補／Core Test候補は追加済みだがCP-P1 ESTABLISHEDを前提としており、当地ではP2実装・検証開始不可。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
 | Project Status | P1-06のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
