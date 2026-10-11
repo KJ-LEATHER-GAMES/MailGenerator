@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.5 / 更新日: 2026-10-11
+Revision: v0.6 / 更新日: 2026-10-11
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -14,6 +14,7 @@ Revision: v0.5 / 更新日: 2026-10-11
 
 - `git status --short`と最新コミットを確認し、未コミットのユーザー変更を保持する。
 - フォルダ整備はPASS／CLOSED。FS-00～06とD-07配置を完了として扱い、過去の保留記録を根拠に再開しない。別PC成果物受入・実機検証は後続の別作業であり、順序と完了条件はOverviewのNext Actionを使用する。
+- P1-02は[Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>)でPASS／COMPLETE。Completion Recordの実行環境と当地の未同期`src`／Workbookを同一視せず、同期時はOverviewの受入条件に従う。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～08は過去記録。特に08をそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。

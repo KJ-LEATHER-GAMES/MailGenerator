@@ -2,11 +2,11 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.2 |
+| Revision | v1.3 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
-| Project Status | フォルダ整備はPASS／完了。別PC成果物の同期と実機検証は独立した後続作業。P2詳細進捗と実行コードCheckpointは当地未反映 |
+| Current Phase / Focus | P1-02：PASS／COMPLETE（Completion Record）。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Project Status | P1-02のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業であり、P2詳細進捗と実行コードCheckpointは当地未反映 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
 
@@ -31,8 +31,8 @@
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
 | BL-MVP-003実装計画整合 | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)はBL-MVP-003をExecution Baselineとし、[Plan Consistency Review](<reviews/Implementation Plan v0.3 Plan Consistency Review v0.1.md>)はPASS | DOC-MVP-IMPL v0.2のAFFECTED / REVISION REQUIREDは解消 |
-| P1-02 Production Patch候補 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)と[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)を追加。Static [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>)はPASS | 現行`src/modules/modOutlookAdapter_CP932.bas`は未置換。Compile・Runtime VerificationはNOT RUNで、P1-02 COMPLETEではない |
-| P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>)と[Inspector Lifecycle Correction Review](<reviews/P1-02 Smoke Test v0.2.2 Inspector Lifecycle Correction Review v0.1.md>)を追加。Cold StartのInspector一時生成を残留と誤判定しない | v0.2／v0.2.1aは履歴保持。3版は同じ`VB_Name`のため、v0.2.2だけをImport候補とする。Compile・再実行はNOT RUN |
+| P1-02完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>)はBL-MVP-003上でP1-02をPASS／COMPLETEと判定。Compile、Warm／Cold Start、P1-01 Regression、Explorer／Draft／Inspector LifecycleはPASS | BL-MVP-003は変更なし。当地の`src`／Workbookが同一実行環境であることは未確認 |
+| P1-02実装・Smoke Test資産 | [Cold Start Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)、[CP932候補Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>)、[Smoke Test v0.2.2](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>)を保持 | 同一`VB_Name`の旧Smoke Testは二重Importしない。当地でのImport・再実行は未実施 |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -45,7 +45,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
-3. P1-02 Cold Start PatchとSmoke Test v0.2.2候補の適用元・実行対象を照合し、Production Module／検証用Workbookへの受入を明示的に判断する。受入後に旧Smoke Testを二重ImportせずVBA Compile、Warm／Cold Start Smoke、Explorer／Draft／Inspector Lifecycle Evidence、P1-01 Regressionを別作業で実施する。
+3. P1-02は[Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/P1-02 Inspector WordEditor Connection Completion Record v0.1.md>)の実行環境で完了済みとして扱う。当地へ成果物を同期・受入する場合は、実行時点・Production Module・Smoke Test v0.2.2を照合し、旧Smoke Testを二重Importせずに別作業で確認する。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
