@@ -2,10 +2,10 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v1.31 |
+| Revision | v1.32 |
 | 更新日 | 2026-10-12 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
-| Current Phase / Focus | P1-01～P1-07：PASS／COMPLETE（Completion Record）。P1-07はLF-P1-07-001（Outlook stale reference／Error 462）をv0.1.1で解消し、Compile・Warm／Cold E2E・Unresolved Fail Closed・P1-02回帰はPASS。CP-P1は未確立。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
+| Current Phase / Focus | P1-01～P1-07：PASS／COMPLETE（Completion Record）。P1-07はLF-P1-07-001（Outlook stale reference／Error 462）をv0.1.1で解消し、Compile・Warm／Cold E2E・Unresolved Fail Closed・P1-02回帰はPASS。CP-P1は未確立。P2 Boundary Confirmationは追加済みだがCP-P1 ESTABLISHEDを前提としており、当地ではP2実装開始不可。開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
 | Project Status | P1-06のExecution EvidenceはPASS／COMPLETE。別PC成果物の同期と当地環境での実機検証は独立した後続作業 |
 | Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
@@ -58,6 +58,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 5. P1-05 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 6. P1-06 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
 7. P1-07 Completion Recordの実行環境と当地のProduction Module・Workbook・OFTを照合する場合は、別PC成果物の受入範囲と時点を先に確定する。完了記録を根拠に当地資産を推測で上書き・Importしない。
+8. P2を当地で開始する場合は、P1 Phase Verification RecordおよびCP-P1 Establishment Recordの正本・適用時点を確認し、OverviewのCP-P1未確立との整合を解消する。解消前にP2 Boundary Confirmationを実装開始の根拠として使わない。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 
