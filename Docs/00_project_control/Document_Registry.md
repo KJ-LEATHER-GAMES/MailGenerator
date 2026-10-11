@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.13
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.14
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.13 |
+| バージョン | v0.14 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.14 更新概要
+
+- DOC-MVP-REQ v0.1.9、DOC-MVP-DES v0.1.9、DOC-MVP-TESTSPEC v0.1.5をApproved Artifactとして最新存在版へ登録。3文書のCold Start Semantic Change整合性レビューはPASS。
+- BL-MVP-003 Candidateを登録。Candidate Creation GateはPASSだが、Approvalは未実施のためCurrent Approved BaselineはBL-MVP-002を維持する。
+- 既存Candidate版はレビュー時点の履歴として保持し、今回のApproved ArtifactやBaselineを置き換えるものではない。
 
 ### v0.13 更新概要
 
@@ -69,10 +75,10 @@
 
 | Document ID | Document | Latest Version | Status | Baseline Version | Role |
 |---|---|---:|---|---:|---|
-| DOC-MVP-REQ | [MVP Requirements v0.1.9 Candidate](<../01_specifications/MVP Requirements v0.1.9 Candidate 日本語版.md>) | v0.1.9 | Candidate | v0.1.8 | Requirement |
-| DOC-MVP-DES | [MVP Design v0.1.9 Candidate](<../01_specifications/MVP Design v0.1.9 Candidate 日本語版.md>) | v0.1.9 | Candidate | v0.1.8 | Design |
+| DOC-MVP-REQ | [MVP Requirements v0.1.9](<../01_specifications/MVP Requirements v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.8 | Requirement |
+| DOC-MVP-DES | [MVP Design v0.1.9](<../01_specifications/MVP Design v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.8 | Design |
 | DOC-TS-A | [Technical Spike A 実施仕様書](../01_specifications/technical_spikes/Technical%20Spike%20A%20実施仕様書.md) | v0.4 | Closed | v0.4 | Technical Evidence |
-| DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.5 Candidate](<../01_specifications/MVP Test Specification v0.1.5 Candidate 日本語版.md>) | v0.1.5 | Candidate | v0.1.4 | Test Definition |
+| DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.5](<../01_specifications/MVP Test Specification v0.1.5 日本語版.md>) | v0.1.5 | Approved | v0.1.4 | Test Definition |
 | DOC-MVP-IMPL | [Implementation Plan](../02_implementation/Implementation_Plan.md) | v0.2 | Approved | — | Implementation Plan |
 
 ### Registry Rule
@@ -80,7 +86,7 @@
 - `Latest Version` は存在する最新Revisionを示す。
 - `Baseline Version` はCurrent Approved Baselineに採用されているRevisionを示す。
 - Latest VersionとBaseline Versionは一致しなくてもよい。
-- BL-MVP-002 Approvalにより、DOC-MVP-REQ / DOC-MVP-DES / DOC-TS-A / DOC-MVP-TESTSPECについてはLatest VersionとBaseline Versionが一致する。
+- BL-MVP-002 Approval時点では、DOC-MVP-REQ / DOC-MVP-DES / DOC-TS-A / DOC-MVP-TESTSPECのLatest VersionとBaseline Versionが一致していた。後続のApproved v0.1.9／v0.1.5はBL-MVP-003 Candidateへ登録済みであり、BL-MVP-003 ApprovalまでCurrent Approved Baselineへは採用しない。
 - Latest Approved Revisionが存在しても、Baseline Candidateの整合性確認とApprovalが完了するまではCurrent Approved Baselineへ自動採用しない。
 - DOC-MVP-IMPLはCurrent Approved Baseline Manifestの構成文書ではないため、Baseline Version欄は `—` を維持する。
 
@@ -167,6 +173,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | TV-P1-001正式判定 | [技術検証記録](../03_verification/technical_validation/TV-P1-001_正式判定.md) |
 | TV-P1-02-001結果記録 | [Technical Verification Result Record](<../03_verification/technical_validation/TV-P1-02-001 Result Record v0.1.md>) |
 | P1-02 Cold Start影響レビュー | [Design / UX Impact Review](<reviews/P1-02 Classic Outlook Cold Start Design UX Impact Review v0.1.md>) |
+| Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
+| BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | Design／Test整合性 | [Cross-document Review](<reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md>) |
 | Implementation Plan Impact | [Impact Review](<reviews/DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md>) |
 | Implementation Plan整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.2 Plan Consistency Review v0.1.md>) |
