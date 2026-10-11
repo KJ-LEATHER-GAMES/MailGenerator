@@ -2,12 +2,12 @@
 
 | 項目 | 内容 |
 | --- | --- |
-| Revision | v0.5 |
+| Revision | v0.6 |
 | 更新日 | 2026-10-11 |
 | 文書の責務 | 現在地・未解決事項・次作業の正本 |
 | Current Phase / Focus | 開発：別PCでP2対応中（2026-10-11ユーザー確認）。当地：フォルダ整備CLOSED |
 | Project Status | フォルダ整備はPASS／完了。別PC成果物の同期と実機検証は独立した後続作業。P2詳細進捗と実行コードCheckpointは当地未反映 |
-| Current Approved Baseline | BL-MVP-002。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
+| Current Approved Baseline | BL-MVP-003。版構成・承認証跡は[Registry](Document_Registry.md)を参照 |
 | 実行資産 | [MailGeneratorNew.xlsm](../../MailGeneratorNew.xlsm)と[Templates](../../Templates/) |
 
 ## 確認した状態と根拠
@@ -17,6 +17,7 @@
 | フォルダ移行 | [移動台帳](Folder_Structure_Migration_Inventory_v0.1.md)第17節でクロージング。検証対象コミット`e54b5e0` | フォルダ整備PASS／CLOSED。実機動作やコード同期の完了を意味しない |
 | P0 | 過去Current.mdにCP-P0確立・P0-06 PASSの記録。原本は`f310667:Docs/01_Project_Control/Reviews/CurrentPosition/Current.md` | BL-MVP-001時点の記録。今回のWorkbookの判定には転用しない |
 | P1-01／DF-P1-001 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>)、[Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>)に完了・Closeを記録 | 旧Current.mdのOneDrive課題を新たな未解決課題として登録しない |
+| BL-MVP-003承認 | [Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md)のQuality GateはPASS。REQ v0.1.9／DES v0.1.9／TS-A v0.4／TESTSPEC v0.1.5を採用 | BL-MVP-002はSupersededとして履歴保持。Baseline承認はWorkbook／VBAの実機PASSや別PC成果物の同期を意味しない |
 | P0再構築後の回帰 | Registry旧v0.6は未確認と記載。[Handoff_08](<../05_handoff/history/Context Handoff_08.md>)第12・13節にはv0.2テストとMailGenerator3.xlsmでのPASS出力あり | 後続実施を示す履歴として保持。MailGeneratorNew.xlsmに対する再実行結果ではない |
 | 現在のWorkbook | ユーザー確認：別PCでP2対応中。WorkbookとOFTだけを当地へコピーし、更新したModules・文書は未反映。FS-04のP2系モジュール検出とも整合 | 差分は部分同期によるもの。フォルダ移行による欠落として扱わず、P2完了承認も推定しない |
 | OFT相対参照 | Settingsは`Templates\MailTemplate.oft`、参照先実在 | 静的確認。Outlookでの読込テスト未実施 |
@@ -29,6 +30,7 @@
 | 別PC成果物の同期 | 当地の文書整備はCurrent Handoffまで。別PCの更新文書・Modulesは未反映で、Workbook／OFTのみコピー済み。共通名ソースの内容一致も未確認。別PCの成果物受入は別作業とし、推測による補完・上書きを行わない |
 | 実機検証 | MailGeneratorNew.xlsmに対するCompile・Path Resolution・OFT／WordEditor・回帰テストは未実施。実施対象はコード対応と利用可能な環境を確認して確定する |
 | P0-03制限 | 選定したSettings Smoke Test v0.2にはローカルパス前提が残る。フォルダ整理ではコードを改修していない |
+| BL-MVP-003実装計画整合 | [Impact Review](<reviews/DOC-MVP-IMPL v0.2 BL-MVP-003 Impact Review v0.1.md>)はDOC-MVP-IMPL v0.2をAFFECTED / REVISION REQUIREDと判定 | v0.3 Candidateと整合性確認が必要。P1-02実施仕様もCold Start対応・Baseline更新の影響を受けるが、改訂版は未受入 |
 | 構成の例外 | 使用済みの旧空フォルダを整理済み。Docs／Evidenceの大文字表記は暫定維持し、共通ルール・移動台帳は00_project_controlへ統合済み |
 
 D-05のWorkbook確認と検証モジュール移動、D-06の現行テスト選定、D-10のPatch分類は完了。詳細証跡は移動台帳を参照する。
@@ -41,6 +43,7 @@ D-07は2026-10-11のユーザー承認に基づき、[Technical Spike A VBAコ�
 
 1. 別PCの更新文書・Modulesを受け入れる範囲と時点を確認し、コードの採用元・Checkpointを別作業で確定する。現在の差分を推測で解消しない。
 2. 実機検証の対象・環境を確定する。Compile・Path Resolution・OFT／WordEditor・関連Smoke／RegressionはNOT RUN。静的移行検証のPASSとアプリケーションのPASSを分ける。
+3. BL-MVP-003を基準に実装を継続する前に、DOC-MVP-IMPL v0.3 CandidateとP1-02実施仕様の必要な改訂を受入れ、整合性確認を行う。
 
 再開方法は[Current Handoff](../05_handoff/Current_Handoff.md)、環境・配置・テストの入口は[README](../../README.md)を参照する。技術仕様やBaselineのRevision表はこの文書に複製しない。
 

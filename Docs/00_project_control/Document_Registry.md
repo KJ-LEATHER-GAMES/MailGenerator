@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.14
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.15
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.14 |
+| バージョン | v0.15 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.15 更新概要
+
+- BL-MVP-003 Baseline Approval Quality GateのPASSとApproval Recordに基づき、Current Approved BaselineをBL-MVP-003へ更新。BL-MVP-002はSupersededへ移行し、Historical BaselineとしてManifestを保持する。
+- DOC-MVP-REQ v0.1.9、DOC-MVP-DES v0.1.9、DOC-MVP-TESTSPEC v0.1.5をBL-MVP-003のBaseline Versionへ採用。
+- DOC-MVP-IMPL v0.2のBL-MVP-003 ImpactはAFFECTED / REVISION REQUIRED。Implementation PlanはBaseline Manifestへ追加せず、v0.3 Candidateの作成・整合性確認を後続作業とする。
 
 ### v0.14 更新概要
 
@@ -86,8 +92,8 @@
 - `Latest Version` は存在する最新Revisionを示す。
 - `Baseline Version` はCurrent Approved Baselineに採用されているRevisionを示す。
 - Latest VersionとBaseline Versionは一致しなくてもよい。
-- BL-MVP-002 Approval時点では、DOC-MVP-REQ / DOC-MVP-DES / DOC-TS-A / DOC-MVP-TESTSPECのLatest VersionとBaseline Versionが一致していた。後続のApproved v0.1.9／v0.1.5はBL-MVP-003 Candidateへ登録済みであり、BL-MVP-003 ApprovalまでCurrent Approved Baselineへは採用しない。
-- Latest Approved Revisionが存在しても、Baseline Candidateの整合性確認とApprovalが完了するまではCurrent Approved Baselineへ自動採用しない。
+- BL-MVP-003 Approvalにより、DOC-MVP-REQ v0.1.9 / DOC-MVP-DES v0.1.9 / DOC-TS-A v0.4 / DOC-MVP-TESTSPEC v0.1.5がCurrent Approved Baselineを構成する。
+- Latest Approved Revisionが存在しても、Baseline Candidateの整合性確認とApprovalが完了するまではCurrent Approved Baselineへ自動採用しない。BL-MVP-003はこの条件を満たして承認済みである。
 - DOC-MVP-IMPLはCurrent Approved Baseline Manifestの構成文書ではないため、Baseline Version欄は `—` を維持する。
 
 ---
@@ -95,34 +101,34 @@
 ## 3. Current Approved Baseline
 
 ```text
-Baseline ID : BL-MVP-002
+Baseline ID : BL-MVP-003
 Status      : Approved
-Approved On : 2026-09-15
+Approved On : 2026-09-19
 ```
 
 ### Baseline Manifest
 
 | Document ID | Approved Version | Status |
 |---|---:|---|
-| DOC-MVP-REQ | v0.1.8 | Approved |
-| DOC-MVP-DES | v0.1.8 | Approved |
+| DOC-MVP-REQ | v0.1.9 | Approved |
+| DOC-MVP-DES | v0.1.9 | Approved |
 | DOC-TS-A | v0.4 | Closed / PASS |
-| DOC-MVP-TESTSPEC | v0.1.4 | Approved |
+| DOC-MVP-TESTSPEC | v0.1.5 | Approved |
 
 正式表現：
 
 ```text
-BL-MVP-002
+BL-MVP-003
 │
-├─ DOC-MVP-REQ      MVP Requirements v0.1.8
-├─ DOC-MVP-DES      MVP Design v0.1.8
+├─ DOC-MVP-REQ      MVP Requirements v0.1.9
+├─ DOC-MVP-DES      MVP Design v0.1.9
 ├─ DOC-TS-A         Technical Spike A v0.4 CLOSED / PASS
-└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.4
+└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.5
 ```
 
 Approval Evidence：
 
-[BL-MVP-002 Approval Record v0.1](baselines/BL-MVP-002_Approval_Record_v0.1.md)
+[BL-MVP-003 Approval Record v0.1](baselines/BL-MVP-003_Approval_Record_v0.1.md)
 
 Baseline Approval Quality Gate：
 
@@ -138,6 +144,27 @@ Quality Gate             : PASS
 ---
 
 ## 4. Historical Baseline
+
+### BL-MVP-002
+
+```text
+Baseline ID   : BL-MVP-002
+Status        : Superseded
+Approved On   : 2026-09-15
+Superseded On : 2026-09-19
+Superseded By : BL-MVP-003
+```
+
+Historical Manifest：
+
+| Document ID | Approved Version | Status |
+|---|---:|---|
+| DOC-MVP-REQ | v0.1.8 | Approved |
+| DOC-MVP-DES | v0.1.8 | Approved |
+| DOC-TS-A | v0.4 | Closed / PASS |
+| DOC-MVP-TESTSPEC | v0.1.4 | Approved |
+
+BL-MVP-002は削除・Invalidatedせず、BL-MVP-003承認前の正式Baselineとして保持する。
 
 ### BL-MVP-001
 
@@ -175,6 +202,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02 Cold Start影響レビュー | [Design / UX Impact Review](<reviews/P1-02 Classic Outlook Cold Start Design UX Impact Review v0.1.md>) |
 | Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
+| BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |
+| BL-MVP-003のImplementation影響 | [Impact Review](<reviews/DOC-MVP-IMPL v0.2 BL-MVP-003 Impact Review v0.1.md>) |
 | Design／Test整合性 | [Cross-document Review](<reviews/MVP Design v0.1.8 × MVP Test Specification v0.1.4 Cross-document Consistency Review.md>) |
 | Implementation Plan Impact | [Impact Review](<reviews/DOC-MVP-IMPL v0.1 BL-MVP-002 Impact Review v0.1.md>) |
 | Implementation Plan整合性 | [Plan Consistency Review](<reviews/Implementation Plan v0.2 Plan Consistency Review v0.1.md>) |
