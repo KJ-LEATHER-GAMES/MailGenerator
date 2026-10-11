@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.57
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.58
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.57 |
+| バージョン | v0.58 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.58 更新概要
+
+- [P2-01 MTS-SCAN-005 Integration Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01MtsScan005IntegrationTest_v0.1_CP932.bas>)を追加。Test用OFTのSubject／BodyTextのみをScanner Inputとし、To／CC／BCCを除外する境界を確認する検証専用Moduleである。
+- Moduleが参照するTest用OFTの存在は確認したが、WorkbookへのImport、VBA Compile、実行、P2-01 VerificationおよびPASS／COMPLETE判定は未実施。CP-P1未確立のためP2検証開始を許可しない。
 
 ### v0.57 更新概要
 
@@ -482,6 +487,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-01 Production候補 | [Template Scanner CP932 Module v0.1.1](<../02_implementation/P2_Scan_Sync/modTemplateScanner_P2-01_v0.1.1_CP932.bas>) |
 | P2-01 Core Test候補 | [CP932 Core Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01FullTemplateScannerCoreTest_v0.1_CP932.bas>) |
 | P2-01 Integration Test候補 | [CP932 Integration Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01FullTemplateScannerIntegrationTest_v0.1_CP932.bas>) |
+| P2-01 MTS-SCAN-005 Integration Test候補 | [CP932 Boundary Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01MtsScan005IntegrationTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
