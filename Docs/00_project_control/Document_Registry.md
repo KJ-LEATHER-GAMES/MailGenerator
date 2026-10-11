@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.33
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.34
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.33 |
+| バージョン | v0.34 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-11 |
+
+### v0.34 更新概要
+
+- P1-05 `modSubjectRenderer`／`modOutlookAdapter` Production候補、Minimal Render Core／Integration Test v0.1、およびProduction Patch Static Reviewを追加。Static ReviewはPASSで、Requirement／Design／Test Specification／Baselineへの影響はNONEである。
+- 本候補は`src`／WorkbookへのImport・VBA Compile・Core／Integration／Negative Verification・P1-01～P1-04 Regression・P1-05 PASS／COMPLETEを未実施とする。Static ReviewのPASSはRuntime Verificationを意味しない。
 
 ### v0.33 更新概要
 
@@ -315,6 +320,10 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-04完了Project Control更新 | [Applied Patch](<../90_archive/applied_patches/Project Control P1-04 Completion Update Patch v0.1.md>) |
 | P1-05実施仕様v0.1 | [Approved Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/P1-05 Minimal Render 実施仕様 v0.1.md>) |
 | P1-05実施仕様v0.1整合性 | [Consistency Review](<reviews/P1-05 Minimal Render 実施仕様 v0.1 Consistency Review v0.1.md>) |
+| P1-05 Production候補 | [Subject Renderer CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modSubjectRenderer_P1-05_v0.1_CP932.bas>)／[Outlook Adapter CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-05_Minimal_Render/modOutlookAdapter_P1-05_v0.1_CP932.bas>) |
+| P1-05 Core Test候補 | [CP932 Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderCoreTest_v0.1_CP932.bas>) |
+| P1-05 Integration Test候補 | [CP932 Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_05MinimalRenderIntegrationTest_v0.1_CP932.bas>) |
+| P1-05 Production Patch静的レビュー | [Static Review](<reviews/P1-05 Minimal Render Production Patch Static Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
