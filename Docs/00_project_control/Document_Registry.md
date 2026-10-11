@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.39
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.40
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.39 |
+| バージョン | v0.40 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.40 更新概要
+
+- P1-06 Production実装手順、`modUnresolvedChecker` CP932候補、Core Test、およびIntegration Testを追加。P1 Interim Error Mappingとして`RenderError`を使用するが、正式なUnresolved Error分類はP6で最終化する。
+- 本候補は`src`／WorkbookへのImport、VBA Compile、Core／Integration実行、P1-06 PASS／COMPLETEを未実施とする。既存実行資産との`VB_Name`衝突は確認されず、同名Moduleを二重Importしない。
 
 ### v0.39 更新概要
 
@@ -357,6 +362,10 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-06実施仕様v0.1 | [Draft Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Draft.md>) |
 | P1-06実施仕様v0.1（Approved） | [Approved Implementation Unit Specification](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Minimal Unresolved Checker 実施仕様 v0.1.md>) |
 | P1-06実施仕様v0.1整合性 | [Consistency Review](<reviews/P1-06 Minimal Unresolved Checker 実施仕様 v0.1 Consistency Review v0.1.md>) |
+| P1-06 Production実装手順 | [Implementation Package](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/P1-06 Production 実装手順 v0.1.md>) |
+| P1-06 Production候補 | [Unresolved Checker CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-06_Minimal_Unresolved_Checker/modUnresolvedChecker_P1-06_v0.1_CP932.bas>) |
+| P1-06 Core Test候補 | [CP932 Core Test](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerCoreTest_v0.1_CP932.bas>) |
+| P1-06 Integration Test候補 | [CP932 Integration Test](<../../tests/vba/P1_Walking_Skeleton/modP1_06MinimalUnresolvedCheckerIntegrationTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
