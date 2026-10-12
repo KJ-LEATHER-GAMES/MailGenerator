@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.84
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.85
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.84 |
+| バージョン | v0.85 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.85 更新概要
+
+- [P2-03 VariableDefinition候補 v0.1.1 fix1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.1_CP932_fix1.bas>)を追加。既存v0.1.1候補の`ValidateCurrentStateCollection`にある重複連結された`rowIndex`代入を単一代入へ修正する未Import候補であり、既存v0.1およびv0.1.1候補は履歴・比較用に保持する。
+- 当地では修正版候補のWorkbook Import、VBA Compile、Regression実行およびP2-03 PASS／COMPLETEは未実施であり、CP-P1未確立のため開始しない。既存`src`、Workbook、OFTおよびBaselineは変更しない。
 
 ### v0.84 更新概要
 
