@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.74
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.75
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.74 |
+| バージョン | v0.75 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.75 更新概要
+
+- [P2-03 VariableDefinition Sync Persistence Finding Assessment v0.1](<reviews/P2-03 VariableDefinition Sync Persistence Finding Assessment v0.1.md>)を条件付き記録として追加。添付記録はVBA CompileおよびCore C01～C12をPASS、Production／Test Artifact／Requirement／DesignのActive Findingなし、Blocking Finding 0と報告し、OBS-P2-03-001を実装確認済みとする。
+- 当地では当該Compile・Core実行・Table復元を独立確認していない。従って追加はP2-03 PASS／COMPLETE、Production候補のWorkbook Import、CP-P1確立、P2 Phase／CP-P2完了またはBaseline更新を意味しない。
 
 ### v0.74 更新概要
 
@@ -592,6 +597,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-03 Production Patch設計 | [Production Patch Design v0.1](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence Production Patch Design v0.1.md>) |
 | P2-03 Production候補 | [VariableDefinition Data Module v0.1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.bas>) |
 | P2-03 Core Test候補 | [CP932 Core Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceCoreTest_v0.1_CP932.bas>) |
+| P2-03 Finding判定 | [Finding Assessment v0.1](<reviews/P2-03 VariableDefinition Sync Persistence Finding Assessment v0.1.md>) |
 | P2-02 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Compatibility Test候補 | [CP932 Compatibility Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCompatibilityTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
