@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.79
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.80
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.79 |
+| バージョン | v0.80 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.80 更新概要
+
+- [P2-04 Manual Sync Integration Boundary Confirmation v0.1](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration Boundary Confirmation v0.1.md>)および[Cross-document Consistency Check v0.13](<reviews/P2-04 Manual Sync Integration Cross-document Consistency Check v0.13.md>)を条件付き記録として追加。前者は`modSyncApplication`によるManual Sync Application Orchestrationの責務境界、後者はBL-MVP-003およびP2-01～03との整合性をPASS with Non-blocking Clarification（Blocking Finding 0）と記録する。
+- 両文書はP2-01～03のPASS／COMPLETEおよびCP-P1 ESTABLISHEDを前提に含むが、当地ではP2成果物の実行環境・Workbook／Module同期・実行結果を独立確認していない。従って追加はP2-04実装・Workbook Import・Compile・検証・PASS／COMPLETE、当地のP2受入、CP-P1確立、P2 Phase／CP-P2完了またはBaseline更新を意味しない。
 
 ### v0.79 更新概要
 
