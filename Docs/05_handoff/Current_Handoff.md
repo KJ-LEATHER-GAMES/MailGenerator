@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.74 / 更新日: 2026-10-12
+Revision: v0.75 / 更新日: 2026-10-12
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -38,7 +38,7 @@ Revision: v0.74 / 更新日: 2026-10-12
 - [P2-02 Sync Engine候補 v0.1.1](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.1_CP932.bas>)、[P2-03 VariableDefinition候補 v0.1.1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.1_CP932.bas>)、[P2-02 Bootstrap Regression Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffBootstrapRegressionTest_v0.1_CP932.bas>)および[P2-03 Bootstrap Regression Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceBootstrapRegressionTest_v0.1_CP932.bas>)を条件付きで追加。IF-P2-04-001向けの未Import／未実行候補であり、既存v0.1候補を置換しない。当地でのImport・Compile・Regression実行・P2-02／P2-03／P2-04 PASS／COMPLETEは未実施。既存`src`、Workbook、OFTおよびBaselineを変更しない。
 - [P2-03 VariableDefinition候補 v0.1.1 fix1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.1_CP932_fix1.bas>)を条件付きで追加。既存v0.1.1候補の`ValidateCurrentStateCollection`にある重複連結された`rowIndex`代入を単一代入へ修正する未Import候補であり、既存v0.1およびv0.1.1候補を置換しない。当地でのImport・Compile・Regression実行・P2-03 PASS／COMPLETEは未実施。既存`src`、Workbook、OFTおよびBaselineを変更しない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
-- [history](history/)の01～16は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15または16を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
+- [history](history/)の01～17は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16または17を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。

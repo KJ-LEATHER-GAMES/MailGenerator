@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.85
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.86
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.85 |
+| バージョン | v0.86 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.86 更新概要
+
+- [Context Handoff_17](<../05_handoff/history/Context Handoff_17.md>)を過去時点の引継ぎとして保管。別環境におけるP2-04 Local Verification、IF-P2-04-001の追加調査、およびP2-02／P2-03再Correction・P2-04検証再開の後続作業を記録する。
+- 本文の別環境での検出結果・進捗・Next Actionは現行状態の根拠にしない。当地ではP2成果物の実行環境・Workbook／Module同期・実行結果を独立確認しておらず、Project OverviewとCurrent HandoffのCP-P1未確立・未受入状態を維持する。
 
 ### v0.85 更新概要
 
