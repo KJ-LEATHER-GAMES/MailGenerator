@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.70
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.71
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.70 |
+| バージョン | v0.71 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.71 更新概要
+
+- [P2-03 VariableDefinition Sync Persistence 実施仕様 v0.1-Candidate](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence 実施仕様 v0.1-Candidate.md>)を条件付きCandidate Artifactとして追加。`modVariableDefinitionData`へ`ApplySyncDiff`を追加し、P2-02のSyncDiffResultを再計算せずPreflight後にPersistenceするImplementation Detailを定義する。
+- CandidateはReview／Approved化前であり、当地では前提P2-02の実行結果を独立確認していない。従って追加はP2-03実装、WorkbookへのImport、Compile、検証、PASS／COMPLETE、CP-P1確立、P2 Phase／CP-P2完了またはBaseline更新を意味しない。
 
 ### v0.70 更新概要
 
@@ -566,6 +571,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-02 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P2-02 Sync Diff Core Production Patch Review v0.1.md>) |
 | P2-02完了判定 | [Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-02 Sync Diff Core Completion Record v0.1.md>) |
 | P2-03 VariableDefinition Sync Persistence実装境界確認v0.1 | [Conditional Boundary Confirmation](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence Boundary Confirmation v0.1.md>) |
+| P2-03 VariableDefinition Sync Persistence実施仕様v0.1 | [Conditional Candidate Implementation Unit Specification](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence 実施仕様 v0.1-Candidate.md>) |
 | P2-02 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Compatibility Test候補 | [CP932 Compatibility Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCompatibilityTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
