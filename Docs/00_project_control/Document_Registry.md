@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.60
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.61
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.60 |
+| バージョン | v0.61 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.61 更新概要
+
+- [P2-01 Full Template Scanner Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-01 Full Template Scanner Completion Record v0.1.md>)を追加。添付記録は別環境のVBA Compile、Core C1～C11、Baseline OFT／MTS-SCAN-005 Integration、P1-04 RegressionおよびReviewを根拠に、P2-01をPASS／COMPLETEと報告している。
+- 当地ではCompletion Recordの実行環境・Workbook／Module同期・実行結果を独立確認していない。従って本記録の追加はCP-P1確立、P2 Phase Exit、Baseline更新または当地のP2-01受入を意味しない。
 
 ### v0.60 更新概要
 
@@ -501,6 +506,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-01 MTS-SCAN-005 Integration Test候補 | [CP932 Boundary Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01MtsScan005IntegrationTest_v0.1_CP932.bas>) |
 | P2-01 Finding判定 | [Finding Assessment v0.1.1](<reviews/P2-01 Full Template Scanner Finding Assessment v0.1.1.md>) |
 | P2-01 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P2-01 Full Template Scanner Production Patch Review v0.1.md>) |
+| P2-01完了判定 | [Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-01 Full Template Scanner Completion Record v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
