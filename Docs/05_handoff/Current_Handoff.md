@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.69 / 更新日: 2026-10-12
+Revision: v0.70 / 更新日: 2026-10-12
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -32,6 +32,7 @@ Revision: v0.69 / 更新日: 2026-10-12
 - [P2-03 Negative Verification Finding Assessment v0.1](<../00_project_control/reviews/P2-03 Negative Verification Finding Assessment v0.1.md>)および[P2-03 Compatibility / Regression / Static Production Review v0.1](<../00_project_control/reviews/P2-03 Compatibility - Regression - Static Production Review v0.1.md>)を条件付き記録として追加。添付記録はN01～N18、K1～K3、既存P0 Read Regression、Static Review S01～S22およびVBA CompileをPASS、Blocking Finding 0と報告するが、当地での独立実行結果ではない。従ってP2-03 PASS／COMPLETE、Workbook ImportまたはBaseline更新は行わない。
 - [P2-03 Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence Completion Record v0.1.md>)、[Final Finding Assessment v0.1](<../00_project_control/reviews/P2-03 VariableDefinition Sync Persistence Final Finding Assessment v0.1.md>)および[Production Patch Review v0.1](<../00_project_control/reviews/P2-03 VariableDefinition Sync Persistence Production Patch Review v0.1.md>)を条件付き記録として追加。添付記録はP2-03 PASS／COMPLETE、Active／Blocking Finding 0を報告するが、当地で実行環境・Workbook／Module同期・実行結果を独立確認していない。従って当地のP2-03受入、CP-P1確立、P2 Phase／CP-P2完了、Workbook ImportまたはBaseline更新は行わない。
 - [P2-04 Manual Sync Integration Boundary Confirmation v0.1](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration Boundary Confirmation v0.1.md>)および[Cross-document Consistency Check v0.13](<../00_project_control/reviews/P2-04 Manual Sync Integration Cross-document Consistency Check v0.13.md>)を条件付き記録として追加。添付記録はP2-01～03のPASS／COMPLETEを前提にManual Syncの責務境界をConfirmed、整合性をPASS with Non-blocking Clarification（Blocking Finding 0）とするが、当地のP2受入・CP-P1確立・P2-04実装開始の根拠にはしない。
+- [P2-04 Manual Sync Integration 実施仕様 v0.1（Candidate）](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration 実施仕様 v0.1 — Candidate.md>)および[Cross-document Consistency Review](<../00_project_control/reviews/P2-04 Manual Sync Integration 実施仕様 v0.1 Cross-document Consistency Review.md>)を条件付き記録として追加。ReviewはCorrection反映後にAPPROVED、Blocking Finding 0とするが、当地では前提P2成果物とCP-P1を独立確認していないため、P2-04の正式承認・実装・受入・Workbook Import・Compile・検証を開始しない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～16は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15または16を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。

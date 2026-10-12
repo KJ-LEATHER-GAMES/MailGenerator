@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.80
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.81
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.80 |
+| バージョン | v0.81 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.81 更新概要
+
+- [P2-04 Manual Sync Integration 実施仕様 v0.1（Candidate）](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration 実施仕様 v0.1 — Candidate.md>)および[Cross-document Consistency Review](<reviews/P2-04 Manual Sync Integration 実施仕様 v0.1 Cross-document Consistency Review.md>)を条件付き記録として追加。Reviewは1件のCorrection反映後にAPPROVED、Residual Conflict／Blocking Finding 0と記録する。
+- CandidateおよびReviewはP2-01～03のPASS／COMPLETEとCP-P1 ESTABLISHEDを前提に含む。当地ではP2成果物の実行環境・Workbook／Module同期・実行結果を独立確認していないため、追加はP2-04の正式承認・実装・Workbook Import・Compile・検証・PASS／COMPLETE、当地のP2受入、CP-P1確立、P2 Phase／CP-P2完了またはBaseline更新を意味しない。
 
 ### v0.80 更新概要
 
