@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.67 / 更新日: 2026-10-12
+Revision: v0.68 / 更新日: 2026-10-12
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -32,7 +32,7 @@ Revision: v0.67 / 更新日: 2026-10-12
 - [P2-03 Negative Verification Finding Assessment v0.1](<../00_project_control/reviews/P2-03 Negative Verification Finding Assessment v0.1.md>)および[P2-03 Compatibility / Regression / Static Production Review v0.1](<../00_project_control/reviews/P2-03 Compatibility - Regression - Static Production Review v0.1.md>)を条件付き記録として追加。添付記録はN01～N18、K1～K3、既存P0 Read Regression、Static Review S01～S22およびVBA CompileをPASS、Blocking Finding 0と報告するが、当地での独立実行結果ではない。従ってP2-03 PASS／COMPLETE、Workbook ImportまたはBaseline更新は行わない。
 - [P2-03 Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-03 VariableDefinition Sync Persistence Completion Record v0.1.md>)、[Final Finding Assessment v0.1](<../00_project_control/reviews/P2-03 VariableDefinition Sync Persistence Final Finding Assessment v0.1.md>)および[Production Patch Review v0.1](<../00_project_control/reviews/P2-03 VariableDefinition Sync Persistence Production Patch Review v0.1.md>)を条件付き記録として追加。添付記録はP2-03 PASS／COMPLETE、Active／Blocking Finding 0を報告するが、当地で実行環境・Workbook／Module同期・実行結果を独立確認していない。従って当地のP2-03受入、CP-P1確立、P2 Phase／CP-P2完了、Workbook ImportまたはBaseline更新は行わない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
-- [history](history/)の01～15は過去記録。14はP2-01の外部実行記録を含む再開用スナップショットであり、15はP2-02外部完了記録を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14または15を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
+- [history](history/)の01～16は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15または16を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。
