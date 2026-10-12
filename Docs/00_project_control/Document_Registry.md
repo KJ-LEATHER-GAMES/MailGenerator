@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.65
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.66
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.65 |
+| バージョン | v0.66 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.66 更新概要
+
+- [TF-P2-02-001 Core Test Local Name Collision Correction v0.1](<../03_verification/technical_validation/TF-P2-02-001 Core Test Local Name Collision Correction v0.1.md>)と[P2-02 Core Test候補 v0.1.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCoreTest_v0.1.1_CP932.bas>)を追加。Test Artifact内のLocal VariableとFixture Function名の衝突を修正するもので、Production Module・Requirement・Design・Baselineは変更しない。
+- v0.1.1を現行Core Test候補とし、v0.1は履歴として保持する。WorkbookへのImport、VBA Compile、Core再実行、P2-02 PASS／COMPLETEは未実施であり、CP-P1未確立のため開始しない。
 
 ### v0.65 更新概要
 
@@ -533,7 +538,9 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-02 Sync Diff Core実施仕様v0.1整合性 | [Cross-document Consistency Review](<reviews/P2-02 Sync Diff Core 実施仕様 v0.1 Cross-document Consistency Review v0.1.md>) |
 | P2-02 Production候補 | [Sync Engine CP932 Module v0.1](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1_CP932.bas>) |
 | P2-02 Production実装記録 | [Production Implementation Record v0.1](<../02_implementation/P2_Scan_Sync/P2-02 Sync Diff Core Production Implementation Record v0.1.md>) |
-| P2-02 Core Test候補 | [CP932 Core Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCoreTest_v0.1_CP932.bas>) |
+| P2-02 Core Test候補v0.1 | [CP932 Core Test（履歴）](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCoreTest_v0.1_CP932.bas>) |
+| P2-02 Core Test候補v0.1.1 | [CP932 Core Test（現行候補）](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCoreTest_v0.1.1_CP932.bas>) |
+| TF-P2-02-001 Core Test修正 | [Test Artifact Correction](<../03_verification/technical_validation/TF-P2-02-001 Core Test Local Name Collision Correction v0.1.md>) |
 | P2-02 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Compatibility Test候補 | [CP932 Compatibility Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCompatibilityTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
