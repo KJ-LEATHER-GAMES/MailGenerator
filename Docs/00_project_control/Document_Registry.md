@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.67
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.68
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.67 |
+| バージョン | v0.68 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.68 更新概要
+
+- [P2-02 Sync Diff Core Production Patch Review v0.1](<reviews/P2-02 Sync Diff Core Production Patch Review v0.1.md>)を条件付き記録として追加。添付記録はApproved Specification §69 Static Review Checklist 23／23、VBA Compile、Core C1～C18、Negative N1～N6およびCompatibility K1～K2をPASS、Production Patch不要、Blocking Finding 0と報告する。
+- 当地では当該Compile・検証結果を独立確認していない。従って追加はP2-02 PASS／COMPLETE、CP-P1確立、WorkbookへのImportまたはBaseline更新を意味しない。
 
 ### v0.67 更新概要
 
@@ -547,6 +552,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-02 Core Test候補v0.1.1 | [CP932 Core Test（現行候補）](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCoreTest_v0.1.1_CP932.bas>) |
 | TF-P2-02-001 Core Test修正 | [Test Artifact Correction](<../03_verification/technical_validation/TF-P2-02-001 Core Test Local Name Collision Correction v0.1.md>) |
 | P2-02 Finding判定 | [Finding Assessment v0.1](<reviews/P2-02 Sync Diff Core Finding Assessment v0.1.md>) |
+| P2-02 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P2-02 Sync Diff Core Production Patch Review v0.1.md>) |
 | P2-02 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Compatibility Test候補 | [CP932 Compatibility Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCompatibilityTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
