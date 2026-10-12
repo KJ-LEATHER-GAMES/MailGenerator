@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.81
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.82
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.81 |
+| バージョン | v0.82 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.82 更新概要
+
+- [P2-04 Production Patch Design v0.1](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration Production Patch Design v0.1.md>)、[P2-04 Production候補 v0.1](<../02_implementation/P2_Scan_Sync/modSyncApplication_P2-04_v0.1_CP932.bas>)および[P2-04 Integration Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_04ManualSyncIntegrationTest_v0.1_CP932.bas>)を条件付きで追加。Production候補は新規`modSyncApplication`、Test候補はPublic `ExecuteManualSync`を対象とするImplementation Verificationであり、いずれも未Importの記録である。
+- 当地ではP2-04候補のWorkbook Import、VBA Compile、Integration Test実行およびP2-04 PASS／COMPLETEは未実施であり、CP-P1未確立のため開始しない。既存`src`、Workbook、OFTおよびBaselineは変更しない。
 
 ### v0.81 更新概要
 
