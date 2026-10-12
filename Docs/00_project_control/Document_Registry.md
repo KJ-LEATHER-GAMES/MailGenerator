@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.83
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.84
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.83 |
+| バージョン | v0.84 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.84 更新概要
+
+- [P2-02 Sync Engine候補 v0.1.1](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.1_CP932.bas>)、[P2-03 VariableDefinition候補 v0.1.1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.1_CP932.bas>)、[P2-02 Bootstrap Regression Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffBootstrapRegressionTest_v0.1_CP932.bas>)および[P2-03 Bootstrap Regression Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceBootstrapRegressionTest_v0.1_CP932.bas>)を追加。IF-P2-04-001のBootstrap Metadata Regressionを対象とする後続候補であり、既存v0.1候補は履歴・比較用に保持する。
+- 当地では4候補のWorkbook Import、VBA Compile、Regression実行およびP2-02／P2-03／P2-04 PASS／COMPLETEは未実施であり、CP-P1未確立のため開始しない。既存`src`、Workbook、OFTおよびBaselineは変更しない。
 
 ### v0.83 更新概要
 
