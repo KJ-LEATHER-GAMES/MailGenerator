@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.59
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.60
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.59 |
+| バージョン | v0.60 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.60 更新概要
+
+- [P2-01 Full Template Scanner Finding Assessment v0.1.1](<reviews/P2-01 Full Template Scanner Finding Assessment v0.1.1.md>)を追加し、v0.1の有効参照を置換。別環境でのTF-P2-01-001（MTS-SCAN-005 Test Pathの重複Separator）修正・再検証をRESOLVED／CLOSED、Production Code変更なしと記録している。
+- [P2-01 Full Template Scanner Production Patch Review v0.1](<reviews/P2-01 Full Template Scanner Production Patch Review v0.1.md>)を追加。添付記録はP1-04との差分、Public APIおよび既存Contract維持をReview PASS、Blocking Finding 0と報告している。
+- 当地では両記録の実行環境・Workbook／Module同期・実行結果を独立確認していない。従って追加・有効参照更新はP2-01 PASS／COMPLETE、CP-P1確立またはBaseline更新を意味しない。
 
 ### v0.59 更新概要
 
@@ -493,7 +499,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-01 Core Test候補 | [CP932 Core Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01FullTemplateScannerCoreTest_v0.1_CP932.bas>) |
 | P2-01 Integration Test候補 | [CP932 Integration Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01FullTemplateScannerIntegrationTest_v0.1_CP932.bas>) |
 | P2-01 MTS-SCAN-005 Integration Test候補 | [CP932 Boundary Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_01MtsScan005IntegrationTest_v0.1_CP932.bas>) |
-| P2-01 Finding判定 | [Finding Assessment v0.1](<reviews/P2-01 Full Template Scanner Finding Assessment v0.1.md>) |
+| P2-01 Finding判定 | [Finding Assessment v0.1.1](<reviews/P2-01 Full Template Scanner Finding Assessment v0.1.1.md>) |
+| P2-01 Production Patchレビュー | [Production Patch Review v0.1](<reviews/P2-01 Full Template Scanner Production Patch Review v0.1.md>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
 | P1-02 Cold Start Production Patch静的レビュー | [Patch Review](<reviews/modOutlookAdapter P1-02 v0.2 Cold Start Production Patch Review v0.1.md>) |
 | P1-02 Smoke Test v0.2.2現行候補 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.2_CP932.bas>) |
