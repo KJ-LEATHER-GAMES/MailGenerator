@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.75
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.76
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.75 |
+| バージョン | v0.76 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.76 更新概要
+
+- [P2-03 Negative Test候補 v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceNegativeTest_v0.1_CP932.bas>)を追加。`ApplySyncDiff`のNothing入力、Structure／値域／Invariant／重複・行不整合、Table／ColumnおよびRuntime Write FailureをN01～N18で確認し、実行後にTable状態を復元する検証候補である。
+- 当地ではWorkbook Import、VBA Compile、N01～N18の実行およびP2-03 PASS／COMPLETEは未実施であり、CP-P1未確立のため開始しない。Workbook・OFT・`src`・Baselineは変更しない。
 
 ### v0.75 更新概要
 
@@ -598,6 +603,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P2-03 Production候補 | [VariableDefinition Data Module v0.1](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.bas>) |
 | P2-03 Core Test候補 | [CP932 Core Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceCoreTest_v0.1_CP932.bas>) |
 | P2-03 Finding判定 | [Finding Assessment v0.1](<reviews/P2-03 VariableDefinition Sync Persistence Finding Assessment v0.1.md>) |
+| P2-03 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_03SyncPersistenceNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Negative Test候補 | [CP932 Negative Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffNegativeTest_v0.1_CP932.bas>) |
 | P2-02 Compatibility Test候補 | [CP932 Compatibility Test v0.1](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffCompatibilityTest_v0.1_CP932.bas>) |
 | P1-02 Cold Start Production Patch候補 | [Patch](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart.patch>)／[CP932 Module](<../02_implementation/P1_Walking_Skeleton/P1-02_WordEditor/modOutlookAdapter_P1-02_v0.2_ColdStart_CP932.bas>) |
