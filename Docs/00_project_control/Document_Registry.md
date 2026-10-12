@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.82
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.83
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.82 |
+| バージョン | v0.83 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.83 更新概要
+
+- [IF-P2-04-001 Initial Sync Metadata Bootstrap Gap v0.1](<reviews/IF-P2-04-001 Initial Sync Metadata Bootstrap Gap v0.1.md>)、[Design Patch Definition v0.1](<reviews/IF-P2-04-001 Design Patch Definition v0.1.md>)および[Test Specification Impact v0.1](<reviews/IF-P2-04-001 Test Specification Impact v0.1.md>)を外部検出の影響・Patch候補記録として追加。FindingはInitial Sync Metadata Bootstrap GapをBlockingのDesign Gapとし、Design v0.1.10およびTest Specification v0.1.6をPatch Target Candidateとして提示する。
+- これらは現行のDesign v0.1.9、Test Specification v0.1.5、Requirements、Implementation PlanおよびBL-MVP-003を改訂・承認・置換しない。当地では検出環境・P2-04実行結果・前提P2成果物を独立確認していないため、IF-P2-04-001の受入、Production修正、Workbook Import、Compile、再検証、P2-04 PASS／COMPLETEまたはBaseline更新を行わない。
 
 ### v0.82 更新概要
 
