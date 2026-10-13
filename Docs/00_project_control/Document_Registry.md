@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.87
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.88
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.87 |
+| バージョン | v0.88 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.88 更新概要
+
+- [P2-02 v0.1.2 Production候補](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.2_CP932.bas>)、[v0.1.1→v0.1.2未適用diff](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.1_to_v0.1.2.diff>)、[Detection History Regression Test候補](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffDetectionHistoryRegressionTest_v0.1_CP932.bas>)、[v0.1.2 Regression Suite候補](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffV012RegressionSuite_v0.1_CP932.bas>)および[Regression Execution Guide](<../03_verification/technical_validation/P2-02_v0.1.2_Regression_Execution_Guide_v0.1.md>)を追加。IF-P2-04-001のDetection History補正を対象とする未Import／未実行候補であり、既存v0.1およびv0.1.1候補は履歴・比較用に保持する。
+- 添付ガイドはBL-MVP-004をExecution Baselineとして記載するが、当地ではBL-MVP-004を受入しておらず、Current Approved Baseline BL-MVP-003を維持する。当地でのWorkbook Import、VBA Compile、Regression実行、P2-02 PASS／COMPLETE、Baseline更新または既存`src`／Workbook／OFTの変更は行わない。
 
 ### v0.87 更新概要
 

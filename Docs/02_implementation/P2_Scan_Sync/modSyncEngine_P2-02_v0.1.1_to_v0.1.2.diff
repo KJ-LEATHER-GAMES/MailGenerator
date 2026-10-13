@@ -1,0 +1,100 @@
+--- modSyncEngine_P2-02_v0.1.1_CP932.bas
++++ modSyncEngine_P2-02_v0.1.2_CP932.bas
+@@ -119,7 +119,7 @@
+
+             If IsStatusActive(CStr(currentDefinition(FIELD_STATUS))) Then
+
+-                If IsMetadataUninitialized(currentDefinition) Then
++                If IsDetectionHistoryUninitialized(currentDefinition) Then
+                     firstDetectedAtValue = syncTimestamp
+                 Else
+                     firstDetectedAtValue = currentDefinition(FIELD_FIRST_DETECTED_AT)
+@@ -138,7 +138,7 @@
+
+             ElseIf IsStatusUnused(CStr(currentDefinition(FIELD_STATUS))) Then
+
+-                If IsMetadataUninitialized(currentDefinition) Then
++                If IsDetectionHistoryUninitialized(currentDefinition) Then
+                     firstDetectedAtValue = syncTimestamp
+                 Else
+                     firstDetectedAtValue = currentDefinition(FIELD_FIRST_DETECTED_AT)
+@@ -573,7 +573,8 @@
+     Dim templateLocationValue As Variant
+     Dim firstDetectedAtValue As Variant
+     Dim lastDetectedAtValue As Variant
+-    Dim emptyCount As Long
++    Dim firstIsEmpty As Boolean
++    Dim lastIsEmpty As Boolean
+
+     On Error GoTo UnexpectedError
+
+@@ -595,17 +596,30 @@
+         Exit Function
+     End If
+
+-    If IsEmpty(templateLocationValue) Then emptyCount = emptyCount + 1
+-    If IsEmpty(firstDetectedAtValue) Then emptyCount = emptyCount + 1
+-    If IsEmpty(lastDetectedAtValue) Then emptyCount = emptyCount + 1
+-
+-    If emptyCount = 3 Then
+-        ' Valid bootstrap state: never detected by Template Sync.
++    ' TemplateLocation state is independent from Detection History state.
++    ' Empty is allowed as a compatibility input. Non-empty values must remain valid.
++    If Not IsEmpty(templateLocationValue) Then
++        If Len(Trim$(CStr(templateLocationValue))) = 0 Or _
++           Not IsValidLocation(CStr(templateLocationValue)) Then
++
++            Set ValidateMetadataState = CreateFailureResult( _
++                "ConfigurationError", _
++                "VariableDefinition contains an unsupported TemplateLocation.", _
++                FIELD_TEMPLATE_LOCATION)
++            Exit Function
++        End If
++    End If
++
++    firstIsEmpty = IsEmpty(firstDetectedAtValue)
++    lastIsEmpty = IsEmpty(lastDetectedAtValue)
++
++    If firstIsEmpty And lastIsEmpty Then
++        ' Valid Detection History bootstrap state.
+         Set ValidateMetadataState = CreateSuccessResult()
+         Exit Function
+     End If
+
+-    If emptyCount > 0 Then
++    If firstIsEmpty Xor lastIsEmpty Then
+         Set ValidateMetadataState = CreateFailureResult( _
+             "ConfigurationError", _
+             "VariableDefinition contains partially initialized sync metadata.", _
+@@ -613,13 +627,13 @@
+         Exit Function
+     End If
+
+-    If Len(Trim$(CStr(templateLocationValue))) = 0 Or _
+-       Not IsValidLocation(CStr(templateLocationValue)) Then
++    If Not IsDate(firstDetectedAtValue) Or _
++       Not IsDate(lastDetectedAtValue) Then
+
+         Set ValidateMetadataState = CreateFailureResult( _
+             "ConfigurationError", _
+-            "VariableDefinition contains an unsupported TemplateLocation.", _
+-            FIELD_TEMPLATE_LOCATION)
++            "VariableDefinition contains invalid sync metadata.", _
++            TARGET_VARIABLE_DEFINITION)
+         Exit Function
+     End If
+
+@@ -635,12 +649,11 @@
+
+ End Function
+
+-Private Function IsMetadataUninitialized( _
++Private Function IsDetectionHistoryUninitialized( _
+     ByVal definition As Object _
+ ) As Boolean
+
+-    IsMetadataUninitialized = _
+-        IsEmpty(definition(FIELD_TEMPLATE_LOCATION)) And _
++    IsDetectionHistoryUninitialized = _
+         IsEmpty(definition(FIELD_FIRST_DETECTED_AT)) And _
+         IsEmpty(definition(FIELD_LAST_DETECTED_AT))
