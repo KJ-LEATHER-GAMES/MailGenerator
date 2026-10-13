@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.86
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.87
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.86 |
+| バージョン | v0.87 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.87 更新概要
+
+- [Design v0.1.10 Candidate Patch](<../01_specifications/MVP Design v0.1.10 Candidate — IF-P2-04-001 Design Gap Resolution Patch.md>)、[Test Specification v0.1.6初期Candidate Patch](<../01_specifications/MVP Test Specification v0.1.6 Candidate - IF-P2-04-001 Test Definition Patch.md>)、[補正後Candidate Patch-2](<../01_specifications/MVP Test Specification v0.1.6 Candidate — IF-P2-04-001 Test Definition Patch-2.md>)、[Design／Test Consistency Review](<reviews/DOC-MVP-DES v0.1.10 Candidate × DOC-MVP-TESTSPEC v0.1.6 Candidate Cross-document Consistency Review v0.1.md>)および[BL-MVP-004 Approval Record](<baselines/BL-MVP-004_Approval_Record_v0.1.md>)を外部候補・承認記録として追加。初期Test CandidateはReview前の履歴、Patch-2はReviewの3件のCorrectionを反映する後続Candidateとして保持する。
+- [DOC-MVP-IMPL v0.3／BL-MVP-004 Impact Review](<reviews/DOC-MVP-IMPL v0.3 - BL-MVP-004 Impact Review v0.1.md>)、[v0.4 Candidate Patch](<../02_implementation/DOC-MVP-IMPL v0.4 Candidate Patch.md>)および[v0.4 Consistency Review](<reviews/DOC-MVP-IMPL v0.4 Candidate - BL-MVP-004 Consistency Review v0.1.md>)を外部候補・レビュー記録として追加。
+- 添付のBL-MVP-004 Approval RecordはBL-MVP-004 APPROVED、Design v0.1.10／Test Specification v0.1.6を報告するが、当地では候補文書・承認経路・P2成果物の実行環境・Workbook／Module同期・実行結果を独立確認していない。従って追加は現行Design v0.1.9、Test Specification v0.1.5、Implementation Plan v0.3、Current Approved Baseline BL-MVP-003の置換、当地のBaseline受入、Production修正、Workbook Import、Compile、再検証またはP2 PASS／COMPLETEを意味しない。
 
 ### v0.86 更新概要
 
