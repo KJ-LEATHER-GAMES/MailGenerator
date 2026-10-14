@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.87 / 更新日: 2026-10-15
+Revision: v0.88 / 更新日: 2026-10-15
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -48,6 +48,7 @@ Revision: v0.87 / 更新日: 2026-10-15
 - [P2-04 I03 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I03_Execution_Preparation_v0.1.md>)および[I03 Remaining Verification Harness候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.1_CP932.bas>)を条件付きで追加。I03 Invalid CandidateのFail Closed、`templateScanResult`公開、`syncDiffResult = Nothing`およびVariableDefinition不変を検証する未Import／未実行候補である。OFTの一時Fixture追加、Workbook Import、Compile、実行および後片付けは当地で行わず、BL-MVP-003、P2-04未完了、IF-P2-04-001の未受入状態、既存`src`／Workbook／OFTを維持する。
 - [P2-04 I04 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I04_Execution_Preparation_v0.1.md>)および[I03／I04 Remaining Verification Harness v0.2候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.2_CP932.bas>)を条件付きで追加。I04 OFT Missing時のFail Closed、両ResultのNothing、VariableDefinition不変および`Settings.TemplatePath`復元を確認する未Import／未実行候補である。v0.1とv0.2は同一`VB_Name`のため、v0.2を後続候補、v0.1を履歴として保持し、同一Workbookへ二重Importしない。Settings一時変更、Workbook Import、Compileおよび実行は当地で行わず、BL-MVP-003、P2-04未完了、既存`src`／Workbook／OFTを維持する。
 - [P2-04 I05 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I05_Execution_Preparation_v0.1.md>)、[I03～I05 Remaining Verification Harness v0.3候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.3_CP932.bas>)および[v0.3.1補正候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.3.1_CP932.bas>)を条件付きで追加。I05 Definition Read Failure時にTemplate Scan後の後続Syncを停止し、`syncDiffResult = Nothing`およびVariableDefinition不変を確認する未Import／未実行候補である。v0.3.1はI05-07を失敗時の初期化済み空Collection契約に整合させる後続候補で、v0.3は履歴として保持する。すべて同一`VB_Name`のため同一Workbookへ二重Importせず、Status列名の一時変更・復元、Import、Compileおよび実行は当地で行わない。
+- [P2-04 I06 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I06_Execution_Preparation_v0.1.md>)および[I03～I06 Remaining Verification Harness v0.4候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.4_CP932.bas>)を条件付きで追加。I06 BuildSyncDiff Failureで後続Applyを停止し、`syncDiffResult = Nothing`、Fixture状態不変および復元後のOriginal状態を確認する未Import／未実行候補である。準備書はv0.3.1と同一の`modP2_04RemainingVerification`を前提とするが、添付v0.4の実際の`VB_Name`は`modP2_04RemainVerification`である。Import前に内部名の不一致を解決する必要があるため、v0.3.1を置換・削除せず、Import、Compile、実行、Status変更・復元は当地で行わない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～18は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17または18を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
