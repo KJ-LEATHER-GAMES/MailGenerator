@@ -1,0 +1,63 @@
+--- modSyncEngine_P2-02_v0.1.2_CP932.bas
++++ modSyncEngine_P2-02_v0.1.3_CP932.bas
+@@ -575,6 +575,7 @@
+     Dim lastDetectedAtValue As Variant
+     Dim firstIsEmpty As Boolean
+     Dim lastIsEmpty As Boolean
++    Dim dateValue As Date
+
+     On Error GoTo UnexpectedError
+
+@@ -627,8 +628,8 @@
+         Exit Function
+     End If
+
+-    If Not IsDate(firstDetectedAtValue) Or _
+-       Not IsDate(lastDetectedAtValue) Then
++    If Not TryGetMetadataDateValue(firstDetectedAtValue, dateValue) Or _
++       Not TryGetMetadataDateValue(lastDetectedAtValue, dateValue) Then
+
+         Set ValidateMetadataState = CreateFailureResult( _
+             "ConfigurationError", _
+@@ -646,6 +647,42 @@
+         "Unable to validate VariableDefinition sync metadata: " & _
+             CStr(Err.Number) & " - " & Err.Description, _
+         TARGET_SYNC_ENGINE)
++
++End Function
++
++Private Function TryGetMetadataDateValue( _
++    ByVal rawValue As Variant, _
++    ByRef dateValue As Date _
++) As Boolean
++
++    TryGetMetadataDateValue = False
++
++    If IsError(rawValue) Or _
++       IsNull(rawValue) Or _
++       IsEmpty(rawValue) Then
++        Exit Function
++    End If
++
++    Select Case VarType(rawValue)
++
++        Case vbDate, vbByte, vbInteger, vbLong, _
++             vbSingle, vbDouble, vbCurrency, vbDecimal
++
++            On Error GoTo InvalidDate
++            dateValue = CDate(rawValue)
++            On Error GoTo 0
++
++            TryGetMetadataDateValue = True
++            Exit Function
++
++        Case Else
++            Exit Function
++
++    End Select
++
++InvalidDate:
++    On Error GoTo 0
++    TryGetMetadataDateValue = False
+
+ End Function

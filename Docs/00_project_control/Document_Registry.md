@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.91
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.92
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.91 |
+| バージョン | v0.92 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.92 更新概要
+
+- [P2-02 v0.1.3 Production候補](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.3_CP932.bas>)、[v0.1.2→v0.1.3未適用diff](<../02_implementation/P2_Scan_Sync/modSyncEngine_P2-02_v0.1.2_to_v0.1.3.diff>)、[DateSerial Regression Test候補](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffDateSerialRegressionTest_v0.1_CP932.bas>)、[v0.1.3 Regression Suite候補](<../../tests/vba/P2_Scan_Sync/modP2_02SyncDiffV013RegressionSuite_v0.1_CP932.bas>)および[DateSerial Regression Guide](<../03_verification/technical_validation/P2-02_v0.1.3_DateSerial_Regression_Guide_v0.1.md>)を追加。Excel `.Value2`で読み取るDate Serialを`TryGetMetadataDateValue`で受容するP2-02補正を対象とする未Import／未実行候補であり、既存v0.1～v0.1.2候補は履歴・比較用に保持する。
+- 添付ガイドはBL-MVP-004をExecution Baselineとして記載するが、当地ではBL-MVP-004を受入しておらず、Current Approved Baseline BL-MVP-003を維持する。当地でのProduction Patch適用、Workbook Import、VBA Compile、Regression実行、P2-02 PASS／COMPLETE、Baseline更新または既存`src`／Workbook／OFTの変更は行わない。
 
 ### v0.91 更新概要
 
