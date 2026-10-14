@@ -1,0 +1,79 @@
+P2-03 v0.1.2 - ValidateDiffItem minimal replacement
+
+Replace only the `If isUnused Then ... End If` block that appears immediately
+after FirstDetectedAt / LastDetectedAt extraction, and add the second guard
+immediately after TemplateLocation domain validation.
+
+1) Replace the current Unused metadata block with:
+
+    If isUnused Then
+
+        If IsEmpty(firstDetectedAtValue) And _
+           IsEmpty(lastDetectedAtValue) Then
+
+            ' Valid Detection History bootstrap target.
+            ' TemplateLocation is independent from Detection History.
+            '
+            ' Legacy compatibility:
+            '   TemplateLocation = Empty
+            '   FirstDetectedAt  = Empty
+            '   LastDetectedAt   = Empty
+            '
+            ' BL-MVP-004 valid target:
+            '   TemplateLocation = Subject / Body / Both
+            '   FirstDetectedAt  = Empty
+            '   LastDetectedAt   = Empty
+            '
+            ' Empty TemplateLocation may return immediately.
+            ' Non-empty TemplateLocation falls through to domain validation.
+            If IsEmpty(templateLocationValue) Then
+                Set ValidateDiffItem = CreateSuccessResult()
+                Exit Function
+            End If
+
+        ElseIf IsEmpty(firstDetectedAtValue) Or _
+               IsEmpty(lastDetectedAtValue) Or _
+               IsEmpty(templateLocationValue) Then
+
+            Set ValidateDiffItem = CreateFailureResult( _
+                "UnexpectedError", _
+                "Unused SyncDiffResult contains partially initialized sync metadata.", _
+                variableName)
+            Exit Function
+        End If
+
+    Else
+
+        If IsEmpty(templateLocationValue) Then
+            Set ValidateDiffItem = CreateFailureResult( _
+                "UnexpectedError", _
+                "TemplateLocation is missing or invalid.", _
+                variableName)
+            Exit Function
+        End If
+
+    End If
+
+2) Immediately after TemplateLocation domain validation, before the first
+   TryGetDateValue(...) call, add:
+
+    If isUnused And _
+       IsEmpty(firstDetectedAtValue) And _
+       IsEmpty(lastDetectedAtValue) Then
+
+        ' Valid BL-MVP-004 Unused / Uninitialized target.
+        ' P2-03 validates and persists the P2-02 target state only.
+        ' It does not generate Detection History timestamps.
+        Set ValidateDiffItem = CreateSuccessResult()
+        Exit Function
+    End If
+
+3) `WriteExistingMetadata` is intentionally unchanged.
+   It already:
+   - persists non-empty TemplateLocation
+   - ClearContents for Empty FirstDetectedAt / LastDetectedAt
+   - does not generate timestamps
+
+Public API change: NONE
+Classification change: NONE
+Persistence shape change: NONE
