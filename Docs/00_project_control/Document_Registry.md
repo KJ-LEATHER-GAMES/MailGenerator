@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.99
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.00
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.99 |
+| バージョン | v1.00 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v1.00 更新概要
+
+- [P2-04 I07／I08 Continuous Retry Guide v0.1](<../03_verification/technical_validation/P2-04_I07_I08_Continuous_Retry_Guide_v0.1.md>)、[I07／I08 Harness v0.1.1候補](<../../tests/vba/P2_Scan_Sync/modP2_04I07I08RetryVerification_v0.1.1_CP932.bas>)、[I09 Warm Lifecycle Guide v0.1](<../03_verification/technical_validation/P2-04_I09_Warm_Lifecycle_Guide_v0.1.md>)、[I09 Harness v0.1候補](<../../tests/vba/P2_Scan_Sync/modP2_04I09WarmLifecycleVerification_v0.1_CP932.bas>)、[I10 Cold Lifecycle Guide v0.1](<../03_verification/technical_validation/P2-04_I10_Cold_Lifecycle_Guide_v0.1.md>)および[I10 Harness v0.1候補](<../../tests/vba/P2_Scan_Sync/modP2_04I10ColdLifecycleVerification_v0.1_CP932.bas>)を追加。I07／I08のApply FailureとFresh Retry、I09のWarm Lifecycle、I10のCold Lifecycleを確認する未Import／未実行候補である。
+- I07／I08 HarnessにはWorksheet保護Fixture専用の固定テスト用パスワードが含まれる。実運用資格情報ではないことを確認した上で原文を保持するが、実行時のみのFixture用途とする。添付ガイドが記載するWorksheet保護・Status変更・Outlook起動／終了・OFT／Workbook操作、Import、CompileおよびVBA実行は当地で行わず、Current Approved Baseline BL-MVP-003、P2-04未完了、`src`／Workbook／OFTを維持する。
 
 ### v0.99 更新概要
 
