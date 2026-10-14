@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.83 / 更新日: 2026-10-15
+Revision: v0.84 / 更新日: 2026-10-15
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -46,7 +46,7 @@ Revision: v0.83 / 更新日: 2026-10-15
 - [P2-02→P2-03 Bootstrap Production Compatibility Guide](<../03_verification/technical_validation/P2-02_P2-03_Bootstrap_Production_Compatibility_Guide_v0.1.md>)および[Bootstrap Production Compatibility Test候補](<../../tests/vba/P2_Scan_Sync/modP2_02P2_03BootstrapProductionCompatibilityTest_v0.1_CP932.bas>)を条件付きで追加。P2-02 v0.1.3とP2-03 v0.1.2を前提にIF-P2-04-001の下位層Bootstrap状態を確認する候補であり、ガイドはBL-MVP-004を前提とするが当地のCurrent Approved BaselineはBL-MVP-003のまま。Import・Compile・互換性テスト、P2-02／P2-03 PASS／COMPLETE、IF-P2-04-001 Closure、Baseline更新または既存`src`／Workbook／OFTの変更は行わない。
 - [P2-04 Manual Sync Integration Completion Review v0.1](<../00_project_control/reviews/P2-04 Manual Sync Integration Completion Review v0.1.md>)および[IF-P2-04-001 Closure Assessment / Closure Record v0.1](<../00_project_control/reviews/IF-P2-04-001 Closure Assessment - Closure Record v0.1.md>)を外部記録として追加。前者はP2-04をIN PROGRESS／NOT YET PASS、後者はIF-P2-04-001をRESOLVED／CLOSEDと記録するが、いずれもBL-MVP-004と外部環境のEvidenceを前提とする。当地では独立確認していないため、Current Approved Baseline BL-MVP-003、IF-P2-04-001の未受入状態、P2-04未完了、既存`src`／Workbook／OFTを維持し、Closure・P2-04 PASS／COMPLETE・P2 Phase／CP-P2完了、Baseline更新、Import、Compileまたはテスト実行は行わない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
-- [history](history/)の01～17は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16または17を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
+- [history](history/)の01～18は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17または18を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。
