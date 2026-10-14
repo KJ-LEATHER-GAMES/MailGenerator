@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.97
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.98
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.97 |
+| バージョン | v0.98 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.98 更新概要
+
+- [P2-04 I05 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I05_Execution_Preparation_v0.1.md>)、[I03～I05 Remaining Verification Harness v0.3候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.3_CP932.bas>)および[v0.3.1補正候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.3.1_CP932.bas>)を追加。I05 Definition Read FailureでTemplate Scan後に後続Sync処理へ進まず、`syncDiffResult = Nothing`およびVariableDefinition不変を確認する未Import／未実行候補である。
+- v0.3.1はI05-07を既存`GetAllVariableDefinitions`の失敗時Carrier契約（初期化済み空Collection）へ整合させる後続候補、v0.3は履歴として保持する。両者と既存v0.1／v0.2は同一`VB_Name`（`modP2_04RemainingVerification`）を持つため、同一Workbookへ二重Importしない。列名の一時変更・復元、Workbook Import、CompileおよびVBA実行は当地で行わず、Current Approved Baseline BL-MVP-003、P2-04未完了、`src`／Workbook／OFTを維持する。
 
 ### v0.97 更新概要
 
