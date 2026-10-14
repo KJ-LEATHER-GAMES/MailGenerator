@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.93
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.94
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.93 |
+| バージョン | v0.94 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.94 更新概要
+
+- [P2-04 Manual Sync Integration Completion Review v0.1](<reviews/P2-04 Manual Sync Integration Completion Review v0.1.md>)および[IF-P2-04-001 Closure Assessment / Closure Record v0.1](<reviews/IF-P2-04-001 Closure Assessment - Closure Record v0.1.md>)を外部実行・判断記録として追加。前者はP2-04をIN PROGRESS／NOT YET PASSとし、後者はIF-P2-04-001をRESOLVED／CLOSEDと記録する。
+- 両記録はBL-MVP-004および外部環境のCompile／回帰／Local Verificationを前提とする。当地ではこれらを独立確認しておらず、Current Approved Baseline BL-MVP-003、IF-P2-04-001の当地での未受入状態、P2-04の未完了、`src`／Workbook／OFTを維持する。当地でのClosure、P2-04 PASS／COMPLETE、P2 Phase／CP-P2完了、Baseline更新、Import、Compileまたはテスト実行は行わない。
 
 ### v0.93 更新概要
 
