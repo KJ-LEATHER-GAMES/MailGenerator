@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.00
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.01
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.00 |
+| バージョン | v1.01 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v1.01 更新概要
+
+- [P2-04 I11 Manual Only Guide v0.1](<../03_verification/technical_validation/P2-04_I11_Manual_Only_Guide_v0.1.md>)および[I11 Manual Only Harness v0.1候補](<../../tests/vba/P2_Scan_Sync/modP2_04I11ManualOnlyVerification_v0.1_CP932.bas>)を追加。Workbookを閉じて再オープンしただけではVariableDefinitionとLastDetectedAtを変更せず、明示的Manual Sync後だけ必要なMetadataが更新されることを確認する未Import／未実行候補である。
+- 添付ガイドはWorkbook保存・終了・再オープンおよびWindows TEMPへの一時Evidence保存を記載するが、当地では実施しない。Current Approved Baseline BL-MVP-003、P2-04未完了、Formal MVP Test NOT RUN、`src`／Workbook／OFTを維持し、P2-04 PASS／COMPLETE、Baseline更新またはP2 Phase／CP-P2完了を行わない。
 
 ### v1.00 更新概要
 
