@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.92
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.93
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.92 |
+| バージョン | v0.93 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.93 更新概要
+
+- [P2-02→P2-03 Bootstrap Production Compatibility Guide](<../03_verification/technical_validation/P2-02_P2-03_Bootstrap_Production_Compatibility_Guide_v0.1.md>)および[Bootstrap Production Compatibility Test候補](<../../tests/vba/P2_Scan_Sync/modP2_02P2_03BootstrapProductionCompatibilityTest_v0.1_CP932.bas>)を追加。IF-P2-04-001で確認された下位層のBootstrap状態について、P2-02 v0.1.3とP2-03 v0.1.2を組み合わせて検証する未Import／未実行候補である。
+- 添付ガイドはBL-MVP-004をExecution Baselineとして記載するが、当地ではBL-MVP-004を受入しておらず、Current Approved Baseline BL-MVP-003を維持する。当地でのWorkbook Import、VBA Compile、互換性テスト実行、P2-02／P2-03 PASS／COMPLETE、IF-P2-04-001 Closure、Baseline更新または既存`src`／Workbook／OFTの変更は行わない。
 
 ### v0.92 更新概要
 
