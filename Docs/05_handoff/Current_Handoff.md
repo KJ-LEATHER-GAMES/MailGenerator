@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v0.91 / 更新日: 2026-10-15
+Revision: v0.92 / 更新日: 2026-10-15
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -53,7 +53,7 @@ Revision: v0.91 / 更新日: 2026-10-15
 - [P2-04 I11 Manual Only Guide v0.1](<../03_verification/technical_validation/P2-04_I11_Manual_Only_Guide_v0.1.md>)および[I11 Manual Only Harness v0.1候補](<../../tests/vba/P2_Scan_Sync/modP2_04I11ManualOnlyVerification_v0.1_CP932.bas>)を条件付きで追加。Workbook再オープンだけではVariableDefinitionとLastDetectedAtを変更せず、明示的Manual Sync後だけ必要なMetadataが更新されることを確認する未Import／未実行候補である。Workbook保存・終了・再オープン、Windows TEMPへの一時Evidence保存、Import、Compileおよび実行は当地で行わない。
 - [P2-04 I12 Contract Regression Guide v0.1](<../03_verification/technical_validation/P2-04_I12_Contract_Regression_Guide_v0.1.md>)を条件付きで追加。P2-01、P2-02 v0.1.3、P2-03 v0.1.2およびBootstrap Compatibilityの既存Regression SuiteをI12 Evidenceとして再実行する未実行計画であり、新規Aggregator Harnessは追加しない。Workbook Import、Compile、各Regression実行およびEvidence取得は当地で行わず、I12 PASS、P2-04 PASS／COMPLETE、Baseline更新またはP2 Phase／CP-P2完了を行わない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
-- [history](history/)の01～18は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証を含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17または18を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
+- [history](history/)の01～19は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証、19はP2-04 I03～I12外部Scenario VerificationとCompletion後続Gateを含む再開用スナップショットである。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17、18または19を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
 
 本Handoffの作成は、追加Workbookのソース同期・Compile・回帰テスト・Baseline更新の完了を意味しない。
