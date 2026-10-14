@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.90
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.91
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.90 |
+| バージョン | v0.91 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.91 更新概要
+
+- [P2-03 v0.1.2 Production候補](<../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.2_CP932.bas>)および[P2-03 v0.1.2 Regression Review v0.1](<reviews/P2-03 v0.1.2 Regression Review v0.1.md>)を追加。添付ReviewはProduction系43/43 PASS、Compatibility K1 FAIL・K2/K3 PASSによりP2-03 v0.1.2をNOT COMPLETEと記録し、Failureを`ApplySyncDiff`到達前の`GetAllVariableDefinitions`→`BuildSyncDiff`と報告する。
+- 当地では当該Production候補のWorkbook Import、VBA Compile、Regression／Compatibility実行および実行環境を独立確認していない。従って追加は当地のP2-03受入・PASS／COMPLETE、Current Approved Baseline BL-MVP-003の変更、Workbook／`src`／OFT変更またはP2 Phase／CP-P2完了を意味しない。
 
 ### v0.90 更新概要
 
