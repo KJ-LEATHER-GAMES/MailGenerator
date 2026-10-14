@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v0.95
+# 定型メール作成ツール Project Document Registry and Approved Baseline v0.96
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v0.95 |
+| バージョン | v0.96 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v0.96 更新概要
+
+- [P2-04 I03 Execution Preparation v0.1](<../03_verification/technical_validation/P2-04_I03_Execution_Preparation_v0.1.md>)および[I03 Remaining Verification Harness候補](<../../tests/vba/P2_Scan_Sync/modP2_04RemainingVerification_v0.1_CP932.bas>)を追加。Invalid Candidate時に`ExecuteManualSync`がFail Closedとなり、`templateScanResult`の公開、`syncDiffResult = Nothing`およびVariableDefinition不変を確認するための未Import／未実行候補である。
+- 添付準備文書はOFTへの一時Fixture追加、WorkbookへのHarness Import、CompileおよびVBA実行を記載するが、当地ではこれらを実施しない。Current Approved Baseline BL-MVP-003、P2-04未完了、IF-P2-04-001の当地での未受入状態、`src`／Workbook／OFTを維持し、P2-04 PASS／COMPLETE、Baseline更新またはP2 Phase／CP-P2完了を行わない。
 
 ### v0.95 更新概要
 
