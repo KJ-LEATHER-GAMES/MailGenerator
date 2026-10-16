@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v1.06 / 更新日: 2026-10-16
+Revision: v1.07 / 更新日: 2026-10-16
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -61,6 +61,7 @@ Revision: v1.06 / 更新日: 2026-10-16
 - IF-P2-05-001の調査詳細は[Update v0.6](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.6.md>)と[WordEditor Timing Diagnostic v0.1 CP932](<../../tests/vba/P2_Scan_Sync/modP2_05WordEditorTimingDiagnostic_v0.1_CP932.bas>)を参照する（初期計画・v0.2～v0.5はRegistryから参照）。後続の[Context Handoff_21](<history/Context Handoff_21.md>)はFresh Warm 2回PASS、IF-P2-05-001の非再現FindingとしてのClose、OBS-P2-05-002 OPEN／NON-BLOCKINGと検証再開を報告する。原因は未確定、Production CorrectionはNONE。本文参照のFinding Assessment／Verification Resume Decision v0.7は当地未登録であり、当地のClosure・検証再開判断は未実施。Handoff_21時点の次CaseはP05-I07と続くI16で、後続I07結果は下記実施レポートを参照する。再開時は判断書の登録状況とOverviewの受入・同期条件を確認する。
 - [P05-I07 Invalid Candidate 詳細実施手順書 v0.1](<../03_verification/technical_validation/P05-I07 Invalid Candidate 詳細実施手順書 v0.1.md>)を追加。I07のFixture・Carrier・通知・VariableDefinition不変のEvidence、WordEditor E_FAIL再発時の切り分け、I16 Fresh Retryへの連続実施条件を参照する。手順は当地で未実行。同時添付のApproved仕様書は既存同名ファイルをEditorial／Governance更新し、技術契約・検証条件は維持した。再開時は上記判断書の登録状況とOverviewの受入・同期条件を確認する。
 - [P05-I07 Invalid Candidate 実施レポート v0.1](<../03_verification/technical_validation/P2-05 Implementation Verification Report_P05-I07 — Invalid Candidate 実施レポート v0.1.md>)を追加。添付はI07 PASS／Re-test NOT REQUIRED、WordEditor E_FAIL再発なし、VariableDefinition不変と単一Failure通知を報告する。InvalidCandidates.Count = 1は直接未観測との留保があり、Screenshot等の元Evidenceは今回未添付。次の外部引継ぎ先はI16 Fresh Retryで、I07 Failure Fixtureを原因修正前の状態として使用する計画。当地の受入・実機検証はOverviewの条件を確認して別途判断する。
+- [P05-I16 Fresh Retry 実施手順](<../03_verification/technical_validation/P05-I16 Fresh Retry 実施手順.md>)をユーザー提示本文から保存。I07 Failure Evidenceからの継続、OFT原因修正、Automatic Retryなし、2回目Manual SyncのCarrier・通知・Current State再取得を確認する手順である。I16のSuccess PersistenceではVariableDefinition不変を要求しない点を参照する。当地でのOFT変更・テスト実行・結果判定は未実施であり、着手時はOverviewの受入・同期条件を確認する。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～21は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証、19はP2-04 I03～I12外部Scenario VerificationとCompletion後続Gateを含む再開用スナップショットである。[20](<history/Context Handoff_20.md>)はP2-04のContract補正・統合Static Review・Controlled Correction・Regression・完了判断とP2-05への引継ぎをまとめる。[21](<history/Context Handoff_21.md>)はP2-05実装・部分検証とWordEditor調査・Fresh Warm再現確認後の引継ぎをまとめる。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17、18、19、20または21を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。

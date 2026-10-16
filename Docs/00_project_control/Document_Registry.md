@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.17
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.18
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.17 |
+| バージョン | v1.18 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.18 更新概要
+
+- ユーザー提示の[P05-I16 Fresh Retry 実施手順](<../03_verification/technical_validation/P05-I16 Fresh Retry 実施手順.md>)をMarkdownとして保存。I07 Failureを1回目Executionとして利用し、原因修正後の明示的Manual Sync、Automatic Retryなし、Current State再取得・Previous Result非再利用、Success通知と正常Persistenceを確認する未実行手順である。
+- 提示された本文を保持し、I16実行結果やPASS判定は追加していない。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.17 更新概要
 
