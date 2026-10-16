@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.23
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.24
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.23 |
+| バージョン | v1.24 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.24 更新概要
+
+- [P2-05 Verification Evidence Consolidation v0.1](<../03_verification/technical_validation/P2-05 Verification Evidence Consolidation v0.1.md>)、[P2-01 Regression 実施計画 v0.1](<../03_verification/technical_validation/P2-01 Full Template Scanner Regression 実施計画 v0.1.md>)、[ReadBodyText Failure Triage Plan v0.1](<../03_verification/technical_validation/P2-01 Regression ReadBodyText Failure Triage Plan v0.1.md>)および[Regression Record v0.1](<../03_verification/technical_validation/P2-01 Full Template Scanner Regression Record v0.1.md>)を追加。ConsolidationはI01～I17／K01～K04のPASS統合とPASS／CLOSEDを報告し、計画・Triageは当時の実施方針と初回失敗時の状態として保持する。
+- P2-01 Record（2026-10-09）はCore 11/11 PASS、初回両IntegrationのReadBodyText失敗、その後Production変更なしのFresh Warm Controlled Rerunで両Integration PASS、最終PASS／CLOSEDを報告する。初回のErrorType／Message／Targetは未取得でExact Root Causeは未証明、既存WordEditor E_FAILと同一とは断定しない。次の記録上の工程はP2-02 Regression。当地の受入・同期状態、BL-MVP-003、OBS-P2-05-002 OPEN／NON-BLOCKINGを維持し、P2-05 COMPLETE／CP-P2確立の判定は行わない。
 
 ### v1.23 更新概要
 
