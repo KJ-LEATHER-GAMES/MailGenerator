@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.08
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.09
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.08 |
+| バージョン | v1.09 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.09 更新概要
+
+- P2-05の[Boundary Confirmation v0.1](<../02_implementation/P2_Scan_Sync/P2-05 Fail Closed - Sync Result - Phase Integration Boundary Confirmation v0.1.md>)、[Boundary Cross-document Consistency Review v0.1](<reviews/P2-05 Fail Closed - Sync Result - Phase Integration Cross-document Consistency Review v0.1.md>)、[Implementation Specification v0.1 Approved](<../02_implementation/P2_Scan_Sync/P2-05 Fail Closed - Sync Result - Phase Integration Implementation Specification v0.1 Approved.md>)、[Specification Cross-document Consistency Review](<reviews/P2-05 Fail Closed - Sync Result - Phase Integration Implementation Specification v0.1 Cross-document Consistency Review.md>)および[Candidate](<../02_implementation/P2_Scan_Sync/P2-05 Fail Closed - Sync Result - Phase Integration Implementation Specification v0.1 Candidate.md>)を追加。仕様の参照先はApproved版とし、Candidate版は承認前の策定記録として保持する。Boundary ReviewはBC-P2-05-001／002を解決済み、Specification ReviewはPASS／CLOSED・Specification APPROVED・Residual Conflict／Blocking Finding 0と報告する。
+- 添付はBL-MVP-003を前提に、UI LayerのManual Sync Entry・基本結果通知・Fail Closed境界を定義する。次GateはCurrent Production Source Reviewで、OBS-P2-05-001～003は非ブロッキングの確認事項として残る。添付の承認・Review判定は原記録として保持し、当地の別PC成果物受入・同期待ち状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.08 更新概要
 
