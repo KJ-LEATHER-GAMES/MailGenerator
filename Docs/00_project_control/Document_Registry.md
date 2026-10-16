@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.27
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.28
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.27 |
+| バージョン | v1.28 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.28 更新概要
+
+- [P2-04 Manual Sync Integration Regression 実施計画 v0.1](<../03_verification/technical_validation/P2-04 Manual Sync Integration Regression 実施計画 v0.1.md>)を追加。Bootstrap Production Compatibility 29件、I03～I11の既存Harness、I12の既存Regression Evidence統合を対象とする未実行計画。I01／I02は既存Evidenceの対応づけであり、現行Buildでの独立再実行と主張しない。I10／I11の二段階準備・復元条件を保持する。
+- 本文のSource Package `P2-04_Regression.zip`は今回未添付であり、Source Review結果や現行Workbookとの対応は当地で独立確認していない。Baseline／Build照合とP2-02／P2-03 RecordのClosure留保を維持し、当地でのImport・Compile・Harness実行・Workbook／OFT変更は行わない。Current Approved Baseline BL-MVP-003と受入・同期状態を維持し、P2-04 Regression PASS／CLOSED、P2-05 COMPLETE／CP-P2確立は判定しない。
 
 ### v1.27 更新概要
 

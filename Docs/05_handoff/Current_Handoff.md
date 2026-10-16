@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v1.16 / 更新日: 2026-10-16
+Revision: v1.17 / 更新日: 2026-10-16
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -71,6 +71,7 @@ Revision: v1.16 / 更新日: 2026-10-16
 - [Context Handoff_23](<history/Context Handoff_23.md>)をユーザー提示の最新引継ぎスナップショットとして保存。Runtime分類5件・Evidence統合・P2-01 Regressionの経過とPASS／CLOSED判定、初回ReadBodyText失敗の原因未証明という留保をまとめる。次の記録上の工程はP2-02 Sync Diff Core Regressionで、P2-03／P2-04 RegressionとCompile・各Review・Completion判断が続く。P2-05 COMPLETE／CP-P2は未成立、OBS-P2-05-002はOPEN／NON-BLOCKING。本文の後続手順は当地で未実行であり、受入・着手条件はOverviewを参照する。
 - P2-02 Regressionの[実施チェックリスト v0.1](<../03_verification/technical_validation/P2-02 Sync Diff Core Regression 実施チェックリスト v0.1.md>)および[Record v0.1](<../03_verification/technical_validation/P2-02 Sync Diff Core Regression Record v0.1.md>)を追加。Recordは提供ログで111/111 PASS・FAIL 0を報告する一方、Baseline／Buildの特定待ちによりDRAFT／CLOSE保留。次の記録上のActionはBR-P2-02-REG-001のBaselineラベル照合、実行Workbook／Sourceの特定、元ログ保管とRecord確定であり、P2-03 Regressionへの進行はその後となる。当地での独立検証・Baseline変更・正式CLOSEは未実施。当地の受入・着手条件はOverviewを参照し、P2-05未完了／CP-P2未確立を維持する。
 - P2-03 Regressionの[実施チェックリスト v0.1](<../03_verification/technical_validation/P2-03 Regression 実施チェックリスト v0.1.md>)および[Record v0.1](<../03_verification/technical_validation/P2-03 VariableDefinition Sync Persistence Regression Record v0.1.md>)を追加。Recordは提供ログで46/46 PASS・FAIL 0と全5 Suiteの復元出力を報告する一方、Baseline／Build／元ログ保存先・Fixture最終確認待ちによりDRAFT／CLOSE保留。次の記録上のActionはBR-P2-03-REG-001～003の確認、P2-02 Recordの同種項目の照合、P2-04 RegressionのSuite・Entry Point・Fixture前提の特定。全セル・属性の完全復元は主張しない。当地での独立検証・正式CLOSE・Baseline変更は未実施であり、受入・着手条件はOverviewを参照する。P2-05未完了／CP-P2未確立を維持する。
+- [P2-04 Regression 実施計画 v0.1](<../03_verification/technical_validation/P2-04 Manual Sync Integration Regression 実施計画 v0.1.md>)を追加。Bootstrap Compatibility、I03～I11の個別実行、I12 Evidence統合の順序と事前条件を参照する。I01／I02は既存Evidenceを対応づける扱いで、現行Buildでの独立再実行ではない。Source ZIPは今回未添付で当地の独立照合・実行は未実施。着手時はOverviewの受入・同期条件、Baseline／Build、Fixture・復元手順とI10／I11の二段階条件を確認する。P2-02／P2-03 RecordのClosure留保、P2-05未完了／CP-P2未確立を維持する。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～23は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証、19はP2-04 I03～I12外部Scenario VerificationとCompletion後続Gateを含む再開用スナップショットである。[20](<history/Context Handoff_20.md>)はP2-04のContract補正・統合Static Review・Controlled Correction・Regression・完了判断とP2-05への引継ぎをまとめる。[21](<history/Context Handoff_21.md>)はP2-05実装・部分検証とWordEditor調査・Fresh Warm再現確認後の引継ぎをまとめる。[22](<history/Context Handoff_22.md>)はP05-I07／I16／I08の実施結果と残件・Controlled Fixture設計への引継ぎをまとめる。[23](<history/Context Handoff_23.md>)はRuntime分類5件・Evidence統合・P2-01 Regression結果とP2-02 Regressionへの引継ぎをまとめる。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17、18、19、20、21、22または23を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
