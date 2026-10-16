@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v1.09 / 更新日: 2026-10-16
+Revision: v1.10 / 更新日: 2026-10-16
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -64,6 +64,7 @@ Revision: v1.09 / 更新日: 2026-10-16
 - [P05-I16 Fresh Retry 実施手順](<../03_verification/technical_validation/P05-I16 Fresh Retry 実施手順.md>)をユーザー提示本文から保存。I07 Failure Evidenceからの継続、OFT原因修正、Automatic Retryなし、2回目Manual SyncのCarrier・通知・Current State再取得を確認する手順である。I16のSuccess PersistenceではVariableDefinition不変を要求しない点を参照する。当地でのOFT変更・テスト実行・結果判定は未実施であり、着手時はOverviewの受入・同期条件を確認する。
 - [P05-I16 Fresh Retry Evidence Record](<../03_verification/technical_validation/P05‐I16 ‐ Fresh Retry Evidence Record.md>)をユーザー提示の確定結果として保存。I07 Failure後の原因修正・Automatic Retryなし・明示的Manual Sync成功を根拠にI16 PASS／Re-test NOT REQUIREDと報告する。Current State再取得・Previous Failure Result非再利用のBehavioral Evidence、LastDetectedAt更新、OBS-P2-05-002非再発を記録する。当地での追加実行は行っておらず、実行Workbookとの対応はOverviewの受入・同期条件に従って確認する。
 - [P05-I08 OFT Missing 詳細実施手順書 v0.1](<../03_verification/technical_validation/P05-I08 — OFT Missing 詳細実施手順書 v0.1.md>)をユーザー提示本文から保存。Settingsを維持したOFT一時リネーム、Failure Carrier・通知・LastDetectedAtを含むVariableDefinition不変、Fixture復元とEvidence様式を参照する。templateScanResultの特定値をPASS条件へ追加しない点、WordEditor E_FAIL時のFixture・実行経路確認を含む。当地でのOFT変更・テスト実行・結果判定は未実施であり、着手時はOverviewの受入・同期条件を確認する。
+- [P05-I08 OFT Missing Evidence Record](<../03_verification/technical_validation/P05-I08 — OFT Missing Evidence Record.md>)をユーザー提示の確定結果として保存。I08 PASS／Re-test NOT REQUIRED、ConfigurationError／TemplatePath、両Carrier Nothing、単一Failure通知、VariableDefinition不変、Settings変更なし・OFT復元済みと報告する。OBS-P2-05-002は非再発、新規Findingなし・Blocking Finding 0。当地での追加実行は行っておらず、実行Workbookとの対応はOverviewの受入・同期条件に従って確認する。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～21は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証、19はP2-04 I03～I12外部Scenario VerificationとCompletion後続Gateを含む再開用スナップショットである。[20](<history/Context Handoff_20.md>)はP2-04のContract補正・統合Static Review・Controlled Correction・Regression・完了判断とP2-05への引継ぎをまとめる。[21](<history/Context Handoff_21.md>)はP2-05実装・部分検証とWordEditor調査・Fresh Warm再現確認後の引継ぎをまとめる。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17、18、19、20または21を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。

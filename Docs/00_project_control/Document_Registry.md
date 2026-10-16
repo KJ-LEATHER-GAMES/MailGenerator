@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.20
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.21
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.20 |
+| バージョン | v1.21 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.21 更新概要
+
+- ユーザー提示の[P05-I08 OFT Missing Evidence Record](<../03_verification/technical_validation/P05-I08 — OFT Missing Evidence Record.md>)をMarkdownとして保存。実施日2026-10-05、PASS／Re-test NOT REQUIREDを記録する。Settingsを変更せずOFTを一時リネームし、ConfigurationError／TemplatePath、両Carrier Nothing、Failure通知1回・Success通知0回、VariableDefinition不変とOFT復元を確認したとの結果を保持する。
+- 提示結果は新規Findingなし・Blocking Finding 0、Unhandled Runtime Errorなし、OBS-P2-05-002非再発とする。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003は従来の管理状態を維持する。
 
 ### v1.20 更新概要
 
