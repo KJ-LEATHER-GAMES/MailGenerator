@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.05
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.06
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.05 |
+| バージョン | v1.06 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v1.06 更新概要
+
+- [P2-04 Final Finding Assessment v0.1](<reviews/P2-04 Manual Sync Integration Final Finding Assessment v0.1.md>)、[Production Patch Review v0.1](<reviews/P2-04 Manual Sync Integration Production Patch Review v0.1.md>)および[Regression Evidence Finalization v0.1](<reviews/P2-04 Manual Sync Integration Regression Evidence Finalization v0.1.md>)を外部の最終判断・Review・Evidence記録として追加。これらはP2-04のActive／Blocking Finding 0、Production Patch Review PASS、Regression Evidence PASS／FINALIZEDを記録する。
+- 当地では各記録の前提・Production Source・I01～I12、Compile、Regression EvidenceおよびStatic Review結論を独立確認していない。したがって追加は当地のFinal Finding Assessment PASS、P2-04 PASS／COMPLETE、IF-P2-04-001 Closure、Current Approved Baseline BL-MVP-003の変更、P2 Phase／CP-P2完了または`src`／Workbook／OFTの変更を意味しない。
 
 ### v1.05 更新概要
 
