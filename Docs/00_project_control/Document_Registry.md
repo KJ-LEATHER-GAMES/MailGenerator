@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.22
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.23
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.22 |
+| バージョン | v1.23 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.23 更新概要
+
+- [P05-I02 New Only](<../03_verification/technical_validation/P05-I02 New Only Runtime Verification Record v0.1.md>)、[I04 Reactivated Only](<../03_verification/technical_validation/P05-I04 Reactivated Only Runtime Verification Record v0.1.md>)、[I05 Unused Only](<../03_verification/technical_validation/P05-I05 Unused Only Runtime Verification Record v0.1.md>)、[I06 Zero-diff Success](<../03_verification/technical_validation/P05-I06 Zero-diff Success Runtime Verification Record v0.1.md>)および[I01 Mixed Result](<../03_verification/technical_validation/P05-I01 Mixed Result Runtime Verification Record v0.1.md>)のRuntime Verification Record v0.1を追加。添付は実施日2026-10-07、5件すべてPASS／CLOSED・Re-test NOT REQUIREDを報告する。I02／I04のSuccess・Carrier存在はBehavioral／Contract-based Evidence、I05／I06／I01はLocalsの直接確認を含む記録として保持する。
+- 参照されるScreenshot等の元Evidenceは今回の添付対象外。I01記録上では残っていたRuntime 5件をCloseし、次工程をVerification Evidence Consolidationとする。Regression・Compile・Static Review・Production Patch Review・Final Finding Assessment・Completion判断が後続として残り、P2-05 COMPLETE／CP-P2確立を意味しない。当地の成果物受入・同期状態、Current Approved Baseline BL-MVP-003およびOBS-P2-05-002 OPEN／NON-BLOCKINGの扱いを維持する。
 
 ### v1.22 更新概要
 
