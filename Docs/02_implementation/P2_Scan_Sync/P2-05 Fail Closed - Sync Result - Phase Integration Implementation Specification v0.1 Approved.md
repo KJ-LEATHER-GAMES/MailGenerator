@@ -13,8 +13,7 @@
 | Implementation Unit | P2-05 Fail Closed / Sync Result / Phase Integration |
 | Preceding Unit | P2-04 Manual Sync Integration |
 | Boundary Confirmation | **PASS** |
-| Boundary Cross-document Consistency Review | **PASS / CLOSED** |
-| Specification Cross-document Consistency Review | **PASS / CLOSED** |
+| Cross-document Consistency Review | **PASS / CLOSED** |
 | Requirement Gap | **NONE** |
 | Design Finding | **NONE** |
 | Blocking Finding at Entry | **0** |
@@ -2273,7 +2272,7 @@ Formal MVP TestはP7 Test Candidate Build固定後に実施する。
 
 # 63. Baseline Impact
 
-Candidate Specification時点では、
+Approved Specification時点では、
 
 ```text
 BL-MVP-003:
@@ -2311,59 +2310,41 @@ REOPEN NOT REQUIRED
 
 ---
 
-# 64. Approval Result
+# 64. Approval Conditions
 
-Cross-document Consistency Reviewで以下を確認済みとする。
+本CandidateをApproved Unit Specificationとするには、少なくとも以下をReviewする。
 
 ```text
-Requirement Consistency:
-PASS
+Requirement Consistency
 
-Design Responsibility Consistency:
-PASS
+Design Responsibility Consistency
 
-MTS-SYNC-008～012 Consistency:
-PASS
+MTS-SYNC-008～012 Consistency
 
-P2 / P3 / P6 Scope Consistency:
-PASS
+P2 / P3 / P6 Scope Consistency
 
-P2-04 Public Contract Compatibility:
-PASS
+P2-04 Public Contract Compatibility
 
-UI / Application Responsibility:
-PASS
+UI / Application Responsibility
 
-Fail Closed Rules:
-PASS
+Fail Closed Rules
 
-Reactivated Presentation:
-PASS
+Reactivated Presentation
 
-Verification Coverage:
-PASS
+Verification Coverage
 
-No P6 Preemption:
-PASS
+No P6 Preemption
 
-No P3 Preemption:
-PASS
+No P3 Preemption
 
-No New Requirement:
-PASS
-
-Residual Conflict:
-0
-
-Blocking Finding:
-0
+No New Requirement
 ```
 
 ---
 
-# 65. Approved Decision
+# 65. Approval Decision
 
-本Specificationでは以下をApproved Decisionとして固定する。
+本Specificationでは以下を承認する。
 
 ```text
 P2-04 Public Contract:
@@ -2417,49 +2398,29 @@ APPROVED
 
 ---
 
-# 66. Next Gate
+# 66. Approval Result / Next Gate
 
-Specification Cross-document Consistency Review結果：
+Cross-document Consistency Review結果：
 
 ```text
-PASS / CLOSED
-
-Residual Conflict:
-0
-
-Blocking Finding:
-0
+Residual Conflict = 0
+Blocking Finding = 0
 ```
 
-本Specification：
+したがって、
 
 ```text
 Implementation Specification v0.1
 APPROVED
 ```
 
+とする。
+
 次の正式Gate：
 
 ```text
-P2-05 Current Production Source Review
-```
-
-Review対象：
-
-```text
-modUiController current source / shell
-modSyncApplication current production source
-COperationResult / CErrorInfo concrete interface
-SyncDiffResult concrete carrier
-TemplateScanResult concrete carrier
-Current Manual Sync Button / Macro wiring
-Name collision
-Dependency direction
-```
-
-その後、
-
-```text
+Current Production Source Review
+↓
 Production Patch Design
 ```
 
@@ -2471,7 +2432,7 @@ Production Patch Design
 
 ## 日本語
 
-P2-05 Implementation Specification v0.1 Candidateでは、P2-04で成立済みの`ExecuteManualSync` Contractを変更せず、Manual Sync User EntryとBasic Sync Result / Failure NotificationをUI Layerへ接続する仕様とした。
+P2-05 Implementation Specification v0.1 Approvedでは、P2-04で成立済みの`ExecuteManualSync` Contractを変更せず、Manual Sync User EntryとBasic Sync Result / Failure NotificationをUI Layerへ接続する仕様とした。
 
 Manual Sync成功判定は`COperationResult.Success`をSource of Truthとし、Success時のみPersistence成功済み`SyncDiffResult`をPresentationへ使用する。ResultはNew / Existing / Reactivated / Unusedの4分類を保持し、それぞれ「新規 / 継続 / 復活 / Unused化」として表示する。
 
@@ -2483,11 +2444,11 @@ P2-05ではAutomatic Retry、新Result Class、Unused Confirmation UI、Final Er
 
 Implementation VerificationはP05-I01～I17、Contract Compatibility P05-K01～K04、Static Review S01～S32、およびP2-01～P2-04 Regressionを候補とする。
 
-本SpecificationはCross-document Consistency ReviewでResidual Conflict = 0、Blocking Finding = 0を確認し、正式に **APPROVED** とする。次の正式Gateは **P2-05 Current Production Source Review** である。
+本書をApproved Unit Specificationとする。次の正式GateはCurrent Production Source Reviewである。
 
 ## English
 
-The P2-05 Implementation Specification v0.1 Candidate keeps the established P2-04 `ExecuteManualSync` contract unchanged and connects the Manual Sync user entry and basic result/failure notification through the UI layer.
+The P2-05 Implementation Specification v0.1 Approved keeps the established P2-04 `ExecuteManualSync` contract unchanged and connects the Manual Sync user entry and basic result/failure notification through the UI layer.
 
 `COperationResult.Success` remains the source of truth for Manual Sync success. Only a successful, persisted `SyncDiffResult` may be used for success presentation. The four internal categories remain unchanged and are presented as New, Continued, Reactivated, and Unused.
 
@@ -2499,4 +2460,4 @@ P2-05 does not add automatic retry, a new result class, the Unused confirmation 
 
 Candidate verification consists of P05-I01–I17, compatibility checks P05-K01–K04, static review S01–S32, and P2-01–P2-04 regression verification.
 
-This specification has passed its cross-document consistency review with zero residual conflicts and zero blocking findings and is formally **APPROVED**. The next formal gate is the **P2-05 Current Production Source Review**.
+This specification is Approved. The next formal gate is the Current Production Source Review.

@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.15
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.16
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.15 |
+| バージョン | v1.16 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.16 更新概要
+
+- [P05-I07 Invalid Candidate 詳細実施手順書 v0.1](<../03_verification/technical_validation/P05-I07 Invalid Candidate 詳細実施手順書 v0.1.md>)を追加。`{{Bad-Name}}`を用いるFixture、Failure Carrier・単一通知・VariableDefinition不変の確認、WordEditor E_FAIL再発時の切り分けおよびI16への引継ぎを定める未実行手順である。
+- 同時添付の[P2-05 Implementation Specification v0.1 Approved](<../02_implementation/P2_Scan_Sync/P2-05 Fail Closed - Sync Result - Phase Integration Implementation Specification v0.1 Approved.md>)で既存同名ファイルを更新。差分はReview情報欄、承認説明・見出し・Next Gate・Summary等のEditorial／Governance Changeで、技術契約・検証条件は同一。添付のVersion v0.1／APPROVEDを保持し、旧内容はコミット`d8ec4883cb39196f3134facc06ddfdadbc0d463b`の同パスから復元可能。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.15 更新概要
 
