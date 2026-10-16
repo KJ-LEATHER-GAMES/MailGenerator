@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.13
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.14
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.13 |
+| バージョン | v1.14 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.14 更新概要
+
+- [IF-P2-05-001 Investigation Update v0.6](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.6.md>)を外部調査記録として追加し、最新の調査参照先とする。v0.5以前は時点別の経過記録として保持する。添付はP1／診断実行後の同一Office Sessionで`RunManualSync`が2回成功し、P05-I03 Existing OnlyおよびI09 Failure PresentationをPASSと報告する。I16 Fresh Retryは未Closeである。
+- 原因はセッション依存のWordEditor初期化状態が有力とされるが未確定。Finding OPEN／Production Correction NONEを維持し、次の外部確認は独立したFresh Warm SessionのFW-1／FW-2。非ブロッキングへの変更と成功経路検証再開は両試行のPASSを条件とする後続判断である。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.13 更新概要
 
