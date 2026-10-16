@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.21
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.22
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.21 |
+| バージョン | v1.22 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.22 更新概要
+
+- ユーザー提示の[Context Handoff_22](<../05_handoff/history/Context Handoff_22.md>)を引継ぎ履歴として保存。Approved仕様書の状態反映、P05-I07／I16／I08のPASS／CLOSED記録、Evidence上の留保、残るRuntime Verificationと後続Completion Gateをまとめる。
+- 次の記録上のActionはP05-I02 New OnlyのControlled Fixture設計で、I04／I05／I01／I06が続く。P2-05はImplementation Verification継続中、P2-05 COMPLETE・CP-P2は未成立、OBS-P2-05-002はOPEN／NON-BLOCKINGとする本文を保持する。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003は従来の管理状態を維持する。
 
 ### v1.21 更新概要
 
