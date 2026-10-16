@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.25
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.26
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.25 |
+| バージョン | v1.26 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.26 更新概要
+
+- [P2-02 Regression 実施チェックリスト v0.1](<../03_verification/technical_validation/P2-02 Sync Diff Core Regression 実施チェックリスト v0.1.md>)および[Regression Record v0.1](<../03_verification/technical_validation/P2-02 Sync Diff Core Regression Record v0.1.md>)を追加。ChecklistはSource／Entry Point確認待ち・実行結果未記入の準備資料として保持する。Record（2026-10-10）は提供ログの6 Suite合計111/111 PASS・FAIL 0を報告するが、DRAFT／CLOSURE PENDING BASELINE & BUILD PROVENANCEであり、Regressionの正式CLOSEとは区別する。
+- BR-P2-02-REG-001（ログのBL-MVP-004と既存記録BL-MVP-003の照合）、実行Workbook／Production Source／Build特定、Public Signature確認および元ログ保管はRecordの未解決事項として登録する。本文の判断・後続手順は今回実行せず、当地の受入・同期状態とCurrent Approved Baseline BL-MVP-003を維持する。P2-05 COMPLETE／CP-P2確立・Formal MVP Test PASSは主張しない。
 
 ### v1.25 更新概要
 
