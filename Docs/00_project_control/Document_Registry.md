@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.10
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.11
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.10 |
+| バージョン | v1.11 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.11 更新概要
+
+- [P2-05 Production Implementation Record v0.1](<../02_implementation/P2_Scan_Sync/P2-05 Production Implementation Record v0.1.md>)と[modUiController v0.1 CP932候補](<../02_implementation/P2_Scan_Sync/modUiController_P2-05_v0.1_CP932.bas>)を追加。実装記録は候補作成時点の状態を保持し、外部Workbookについて`modUiController`／Manual Sync Buttonが未存在との確認によりOBS-P2-05-SR-001をCLOSEDと記録する。VBA候補は内部名`modUiController`・CP932を維持して実装資料配下へ保存する。
+- 後続の[VBA Compile Evidence v0.1](<../03_verification/technical_validation/P2-05 VBA Compile Evidence v0.1.md>)、[Verification Execution Plan and Evidence Record v0.1](<../03_verification/technical_validation/P2-05 Verification Execution Plan and Evidence Record v0.1.md>)および[Verification Partial Result v0.1](<../03_verification/technical_validation/P2-05 Verification Partial Result v0.1.md>)を追加。添付は外部環境のImport・Compile PASS、I09～I15／I17とK01～K04の計12件PASSを報告し、Runtime UIのI01～I08／I16はNOT RUN、RegressionとFinal Static Reviewは未着手、P2-05 VerificationはIN PROGRESSとする。当地の成果物受入・同期状態とCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.10 更新概要
 
