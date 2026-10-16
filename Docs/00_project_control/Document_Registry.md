@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.19
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.20
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.19 |
+| バージョン | v1.20 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.20 更新概要
+
+- ユーザー提示の[P05-I08 OFT Missing 詳細実施手順書 v0.1](<../03_verification/technical_validation/P05-I08 — OFT Missing 詳細実施手順書 v0.1.md>)をMarkdownとして保存。Settingsを変更せずOFTを一時リネームするFixture、Failure Carrier・単一Failure通知・Success通知なし・VariableDefinition不変の確認、想定外結果の切り分けとOFT復元を定める未実行手順である。
+- 提示本文を保持し、I08実施結果やPASS判定は追加していない。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.19 更新概要
 
