@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.06
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.07
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.06 |
+| バージョン | v1.07 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-10-12 |
+| 更新日 | 2026-10-16 |
+
+### v1.07 更新概要
+
+- [P2-04 Completion Record v0.1](<../02_implementation/P2_Scan_Sync/P2-04 Manual Sync Integration Completion Record v0.1.md>)および[Completion Criteria Final Check v0.1](<reviews/P2-04 Manual Sync Integration Completion Criteria Final Check v0.1.md>)を外部のUnit完了・完了条件照合記録として追加。添付は15/15 Completion Criteria PASS、P2-04 PASS／COMPLETE、Active／Blocking Finding 0を報告し、Final Check第4節にProduction Patch DesignのAPPROVED AS IMPLEMENTED判断を記録する。
+- 添付本文の承認・判定は原記録として保持し、当地の受入状態は従来どおり別PC成果物の同期・独立確認待ちとする。Current Approved BaselineはBL-MVP-003を維持する。添付の完了範囲はP2-04 Unitであり、P2 PhaseはIN PROGRESS、CP-P2はNOT ESTABLISHED、Formal MVP Testは後続工程とされている。
 
 ### v1.06 更新概要
 
