@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.12
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.13
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.12 |
+| バージョン | v1.13 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.13 更新概要
+
+- IF-P2-05-001の[Investigation Update v0.4](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.4.md>)、[v0.5](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.5.md>)および[WordEditor Timing Diagnostic v0.1 CP932](<../../tests/vba/P2_Scan_Sync/modP2_05WordEditorTimingDiagnostic_v0.1_CP932.bas>)を追加。最新の調査状況はv0.5を参照し、v0.4以前は時点別の経過記録として保持する。診断専用VBAは内部名`modP2_05WordEditorTimingDiagnostic`・CP932を維持してtestsへ保存する。
+- 添付はP1-03 Snapshotと診断A／B／CのPASS、現`modSyncApplication`の意味的差分なしを報告する。v0.5では単一DoEvents不足の仮説は現診断結果に支持されず、初回WordEditor接続前後のセッション依存状態を未確定の仮説として残す。次の外部確認はFresh Warm Sessionでの再現。IF-P2-05-001はOPEN、成功経路の検証はPAUSED、Production PatchはNONEとされる。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.12 更新概要
 
