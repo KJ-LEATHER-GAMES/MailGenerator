@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.11
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.12
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.11 |
+| バージョン | v1.12 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.12 更新概要
+
+- IF-P2-05-001の[WordEditor Access Failure Investigation Plan v0.1](<../03_verification/technical_validation/IF-P2-05-001 WordEditor Access Failure Investigation Plan v0.1.md>)、[Investigation Update v0.2](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.2.md>)および[v0.3](<../03_verification/technical_validation/IF-P2-05-001 Investigation Update v0.3.md>)を外部の技術検証・調査記録として追加。最新の調査状況はv0.3を参照し、初期計画とv0.2は経過記録として保持する。
+- 添付はWarm状態のManual SyncでWordEditor失敗が2回再現し、直接のP1-02 Warm RegressionはPASSと報告する。v0.3は初期化タイミング・Snapshot処理順序・現WorkbookのOrchestration差分を未確定の仮説として残し、次の切り分け候補をP1-03 Snapshot Testとする。IF-P2-05-001はOPEN、P2-05成功経路の検証はPAUSED、P05-I09 Failure PresentationはPASS candidate。当地では記録追加として扱い、成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003を維持する。
 
 ### v1.11 更新概要
 
