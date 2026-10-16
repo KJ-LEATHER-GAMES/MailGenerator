@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.09
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.10
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.09 |
+| バージョン | v1.10 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.10 更新概要
+
+- [P2-05 Current Production Source Review v0.1](<reviews/P2-05 Fail Closed - Sync Result - Phase Integration Current Production Source Review v0.1.md>)および[Production Patch Design v0.1](<../02_implementation/P2_Scan_Sync/P2-05 Fail Closed - Sync Result - Phase Integration Production Patch Design v0.1.md>)を追加。添付はSource Review PASS／CLOSED・Patch Scope CONFIRMED、Design APPROVED FOR IMPLEMENTATIONを記録し、実装対象を`modUiController`と`RunManualSync()`のUI Entry／基本通知に限定する。
+- Source Review上ではOBS-P2-05-001／002はRESOLVED、003はPARTIALLY RESOLVEDで、Workbook固有の確認はOBS-P2-05-SR-001へ引き継ぐ。既存ボタン／マクロ接続はWorkbook Integration・P2-05 Verificationで完了前に確認する事項である。添付の次GateはProduction Implementation。当地の成果物受入・同期状態およびCurrent Approved Baseline BL-MVP-003は従来の管理状態を維持する。
 
 ### v1.09 更新概要
 
