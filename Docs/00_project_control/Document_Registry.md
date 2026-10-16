@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.03
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.04
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.03 |
+| バージョン | v1.04 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-12 |
+
+### v1.04 更新概要
+
+- [P2-04 Integrated Static Review v0.1 Open](<reviews/P2-04 Manual Sync Integration 統合Static Review v0.1_Open.md>)、[Production Change Scope Correction Record v0.1](<reviews/P2-04 Production Change Scope Correction Record v0.1.md>)および[Static Review Scope Correction Record](<reviews/P2-04 Static Review Scope Correction Record.md>)を外部のStatic Review／Scope判断記録として追加。統合ReviewはISR-01のProduction Module Diff Evidence不足により28/29 PASS・Close Pending、Correction RecordはIF-P2-04-001対応を管理済み補正としてISR-01をPASS WITH CONTROLLED CORRECTIONと扱う記録である。
+- これらはBL-MVP-003を前提とした外部の時点別記録であり、当地では各前提・Production Module Diff・Static Review判定を独立確認していない。Current Approved Baseline BL-MVP-003、P2-04未完了、Formal MVP Test NOT RUN、`src`／Workbook／OFTを維持し、Static Review Close、IF-P2-04-001 Closure、P2-04 PASS／COMPLETE、Baseline更新またはP2 Phase／CP-P2完了を行わない。
 
 ### v1.03 更新概要
 
