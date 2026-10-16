@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.26
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.27
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.26 |
+| バージョン | v1.27 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-16 |
+
+### v1.27 更新概要
+
+- [P2-03 Regression 実施チェックリスト v0.1](<../03_verification/technical_validation/P2-03 Regression 実施チェックリスト v0.1.md>)および[Regression Record v0.1](<../03_verification/technical_validation/P2-03 VariableDefinition Sync Persistence Regression Record v0.1.md>)を追加。ChecklistはSource／Fixture確認待ち・実行結果未取得の準備資料として保持する。Record（2026-10-11）は提供ログの5 Suite合計46/46 PASS・FAIL 0と各Suiteの復元出力を報告するが、DRAFT／CLOSURE PENDINGであり、正式CLOSEや完全復元保証とは区別する。
+- BR-P2-03-REG-001～003（Baseline照合、実行Workbook／Production Source／Build特定、元ログ保管・Fixture最終状態確認）とFinal Finding Dispositionが後続確認事項。P2-02 Recordの同種項目も未解消として維持する。当地での独立検証・本文の後続手順・Baseline変更は行わず、当地の受入・同期状態とCurrent Approved Baseline BL-MVP-003を維持する。P2-05 COMPLETE／CP-P2確立・Formal MVP Test PASSは主張しない。
+- Checklist末尾の行末空白1文字のみ除去（Editorial Change）。文書Version・技術内容・判定は原本どおり保持する。
 
 ### v1.26 更新概要
 
