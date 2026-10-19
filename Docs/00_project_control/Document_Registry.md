@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.36
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.37
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.36 |
+| バージョン | v1.37 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.37 更新概要
+
+- [I12 Historical Evidence Applicability Assessment v0.1 Draft](<../03_verification/technical_validation/P2-04_I12_Historical_Regression_Evidence_Applicability_Assessment_v0.1_Draft.md>)、[Build Provenance Verification v0.3 Draft](<../03_verification/technical_validation/P2-04_Regression_Build_Provenance_Verification_v0.3_Draft.md>)および[I12 Evidence Matrix v0.5 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.5_Draft.md>)を追加。Provenance／Matrixを最新参照先とし、旧版は経過記録として保持する。本文は原本どおり保存する。
+- 本文は全回帰で共通Production 9モジュールを使用したという実行者申告をUSER ATTESTATIONとして扱い、9/9照合報告と合わせてP2-01／P2-02／P2-03の過去EvidenceをSource Contract限定で技術的に再利用可と評価する。I01／I02は歴史的な補強証拠であり今回の新実行に加算しない。Workbookの独立バイナリ証明、全面Fixture／OFT／Compile一致、P2-02／P2-03独立Recordの正式Closure、I12最終判断は別Gateとして未確定を維持する。
+- 今回は文書3件の追加のみで、引用申告・Source／Raw Log照合・技術評価を当地で独立追認していない。ZIP・Workbook・P2-02／P2-03生ログ本体は今回未添付。当地での再利用承認、Source同期、Baseline切替、手順実行、過去Completion／正式Status変更は行わない。
 
 ### v1.36 更新概要
 
