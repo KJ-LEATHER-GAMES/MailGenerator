@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.41
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.42
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.41 |
+| バージョン | v1.42 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.42 更新概要
+
+- [P2 Regression Closure～Phase Exit Action Plan v0.1（2026-10-19）](<P2_Closure_and_Phase_Exit_Action_Plan_v0.1_20261019.md>)をProject Controlの実行計画案として追加。本文・DRAFT／NOT APPROVEDを原本どおり保持する。S0棚卸し、S1 Evidence保管、S2個別Regression Closure、S3 I12／P2-04 Closure、S4管理／Baseline整合、S5 P2-05 Completion、S6 Phase Exit／CP-P2の順序・責務・Done Whenを示す提案である。
+- 本文の初回依頼例・Commit禁止等は計画内の将来作業条件であり、今回のファイル追加依頼とは区別する。当地でS0～S6の実行・計画承認・正本同期・正式Closure・Baseline変更・実機Compileは行わず、関連文書の登録状況と外部会話時点の未登録説明を区別する。今回の変更は計画書保存と必要な入口参照更新に限定し、pushは行わない。
 
 ### v1.41 更新概要
 
