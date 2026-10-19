@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.31
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.32
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.31 |
+| バージョン | v1.32 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.32 更新概要
+
+- [P2-04 Regression Build Provenance Verification v0.1 Draft](<../03_verification/technical_validation/P2-04_Regression_Build_Provenance_Verification_v0.1_Draft.md>)をI12 Matrix v0.2の後続照合記録として追加。本文は参照Git Snapshot・承認記録・版付きArtifactとsrcの差異を報告する一方、DRAFT／BUILD PROVENANCE NOT VERIFIED／I12 CLOSURE PENDINGを維持する。182/182 PASSは引継ぎ報告値であり、Git Blobと実行Workbook／VBAProjectの一致・原本ログ所在は未確認とする。
+- BPV-001～008、Run別Evidence Chain、旧Evidence再利用条件と実行PCでの採取手順を作成時点の記録として保持する。今回の追加は本文報告の独立追認や照合手順の実行を伴わず、Workbook／OFT／VBA操作、元ログ採取、Source同期、Baseline切替、I12正式Closureまたは過去Completionの変更は行わない。本文のCommit未実施・外部生成先は作成時点の説明であり、当地の保存先は上記リンクとする。
 
 ### v1.31 更新概要
 
