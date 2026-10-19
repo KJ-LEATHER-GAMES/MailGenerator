@@ -1,15 +1,22 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.37
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.38
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.37 |
+| バージョン | v1.38 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.38 更新概要
+
+- [P2-02 Regression Closure Review v0.1 Candidate](<reviews/P2-02_Sync_Diff_Core_Regression_Closure_Review_v0.1_Candidate.md>)、[P2-03 Regression Closure Review v0.1 Candidate](<reviews/P2-03_Sync_Persistence_Regression_Closure_Review_v0.1_Candidate.md>)、[I12 Execution Policy Alignment Decision v0.1 Proposed](<P2-04_I12_Execution_Policy_Alignment_Decision_v0.1_Proposed.md>)、[I12 Final Quality Gate Assessment v0.1 Draft](<../03_verification/technical_validation/P2-04_I12_Final_Quality_Gate_Assessment_v0.1_Draft.md>)および[I12 Evidence Matrix v0.6 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.6_Draft.md>)を追加。Matrixを最新参照先とし、v0.5以前は経過記録として保持する。5文書の本文・Candidate／Proposed／Draft状態は原本どおり保存する。
+- Closure ReviewはP2-02の111件／P2-03の46件について技術的Closureを推奨する一方、独立Recordの正式ClosureはArchive・受入・承認待ち。Decisionは後続実施計画によるEvidence再利用方式を当該Cycleへ採用する提案であり、ユーザー承認待ちを維持する。旧Guideを自動的に無効化せず、I01／I02の歴史的補強証拠を今回の再実行や9資産共通性の証明へ拡張しない。
+- Final Assessment／Matrixは提案方式での技術的PASS候補と正式Gateを区別する。方針承認、今回CycleのCompile、最終OFT／Settingsの限定確認、Evidence登録・正式改訂は残件であり、I12はPENDING／NOT CLOSED。P2-05完了・CP-P2確立・Formal MVP Test PASSは主張しない。
+- 今回は文書追加と管理参照更新のみで、Source照合報告・実行者申告・Finding評価の独立追認、手順実行、承認、過去RecordのStatus変更、Baseline切替、Workbook／OFT／Production変更は行わない。P2-02／P2-03生ログ本体・Source ZIPは今回未添付であり、当地への受入・Archive完了と区別する。
 
 ### v1.37 更新概要
 
