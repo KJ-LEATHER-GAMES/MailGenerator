@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.40
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.41
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.40 |
+| バージョン | v1.41 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.41 更新概要
+
+- ユーザー提示の[Context Handoff_25](<../05_handoff/history/Context Handoff_25.md>)を引継ぎ履歴として追加し、本文を原本どおり保存する。P2-02の111件／P2-03の46件／P2-04の182件を別系列として整理し、9 Sourceの照合報告・実行者申告・Compile継続性と、I12 TECHNICAL PASS／REVIEWEDをまとめるスナップショットである。
+- 次の記録上のActionはEvidenceの正規保管、独立Regression RecordのClosure審査、I12正式記録反映、Baseline管理の同期方針確認。正式Closure・P2-05完了・CP-P2は別Gate、Source／Workbook同一性とUSER-ATTESTEDの限界を維持する。本文のGitHub未Commit・Registry未反映等は外部会話時点の説明であり、当地の関連文書登録・コミット履歴と区別する。今回、生ログ・ZIP・対象Workbookの追加、独立照合、本文の後続手順、正式Closure、Baseline切替、pushは行わない。
 
 ### v1.40 更新概要
 
