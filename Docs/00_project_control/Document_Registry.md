@@ -1,15 +1,22 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.38
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.39
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.38 |
+| バージョン | v1.39 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.39 更新概要
+
+- [I12 Execution Policy Decision v0.2 Accepted](<P2-04_I12_Execution_Policy_Alignment_Decision_v0.2_Accepted.md>)、[P2-02 Closure Review v0.2 Candidate](<reviews/P2-02_Sync_Diff_Core_Regression_Closure_Review_v0.2_Candidate.md>)、[P2-03 Closure Review v0.2 Candidate](<reviews/P2-03_Sync_Persistence_Regression_Closure_Review_v0.2_Candidate.md>)、[I12 Final Quality Gate Assessment v0.2 Review Result](<../03_verification/technical_validation/P2-04_I12_Final_Quality_Gate_Assessment_v0.2_Review_Result.md>)、[I12 Evidence Matrix v0.7 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.7_Draft.md>)および[Evidence Archive Manifest v0.1 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Archive_Manifest_v0.1_Draft.md>)を追加。各更新文書を最新参照先とし、旧版は経過記録として保持する。6文書の本文は原本どおり保存する。
+- Decisionは2026-10-19の外部会話で承認された当該CycleのEvidence再利用方針を記録し、Review ResultはI12 TECHNICAL PASS／REVIEWED、正式ClosureはDOCUMENTARY PENDINGと報告する。P2-02／P2-03は技術PASS・Closure推奨だが、独立RecordはDRAFT／CLOSURE PENDINGのまま。今回の受領は新たな承認、旧Guideの改訂、独立Recordの正式Closureを意味しない。
+- Compileは実行者申告による2026-10-10の履歴PASSに限定し、2026-10-18の最終VBAProject Compileとみなさない。OFT復元・Settings意図値はUSER-ATTESTEDであり、最終Settings値・画面の独立確認やログ欠落の補作は行わない。P2-05 Final Compileと各Review／Completion、CP-P2は別Gateとして維持する。
+- ManifestはEvidence候補と申告Hashを一覧化したDraftであり、原文ログ・ZIP・Workbook本体は今回未添付。P2-04 Raw Logは既存の当地保存を維持するが、P2-02／P2-03生ログ・ZIPの当地Archive、外部保管先のアクセス制御、Workbook Hashの独立検証は未完了。資料内の配置案より既存フォルダ管理ルールを優先し、管理DecisionはProject Control、Closure Reviewはreviews、評価・Matrix・Manifestはtechnical_validationへ保存する。Baseline切替、Production変更、手順実行、pushは行わない。
 
 ### v1.38 更新概要
 
