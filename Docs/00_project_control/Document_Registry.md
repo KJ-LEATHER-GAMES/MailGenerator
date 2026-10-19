@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.32
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.33
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.32 |
+| バージョン | v1.33 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.33 更新概要
+
+- [P2-04 Regression Build Provenance Verification v0.2 Draft](<../03_verification/technical_validation/P2-04_Regression_Build_Provenance_Verification_v0.2_Draft.md>)を追加し、最新のBuild Provenance参照先とする。v0.1は経過記録として保持する。本文は受領ZIPの9資産について正規化全文一致・Case-Sensitive String Literal一致を報告するが、Workbook Fingerprintはユーザー申告値、Build ProvenanceはPARTIALLY VERIFIED、I12はPENDING／NOT CLOSEDを維持する。
+- 本文のSource照合結果・Hash・実行後変更なし等の申告は原記録として保持し、Workbook本体・VBAProject全体・Raw Log・過去Regressionの実行Buildまで一致したとは扱わない。今回の追加対象は当該文書のみでZIP／Workbook／Raw Logは含まれず、当地での独立再計算・Source比較・実機Compile・手順実行は行わない。受入・同期、Source正本整理、Baseline切替、Record正式Closureは別Gateとし、過去Completionを変更しない。
 
 ### v1.32 更新概要
 
