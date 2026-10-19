@@ -27,7 +27,7 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 | 引継ぎ履歴 | [history](Docs/05_handoff/history/) |
 | 旧版・適用済みPatch | [Archive](Docs/90_archive/) |
 
-生ログ・画面・検証出力の保存先はルートの`Evidence/`です。現在は空でGit追跡されていないため、別チェックアウトでは必要時に作成します。`Docs`・`Evidence`の大文字表記は、記録済みの保持例外です。管理文書・共通ルール・移動台帳は`Docs/00_project_control/`へ統合済みです。
+生ログ・画面・検証出力の保存先はルートの[Evidence](Evidence/)です。[P2-04の2026-10-18 Regression原文ログ](Evidence/P2-04/2026-10-18/P2-04_Regression_20261018_Raw.txt)をGit追跡しています。当該ログはSHA-256で原本バイトを照合し、ログ単位のGit属性で改行変換を無効化しています。ローカル個人フォルダパスを含むため、公開前に取扱範囲を確認してください。その他のEvidenceは必要時に追加します。`Docs`・`Evidence`の大文字表記は、記録済みの保持例外です。管理文書・共通ルール・移動台帳は`Docs/00_project_control/`へ統合済みです。
 
 ## 実行環境とWorkbookの扱い
 

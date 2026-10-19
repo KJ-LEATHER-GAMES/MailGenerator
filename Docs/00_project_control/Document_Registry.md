@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.34
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.35
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.34 |
+| バージョン | v1.35 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.35 更新概要
+
+- [P2-04 Regression Record v0.2 Draft](<../03_verification/technical_validation/P2-04_Manual_Sync_Integration_Regression_Record_v0.2_Draft.md>)、[I12 Evidence Matrix v0.3 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.3_Draft.md>)および[2026-10-18 Raw Log](../../Evidence/P2-04/2026-10-18/P2-04_Regression_20261018_Raw.txt)を追加。文書2件を最新参照先とし、旧版は当時の記録として保持する。提供Raw Logは439行・9群のPASS Count合計182／FAIL 0・Overall PASS 9件・初回I10 ABORT 1件を静的確認し、テストを再実行したとは扱わない。
+- Raw Log SHA-256は`4a16f9dfb09573bd28c6732372465c39644417502081b8d37b5c132b76f08add`で原本と一致。CRLF・終端改行なしを含めバイト保持し、同一フォルダのGit属性で当該ログだけ改行正規化を無効化した。ローカル個人フォルダパスを含む原文であり公開前の取扱確認を要する。文書2件は当該Raw Logの保存先リンクのみEditorial更新し、本文の未反映説明は作成時点の記録として保持する。
+- 今回Cycleのログ収集と旧P2-02／P2-03の実行ログ・Build・Fixture、I01／I02再利用、Final Finding／I12最終判定を区別する。両文書のDRAFT／CLOSURE PENDING、I12 PENDING／NOT CLOSEDを維持し、Workbook／ZIP独立検査、実機Compile、手順実行、過去Record正式Closure、Baseline切替は行わない。
 
 ### v1.34 更新概要
 

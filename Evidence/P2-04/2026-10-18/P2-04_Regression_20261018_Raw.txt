@@ -1,0 +1,439 @@
+==================================================================================
+P2-02 -> P2-03 Bootstrap Production Compatibility
+Execution Baseline = BL-MVP-004
+IF-P2-04-001
+ThisWorkbook = MailGeneratorNew.xlsm
+==================================================================================
+PASS  K-B01 GetAllVariableDefinitions returns Success
+PASS  K-B02 CurrentDefinitions.Count = 2
+PASS  K-B03 ModelName carrier = Active / Subject / Blank-Blank
+PASS  K-B04 OldVariable carrier = Unused / Body / Blank-Blank
+PASS  K-B05 BuildSyncDiff returns Success
+PASS  K-B06 SyncDiffResult published
+PASS  K-B07 New.Count = 0
+PASS  K-B08 Existing.Count = 1
+PASS  K-B09 Reactivated.Count = 0
+PASS  K-B10 Unused.Count = 0 (Already-Unused no-op)
+PASS  K-B11 Existing.VariableName = ModelName
+PASS  K-B12 Existing.Status = Active
+PASS  K-B13 Existing.TemplateLocation = Subject
+PASS  K-B14 Existing.FirstDetectedAt = SyncTimestamp
+PASS  K-B15 Existing.LastDetectedAt = SyncTimestamp
+PASS  K-B16 ApplySyncDiff returns Success
+PASS  K-B17 Row Count remains 2
+PASS  K-B18 ModelName.VariableName preserved
+PASS  K-B19 ModelName.Status = Active
+PASS  K-B20 ModelName.TemplateLocation = Subject
+PASS  K-B21 ModelName.FirstDetectedAt = SyncTimestamp
+PASS  K-B22 ModelName.LastDetectedAt = SyncTimestamp
+PASS  K-B23 ModelName user configuration preserved
+PASS  K-B24 OldVariable.VariableName preserved
+PASS  K-B25 OldVariable.Status remains Unused
+PASS  K-B26 OldVariable.TemplateLocation remains Body
+PASS  K-B27 OldVariable.FirstDetectedAt remains Blank
+PASS  K-B28 OldVariable.LastDetectedAt remains Blank
+PASS  K-B29 OldVariable user configuration preserved
+----------------------------------------------------------------------------------
+PASS Count = 29
+FAIL Count = 0
+Overall = PASS
+Original tblVariableDefinition contents restored.
+==================================================================================
+
+========================================================================
+P2-04 Remaining Verification - I03 Invalid Candidate
+========================================================================
+I03 Fixture Preflight:
+  GetSettingValue:
+  Success = True
+  ResolveWorkbookRelativePath:
+  Success = True
+  Resolved Template Path = C:\Users\monsi\OneDrive\ドキュメント\MailGenerator\Templates\MailTemplate.oft
+  CreateMailFromTemplate:
+  Success = True
+  ReadSubject:
+  Success = True
+  ReadBodyText:
+  Success = True
+  ScanTemplate:
+  Success = True
+  CloseWithoutSave:
+  Success = True
+  InvalidCandidates.Count > 0 = PASS
+  InvalidCandidates.Count = 1
+  Invalid Candidate: {{1stGate}}
+PASS  I03-00 Invalid Candidate fixture preflight
+PASS  I03-01 VariableDefinition Before snapshot
+Before Snapshot: Rows=5; Columns=12
+PASS  I03-02 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = False
+  ErrorType=ConfigurationError; Target=TemplateScanResult; Message=The template contains invalid variable candidates.
+PASS  I03-03 ExecuteManualSync = Failure
+PASS  I03-04 templateScanResult = Published
+PASS  I03-05 templateScanResult is Dictionary
+PASS  I03-06 InvalidCandidates.Count > 0
+  InvalidCandidates.Count = 1
+  Invalid Candidate: {{1stGate}}
+PASS  I03-07 syncDiffResult = Nothing
+PASS  I03-08 VariableDefinition After snapshot
+After Snapshot: Rows=5; Columns=12
+PASS  I03-09 VariableDefinition Before = After
+------------------------------------------------------------------------
+PASS Count = 10
+FAIL Count = 0
+Overall = PASS
+========================================================================
+
+========================================================================
+P2-04 Remaining Verification - I04 OFT Missing
+========================================================================
+Original TemplatePath = Templates\TESTP204I04.oft
+Missing TemplatePath = Templates\__P2_04_I04_MISSING_20261018_072106_01.oft
+Resolved Missing Path = C:\Users\monsi\OneDrive\ドキュメント\MailGenerator\Templates\__P2_04_I04_MISSING_20261018_072106_01.oft
+PASS  I04-00 Missing OFT fixture preflight
+PASS  I04-01 VariableDefinition Before snapshot
+Before Snapshot: Rows=5; Columns=12
+PASS  I04-02 Temporary TemplatePath applied
+PASS  I04-03 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = False
+  ErrorType=ConfigurationError; Target=TemplatePath; Message=Template file does not exist.
+PASS  I04-04 ExecuteManualSync = Failure
+PASS  I04-05 ConfigurationError / TemplatePath / OFT missing
+PASS  I04-06 templateScanResult = Nothing
+PASS  I04-07 syncDiffResult = Nothing
+PASS  I04-08 VariableDefinition After snapshot
+After Snapshot: Rows=5; Columns=12
+PASS  I04-09 VariableDefinition Before = After
+PASS  I04-10 Settings.TemplatePath restored
+Restored TemplatePath = Templates\TESTP204I04.oft
+------------------------------------------------------------------------
+PASS Count = 11
+FAIL Count = 0
+Overall = PASS
+========================================================================
+
+========================================================================
+P2-04 Remaining Verification - I05 Definition Read Failure
+========================================================================
+I05 Normal Template Preflight:
+  GetSettingValue:
+  Success = True
+  ResolveWorkbookRelativePath:
+  Success = True
+  Resolved Template Path = C:\Users\monsi\OneDrive\ドキュメント\MailGenerator\Templates\MailTemplate.oft
+  CreateMailFromTemplate:
+  Success = True
+  ReadSubject:
+  Success = True
+  ReadBodyText:
+  Success = True
+  ScanTemplate:
+  Success = True
+  CloseWithoutSave:
+  Success = True
+  InvalidCandidates.Count = 0 = PASS
+PASS  I05-00 Normal template preflight
+PASS  I05-01 Status column preflight
+PASS  I05-02 VariableDefinition Before snapshot
+Before Snapshot: Rows=5; Columns=12
+PASS  I05-03 Broken Status column applied
+PASS  I05-04 Original Status column unavailable
+PASS  I05-05 Direct definition read returns COperationResult
+Direct GetAllVariableDefinitions:
+  Success = False
+  ErrorType=ConfigurationError; Target=Status; Message=Required column was not found in tblVariableDefinition.
+PASS  I05-06 Direct GetAllVariableDefinitions = Failure
+PASS  I05-07 Failed definition read returns initialized empty collection
+PASS  I05-08 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = False
+  ErrorType=ConfigurationError; Target=Status; Message=Required column was not found in tblVariableDefinition.
+PASS  I05-09 ExecuteManualSync = Failure
+PASS  I05-10 templateScanResult = Published
+PASS  I05-11 templateScanResult is Dictionary
+PASS  I05-12 InvalidCandidates.Count = 0
+PASS  I05-13 syncDiffResult = Nothing
+PASS  I05-14 VariableDefinition After snapshot
+After Snapshot: Rows=5; Columns=12
+PASS  I05-15 VariableDefinition Data Before = After
+PASS  I05-16 Status column restored
+Restored Column Name = Status
+------------------------------------------------------------------------
+PASS Count = 17
+FAIL Count = 0
+Overall = PASS
+========================================================================
+
+========================================================================
+P2-04 Remaining Verification - I06 BuildSyncDiff Failure
+========================================================================
+I05 Normal Template Preflight:
+  GetSettingValue:
+  Success = True
+  ResolveWorkbookRelativePath:
+  Success = True
+  Resolved Template Path = C:\Users\monsi\OneDrive\ドキュメント\MailGenerator\Templates\MailTemplate.oft
+  CreateMailFromTemplate:
+  Success = True
+  ReadSubject:
+  Success = True
+  ReadBodyText:
+  Success = True
+  ScanTemplate:
+  Success = True
+  CloseWithoutSave:
+  Success = True
+  InvalidCandidates.Count = 0 = PASS
+PASS  I06-00 Normal template preflight
+Original ModelName.Status = Active
+PASS  I06-01 Target Status cell preflight
+PASS  I06-02 Original VariableDefinition snapshot
+Original Snapshot: Rows=5; Columns=12
+PASS  I06-03 Invalid Status fixture applied
+PASS  I06-04 Fixture VariableDefinition snapshot
+PASS  I06-05 Definition read returns COperationResult
+Direct GetAllVariableDefinitions:
+  Success = True
+PASS  I06-06 GetAllVariableDefinitions = Success
+PASS  I06-07 Definition carrier contains ModelName / InvalidStatus
+PASS  I06-08 Direct TemplateScanResult obtained
+Direct Build SyncTimestamp = 2026-10-18 09:04:25
+PASS  I06-09 Direct BuildSyncDiff returns COperationResult
+Direct BuildSyncDiff:
+  Success = False
+  ErrorType=ConfigurationError; Target=Status; Message=VariableDefinition contains an unsupported Status.
+PASS  I06-10 Direct BuildSyncDiff = Failure
+PASS  I06-11 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = False
+  ErrorType=ConfigurationError; Target=Status; Message=VariableDefinition contains an unsupported Status.
+PASS  I06-12 ExecuteManualSync = Failure
+PASS  I06-13 templateScanResult = Published
+PASS  I06-14 templateScanResult is Dictionary
+PASS  I06-15 InvalidCandidates.Count = 0
+PASS  I06-16 syncDiffResult = Nothing
+PASS  I06-17 Post-execution VariableDefinition snapshot
+PASS  I06-18 Fixture State = Post-execution State
+PASS  I06-19 ModelName.Status restored
+Restored ModelName.Status = Active
+PASS  I06-20 Restored VariableDefinition snapshot
+PASS  I06-21 Original State = Restored State
+------------------------------------------------------------------------
+PASS Count = 22
+FAIL Count = 0
+Overall = PASS
+========================================================================
+
+============================================================================
+P2-04 Remaining Verification - I07 / I08 Continuous Retry
+============================================================================
+PASS  P00 VariableDefinition worksheet initially unprotected
+Original ModelName.Status = Active
+PASS  P01 ModelName.Status = Active precondition
+PASS  P02 Original VariableDefinition snapshot
+PASS  P03 Normal TemplateScanResult obtained
+PASS  P04 InvalidCandidates.Count = 0
+PASS  P05 Normal GetAllVariableDefinitions = Success
+PASS  P06 Normal BuildSyncDiff = Success
+PASS  P07 ModelName classified Existing before I07
+PASS  P08 Preflight New.Count = 0
+----------------------------------------------------------------------------
+I07 ApplySyncDiff Failure
+----------------------------------------------------------------------------
+PASS  I07-00 Worksheet protection applied
+PASS  I07-01 Definition Read under protection = Success
+PASS  I07-02 BuildSyncDiff under protection = Success
+PASS  I07-03 Protected Build classifies ModelName Existing
+PASS  I07-04 ExecuteManualSync returns COperationResult
+I07 ExecuteManualSync:
+  Success = False
+  ErrorType=UnexpectedError; Target=tblVariableDefinition; Message=Unexpected error while persisting VariableDefinition after writing started. The table may be partially updated. 1004 - 変更しようとしているセルやグラフは保護されているシート上にあります。変更するには、シートの保護を解除してください。パスワードの入力が必要な場合もあります。
+PASS  I07-05 ExecuteManualSync = Failure
+PASS  I07-06 templateScanResult = Published
+PASS  I07-07 syncDiffResult = Nothing
+PASS  I07-08 Automatic retry did not convert failure to success
+SUPPORT PASS  I07 VariableDefinition Before = After
+NOTE: This SUPPORT observation is not a universal rollback contract.
+PASS  I07-09 Worksheet protection removed
+----------------------------------------------------------------------------
+I08 Retry Fresh State
+----------------------------------------------------------------------------
+PASS  I08-00 ModelName.Status Active -> Unused
+PASS  I08-01 Retry fixture snapshot captured
+PASS  I08-02 Fresh pre-retry Definition Read = Success
+PASS  I08-03 CurrentDefinitions contains ModelName / Unused
+Retry lower-bound timestamp = 2026-10-18 09:16:10
+PASS  I08-04 Retry ExecuteManualSync returns COperationResult
+I08 Retry ExecuteManualSync:
+  Success = True
+PASS  I08-05 Retry ExecuteManualSync = Success
+PASS  I08-06 templateScanResult = Published
+PASS  I08-07 New syncDiffResult = Published
+PASS  I08-08 ModelName classified Reactivated
+PASS  I08-09 ModelName is not classified Existing
+PASS  I08-10 Persisted ModelName.Status = Active
+PASS  I08-11 Reactivated LastDetectedAt readable
+I08 Reactivated LastDetectedAt = 2026-10-18 09:16:10
+PASS  I08-12 Retry uses new SyncTimestamp
+PASS  I08-13 Post-retry VariableDefinition snapshot
+PASS  C00 Original VariableDefinition state restored
+PASS  C01 Restored snapshot captured
+PASS  C02 Original State = Restored State
+PASS  C03 Worksheet protection state restored
+----------------------------------------------------------------------------
+PASS Count = 37
+FAIL Count = 0
+Overall = PASS
+============================================================================
+
+============================================================================
+P2-04 Remaining Verification - I09 Warm Lifecycle
+============================================================================
+PASS  I09-00 Classic Outlook Warm Start precondition
+PASS  I09-01 Lifecycle baseline acquired
+Explorer Count Before = 1
+Inspector Count Before = 0
+Draft Count Before = 23
+PASS  I09-02 VariableDefinition original snapshot
+PASS  I09-03 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = True
+PASS  I09-04 ExecuteManualSync = Success
+PASS  I09-05 templateScanResult = Published
+PASS  I09-06 syncDiffResult = Published
+Explorer Count After = 1
+Inspector Count After = 0
+Draft Count After = 23
+PASS  I09-07 Existing Explorer reused / no unnecessary Explorer
+PASS  I09-08 Inspector residue = NONE
+PASS  I09-09 Draft residue = NONE
+PASS  I09-10 Scan MailItem Display residue = NONE (indirect)
+PASS  I09-11 Existing Explorer remains open
+PASS  I09-12 Post-sync VariableDefinition snapshot
+PASS  I09-13 Original VariableDefinition state restored
+PASS  I09-14 Restored snapshot captured
+PASS  I09-15 Original State = Restored State
+----------------------------------------------------------------------------
+PASS Count = 16
+FAIL Count = 0
+Overall = PASS
+============================================================================
+
+============================================================================
+P2-04 Remaining Verification - I10 Cold Lifecycle
+============================================================================
+ABORT: I10 baseline has not been prepared in this VBA session.
+Run PrepareP204I10ColdLifecycleBaseline while Outlook is running.
+----------------------------------------------------------------------------
+RESULT = ABORTED
+Cold Start precondition was not satisfied; Production path was not run.
+============================================================================
+
+============================================================================
+P2-04 I10 Cold Lifecycle - Baseline Preparation
+============================================================================
+PASS  Baseline prepared
+OUTLOOK.EXE Process Count = 1
+Explorer Count Baseline = 1
+Inspector Count Baseline = 0
+Draft Count Baseline = 23
+Baseline Captured At = 2026-10-18 09:43:36
+----------------------------------------------------------------------------
+NEXT: Fully exit Classic Outlook, keep Excel open, then run:
+      TestP204I10ColdLifecycle
+============================================================================
+
+============================================================================
+P2-04 Remaining Verification - I10 Cold Lifecycle
+============================================================================
+PASS  I10-00 Pre-shutdown lifecycle baseline available
+Draft Count Baseline = 23
+Baseline Captured At = 2026-10-18 09:43:36
+OUTLOOK.EXE Process Count Before = 0
+PASS  I10-01 OUTLOOK.EXE Not Running
+PASS  I10-02 No running Outlook.Application available
+PASS  I10-03 VariableDefinition original snapshot
+PASS  I10-04 ExecuteManualSync returns COperationResult
+ExecuteManualSync:
+  Success = True
+PASS  I10-05 ExecuteManualSync = Success
+PASS  I10-06 templateScanResult = Published
+PASS  I10-07 syncDiffResult = Published
+OUTLOOK.EXE Process Count After = 1
+PASS  I10-08 Classic Outlook process established
+PASS  I10-09 Cold Start Outlook.Application reacquired
+Explorer Count After = 1
+Inspector Count After = 0
+Active Explorer After = True
+PASS  I10-10 Visible Explorer established
+PASS  I10-11 Active Explorer available
+PASS  I10-12 Inspector residue = NONE
+Draft Count After = 23
+PASS  I10-13 Draft residue = NONE
+PASS  I10-14 Scan MailItem Display residue = NONE (indirect)
+PASS  I10-15 Cold-start Explorer remains open
+PASS  I10-16 Post-sync VariableDefinition snapshot
+PASS  I10-17 Original VariableDefinition state restored
+PASS  I10-18 Restored snapshot captured
+PASS  I10-19 Original State = Restored State
+----------------------------------------------------------------------------
+PASS Count = 20
+FAIL Count = 0
+Overall = PASS
+NOTE: Cold-start Explorer is intentionally left open.
+============================================================================
+
+============================================================================
+P2-04 I11 Manual Only - Baseline Preparation
+============================================================================
+PASS  Workbook saved before baseline capture
+PASS  VariableDefinition baseline saved
+PASS  LastDetectedAt baseline saved
+Full Baseline File = C:\Users\monsi\AppData\Local\Temp\P2-04_I11_MailGeneratorNew.xlsm_full.txt
+LastDetectedAt Baseline File = C:\Users\monsi\AppData\Local\Temp\P2-04_I11_MailGeneratorNew.xlsm_lastdetected.txt
+----------------------------------------------------------------------------
+NEXT:
+  1. Close the workbook / Excel normally.
+  2. Reopen the same workbook.
+  3. DO NOT run Manual Sync.
+  4. Run:
+       TestP204I11ManualOnlyAfterReopen
+============================================================================
+
+Excel再起動後実行。
+
+============================================================================
+P2-04 Remaining Verification - I11 Manual Only
+============================================================================
+PASS  I11-00 Reopen baseline evidence files available
+PASS  I11-01 VariableDefinition Before Close = After Reopen
+PASS  I11-02 LastDetectedAt unchanged after Workbook Open
+PASS  Workbook Open caused no VariableDefinition sync update
+PASS  I11-03 Pre-manual-sync VariableDefinition snapshot
+PASS  I11-04 Explicit ExecuteManualSync returns COperationResult
+Explicit ExecuteManualSync:
+  Success = True
+PASS  I11-05 Explicit ExecuteManualSync = Success
+PASS  I11-06 templateScanResult = Published
+PASS  I11-07 syncDiffResult = Published
+PASS  I11-08 New.Count = 0
+PASS  I11-09 Reactivated.Count = 0
+PASS  I11-10 Unused.Count = 0
+PASS  I11-11 Existing.Count > 0
+PASS  I11-12 Post-manual-sync VariableDefinition snapshot
+PASS  I11-13 User Configuration unchanged
+PASS  I11-14 Only LastDetectedAt changed in stable explicit sync
+PASS  I11-15 LastDetectedAt updated only after explicit Manual Sync
+PASS  I11-16 Pre-manual-sync state restored
+PASS  I11-17 Restored snapshot captured
+PASS  I11-18 Original reopened State = Restored State
+PASS  I11-19 Restored workbook saved
+PASS  Temporary I11 baseline evidence files removed
+----------------------------------------------------------------------------
+PASS Count = 20
+FAIL Count = 0
+Overall = PASS
+P3 UserForm Variant = N/A - P3 not implemented
+============================================================================
