@@ -1,15 +1,22 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.39
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.40
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.39 |
+| バージョン | v1.40 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.40 更新概要
+
+- [P2-02 Closure Review v0.3 Candidate](<reviews/P2-02_Sync_Diff_Core_Regression_Closure_Review_v0.3_Candidate.md>)、[P2-03 Closure Review v0.3 Candidate](<reviews/P2-03_Sync_Persistence_Regression_Closure_Review_v0.3_Candidate.md>)、[I12 Evidence Matrix v0.8 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.8_Draft.md>)、[I12 Final Quality Gate Assessment v0.3 Review Result](<../03_verification/technical_validation/P2-04_I12_Final_Quality_Gate_Assessment_v0.3_Review_Result.md>)および[Build Provenance Verification v0.4 Draft](<../03_verification/technical_validation/P2-04_Regression_Build_Provenance_Verification_v0.4_Draft.md>)を追加し、各文書の最新参照先とする。旧版は経過記録として保持し、本文は原本どおり保存する。
+- 添付READMEは[I12 Compile Continuity Update (2026-10-19)](<../03_verification/technical_validation/P2-04_I12_Compile_Continuity_Update_20261019_README.md>)として内容を識別できる名前で追加。今回の5文書の更新パッケージ説明であり、ルートREADMEは変更しない。本文の未変更・未Commit等は資料作成時点の説明として保持する。
+- 今回の追加資料は、2026-10-10 Compile PASS後にProduction Module／Test Harnessを含むVBAProjectの追加・変更がないという2026-10-19の実行者申告を根拠に、履歴Compileを2026-10-18 Regressionへ適用可能と評価する。これはUSER-ATTESTEDの評価であり、10/18の新規Compileや当地でのWorkbook／VBAProject独立検証を意味しない。I12 TECHNICAL PASS／REVIEWEDと正式Closure DOCUMENTARY PENDINGを分離し、P2-05のFinal Compile Gateを代替しない。
+- P2-02／P2-03はClosure推奨Candidate、元の独立RecordはDRAFT／CLOSURE PENDINGを維持する。Matrix v0.8第1節のClosure Review v0.2への言及は受領原文のまま保持し、当地の最新Closure Reviewは上記v0.3とする。生ログ・ZIP・対象Workbook本体は今回未添付。Archive完了、独立Record改訂・承認、Baseline切替、Production変更、実機手順実行、pushは行わない。
 
 ### v1.39 更新概要
 
