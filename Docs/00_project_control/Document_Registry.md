@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.30
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.31
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.30 |
+| バージョン | v1.31 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.31 更新概要
+
+- [P2-04 I12 Evidence Reconciliation Matrix v0.2 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.2_Draft.md>)を追加し、最新の照合参照先とする。v0.1は当時の経過記録として保持する。本文は参照Git SnapshotでBL-MVP-004のApprovalとP2-02／P2-03独立Regression Record等を確認したと報告する一方、DRAFT／CLOSURE PENDING、I12 PENDING／NOT CLOSEDを維持する。
+- 本文のGit Commit／Blobは参照Snapshotであって実行WorkbookのBuild識別ではなく、今回の依頼でも実行PCとの対応・生ログ・Evidence再利用可否を独立確認していない。I12実施計画と旧Guideの再利用／再実行条件の差異は後続照合事項として保持する。本文の保存・Commit未実施等は作成時点の記録とし、当地での追加先は上記リンク。Baseline切替、Production変更、手順実行、正式Closureや過去判定の変更は行わない。
 
 ### v1.30 更新概要
 
