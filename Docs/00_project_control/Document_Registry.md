@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.28
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.29
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.28 |
+| バージョン | v1.29 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-10-16 |
+| 更新日 | 2026-10-19 |
+
+### v1.29 更新概要
+
+- ユーザー提示の[Context Handoff_24](<../05_handoff/history/Context Handoff_24.md>)を引継ぎ履歴として保存。2026-10-18を中心とするP2-04 RegressionのBootstrap Compatibility 29件＋I03～I11 153件＝182/182 PASS・FAIL 0、I10初回ABORT後の再実行PASS、Fixture復元と保証範囲の留保を報告するスナップショットである。
+- 次の記録上のActionはI12 Evidence統合、Baseline／Build照合、P2-04 Regression Record作成。I01／I02の過去Evidenceと今回の実行を区別し、Regression全体の正式Closure、P2-05 COMPLETE、P2 Phase完了・CP-P2確立は未判定とする。本文の未確認事項は当時の記録として保持し、当地のBL-MVP-004承認記録の存在を受入・Baseline切替と同一視しない。元ログ・画面・Exportは今回の追加対象外で、当地での実行・独立検証・Production変更は行っていない。
 
 ### v1.28 更新概要
 
