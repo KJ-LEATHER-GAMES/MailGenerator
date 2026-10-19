@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.33
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.34
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.33 |
+| バージョン | v1.34 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.34 更新概要
+
+- [P2-04 Manual Sync Integration Regression Record v0.1 Draft](<../03_verification/technical_validation/P2-04_Manual_Sync_Integration_Regression_Record_v0.1_Draft.md>)を新Cycleの回帰結果記録として追加。182/182 PASSは引継ぎを構造化したSecondary Evidenceであり、Raw Log原文の逐語転記・全文再照合ではない。DRAFT／RAW LOG VERBATIM ARCHIVE PENDING／REGRESSION CLOSURE PENDING、I12 PENDINGを保持する。
+- 本文の会話所在・Source 9資産一致・Workbook Hashは原記録の報告として扱い、今回Raw Log・ZIP・Workbookの取得／独立検証は行っていない。第8節の未展開URLプレースホルダーのみ、本文冒頭の同一Original Conversation URLに置換（Editorial Change）。本文の推奨保存名・Commit未実施等は作成時点の説明として保持し、当地の保存先は上記リンクとする。正式Closure、Baseline切替、過去Completion変更は行わない。
 
 ### v1.33 更新概要
 
