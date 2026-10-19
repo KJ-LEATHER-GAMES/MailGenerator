@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.35
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.36
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.35 |
+| バージョン | v1.36 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-10-19 |
+
+### v1.36 更新概要
+
+- [P2-02 Raw Evidence Addendum v0.1 Draft](<../03_verification/technical_validation/P2-02_Sync_Diff_Core_Regression_Raw_Evidence_Addendum_v0.1_Draft.md>)、[P2-03 Raw Evidence Addendum v0.1 Draft](<../03_verification/technical_validation/P2-03_Sync_Persistence_Regression_Raw_Evidence_Addendum_v0.1_Draft.md>)、[I12 Evidence Matrix v0.4 Draft](<../03_verification/technical_validation/P2-04_I12_Evidence_Reconciliation_Matrix_v0.4_Draft.md>)、[P2-04 Regression Record v0.3 Draft](<../03_verification/technical_validation/P2-04_Manual_Sync_Integration_Regression_Record_v0.3_Draft.md>)を追加。Matrix／Recordは最新参照先とし、旧版は経過記録として保持する。4文書の本文は原本どおり保持する。
+- 追補はP2-02の111/111 PASS（同一Bootstrap 33件の再掲は加算しない）とP2-03の46/46 PASS・5 Suite復元出力を原文照合したと報告する。これらはP2-04の182件とは別系列であり、実行日・歴史的Workbook／Buildをファイル名や今回のWorkbook Hashから推定しない。独立RecordはDRAFT／CLOSURE PENDING、I12はPENDING／NOT CLOSEDを維持する。
+- 今回の追加対象は文書4件のみ。記載されたP2-02／P2-03生ログ本体は未添付・当地未登録であり、原文SHA-256・行数・Assertionを今回独立確認していない。受領済み・Repo未更新等の説明は文書作成環境の記録として保持し、当地の受入と区別する。既存P2-04 Raw Log・過去Completion・Baseline・Production資産は変更せず、手順実行・正式Closureは行わない。
 
 ### v1.35 更新概要
 
