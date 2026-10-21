@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.42
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.43
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.42 |
+| バージョン | v1.43 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-10-19 |
+| 更新日 | 2026-10-21 |
+
+### v1.43 更新概要
+
+- [S0 Read-only棚卸し指示書 v0.1](<Codex_S0_ReadOnly_Inventory_Instruction_v0.1_20261020.md>)、[S0棚卸し結果まとめ v0.1](<../03_verification/technical_validation/S0_P2_Artifact_Evidence_Inventory_Summary_v0.1_20261021.md>)、[S1-A Evidence Archive方針・公開リスク調査指示書 v0.1](<Codex_S1A_Evidence_Archive_Policy_ReadOnly_Instruction_v0.1_20261021.md>)、[S1 Evidence Archive実施計画 v0.1](<S1_Evidence_Archive_Implementation_Plan_v0.1_20261021.md>)を追加。指示書と計画はProject Control、S0結果まとめはtechnical_validationへ配置し、本文・Draft／承認待ち状態を原本どおり保持する。
+- S0結果まとめは既実施のRead-only調査報告を整理した二次資料であり、今回の独立再検証ではない。本文のGit状態・Remote未確認等は調査当時の記録として扱う。S1-Aは既に会話内で実施済みだが、その後のG1（D-S1-01～08）は未承認。指示書内の手順は今回再実行せず、S1-Bの実体コピー、S1-CのArchive Manifest改訂、Baseline変更、正式Closure、pushは行わない。今回の変更は4資料の保存と入口参照更新に限定する。
 
 ### v1.42 更新概要
 

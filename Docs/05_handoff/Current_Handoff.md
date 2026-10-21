@@ -1,6 +1,6 @@
 # Current Handoff
 
-Revision: v1.31 / 更新日: 2026-10-19
+Revision: v1.32 / 更新日: 2026-10-21
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
 
@@ -84,6 +84,8 @@ Revision: v1.31 / 更新日: 2026-10-19
 - [I12 Compile Continuity Update README](<../03_verification/technical_validation/P2-04_I12_Compile_Continuity_Update_20261019_README.md>)を更新パッケージ説明として追加。ルートREADMEを上書きせず、原文を保持した。5文書の更新はCompile継続性の実行者申告を記録するものであり、生ログ・ZIP・対象Workbookの受入、独立照合、正式Closureは今回の追加対象外。
 - [Context Handoff_25](<history/Context Handoff_25.md>)を最新の外部引継ぎスナップショットとして追加。I12 TECHNICAL PASS／REVIEWED、Evidence再利用方式承認、9 Source照合報告とCompile継続性の実行者申告を整理する。次の記録上のActionは新テストではなく、Evidence保管先・アクセス範囲の確定、独立Regression RecordのClosure審査、I12正式記録とBaseline管理の整合確認。当地には関連候補文書が登録済みだが、生ログ・ZIP・対象Workbookの追加や独立確認・正式Closureは今回未実施。本文の未Commit等は外部会話時点の説明として保持し、P2-05 Final Compile／各Review・Completion・CP-P2は別Gateとする。着手時はOverviewの当地受入条件を確認する。
 - [P2 Closure / Phase Exit Action Plan v0.1（2026-10-19）](<../00_project_control/P2_Closure_and_Phase_Exit_Action_Plan_v0.1_20261019.md>)を追加。DRAFT／NOT APPROVEDの計画案であり、S0～S6の依存順序と完了条件、最初の候補作業としてS0＋S1前半のRead-only棚卸しを示す。本文の依頼例は今回未実行。後続着手時は作業範囲・必要な承認を確認し、I12技術PASS、正式Closure、P2-05完了、Phase Exit／CP-P2を分離する。計画書の登録はEvidence受入・Baseline同期・実機Compile・Closure承認の完了を意味しない。
+- [S0 Read-only棚卸し指示書](<../00_project_control/Codex_S0_ReadOnly_Inventory_Instruction_v0.1_20261020.md>)と[S0結果まとめ v0.1](<../03_verification/technical_validation/S0_P2_Artifact_Evidence_Inventory_Summary_v0.1_20261021.md>)を追加。S0は2026-10-21に実施済みで、結果まとめはその報告の二次資料（Draft）。Git状態・Remote未確認等は当時のスナップショットとして保持し、今回の追加では棚卸しを再実行していない。
+- [S1実施計画 v0.1](<../00_project_control/S1_Evidence_Archive_Implementation_Plan_v0.1_20261021.md>)と[S1-A Read-only指示書](<../00_project_control/Codex_S1A_Evidence_Archive_Policy_ReadOnly_Instruction_v0.1_20261021.md>)を追加。計画はDRAFT／APPROVAL PENDINGのまま。S1-A調査は会話内で実施済みであり、次はG1（D-S1-01～08）の明示判断が必要。Archive保存先・アクセス範囲・対象・責任者等の承認前にS1-B／S1-Cへ進まない。今回、Raw／ZIP／Workbookのコピー、Archive Manifest改訂、正式Closure、Baseline変更、pushは行っていない。
 - 別PCでP2対応中であり、当地にはWorkbook／OFTだけがコピーされている。未反映のModules・文書をWorkbookから推測で再生成せず、別PCから受け入れる範囲・時点を確認する。
 - [history](history/)の01～25は過去記録。14はP2-01の外部実行記録、15はP2-02外部完了記録、16はP2-03外部完了記録、17はP2-04 Local VerificationおよびIF-P2-04-001追加調査、18はP2-02／P2-03補正・P2-04再検証・IF-P2-04-001 ClosureとP2-04残検証、19はP2-04 I03～I12外部Scenario VerificationとCompletion後続Gateを含む再開用スナップショットである。[20](<history/Context Handoff_20.md>)はP2-04のContract補正・統合Static Review・Controlled Correction・Regression・完了判断とP2-05への引継ぎをまとめる。[21](<history/Context Handoff_21.md>)はP2-05実装・部分検証とWordEditor調査・Fresh Warm再現確認後の引継ぎをまとめる。[22](<history/Context Handoff_22.md>)はP05-I07／I16／I08の実施結果と残件・Controlled Fixture設計への引継ぎをまとめる。[23](<history/Context Handoff_23.md>)はRuntime分類5件・Evidence統合・P2-01 Regression結果とP2-02 Regressionへの引継ぎをまとめる。[24](<history/Context Handoff_24.md>)はP2-04 Regressionの182件PASS報告、I10 ABORTと再実行、I12統合・Record作成・Baseline／Build照合の残件をまとめる。[25](<history/Context Handoff_25.md>)はSource／Build・過去Evidenceの適用性、I12技術PASSと正式Closureの分離、Evidence保管・正式Record反映の残件をまとめる。現在地はOverviewとCurrent Handoffを正本として確認する。14、15、16、17、18、19、20、21、22、23、24または25を当地のP2受入、CP-P1確立、P2 Phase Exitまたは現WorkbookのPASS結果として扱わない。特に08もそのまま現在の進捗や現WorkbookのPASS結果として扱わない。
 - FS-05で移動したファイルはない。旧Current.mdはOverviewへの統合後に削除し、Gitで履歴を保持した。復元情報は移動台帳第14節を参照する。
