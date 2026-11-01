@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.52
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.53
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.52 |
+| バージョン | v1.53 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.53 更新概要
+
+- 添付の[S1-B Backup Precheck～P2 Phase Exitアクション計画 v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>)をProject Controlへ追加。本文とProposed／未承認を原本どおり保持する。
+- 本文の計画起点にある`Context_Handoff_S1B_Backup_Precheck_20261022_v0.1(1).md`は受領原文の表記として保持し、当地の参照先は[保存済み引継ぎ履歴](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>)とする。A01の実施指示は[USB Backup Precheck実施指示書](<Codex_S1_B_Backup_USB_Precheck_ReadOnly_Instruction_v0.1_20261101.md>)を参照する。
+- 未実施・未承認・Baseline不整合等の説明は2026-10-22時点の計画記録として扱う。今回の変更は資料保存と参照登録に限り、A01～A10の実行・計画承認・現行の状態やBaselineの変更は行わない。
 
 ### v1.52 更新概要
 
@@ -929,6 +935,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Primary Directoryレビュー・次アクション計画（2026-10-21時点・Not Approved） | [Primary Directory Review and Next Action Plan v0.1](<reviews/S1-B_Primary_Directory_Review_and_Next_Action_Plan_v0.1_20261021.md>) |
 | S1-B Backup Precheck一般指示（先行提示文・Read-only） | [Backup Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Backup USB Precheck実施指示（Read-only・提示文） | [Backup USB Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_USB_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
+| S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
