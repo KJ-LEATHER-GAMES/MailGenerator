@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.47
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.48
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.47 |
+| バージョン | v1.48 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.48 更新概要
+
+- ユーザー提示の[S1-B Primary Archive空フォルダ作成・作成後検証](<Codex_S1_B_Primary_Directory_Creation_Verification_Instruction_v0.1_20261101.md>)をProject Controlの指示書として追加し、本文を原文どおり保存する。
+- 今回の変更は指示文の保存と参照登録に限る。本文の空3階層作成・作成後検証・原本コピーは実行せず、現行のS1-B状態・完了条件・G2判定は変更しない。本文内の承認範囲・禁止事項は、当該作業を実施する際の条件として保持する。
 
 ### v1.47 更新概要
 
@@ -897,6 +902,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | S1-B Precheck追加調査指示（Read-only・提示文） | [Additional Read-only Instruction v0.1](<Codex_S1_B_Precheck_Additional_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Precheck追加調査結果（2026-10-21時点・提示文） | [Additional Investigation Result v0.1](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>) |
+| S1-B Primary空フォルダ作成・作成後検証指示（提示文） | [Primary Directory Creation and Verification Instruction v0.1](<Codex_S1_B_Primary_Directory_Creation_Verification_Instruction_v0.1_20261101.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
