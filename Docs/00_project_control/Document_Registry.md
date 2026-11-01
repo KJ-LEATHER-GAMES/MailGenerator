@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.44
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.45
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.44 |
+| バージョン | v1.45 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-10-24 |
+| 更新日 | 2026-11-01 |
+
+### v1.45 更新概要
+
+- ユーザー提示の[S1-B PRECHECK結果レビュー・次アクション v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>)を継続参照用レビューとして追加。本文とReview draftの状態を原本どおり保持する。
+- 本文の未Commit・PRECHECK_BLOCKED・G2未判定および次手順は2026-10-21時点の記録として扱う。現在地は[Project Overview](Project_Overview.md)、再開手順は[Current Handoff](../05_handoff/Current_Handoff.md)を参照する。今回の変更は資料保存と参照登録であり、本文第6節の調査・Archive実行・承認は行わない。
 
 ### v1.44 更新概要
 
@@ -879,6 +884,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
