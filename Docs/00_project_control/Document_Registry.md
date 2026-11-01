@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.46
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.47
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.46 |
+| バージョン | v1.47 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.47 更新概要
+
+- ユーザー提示の[S1-B Precheck追加調査結果](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>)をtechnical_validationへ追加。2026-10-21 22:52～22:55 JSTの調査結果を、個人パス・主体名の匿名化を含め原文どおり保存する。
+- PRECHECK_BLOCKED、未追跡状態、SHA-256一致等は当時の報告として扱い、今回の独立再検証とは区別する。Gate B1／B2の分離は検討案のままとし、既存の完了条件・承認状態・現在地を変更しない。今回の作業は資料保存と参照登録であり、本文の追加調査・Archive作成・原本コピーは実行していない。
 
 ### v1.46 更新概要
 
@@ -891,6 +896,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
 | S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | S1-B Precheck追加調査指示（Read-only・提示文） | [Additional Read-only Instruction v0.1](<Codex_S1_B_Precheck_Additional_ReadOnly_Instruction_v0.1_20261101.md>) |
+| S1-B Precheck追加調査結果（2026-10-21時点・提示文） | [Additional Investigation Result v0.1](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
