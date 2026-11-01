@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.54
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.55
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.54 |
+| バージョン | v1.55 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-11-01 |
+| 更新日 | 2026-11-02 |
+
+### v1.55 更新概要
+
+- 添付の[S1-B Backup Precheck Review and Next Action Plan v0.1](<reviews/S1B_Backup_Precheck_Review_and_Next_Action_Plan_v0.1_20261022.md>)を継続参照用レビューとしてreviewsへ追加。本文とPROPOSED／未承認の状態を原本どおり保持する。
+- [Backup Precheck結果（2026-10-22）](<../03_verification/technical_validation/S1-B_Backup_Precheck_Result_v0.1_20261022.md>)に対する当時のレビューとして扱い、BK-01～05や後続Gateの説明を現在の状態・承認へ置き換えない。今回の変更は資料保存と参照登録に限り、本文のBitLocker状態照会・ACL修正設計／実行・原本コピー・残留リスク受容は行わない。現行の完了条件・Baseline・G2判定は変更しない。
 
 ### v1.54 更新概要
 
@@ -941,6 +946,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Backup Precheck一般指示（先行提示文・Read-only） | [Backup Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Backup USB Precheck実施指示（Read-only・提示文） | [Backup USB Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_USB_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Backup Precheck結果（2026-10-22時点・提示文） | [Backup Precheck Result v0.1](<../03_verification/technical_validation/S1-B_Backup_Precheck_Result_v0.1_20261022.md>) |
+| S1-B Backup Precheckレビュー・次アクション計画（2026-10-22時点・PROPOSED／未承認） | [Backup Precheck Review and Next Action Plan v0.1](<reviews/S1B_Backup_Precheck_Review_and_Next_Action_Plan_v0.1_20261022.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
