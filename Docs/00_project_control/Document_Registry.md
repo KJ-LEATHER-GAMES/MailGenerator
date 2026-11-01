@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.51
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.52
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.51 |
+| バージョン | v1.52 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.52 更新概要
+
+- 添付の[記事用素材（S0～S1-B Archive）](<Article_Materials_S0_S1B_Archive_20261022_v0.1.md>)を運用の振り返り・記事企画用資料としてProject Controlへ、[S1-B Backup Precheck引継ぎ（2026-10-22）](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>)を引継ぎ履歴へ追加。双方の本文を原本どおり保持する。
+- 未実施・未承認・未追跡・Baseline不整合等の説明は2026-10-22時点の記録として扱い、記事の企画・学びを公開済み成果や現在の承認状態と混同しない。現在地は[Project Overview](Project_Overview.md)、再開手順は[Current Handoff](../05_handoff/Current_Handoff.md)を参照する。今回の変更は資料保存と参照登録に限り、本文のBackup Precheck・Archive実行・記事公開・後続Gate承認は行わない。
 
 ### v1.51 更新概要
 
@@ -914,6 +919,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| S0～S1-B記事素材（2026-10-22時点・企画資料） | [Article Materials v0.1](<Article_Materials_S0_S1B_Archive_20261022_v0.1.md>) |
+| S1-B Backup Precheck引継ぎ履歴（2026-10-22時点） | [Context Handoff v0.1](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>) |
 | S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | S1-B Precheck追加調査指示（Read-only・提示文） | [Additional Read-only Instruction v0.1](<Codex_S1_B_Precheck_Additional_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Precheck追加調査結果（2026-10-21時点・提示文） | [Additional Investigation Result v0.1](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>) |
