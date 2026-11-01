@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.56
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.57
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.56 |
+| バージョン | v1.57 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.57 更新概要
+
+- ユーザー提示の[S1-B USB ACL Remediation Design結果](<../03_verification/technical_validation/S1B_USB_ACL_Remediation_Design_Result_v0.1_20261022.md>)をtechnical_validationへ追加。2026-10-22 22:39～22:44 JSTの報告内容、REVIEW_REQUIRED、および未承認・未実行の候補コマンドをそのまま保存する。
+- System Volume InformationのACL・継承保護・影響／復旧範囲のUNKNOWNと、案A／案B・退避／復旧計画は当時の調査・提案として扱う。今回の変更は結果保存と参照登録に限り、媒体調査・ACL変更・退避／復旧コマンド実行・原本コピーは行わない。現行の状態・完了条件・Baseline・G2判定は変更しない。
 
 ### v1.56 更新概要
 
@@ -953,6 +958,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Backup Precheck結果（2026-10-22時点・提示文） | [Backup Precheck Result v0.1](<../03_verification/technical_validation/S1-B_Backup_Precheck_Result_v0.1_20261022.md>) |
 | S1-B Backup Precheckレビュー・次アクション計画（2026-10-22時点・PROPOSED／未承認） | [Backup Precheck Review and Next Action Plan v0.1](<reviews/S1B_Backup_Precheck_Review_and_Next_Action_Plan_v0.1_20261022.md>) |
 | S1-B USB ACL修正設計指示（2026-10-22時点・Read-only） | [USB ACL Remediation Design Read-only Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Design_ReadOnly_Instruction_v0.1_20261022.md>) |
+| S1-B USB ACL修正設計結果（2026-10-22時点・REVIEW_REQUIRED） | [USB ACL Remediation Design Result v0.1](<../03_verification/technical_validation/S1B_USB_ACL_Remediation_Design_Result_v0.1_20261022.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
