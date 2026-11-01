@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.49
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.50
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.49 |
+| バージョン | v1.50 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.50 更新概要
+
+- 添付の[S1-B Primary Directory Review・次アクション計画 v0.1](<reviews/S1-B_Primary_Directory_Review_and_Next_Action_Plan_v0.1_20261021.md>)をreviewsへ、ユーザー提示の[S1-B Backup Precheck（Read-only）](<Codex_S1_B_Backup_Precheck_ReadOnly_Instruction_v0.1_20261101.md>)をProject Controlへ追加。双方の本文と、レビューのReview Proposal / Not Approvedを原文どおり保持する。
+- レビューの受容推奨・Backup未決定・未完了等は2026-10-21時点の記録として扱う。今回の変更は資料保存と参照登録であり、本文のBackup調査・残留リスク受容・原本コピー・EXECUTE_ARCHIVE承認は実行していない。現行のS1-B状態・完了条件・G2判定は変更しない。
 
 ### v1.49 更新概要
 
@@ -909,6 +914,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Precheck追加調査結果（2026-10-21時点・提示文） | [Additional Investigation Result v0.1](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>) |
 | S1-B Primary空フォルダ作成・作成後検証指示（提示文） | [Primary Directory Creation and Verification Instruction v0.1](<Codex_S1_B_Primary_Directory_Creation_Verification_Instruction_v0.1_20261101.md>) |
 | S1-B Primary空フォルダ作成・検証結果（2026-10-21時点・提示文） | [Primary Directory Creation and Verification Result v0.1](<../03_verification/technical_validation/S1-B_Primary_Directory_Creation_Verification_Result_v0.1_20261021.md>) |
+| S1-B Primary Directoryレビュー・次アクション計画（2026-10-21時点・Not Approved） | [Primary Directory Review and Next Action Plan v0.1](<reviews/S1-B_Primary_Directory_Review_and_Next_Action_Plan_v0.1_20261021.md>) |
+| S1-B Backup Precheck指示（Read-only・提示文） | [Backup Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
