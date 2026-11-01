@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.53
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.54
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.53 |
+| バージョン | v1.54 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-01 |
+
+### v1.54 更新概要
+
+- ユーザー提示の[S1-B Backup Precheck結果](<../03_verification/technical_validation/S1-B_Backup_Precheck_Result_v0.1_20261022.md>)をtechnical_validationへ追加。2026-10-22 21:47～21:52 JSTの報告内容とBACKUP_PRECHECK_BLOCKEDを保持し、Markdownの表・空行を整えて保存する。
+- USB識別・物理独立性のVERIFIED、USBルートEveryone FullControl、BitLocker状態のUNKNOWN、Primary残留リスク・Git状態等は当時の報告として扱う。今回の変更は結果記録の保存と参照登録に限り、実機調査・ACL修正・暗号化設定変更・原本コピーは実行していない。現行の状態・完了条件・承認状態・G2判定は変更しない。
 
 ### v1.53 更新概要
 
@@ -935,6 +940,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Primary Directoryレビュー・次アクション計画（2026-10-21時点・Not Approved） | [Primary Directory Review and Next Action Plan v0.1](<reviews/S1-B_Primary_Directory_Review_and_Next_Action_Plan_v0.1_20261021.md>) |
 | S1-B Backup Precheck一般指示（先行提示文・Read-only） | [Backup Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Backup USB Precheck実施指示（Read-only・提示文） | [Backup USB Precheck Read-only Instruction v0.1](<Codex_S1_B_Backup_USB_Precheck_ReadOnly_Instruction_v0.1_20261101.md>) |
+| S1-B Backup Precheck結果（2026-10-22時点・提示文） | [Backup Precheck Result v0.1](<../03_verification/technical_validation/S1-B_Backup_Precheck_Result_v0.1_20261022.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
