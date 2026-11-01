@@ -1,4 +1,8 @@
-# P2-04 I12 Final Quality Gate Assessment v0.3 — Review Result
+# P2-04 I12 Final Quality Gate Assessment v0.4 — Documentary Closed
+
+Version: v0.4 / Updated: 2026-10-24 (JST) / Status: **CLOSED — I12 Documentary Formal Closure**
+
+本文の正式判断追記に伴う改訂。既存ファイル名のv0.3_Review_Resultは参照保持のため維持する。最新のFormal Closureは第5.1節。第1～4節・第5.2節・第6節・旧Summaryは2026-10-19 Review時点の履歴として保持し、DOCUMENTARY PENDING、旧DRAFT、現物未入手を現在地と混同しない。
 
 ## 1. 判定（2026-10-19）
 
@@ -65,6 +69,43 @@
 
 ## 5. Formal Documentation Closureとの分離
 
+### 5.1 I12 Documentary Formal Closure（2026-10-24 JST）
+
+<a id="i12-documentary-formal-closure-20261024"></a>
+
+| 項目 | 正式記録 |
+|---|---|
+| Decision / Authority / Date | **APPROVED_BY_USER / USER / 2026-10-24（JST）**。本Codex会話の明示承認。正確な時刻・新規承認IDは付与しない |
+| I12 Documentary Formal Closure | **CLOSED**。第1節の既存technical PASS／REVIEWEDを維持し、S3 Precheck READYと今回の正式承認に基づく文書管理上のClosure |
+| P2-04新Cycle Regression | [Regression Recordの正式判断](P2-04_Manual_Sync_Integration_Regression_Record_v0.3_Draft.md#p204-newcycle-regression-formal-closure-20261024)：**182/182 PASS・FAIL 0／CLOSED**。旧Unit Completionとは別Cycle |
+| Evidence reuse | [DP-P204-I12-001／v0.2 ACCEPTED](../../00_project_control/P2-04_I12_Execution_Policy_Alignment_Decision_v0.2_Accepted.md)を適用。旧I01/I02はSUPPORT ONLY、111件・46件も過去Evidenceであり182件へ加算しない |
+| S1 Archive / G2 | [Manifest本文v0.3／ApprovedのG2承認・S1 CLOSED](P2-04_I12_Evidence_Archive_Manifest_v0.1_Draft.md#s1-g2-approval-closure-20261024)を維持。G2・Manifestの再承認ではない |
+| 先行Regression Records | [P2-01既存PASS/CLOSED](<P2-01 Full Template Scanner Regression Record v0.1.md>)、S2で正式CLOSEDの[P2-02](<P2-02 Sync Diff Core Regression Record v0.1.md#p202-regression-formal-closure-20261024>)／[P2-03](<P2-03 VariableDefinition Sync Persistence Regression Record v0.1.md#p203-regression-formal-closure-20261024>)を参照 |
+
+**Five-Evidence Traceability：PASS**。`ARC-MG-P2-I12-20261018`の次の対応・原本SHA-256は第2節とManifestに維持する。S3 Precheckで照合済みのPrimary／Backup Private Index一致、原本5件の識別、Primary／Backup保全およびUSB Backupからの5/5復元SHA照合PASSを再利用し、Archive・復元試験を再実行しない。実Locator・Index全文は非公開管理情報で解決する。
+
+| 本Review ID | Archive Evidence ID | SHA-256参照 |
+|---|---|---|
+| E02 | `E-P202-RAW` | 第2節E02／Manifest同ID |
+| E03 | `E-P203-RAW` | 第2節E03／Manifest同ID |
+| E04 | `E-P204-RAW` | 第2節E04／Manifest同ID |
+| E05 | `E-P204-SOURCE` | 第2節E05／Manifest同ID |
+| E06 | `E-P204-WB` | 第2節E06／Manifest同ID |
+
+**保持する証拠限定・残留事項：**
+
+- [Build Provenance v0.4](P2-04_Regression_Build_Provenance_Verification_v0.4_Draft.md)の9/9正規化一致＋同じSource使用という実行者申告は**LIMITED**。S1で選定Workbook現物をFILE_VERIFIEDとして保全したが、過去の実行Workbook全体・VBAProject全体の同一性は独立証明していない。第2節E06の「現物未入手」は2026-10-19時点の履歴。
+- Compileは**2026-10-10 USER-REPORTED PASS**と、その後Production／Test Harnessを含むVBAProjectの追加・変更なしという申告による適用。2026-10-18または今回の新規Compile実行を意味しない。
+- 新Cycle実施日は2026-10-18の実行者申告と原文内の個別時刻を区別する。原文にない全Run開始／終了時刻を補完しない。過去P2-02／P2-03の実行日時UNKNOWNは維持し、ファイル名やEvidence IDから実行日を推定しない。今回Closure判断日は2026-10-24。
+- 最終OFT復元・Settings意図値は**USER-ATTESTED**。完全Fixture復元・Rollback／Atomicity保証へ格上げしない。
+- BL-MVP-003の旧記録、原文のBL-MVP-004表記、既存BL-MVP-004承認履歴を区別する。Repositoryでの受入・技術正本同期／Registry整合はS4の別Gateであり、今回Baseline変更なし。
+- `IF-P2-04-001`は[既存解消記録](<../../00_project_control/reviews/IF-P2-04-001 Closure Assessment - Closure Record v0.1.md>)に従う。旧Unitの`I12 Evidence Incomplete = RESOLVED / CLOSED`は今回のDocumentary Closureそのものではない。`OBS-P2-05-002`は**OPEN / NON-BLOCKING**。新規Blocking Finding NONEは今回S3審査範囲に限り、P2全体のFinding 0を主張しない。
+- **OneDriveRegistration=UNKNOWN／ManagementShareEffectiveAccess=UNKNOWN／Stage2TotalExecutionCount=UNKNOWN**を維持。Primary／Restoreの既存S1限定受容をS3・S4へ拡張せず、安全性の技術的PASSとしない。
+
+本更新はDocumentary Closureのみ。新たなBaseline承認、Formal MVP Test PASS、P2-05 COMPLETE、P2 Phase Closure、CP-P2確立を記録しない。Manifest・Private Index・原Evidenceを変更せず、技術テスト・Compile・Archive再実行、Git操作なし。下記の旧Registry／管理作業PENDINGは2026-10-19当時の履歴であり、最新のS3 Closure条件にS4作業を追加しない。
+
+### 5.2 v0.3 Review時点の判断・未実施管理作業（2026-10-19・履歴）
+
 ### このReviewで判断できること
 
 - I12の**Evidence再利用方式は承認**され、Expected Coverageを満たす範囲で**技術PASS**と評価。
@@ -81,13 +122,20 @@
 
 **I12技術PASS ≠ P2-04 Regression RecordのGitHub正式`PASS/CLOSED` ≠ P2-05 COMPLETE ≠ CP-P2**。
 
-## 6. Next Action
+## 6. Next Action（2026-10-19 Review時点の履歴）
 
 従来の確認項目「10/10以降にVBAProjectへモジュール追加／変更があったか」は**実行者の明示回答により解消**した。I12技術Gateは**PASS / REVIEWED**の判定を維持し、追加のCompileや全面Regression再実行は本Gateのためには要求しない。P2-05の別のFinal Compile Gateでは、その時点の最終VBAProjectを対象に改めてCompileを取得することを推奨する。
 
 今回のファイル一式を正式保存先へ登録するためのGitHub更新作業は未実施。Rawログにユーザーフォルダ名・ローカルパスがあるため、非公開保存または公開版マスキングが必要。
 
-## まとめ / Summary
+## 7. Revision History
+
+| Version | 日付 | 記録 |
+|---|---|---|
+| v0.3 Review Result | 2026-10-19 | I12 technical PASS／REVIEWED、DOCUMENTARY PENDING。旧Review・Evidence Index・Finding Disposition・旧Next Actionを履歴保持 |
+| v0.4 Documentary Closed | 2026-10-24 | USER正式承認、S1 G2／5件Traceability、S2 Closure、S3 Precheckに基づきI12 Documentary CLOSEDを記録。証拠限定・UNKNOWNは不変、既存ファイル名維持 |
+
+## まとめ / Summary（v0.3 Review・2026-10-19時点の履歴）
 
 **日本語**：後続PlanのEvidence再利用方式は承認済み。10/10 Compile PASSは、10/10以降VBAProject変更なしという追加の実行者申告により10/18 Regressionへ適用可能と判定。OFT復元、Settings意図値も実行者申告として採用。I12は技術PASS、原記録の正式ClosureはEvidence保管・管理文書更新待ち。
 

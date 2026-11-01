@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.43
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.44
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.43 |
+| バージョン | v1.44 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-10-21 |
+| 更新日 | 2026-10-24 |
+
+### v1.44 更新概要
+
+- 既存APPROVEDのBL-MVP-004について、[2026-10-24 JSTのCurrent Acceptance Ratification](baselines/BL-MVP-004_Approval_Record_v0.1.md#bl-mvp-004-current-ratification-20261024)と、承認済み全文3件の統合・保存後照合に基づき、§2～4と正本参照を同期した。固定4文書のVersion組合せは変更せず、歴史的承認主体・承認決定日はUNKNOWN、2026-10-01はGate実施日として区別する。
+- Design v0.1.10、Test Specification v0.1.6、Implementation Plan v0.4を現行全文として登録。Planは承認済み影響修正文書でありBaseline Manifest構成文書ではない。BL-MVP-003と旧全文・Patch・Reviewは履歴として保持する。
+- これはRepository文書の受入・同期であり、実行資産の同一性・Compile・Runtime／Formal Test結果を証明しない。S1～S3 Closure、Provenance限定、3件のUNKNOWN、OBS-P2-05-002 OPEN / NON-BLOCKINGは不変。現在地と次Actionは[Project Overview](Project_Overview.md#s4b-repository-acceptance-20261024)を参照し、下記の旧更新概要は当時の履歴として読む。
 
 ### v1.43 更新概要
 
@@ -735,19 +741,19 @@
 
 | Document ID | Document | Latest Version | Status | Baseline Version | Role |
 |---|---|---:|---|---:|---|
-| DOC-MVP-REQ | [MVP Requirements v0.1.9](<../01_specifications/MVP Requirements v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.8 | Requirement |
-| DOC-MVP-DES | [MVP Design v0.1.9](<../01_specifications/MVP Design v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.8 | Design |
+| DOC-MVP-REQ | [MVP Requirements v0.1.9](<../01_specifications/MVP Requirements v0.1.9 日本語版.md>) | v0.1.9 | Approved | v0.1.9 | Requirement |
+| DOC-MVP-DES | [MVP Design v0.1.10](<../01_specifications/MVP Design v0.1.10 日本語版.md>) | v0.1.10 | Approved | v0.1.10 | Design |
 | DOC-TS-A | [Technical Spike A 実施仕様書](../01_specifications/technical_spikes/Technical%20Spike%20A%20実施仕様書.md) | v0.4 | Closed | v0.4 | Technical Evidence |
-| DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.5](<../01_specifications/MVP Test Specification v0.1.5 日本語版.md>) | v0.1.5 | Approved | v0.1.4 | Test Definition |
-| DOC-MVP-IMPL | [Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>) | v0.3 | Approved | — | Implementation Plan |
+| DOC-MVP-TESTSPEC | [MVP Test Specification v0.1.6](<../01_specifications/MVP Test Specification v0.1.6 日本語版.md>) | v0.1.6 | Approved | v0.1.6 | Test Definition |
+| DOC-MVP-IMPL | [Implementation Plan v0.4](<../02_implementation/Implementation Plan v0.4 日本語版.md>) | v0.4 | Approved | — | Implementation Plan |
 
 ### Registry Rule
 
 - `Latest Version` は存在する最新Revisionを示す。
 - `Baseline Version` はCurrent Approved Baselineに採用されているRevisionを示す。
 - Latest VersionとBaseline Versionは一致しなくてもよい。
-- BL-MVP-003 Approvalにより、DOC-MVP-REQ v0.1.9 / DOC-MVP-DES v0.1.9 / DOC-TS-A v0.4 / DOC-MVP-TESTSPEC v0.1.5がCurrent Approved Baselineを構成する。
-- Latest Approved Revisionが存在しても、Baseline Candidateの整合性確認とApprovalが完了するまではCurrent Approved Baselineへ自動採用しない。BL-MVP-003はこの条件を満たして承認済みである。
+- 既存BL-MVP-004 Approvalと独立したCurrent Acceptance Ratification、S4-Bの全文統合・照合に基づくRepository文書受入により、DOC-MVP-REQ v0.1.9 / DOC-MVP-DES v0.1.10 / DOC-TS-A v0.4 CLOSED / PASS / DOC-MVP-TESTSPEC v0.1.6をCurrent Approved Baselineとして登録する。
+- Latest Approved Revisionの存在だけではCurrent Approved Baselineへ自動採用しない。ApprovalとRepository受入・全文統合・Registry同期は区別し、BL-MVP-004の既存固定構成を今回受け入れる。
 - DOC-MVP-IMPLはCurrent Approved Baseline Manifestの構成文書ではないため、Baseline Version欄は `—` を維持する。
 
 ---
@@ -755,36 +761,40 @@
 ## 3. Current Approved Baseline
 
 ```text
-Baseline ID : BL-MVP-003
+Baseline ID : BL-MVP-004
 Status      : Approved
-Approved On : 2026-09-19
+Repository Document Acceptance : ACCEPTED (S4-B / 2026-10-24 JST)
+Historical Approval Authority  : UNKNOWN
+Historical Approval Date       : UNKNOWN
+Gate Execution Date            : 2026-10-01 (not Approval Date)
+Current Acceptance Ratification: 2026-10-24 JST / USER
 ```
+
+[Approval Recordと独立した追認記録](baselines/BL-MVP-004_Approval_Record_v0.1.md#bl-mvp-004-current-ratification-20261024)を根拠とする。追認主体の権限は本人申告であり、独立検証していない。今回の受入は既存Baselineの文書統合・同期であり、新Baseline発行・固定構成変更・技術実行資産の受入完了ではない。
 
 ### Baseline Manifest
 
 | Document ID | Approved Version | Status |
 |---|---:|---|
 | DOC-MVP-REQ | v0.1.9 | Approved |
-| DOC-MVP-DES | v0.1.9 | Approved |
+| DOC-MVP-DES | v0.1.10 | Approved |
 | DOC-TS-A | v0.4 | Closed / PASS |
-| DOC-MVP-TESTSPEC | v0.1.5 | Approved |
+| DOC-MVP-TESTSPEC | v0.1.6 | Approved |
 
 正式表現：
 
 ```text
-BL-MVP-003
+BL-MVP-004
 │
 ├─ DOC-MVP-REQ      MVP Requirements v0.1.9
-├─ DOC-MVP-DES      MVP Design v0.1.9
+├─ DOC-MVP-DES      MVP Design v0.1.10
 ├─ DOC-TS-A         Technical Spike A v0.4 CLOSED / PASS
-└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.5
+└─ DOC-MVP-TESTSPEC MVP Test Specification v0.1.6
 ```
 
-Approval Evidence：
+DOC-MVP-IMPL v0.4は承認済みの影響修正文書であり、上記固定4文書へ追加しない。各正本へのリンクは§2を参照する。
 
-[BL-MVP-003 Approval Record v0.1](baselines/BL-MVP-003_Approval_Record_v0.1.md)
-
-Baseline Approval Quality Gate：
+Baseline Approval Quality Gate（既存Approval Record §8の結果を保持。今回の技術再実行結果ではない）：
 
 ```text
 Blocking Requirement Gap : NONE
@@ -798,6 +808,27 @@ Quality Gate             : PASS
 ---
 
 ## 4. Historical Baseline
+
+### BL-MVP-003
+
+```text
+Baseline ID   : BL-MVP-003
+Status        : Superseded
+Approved On   : 2026-09-19
+Superseded On : 2026-10-01
+Superseded By : BL-MVP-004
+```
+
+Historical Manifest：
+
+| Document ID | Approved Version | Status |
+|---|---:|---|
+| DOC-MVP-REQ | [v0.1.9](<../01_specifications/MVP Requirements v0.1.9 日本語版.md>) | Approved |
+| DOC-MVP-DES | [v0.1.9](<../01_specifications/MVP Design v0.1.9 日本語版.md>) | Approved |
+| DOC-TS-A | v0.4 | Closed / PASS |
+| DOC-MVP-TESTSPEC | [v0.1.5](<../01_specifications/MVP Test Specification v0.1.5 日本語版.md>) | Approved |
+
+[BL-MVP-003 Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md)と既存BL-MVP-004 Approval Record §12のTransitionを保持する。2026-10-01は記録済みのSuperseded On／Gate実施日であり、BL-MVP-004の歴史的承認決定日とは認定しない。過去EvidenceのExecution Baselineは変更しない。[Implementation Plan v0.3](<../02_implementation/Implementation Plan v0.3 日本語版.md>)も当時の影響修正文書として保持する。
 
 ### BL-MVP-002
 
@@ -965,6 +996,10 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | P1-02 Smoke Test v0.2.1a中間成果物 | [CP932 Smoke Test](<../../tests/vba/P1_Walking_Skeleton/modP1_02InspectorWordEditorSmokeTest_v0.2.1a_CP932.bas>) |
 | P1-02 Smoke Test v0.2.2 Inspector修正レビュー | [Inspector Lifecycle Correction Review](<reviews/P1-02 Smoke Test v0.2.2 Inspector Lifecycle Correction Review v0.1.md>) |
 | Cold Start 3文書整合性 | [Cross-document Consistency Review](<reviews/Cold Start Semantic Change Cross-document Consistency Review v0.1.md>) |
+| BL-MVP-004承認・現在の追認 | [Approval Record（本文v0.2）](baselines/BL-MVP-004_Approval_Record_v0.1.md#bl-mvp-004-current-ratification-20261024) |
+| BL-MVP-004 Design／Test補正根拠 | [Cross-document Consistency Review](<reviews/DOC-MVP-DES v0.1.10 Candidate × DOC-MVP-TESTSPEC v0.1.6 Candidate Cross-document Consistency Review v0.1.md>) |
+| BL-MVP-004のImplementation影響 | [v0.3 Impact Review](<reviews/DOC-MVP-IMPL v0.3 - BL-MVP-004 Impact Review v0.1.md>) |
+| Implementation Plan v0.4承認・補正根拠 | [Consistency Review §4～5／§9](<reviews/DOC-MVP-IMPL v0.4 Candidate - BL-MVP-004 Consistency Review v0.1.md>) |
 | BL-MVP-003候補 | [Baseline Candidate](<baselines/BL-MVP-003 Candidate.md>) |
 | BL-MVP-003承認記録 | [Baseline Approval Record](baselines/BL-MVP-003_Approval_Record_v0.1.md) |
 | BL-MVP-003のImplementation影響 | [Impact Review](<reviews/DOC-MVP-IMPL v0.2 BL-MVP-003 Impact Review v0.1.md>) |

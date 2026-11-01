@@ -1,8 +1,58 @@
 # Current Handoff
 
-Revision: v1.32 / 更新日: 2026-10-21
+Revision: v1.40 / 更新日: 2026-10-24
 
 この文書は再開手順を管理する。現在地・Next Action・未解決事項の正本は[Project Overview](../00_project_control/Project_Overview.md)、正式な文書Revision構成は[Document Registry](../00_project_control/Document_Registry.md)である。
+
+## S4-B文書同期後の最新入口（2026-10-24 JST）
+
+**S4：COMPLETED／S4-B Repository Acceptance：PASS**。Current Approved BaselineはBL-MVP-004（Repository文書受入）。固定版構成・独立したUSER追認・全文統合の根拠は[Registry](../00_project_control/Document_Registry.md#3-current-approved-baseline)、最新現在地・証拠限定は[OverviewのS4-B](../00_project_control/Project_Overview.md#s4b-repository-acceptance-20261024)を参照する。詳細なVersion表はここに複製しない。
+
+S1～S3正式Closure、歴史的Baseline／Provenance限定、3件のUNKNOWN、既存S1限定受容、OBS-P2-05-002 OPEN / NON-BLOCKINGは維持。文書受入は実行資産の同一性・Compile／技術検証の新規PASSを意味しない。**P2PhaseClosed=FALSE／CP-P2Established=FALSE**。
+
+次Action：S4-B結果をユーザーへ報告して停止し、レビューを待つ。次候補は**S5：P2-05 Completion準備のRead-only Precheck（別承認待ち・未着手）**であり、自動着手しない。Git操作・Baseline再構成・技術テスト／Compile／Archive再実行はない。以下のv1.39以前のS4未着手等は各時点の履歴として保持する。
+
+## S3 Formal Closure後の最新入口（2026-10-24 JST）
+
+**S3：COMPLETED／S3_FORMAL_CLOSURE_RECORDED**。2026-10-24（JST）のユーザー承認により、[P2-04新Cycle Regression Record](../03_verification/technical_validation/P2-04_Manual_Sync_Integration_Regression_Record_v0.3_Draft.md#p204-newcycle-regression-formal-closure-20261024)は本文v0.4／**182/182 PASS・CLOSED**、[I12 Assessment](../03_verification/technical_validation/P2-04_I12_Final_Quality_Gate_Assessment_v0.3_Review_Result.md#i12-documentary-formal-closure-20261024)は本文v0.4／**Documentary CLOSED**。詳細な現在地・証拠限定は[OverviewのS3 Closure](../00_project_control/Project_Overview.md#s3-newcycle-i12-formal-closure-20261024)と両記録を参照する。
+
+S1・S2の正式Closureは維持。次は**S4：BL-MVP-004 Repository受入・文書整合のRead-only Precheck／別承認待ち（未着手・未承認）**であり、今回開始しない。S5 P2-05 Completion、S6 Phase Exit／CP-P2は残工程。**P2PhaseClosed=FALSE／CP-P2Established=FALSE**。3件のUNKNOWN、既存S1限定受容、`OBS-P2-05-002`のOPEN／NON-BLOCKINGは不変で、受容範囲を拡大しない。技術再実行・Manifest／Private Index変更・Git操作・Baseline変更はない。以下のv1.38以前のS3未着手・旧PENDINGは当時の履歴として保持する。
+
+## S2 Formal Closure後の最新入口（2026-10-24 JST）
+
+**P2-02／P2-03 Regression Records：各本文v0.2／PASS・CLOSED、S2：FORMAL CLOSURE RECORDED**。2026-10-24（JST）のユーザー承認と両Recordの読み戻し照合に基づく。Unit Completionとは別の正式Closureであり、111/111・46/46 PASS、Disposition、Source／Compile／実行日時／Baselineの限定は各正本に保持した。Record参照先と最新現在地は[OverviewのS2 Closure](../00_project_control/Project_Overview.md#s2-regression-formal-closure-20261024)を参照する。
+
+次Actionは**S3：P2-04新Cycle／I12 Documentary ClosureのPrecheck（未着手・未承認）**。Read-only確認または別途承認判断のための次のユーザー指示を待ち、今回S3には着手しない。S1 CLOSEDは維持、S4～S6は未完了。残留3件のUNKNOWNと既存S1限定受容は不変であり、S2への受容拡張・Baseline更新・Git操作はない。以下のv1.37以前のS2未完了・旧PENDINGは歴史的記録として保持する。
+
+## G2正式承認・S1 Closure後の最新入口（2026-10-24 JST）
+
+**G2：APPROVED_BY_USER（2026-10-24 JST）／S1：CLOSED**。S1-B実行PASS・S1-CレビューPASSと3文書の最終整合性確認を維持する。承認記録・現在地の正本は[OverviewのG2承認・S1 Closure](../00_project_control/Project_Overview.md#s1-g2-approval-closure-20261024)を参照し、詳細を重複転記しない。
+
+次Actionは**S2：P2-02／P2-03 Regression Recordsの正式Closure**。**S1を再開する必要はなく、S2～S6は未完了・今回未着手**。追加承認なしに次工程を開始しない。OneDriveRegistration／ManagementShareEffectiveAccess／Stage2TotalExecutionCountはUNKNOWN、Primary／Restoreの残留リスク受容は既存S1範囲のみを維持する。Archive再実行・Private Index変更・Git操作・Baseline更新はない。下段のv1.36以前のG2 PENDING／Draft等は当時の履歴として保持する。
+
+## S1-B実行後・S1-C再開の最新入口（2026-10-24訂正）
+
+**EXECUTE_ARCHIVE：APPROVED_BY_USER／実行結果PASS**。既存実行報告でPrimary・Backup保全とUSB Backupからの復元試験は各5/5_SHA256_PASS。Private Index一致を今回Read-onlyで照合し、計画準拠後処理・原本不変を含む既存実行Evidenceとの整合を確認した。詳細と根拠は[Overviewの最新現在地](../00_project_control/Project_Overview.md#s1c-current-after-execution-20261024)を参照する。
+
+現在作業の判定は**S1-C：REVIEW PASS／G2 REVIEW PENDING**。Manifestはv0.2 Draftへ更新済み。次Actionはレビュー結果を報告して停止し、ユーザーのG2判断を待つこと。**G2：PENDING／NOT APPROVED、S1：NOT CLOSED**。OneDriveRegistration／ManagementShareEffectiveAccess／Stage2TotalExecutionCountのUNKNOWNと既存のS1限定受容は維持する。Archive再実行・Private Index変更・Git操作は行っていない。v1.35までの下段の承認待ち・NOT APPROVEDは当時の履歴として保持し、現在の再開判断には本欄を使用する。
+
+## S1 Archive Final Precheck後の再開条件（2026-10-24追記）
+
+**Restore Test Destination：USER APPROVED／Residual Risk：USER ACCEPTED・S1 ONLY／OneDrive Registration：UNKNOWN**。判断詳細と最終判定の正本は[OverviewのS1-RESTORE-APPROVAL-20261024-01](../00_project_control/Project_Overview.md#s1-restore-final-precheck-20261024)を参照する。Primaryの既存受容判断・Stage 2判定・過去の実行履歴は変更しない。
+
+Archive Final Precheckは**READY**。ただし、**Archive Execution：NOT APPROVED／G2：PENDING**であり、次Actionはユーザーによる`EXECUTE_ARCHIVE`の明示承認待ち。未作成の子ディレクトリ作成・コピー・復元試験は承認後の別作業とし、OneDriveのUNKNOWNを安全性PASSと扱わない。下記の過去の再開条件は各記録時点の履歴として保持する。Git操作・S1-C／G2の自動実行は行わない。
+
+## S1 Archive Precheckへの引継ぎ（2026-10-24後続追記）
+
+Primary残留リスクは**USER ACCEPTED（今回のS1に限定）**。管理共有の実効アクセス・通信暗号化はUNKNOWNのまま。正式な受容判断は[OverviewのS1-PRIMARY-RISK-20261024-01](../00_project_control/Project_Overview.md#s1-primary-risk-acceptance-20261024)を参照し、ここに詳細を複製しない。
+
+次Action：**S1 Archive Read-only Precheck**。**Archive Execution：NOT APPROVED／G2：PENDING**。下記v1.33時点の受容判断待ちは当時の履歴として保持する。Stage 2の判定・実行履歴は維持し再調査・再実行しない。Primary管理共有の追加調査・追加是正、Archive作成・コピー・復元試験・Git操作へ進まない。
+
+## S1-B再開時の優先確認（2026-10-24追記）
+
+v1.32の既往記述を保持したまま、S1-Bの最新の再開条件を追記する。現在地・実行履歴の訂正・Primary管理共有のA／B比較は[OverviewのS1B-S2-CORR-20261024-01](../00_project_control/Project_Overview.md#s1b-stage2-closure-20261024)を正本とする。過去のG1未承認・Stage 2保留等の記録は当時の状態として読む。
+
+Stage 2技術判定を再実行せず、まずPrimary管理共有の残留リスクを受容するか、限定した追加是正の検討に進むかについてユーザー判断を得る。今回の範囲では、下記の一般的な再開手順にかかわらずGit操作を行わず、ACL変更・Archive作成・原本コピー・S1-Cへ進まない。追加の調査・変更は、その対象と実行条件の別途承認を確認してから扱う。
 
 ## Read First
 

@@ -1,4 +1,8 @@
-# P2-04 Manual Sync Integration Regression Record v0.3 — Draft
+# P2-04 Manual Sync Integration Regression Record v0.4 — Closed
+
+Version: v0.4 / Updated: 2026-10-24 (JST) / Status: **PASS / CLOSED**
+
+本文の正式Closure追記に伴う改訂。既存ファイル名のv0.3_Draftは参照保持のため維持する。第1節の最新Statusと第7.1節が現行判断であり、第2～6節・第7.2節・旧Summaryはv0.3（2026-10-19）時点の技術記録・履歴として保持する。旧「Workbookバイナリ未受領」等は当時の証拠範囲であり、後続S1の現物保全と過去実行時の完全同一性を混同しない。
 
 ## 1. 文書情報 / Result Boundary
 
@@ -8,7 +12,7 @@
 | Unit | P2-04 Manual Sync Integration |
 | Verification Type | Implementation / Regression Verification（Formal MVP Testではない） |
 | Execution Date | 2026-10-18（ユーザー申告） |
-| Record Update | 2026-10-19 / v0.3 Draft |
+| Record Update | 2026-10-24 / v0.4 Closed（v0.3 Draftは改訂履歴に保持） |
 | Source | `261018_P2-04_Regression Log.txt`（ユーザー提供テキスト） |
 | Raw Log Status | **RECEIVED / BYTE-PRESERVED / ASSERTIONS RECONCILED** |
 | Execution Workbook | `MailGeneratorNew.xlsm`（GitHubにある別版ではなく、ユーザーの別フォルダの実行版） |
@@ -17,8 +21,8 @@
 | Per-Scenario Regression | **182/182 PASS, 0 FAIL — RAW-LOG-CONFIRMED** |
 | I10 Initial Attempt | **ABORTED**（Production実行前、後続の準備・再実行でPASS） |
 | Historical P2-02/P2-03 Raw Evidence | **RECEIVED / VERIFIED TEXT：111 + 46（別Cycle・追加計上なし）** |
-| P2-04 Regression Record | **DRAFT / CLOSURE PENDING** |
-| I12 Contract Regression | **PENDING / NOT CLOSED** |
+| P2-04 Regression Record | **PASS / CLOSED — APPROVED_BY_USER（2026-10-24 JST）** |
+| I12 Contract Regression | **PASS / DOCUMENTARY CLOSED — APPROVED_BY_USER（2026-10-24 JST）** |
 | Historical P2-04 Completion | **PASS / COMPLETE（別Cycle）** |
 | P2-05 / CP-P2 / Formal MVP Test | **NOT CLAIMED** |
 
@@ -141,6 +145,27 @@ P2-02原文の末尾には33件Bootstrapの**完全同一ログ再掲**がある
 
 ## 7. Quality Gates / 次のアクション
 
+### 7.1 Formal Closure Decision（2026-10-24 JST）
+
+<a id="p204-newcycle-regression-formal-closure-20261024"></a>
+
+| 項目 | 正式記録 |
+|---|---|
+| Decision / Authority / Date | **APPROVED_BY_USER / USER / 2026-10-24（JST）**。本Codex会話の明示承認。正確な時刻・新規承認IDは付与しない |
+| P2-04新Cycle Regression | **PASS / CLOSED**。既存439行の原Evidence、成功時9群 **182/182 PASS・FAIL 0**（第3節）、S3 Read-only Precheck READYに基づく |
+| I12 Documentary Closure | **CLOSED**。同じユーザー承認に基づく[I12正式判断](P2-04_I12_Final_Quality_Gate_Assessment_v0.3_Review_Result.md#i12-documentary-formal-closure-20261024)と整合。旧Unit Completionや旧I12解消記録とは別Decision |
+| Closing Evidence | `ARC-MG-P2-I12-20261018`の`E-P204-RAW`／`E-P204-SOURCE`／`E-P204-WB`。[Manifest本文v0.3／Approved・S1 G2承認](P2-04_I12_Evidence_Archive_Manifest_v0.1_Draft.md#s1-g2-approval-closure-20261024)、両Private Index・5/5保全／USB復元の既存照合結果を再利用 |
+| Reuse / Provenance | [DP-P204-I12-001](../../00_project_control/P2-04_I12_Execution_Policy_Alignment_Decision_v0.2_Accepted.md)、[Build Provenance v0.4](P2-04_Regression_Build_Provenance_Verification_v0.4_Draft.md)、I12正式判断の限定に従う。9/9 Source一致＋実行者申告の**LIMITED**であり、過去Workbook全体の同一性は未証明 |
+| 審査境界 | 今回のS3範囲で新規Blocking Finding **NONE**。`OBS-P2-05-002`は**OPEN / NON-BLOCKING**。P2-05 Completion・P2 Phase Closure・CP-P2・Formal MVP Test PASSは**NOT CLAIMED** |
+
+[P2-01の既存CLOSED記録](<P2-01 Full Template Scanner Regression Record v0.1.md>)と、S2で正式CLOSEDとなった[P2-02](<P2-02 Sync Diff Core Regression Record v0.1.md#p202-regression-formal-closure-20261024>)／[P2-03](<P2-03 VariableDefinition Sync Persistence Regression Record v0.1.md#p203-regression-formal-closure-20261024>)をContract Evidenceとして参照する。111件・46件、旧I01/I02のSUPPORT、I10 ABORT／準備、I11準備／追加観測、I07 SUPPORT PASSを182件へ追加しない。
+
+Source／Workbook・2026-10-10 Compileユーザー申告・実行日時・OFT／Settings・Baselineの限定、および3件の残留UNKNOWNは[I12正式判断の保持条件](P2-04_I12_Final_Quality_Gate_Assessment_v0.3_Review_Result.md#i12-documentary-formal-closure-20261024)を参照する。今回の正式Closureは記録上の判断であり、技術テスト・Compile・Archive再実行、G2再承認、Git操作、Baseline変更を行わない。Registry／BL-MVP-004 Repository受入・同期はS4の別Gateである。
+
+### 7.2 v0.3 Draft時点のQuality Gate／次作業（2026-10-19・履歴）
+
+以下のPENDING・未実施・配置提案は当時の記録。最新の正式状態は第7.1節による。
+
 | Gate | Status | 未完了条件 |
 |---|---|---|
 | 実行Log収集（今回182件） | **PASS / RECEIVED** | 原文を改変せず保管し、リンク／SHA-256で追跡可能にする |
@@ -161,7 +186,14 @@ P2-02原文の末尾には33件Bootstrapの**完全同一ログ再掲**がある
 
 **プロジェクト書込み状態**：本書は会話内生成物。GitHubへの追加・`Evidence/`配置・Document Registry更新・Commitは**未実施**。Original Completion RecordやCurrent Project Controlを変更していない。
 
-## まとめ / Summary
+## 8. Revision History
+
+| Version | 日付 | 記録 |
+|---|---|---|
+| v0.3 Draft | 2026-10-19 | 182/182 PASSの原文照合、P2-04 Record DRAFT／CLOSURE PENDING、I12 PENDING／NOT CLOSED。当時の本文・旧Summaryを履歴保持 |
+| v0.4 Closed | 2026-10-24 | USER承認に基づき新Cycle RegressionとI12 Documentaryを正式CLOSEDとして記録。技術結果・旧履歴・証拠限定は不変。ファイル名維持、Git／Baseline変更なし |
+
+## まとめ / Summary（v0.3 Draft・2026-10-19時点の履歴）
 
 **日本語：** 2026-10-18の実行ログ439行を受領し、Bootstrap 29件＋I03～I11 153件の計182件がPASS、FAIL 0件であることを原文のAssertionとOverall表示から直接確認した。I10初回ABORTは残し、Fixture／Rollback／保存に関する留保も区別した。P2-02 111件・P2-03 46件の過去原文も受領したが、旧Recordの正式ClosureとI12最終Gateは未完了。
 

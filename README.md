@@ -33,7 +33,7 @@ Excel VBAとClassic Outlookを使用する定型メール作成ツールです�
 
 Windows上のExcel Desktop（VBA）とClassic Outlookを前提とします。Web版Excel／新しいOutlookは、この実装の確認対象ではありません。
 
-Workbookを開く際はルートの`MailGeneratorNew.xlsm`を使用し、Settingsの`TemplatePath = Templates\MailTemplate.oft`とWorkbook／Templatesの相対関係を維持します。具体的な操作は[Implementation Plan](Docs/02_implementation/Implementation_Plan.md)と対象Unit仕様を参照します。追加Workbookの現在のUI操作手順・実機動作は未検証です。
+Workbookを開く際はルートの`MailGeneratorNew.xlsm`を使用し、Settingsの`TemplatePath = Templates\MailTemplate.oft`とWorkbook／Templatesの相対関係を維持します。具体的な操作は[Implementation Plan](<Docs/02_implementation/Implementation Plan v0.4 日本語版.md>)と対象Unit仕様を参照します。追加Workbookの現在のUI操作手順・実機動作は未検証です。
 
 **別PCでP2対応中で、当地にはWorkbookとOFTだけがコピーされています。** 更新文書・Modulesは未反映です。現在のsrcだけでWorkbook全体を再構築できるとは扱わず、既存Workbookへの一括Import・上書きは行わないでください。別PC成果物の受入・照合はフォルダ移行と別作業として扱います。現在地の詳細はProject Overviewを参照してください。
 

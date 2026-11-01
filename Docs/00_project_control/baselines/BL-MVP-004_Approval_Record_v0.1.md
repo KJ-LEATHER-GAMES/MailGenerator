@@ -1,11 +1,11 @@
-# BL-MVP-004 Baseline Approval Record v0.1
+# BL-MVP-004 Baseline Approval Record v0.2
 
 ## 1. 文書情報
 
 | 項目              | 内容                                  |
 | --------------- | ----------------------------------- |
 | 文書名             | BL-MVP-004 Baseline Approval Record |
-| バージョン           | v0.1                                |
+| バージョン           | v0.2                                |
 | 対象プロジェクト        | 定型メール作成ツール                          |
 | Baseline ID     | BL-MVP-004                          |
 | Gate            | Baseline Approval Quality Gate      |
@@ -519,6 +519,36 @@ DOC-MVP-IMPL v0.3 Approved
 Execution Baseline = BL-MVP-003
 BL-MVP-004 Impact Review = REQUIRED
 ```
+
+---
+
+<a id="bl-mvp-004-current-ratification-20261024"></a>
+
+## 16. Current Acceptance Ratification（2026-10-24 JST）
+
+既存のAPPROVED記録とは独立した、現在の受入追認を記録する。
+
+| 項目 | 記録 |
+| --- | --- |
+| Decision | CURRENT ACCEPTANCE RATIFIED |
+| Decision Authority | USER |
+| Authority Evidence | 本人による正式な受入判断権限の申告。独立検証は実施していない |
+| Decision Date | 2026-10-24 (JST)。正確な時刻は付与しない |
+| Scope | 既存BL-MVP-004の固定4文書：DOC-MVP-REQ v0.1.9 / DOC-MVP-DES v0.1.10 / DOC-TS-A v0.4 CLOSED / PASS / DOC-MVP-TESTSPEC v0.1.6 |
+| Historical Approval Authority | UNKNOWN |
+| Historical Approval Decision Date | UNKNOWN |
+| Gate Execution Date | 2026-10-01。既存のGate実施日であり、歴史的承認日とは認定しない |
+
+過去のPASS / APPROVEDを取り消さず、新Baselineの作成・固定Version組合せの再構成・再承認を行わない。§2～15のGate、Transition、Implementation状態は各記録時点の履歴として保持する。
+
+本追認だけでRepository受入・全文統合・Registry同期を完了扱いにしない。S4-Bの承認済み全文統合と検証後のRepository文書受入・同期状態は[Document Registry](../Document_Registry.md#3-current-approved-baseline)および[Project Overview](../Project_Overview.md#s4b-repository-acceptance-20261024)で別途管理する。技術実行資産の同一性、Compile、Runtime VerificationまたはFormal MVP Testの合格は本追認から導出しない。
+
+## 17. 更新履歴
+
+| 本文Version | 更新日 | 変更内容 |
+| --- | --- | --- |
+| v0.2 | 2026-10-24 (JST) | §16の独立したCurrent Acceptance Ratificationと本履歴を追記。既存のApproval・固定構成・Gate日・CR CLOSED・BL-MVP-003 SUPERSEDED履歴は保持。既存ファイル名は維持 |
+| v0.1 | 既存記録 | 初版のGate実施日2026-10-01、PASS / APPROVED記録を保持。歴史的承認主体・承認決定日はUNKNOWN |
 
 ---
 

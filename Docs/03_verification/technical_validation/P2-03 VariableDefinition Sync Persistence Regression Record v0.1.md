@@ -1,6 +1,17 @@
-# P2-03 VariableDefinition Sync Persistence Regression Record v0.1
+# P2-03 VariableDefinition Sync Persistence Regression Record v0.2
+
+| 項目 | 最新管理状態 |
+|---|---|
+| Document Version | v0.2 |
+| Document Status | **CLOSED / PASS** |
+| Formal Closure Decision | [2026-10-24 JST・USER承認記録](#p203-regression-formal-closure-20261024) |
+| Verification Boundary | Implementation / Regression Verification。Formal MVP Test PASSはNOT CLAIMED |
+
+本文追加に伴う改訂。参照保持のため既存ファイル名のv0.1を維持し、現行Version／Statusは上記による。第1～6節・第8～9節・第7.2節はv0.1時点の履歴であり、DRAFT／CLOSURE PENDING、旧Baseline／Build保留、旧Next Actionを現在地と混同しない。最新の正式判断は第7.1節を参照する。
 
 ## 1. Document Information
+
+以下はv0.1原記録の文書情報（履歴）。
 
 | 項目 | 内容 |
 |---|---|
@@ -162,6 +173,41 @@ Comment      Active
 
 ## 7. Closure Gate / Decision
 
+<a id="p203-regression-formal-closure-20261024"></a>
+
+### 7.1 Formal Closure Decision — 2026-10-24（JST）
+
+| 項目 | 正式記録 |
+|---|---|
+| Decision / Authority | **APPROVED_BY_USER / USER**。本Codex会話での明示承認 |
+| 判断日 | **2026-10-24（JST）**。正確な時刻・未存在の承認ID・電子署名は付与しない |
+| Regression Result | **46/46 PASS; FAIL 0（既存）**。7 + 6 + 12 + 18 + 3 = 46。第3節のSuite／Case内訳は不変 |
+| Closure Review | [P2-03 Closure Review v0.3 Candidate](../../00_project_control/reviews/P2-03_Sync_Persistence_Regression_Closure_Review_v0.3_Candidate.md)（2026-10-19）。Candidateを承認の代用にせず、今回のユーザー判断を根拠とする |
+| Evidence Traceability | `ARC-MG-P2-I12-20261018` / `E-P203-RAW` / `261018_P2-03_Regression Log.txt`。原文SHA-256：`f0253df8e7e77a0ac6f2d1aa827d5e6dab34df2bb18708ef66ebf53a1c4e6877`。[Approved Archive Manifest](P2-04_I12_Evidence_Archive_Manifest_v0.1_Draft.md)から非公開Private Indexで解決する |
+| Evidence照合 | 既存S2 Precheck READY：原文のSuite別・Assertion別集計、SHA、Manifest／Index対応はPASS。今回は既存結果を再利用し、原本の再ハッシュ・Archive／技術テスト再実行を行わない |
+| Formal Closure Result | **P2-03 Regression Record = PASS / CLOSED**。以下の証拠限定を維持した正式記録であり、既存Unit Completion Recordは変更しない |
+
+#### 既存Closure項目のDisposition反映（独自再判定なし）
+
+| 項目 | 既存Disposition | 根拠・限定 |
+|---|---|---|
+| BR-P2-03-REG-001 | **PROVENANCE ASSESSMENT RESOLVED** | Closure Review v0.3 §3：BL-MVP-004承認記録の出典確認。Repository側の受入・同期は別Gate |
+| BR-P2-03-REG-002 | **SUPPORTED FOR CONTRACT EVIDENCE REUSE** | Closure Review v0.3 §2～3：実行者申告＋9/9正規化照合。過去WorkbookバイナリHashは未取得、全面同一性は未証明 |
+| BR-P2-03-REG-003 | **COLLECTED / SCOPED** | Closure Review v0.3 §2～3：Raw Log収集済み、全5 Suiteにテーブル内容復元報告。完全Workbook・書式・数式・入力規則の復元は証明しない。S1保全・参照確定は既存Approved Manifestによる |
+
+全5 Suiteの`Original tblVariableDefinition contents restored.`はテーブル内容の限定的な復元報告。Workbook全体の完全復元・Rollback／Atomicity保証へ拡張しない。
+
+#### Provenance / Finding / Scopeの限定
+
+- Sourceは[`modVariableDefinitionData_P2-03_v0.1.2_CP932.bas`](../../02_implementation/P2_Scan_Sync/modVariableDefinitionData_P2-03_v0.1.2_CP932.bas)。[Build Provenance v0.4](P2-04_Regression_Build_Provenance_Verification_v0.4_Draft.md)および既存Reviewによる9/9正規化照合＋同じ9 Sourceを使用した実行者申告を根拠とする。過去Workbook全体の同一性は未証明で、現在のWorkbook SHAを過去Runへ付与しない。
+- Compileは2026-10-10のユーザー申告PASSと、以後Production Module／Test Harnessの追加・変更なしという申告による適用評価。2026-10-18の新規Compile PASS・今回のCompile実行・VBAProject全体の独立検証は主張しない。
+- 原Evidence本文にRegression実行日時はない。ファイル名／Archive IDから2026-10-18実行と認定せず、v0.1のRecord／Review日、2026-10-19の原文収集・Review、2026-10-24のFormal Closure日を区別する。
+- 旧BL-MVP-003記録、原文のBL-MVP-004表示、既存BL-MVP-004承認記録の存在を区別する。Repository側のBaseline受入・同期・Current Baseline確定はS4の別Gateであり、今回変更しない。
+- S2対象の審査EvidenceにBlocking Findingは確認されないが、Project全体のFinding 0は認定しない。`TF-P2-02-001`・`IF-P2-04-001`は既存解消記録、`OBS-P2-05-002`はOPEN / NON-BLOCKINGを維持する。Unit Completion・P2-05 Completion・P2 Phase Exit・CP-P2・Formal MVP Testの成立とは別である。
+- OneDriveRegistration／ManagementShareEffectiveAccess／Stage2TotalExecutionCountはUNKNOWN。S1限定の既存リスク受容をS2へ拡張しない。Archive・Private Index・原本・Source・Workbookは今回変更していない。
+
+### 7.2 v0.1 Closure Decision（履歴）
+
 ```text
 P2-03 Regression Assertions:
 PASS — 46 / 46; FAIL 0
@@ -203,3 +249,11 @@ NOT CLAIMED
 **日本語：** P2-03 Regressionは5 Suite・46/46 PASS、FAIL 0件。新たなRegression Defectはログから確認されない。Baseline / Build / Evidence Archive / Fixtureの最終確認後、Regression RecordをPASS / CLOSEDとする。次はP2-04 Regression。
 
 **English:** All 46 P2-03 regression checks passed. No regression defect is evident from the supplied logs. Confirm the approved baseline, executed build, archived logs and final fixture state before closing the record; then proceed to P2-04 regression.
+
+## 10. Change History
+
+| Version | 日付・範囲 | 記録 |
+|---|---|---|
+| v0.1 | Review Date 2026-10-11（実行日の独立証明ではない） | 46/46 PASS、DRAFT / CLOSURE PENDING。原記録を上記の歴史的Evidenceとして保持 |
+| v0.2 | 2026-10-24（JST）Formal Closure | ユーザー承認を記録しPASS / CLOSED。Closure Review v0.3のDisposition、原Evidenceと証拠限定を反映。旧履歴・Suite内訳・原文は不変。リネーム・Git操作・Baseline変更なし |
+
