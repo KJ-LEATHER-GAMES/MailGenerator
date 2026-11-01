@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.60
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.61
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.60 |
+| バージョン | v1.61 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.61 更新概要
+
+- 添付の[S1-B ACL Design Review・G-PREP Action v0.1](<reviews/S1B_ACL_Design_Review_GPREP_Action_v0.1_20261022.md>)をreviewsへ、ユーザー提示の[G-PREP永続退避準備指示書](<Codex_S1B_GPREP_Persistent_Snapshot_Preparation_Instruction_v0.1_20261102.md>)をProject Controlへ追加。双方の本文と、レビューのReview completed／G-PREP proposed／Changes NOT APPROVEDをそのまま保持する。
+- レビューの設計READY・未保存Snapshot・未承認Gate等は2026-10-22時点の記録として扱う。今回の変更は資料保存と参照登録に限り、本文のG-PREP調査／退避作成・SVI取得・ACL変更・原本コピーは実行していない。指示書の登録をG-PREPの実行承認とは扱わず、現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.60 更新概要
 
@@ -977,6 +982,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B USB ACL設計レビュー・Read-onlyフォローアップ（2026-10-22時点・変更未承認） | [USB ACL Design Review and Read-only Follow-up v0.1](<reviews/S1B_USB_ACL_Design_Review_and_ReadOnly_FollowUp_v0.1_20261022.md>) |
 | S1-B USB ACL修正設計最終レビュー指示（Read-only・提示文） | [USB ACL Final Review Read-only Instruction v0.1](<Codex_S1B_USB_ACL_Final_Review_ReadOnly_Instruction_v0.1_20261102.md>) |
 | S1-B USB ACL修正設計最終レビュー結果（2026-10-22時点・設計READY／実行未承認） | [USB ACL Remediation Design Final Review Result v0.1](<../03_verification/technical_validation/S1B_USB_ACL_Remediation_Design_Final_Review_Result_v0.1_20261022.md>) |
+| S1-B ACL設計レビュー・G-PREP計画（2026-10-22時点・変更未承認） | [ACL Design Review and G-PREP Action v0.1](<reviews/S1B_ACL_Design_Review_GPREP_Action_v0.1_20261022.md>) |
+| S1-B G-PREP永続退避準備指示（提示文・実行は別途承認） | [G-PREP Persistent Snapshot Preparation Instruction v0.1](<Codex_S1B_GPREP_Persistent_Snapshot_Preparation_Instruction_v0.1_20261102.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
