@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.62
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.63
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.62 |
+| バージョン | v1.63 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.63 更新概要
+
+- ユーザー提示の[G-PREP実施結果](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>)をtechnical_validationへ追加。内容とコードを保持し、Markdownの表・空行・コードブロック・強調を整える。報告上のG_PREP_COMPLETEとSVI Snapshotユーザー取得待ちをともに記録する。
+- Root Snapshotの保存・読み戻し・SHA-256等は2026-10-22 23:38 JSTの報告として扱い、今回の独立照合とはしない。今回の変更は資料保存と参照登録に限り、退避先／Snapshot作成・SVI取得・ACL変更・原本コピーは実行していない。現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.62 更新概要
 
@@ -990,6 +995,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B ACL設計レビュー・G-PREP計画（2026-10-22時点・変更未承認） | [ACL Design Review and G-PREP Action v0.1](<reviews/S1B_ACL_Design_Review_GPREP_Action_v0.1_20261022.md>) |
 | S1-B G-PREP永続退避準備指示（提示文・実行は別途承認） | [G-PREP Persistent Snapshot Preparation Instruction v0.1](<Codex_S1B_GPREP_Persistent_Snapshot_Preparation_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP限定実行承認文（保存用提示文） | [G-PREP Limited Execution Approval Instruction v0.1](<Codex_S1B_GPREP_Limited_Execution_Approval_Instruction_v0.1_20261102.md>) |
+| S1-B G-PREP実施結果（2026-10-22時点・Root保存完了／SVI取得待ち） | [G-PREP Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
