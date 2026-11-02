@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.66
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.67
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.66 |
+| バージョン | v1.67 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.67 更新概要
+
+- ユーザー提示の[S1-B G-PREP Snapshot最終検証結果](<../03_verification/technical_validation/S1B_GPREP_Snapshot_Final_Verification_Result_v0.1_20261023.md>)をtechnical_validationへ追加。2026-10-23 20:10～20:14 JSTの報告内容とSTAGE1_PRECHECK_READY、SVIのUSER_PROVIDED_OS_OUTPUT分類、現在のSVI ACLのUNKNOWN、実行直前のユーザー再確認条件を保持し、Markdownの強調表記を整える。
+- Snapshotの検証PASSとStage 1承認審査への移行可能という評価は当時の記録として扱い、ACL変更の実行承認とは区別する。今回の変更は結果保存と参照登録に限り、Snapshot／USB／SVIの再検証・ACL変更・Stage 1／Stage 2は行っていない。現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.66 更新概要
 
@@ -1014,6 +1019,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B G-PREP限定実行承認文（保存用提示文） | [G-PREP Limited Execution Approval Instruction v0.1](<Codex_S1B_GPREP_Limited_Execution_Approval_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP実施結果（2026-10-22時点・Root保存完了／SVI取得待ち） | [G-PREP Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>) |
 | S1-B G-PREP Snapshot最終検証指示（現行詳細版・Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.2](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.2_20261102.md>) |
+| S1-B G-PREP Snapshot最終検証結果（2026-10-23時点・STAGE1_PRECHECK_READY／実行未承認） | [G-PREP Snapshot Final Verification Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Snapshot_Final_Verification_Result_v0.1_20261023.md>) |
 | S1-B G-PREP Snapshot最終検証指示（先行版・経過記録） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
 | S1-B SVI Snapshot取得ガイド（添付資料） | [SVI Snapshot Execution Guide v0.1](<SVI_Snapshot_Execution_Guide_v0.1.md>) |
 | S1-B SVI Snapshot保存補助コード（未実行） | [Save-SVI-Snapshot.ps1](<../../tests/powershell/P2_Scan_Sync/Save-SVI-Snapshot.ps1>) |
