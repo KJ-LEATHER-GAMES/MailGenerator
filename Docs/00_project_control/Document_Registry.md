@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.64
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.65
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.64 |
+| バージョン | v1.65 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.65 更新概要
+
+- 添付の[SVI Snapshot取得ガイド v0.1](<SVI_Snapshot_Execution_Guide_v0.1.md>)をProject Controlへ、[Save-SVI-Snapshot.ps1](<../../tests/powershell/P2_Scan_Sync/Save-SVI-Snapshot.ps1>)を検証用補助コードとしてtests/powershell/P2_Scan_Syncへ追加。双方を原本どおり保存する。
+- ユーザーの明示選択に従い、添付Root.before.jsonは[ローカル参照コピー](<../../Evidence/S1-B/G-PREP-20261022T143534Z-21b5c43a/Root.before.json>)としてEvidenceへ保存し、当該パスだけを.gitignoreでGit管理対象外にする。サイズ1,489 bytes、SHA-256は`b0663196d137eb30bd69c9536394de2a40c25a8d48e402cf8358431316b4d847`。SID・SDDL・非公開の絶対パスは本台帳へ転記しない。
+- スクリプトの入力には既存の非公開G-PREP Runフォルダの正本を使用し、Repository内の参照コピーで置換しない。今回の変更は添付保存・除外設定・参照登録に限り、スクリプト実行・SVI取得・ACL変更・Stage 1／Stage 2は行っていない。現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.64 更新概要
 
@@ -1002,6 +1008,9 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B G-PREP限定実行承認文（保存用提示文） | [G-PREP Limited Execution Approval Instruction v0.1](<Codex_S1B_GPREP_Limited_Execution_Approval_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP実施結果（2026-10-22時点・Root保存完了／SVI取得待ち） | [G-PREP Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>) |
 | S1-B G-PREP Snapshot最終検証指示（Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
+| S1-B SVI Snapshot取得ガイド（添付資料） | [SVI Snapshot Execution Guide v0.1](<SVI_Snapshot_Execution_Guide_v0.1.md>) |
+| S1-B SVI Snapshot保存補助コード（未実行） | [Save-SVI-Snapshot.ps1](<../../tests/powershell/P2_Scan_Sync/Save-SVI-Snapshot.ps1>) |
+| S1-B Root Snapshot添付参照コピー（ローカルのみ・Git除外） | [Root.before.json](<../../Evidence/S1-B/G-PREP-20261022T143534Z-21b5c43a/Root.before.json>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
