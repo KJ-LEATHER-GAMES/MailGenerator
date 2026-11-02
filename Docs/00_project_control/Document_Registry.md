@@ -1,15 +1,21 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.65
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.66
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.65 |
+| バージョン | v1.66 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.66 更新概要
+
+- ユーザー提示の[G-PREP Snapshot Final Verification詳細指示書 v0.2](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.2_20261102.md>)を追加し、同用途の現行参照とする。Root／SVIのサイズ・SHA-256・JSON項目・相互参照・保存先ACL・Stage 1 Entry Criteriaと、追加指定された参照ファイル・Read-only／停止条件を収録。先行v0.1は経過記録として保持する。
+- 個人パスをPublic Repositoryへ転記しないという提示条件に従い、追記された実ユーザー名を含むパスは通常ユーザーの`%USERPROFILE%`表記へ置き換える。既存の非公開Runフォルダと非公開Scripts内のファイルを直接参照し、Repository内の添付参照コピーを検証対象の正本として扱わない。
+- Snapshot保存状況・期待値は提示されたEvidence情報として保持し、今回の実測結果とは扱わない。今回の変更は指示書保存と参照登録に限り、Snapshot／USB／SVI検証・スクリプト実行・ACL変更・Stage 1／Stage 2は行っていない。現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.65 更新概要
 
@@ -1007,7 +1013,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B G-PREP永続退避準備指示（提示文・実行は別途承認） | [G-PREP Persistent Snapshot Preparation Instruction v0.1](<Codex_S1B_GPREP_Persistent_Snapshot_Preparation_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP限定実行承認文（保存用提示文） | [G-PREP Limited Execution Approval Instruction v0.1](<Codex_S1B_GPREP_Limited_Execution_Approval_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP実施結果（2026-10-22時点・Root保存完了／SVI取得待ち） | [G-PREP Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>) |
-| S1-B G-PREP Snapshot最終検証指示（Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
+| S1-B G-PREP Snapshot最終検証指示（現行詳細版・Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.2](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.2_20261102.md>) |
+| S1-B G-PREP Snapshot最終検証指示（先行版・経過記録） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
 | S1-B SVI Snapshot取得ガイド（添付資料） | [SVI Snapshot Execution Guide v0.1](<SVI_Snapshot_Execution_Guide_v0.1.md>) |
 | S1-B SVI Snapshot保存補助コード（未実行） | [Save-SVI-Snapshot.ps1](<../../tests/powershell/P2_Scan_Sync/Save-SVI-Snapshot.ps1>) |
 | S1-B Root Snapshot添付参照コピー（ローカルのみ・Git除外） | [Root.before.json](<../../Evidence/S1-B/G-PREP-20261022T143534Z-21b5c43a/Root.before.json>) |
