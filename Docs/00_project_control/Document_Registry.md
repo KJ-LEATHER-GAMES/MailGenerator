@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.68
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.69
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.68 |
+| バージョン | v1.69 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.69 更新概要
+
+- ユーザー提示の[S1-B USB ACL Remediation Stage 1指示書](<Codex_S1B_USB_ACL_Remediation_Stage1_Instruction_v0.1_20261102.md>)をProject Controlへ追加。Stage 1限定の承認文、直前確認・1回実行・4主体検証・SVI事後照合・Stage 2禁止等の条件をそのまま保存する。
+- 本文のSVI_PRESTAGE1_READONLY_PASSは提示された前提として扱い、今回の実測結果とはしない。今回の変更は指示書保存と参照登録に限り、USB／Snapshot確認・ACL変更・Stage 1／Stage 2は実行していない。指示文の登録により現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.68 更新概要
 
@@ -1026,6 +1031,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B G-PREP Snapshot最終検証指示（現行詳細版・Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.2](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.2_20261102.md>) |
 | S1-B G-PREP Snapshot最終検証結果（2026-10-23時点・STAGE1_PRECHECK_READY／実行未承認） | [G-PREP Snapshot Final Verification Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Snapshot_Final_Verification_Result_v0.1_20261023.md>) |
 | S1-B Stage 1事前承認レビュー・計画（2026-10-23時点・実行未承認） | [Stage 1 Preapproval Review and Action Plan v0.1](<reviews/S1B_Stage1_Preapproval_Review_and_Action_Plan_v0.1_20261023.md>) |
+| S1-B USB ACL Remediation Stage 1限定実行指示（保存用提示文） | [USB ACL Remediation Stage 1 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage1_Instruction_v0.1_20261102.md>) |
 | S1-B Stage 1直前SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPreStage1.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPreStage1.ps1>) |
 | S1-B G-PREP Snapshot最終検証指示（先行版・経過記録） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
 | S1-B SVI Snapshot取得ガイド（添付資料） | [SVI Snapshot Execution Guide v0.1](<SVI_Snapshot_Execution_Guide_v0.1.md>) |
