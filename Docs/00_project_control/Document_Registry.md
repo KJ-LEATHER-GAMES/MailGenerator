@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.63
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.64
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.63 |
+| バージョン | v1.64 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-02 |
+
+### v1.64 更新概要
+
+- ユーザー提示の[G-PREP Snapshot Final Verification Read-only指示書](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>)をProject Controlへ追加。確認対象のRun ID・Root Snapshot SHA-256、検証事項・禁止事項・停止条件をそのまま保存する。
+- 本文のSnapshot保存状況は提示された前提であり、今回の独立検証結果とは扱わない。今回の変更は指示書保存と参照登録に限り、Snapshot照合・USB／SVI調査・ACL変更・Stage 1／Stage 2は実行していない。現行の状態・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.63 更新概要
 
@@ -996,6 +1001,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B G-PREP永続退避準備指示（提示文・実行は別途承認） | [G-PREP Persistent Snapshot Preparation Instruction v0.1](<Codex_S1B_GPREP_Persistent_Snapshot_Preparation_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP限定実行承認文（保存用提示文） | [G-PREP Limited Execution Approval Instruction v0.1](<Codex_S1B_GPREP_Limited_Execution_Approval_Instruction_v0.1_20261102.md>) |
 | S1-B G-PREP実施結果（2026-10-22時点・Root保存完了／SVI取得待ち） | [G-PREP Result v0.1](<../03_verification/technical_validation/S1B_GPREP_Result_v0.1_20261022.md>) |
+| S1-B G-PREP Snapshot最終検証指示（Read-only・提示文） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
