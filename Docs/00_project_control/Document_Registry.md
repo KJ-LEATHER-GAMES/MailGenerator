@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.89
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.90
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.89 |
+| バージョン | v1.90 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.90 更新概要
+
+- 添付の[S1-C Manifest更新・整合性レビュー指示 v0.1（2026-10-24）](<S1C_Manifest_Update_Consistency_Review_Codex_Instruction_v0.1_20261024.md>)と、ユーザー提示の[補足指示](<Codex_S1C_Manifest_Update_Consistency_Review_Supplement_Instruction_v0.1_20261103.md>)をProject Controlへ追加。添付は原本どおり、補足文は識別用見出しを付けて保存する。既存Manifest・Private Index・実行EvidenceのSource of Truth、5件の追跡性、Public／Private分離、S1-CとG2／S1 Closureの境界を保持する。
+- 本文のS1-C限定承認と実行PASS等は保存用提示文として扱い、今回の独立レビューや承認範囲拡大とはしない。今回の変更は資料保存と参照登録に限り、Manifest更新・Private Index照合や変更・Archive再実行・G2判断・S1完了宣言は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.89 更新概要
 
@@ -1153,6 +1158,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B EXECUTE_ARCHIVE限定実行指示（2026-10-24時点・限定承認の保存用指示文） | [EXECUTE_ARCHIVE Limited Execution Instruction v0.1](<S1B_EXECUTE_ARCHIVE_Limited_Execution_Instruction_v0.1_20261024.md>) |
 | S1-B EXECUTE_ARCHIVE限定実行補足指示（保存用提示文・S1-C／G2対象外） | [EXECUTE_ARCHIVE Limited Execution Supplement Instruction v0.1](<Codex_S1B_EXECUTE_ARCHIVE_Limited_Execution_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B EXECUTE_ARCHIVE限定実行結果（提示記録・PASS／S1-C・G2待ち） | [EXECUTE_ARCHIVE Limited Execution Result v0.1](<../03_verification/technical_validation/S1B_EXECUTE_ARCHIVE_Limited_Execution_Result_v0.1_20261103.md>) |
+| S1-C Manifest更新・整合性レビュー指示（2026-10-24時点・S1-C限定承認の保存用指示文） | [Manifest Update and Consistency Review Codex Instruction v0.1](<S1C_Manifest_Update_Consistency_Review_Codex_Instruction_v0.1_20261024.md>) |
+| S1-C Manifest更新・整合性レビュー補足指示（保存用提示文・G2／S1 Closure対象外） | [Manifest Update and Consistency Review Supplement Instruction v0.1](<Codex_S1C_Manifest_Update_Consistency_Review_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
