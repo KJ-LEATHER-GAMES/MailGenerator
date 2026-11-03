@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.72
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.73
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.72 |
+| バージョン | v1.73 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.73 更新概要
+
+- 添付の[S1-B ACL Stage 1検証済み引継ぎ（2026-10-23）](<../05_handoff/history/Context_Handoff_S1B_ACL_Stage1_Verified_20261023.md>)を引継ぎ履歴へ、[ACL・BitLocker・開発スコープの記事素材（2026-10-23）](<Note_Material_S1B_ACL_BitLocker_and_Project_Scope_20261023.md>)を既存の記事企画資料と同じProject Controlへ追加。双方を原本どおり保存する。
+- STAGE1_VERIFIED・Stage 2未承認／未実施・BitLocker確認・S1完了後の開発復帰方針等は2026-10-23時点の記録・企画として扱い、今回の独立実測や実行承認とはしない。今回の変更は資料保存と参照登録に限り、添付内の次アクション・スクリプト・ACL変更・Archive作業は実行していない。現行の現在地・再開手順・共通運用ルール・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.72 更新概要
 
@@ -1024,6 +1029,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
 | S0～S1-B記事素材（2026-10-22時点・企画資料） | [Article Materials v0.1](<Article_Materials_S0_S1B_Archive_20261022_v0.1.md>) |
 | S1-B Backup Precheck引継ぎ履歴（2026-10-22時点） | [Context Handoff v0.1](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>) |
+| S1-B ACL Stage 1検証済み引継ぎ履歴（2026-10-23時点・Stage 2未承認／未実施） | [Context Handoff: Stage 1 Verified](<../05_handoff/history/Context_Handoff_S1B_ACL_Stage1_Verified_20261023.md>) |
+| S1-B ACL・BitLocker・開発スコープの記事素材（2026-10-23時点・企画資料） | [Note Material: ACL, BitLocker and Project Scope](<Note_Material_S1B_ACL_BitLocker_and_Project_Scope_20261023.md>) |
 | S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | S1-B Precheck追加調査指示（Read-only・提示文） | [Additional Read-only Instruction v0.1](<Codex_S1_B_Precheck_Additional_ReadOnly_Instruction_v0.1_20261101.md>) |
 | S1-B Precheck追加調査結果（2026-10-21時点・提示文） | [Additional Investigation Result v0.1](<../03_verification/technical_validation/S1-B_Precheck_Additional_Investigation_Result_v0.1_20261021.md>) |
