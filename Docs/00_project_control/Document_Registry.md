@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.07
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.08
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.07 |
+| バージョン | v2.08 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.08 更新概要
+
+- 添付の[S4-A BL-MVP-004承認根拠・Patch統合条件 Read-only補完確認指示 v0.1（2026-10-24）](<S4A_BL-MVP-004_Approval_Provenance_and_Patch_Integration_ReadOnly_Codex_Instruction_v0.1_20261024.md>)と、ユーザー提示の[補足指示](<Codex_S4A_BL-MVP-004_ReadOnly_Supplement_Instruction_v0.1_20261103.md>)をProject Controlへ追加。添付は原本どおり、補足文は識別用見出しを付けて保存する。承認主体・日時の根拠、Design／Test Specification／Implementation Planの最終承認Patch・適用順序・競合・一意性の照合、S4-B最小編集範囲の提案のみという条件を保持する。
+- 本文の承認・Version・状態は保存用指示文の記述として扱い、今回の独立確認やS4-A調査実施とはしない。S1～S3 Closure・残留UNKNOWN・Provenance限定の保持と推測補完禁止を保存する。今回の変更は資料保存と参照登録に限り、承認根拠／Patch照合・正本統合・S4-B実行・Baseline変更・技術テスト再実行・S5着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.07 更新概要
 
@@ -1269,6 +1274,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S4 BL-MVP-004 Repository文書整合 Read-only Precheck指示（2026-10-24時点・保存用指示文） | [Repository Document Alignment Read-only Precheck Codex Instruction v0.1](<S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Codex_Instruction_v0.1_20261024.md>) |
 | S4 BL-MVP-004 Read-only Precheck補足指示（保存用提示文・受入／同期は未実施） | [Read-only Precheck Supplement Instruction v0.1](<Codex_S4_BL-MVP-004_ReadOnly_Precheck_Supplement_Instruction_v0.1_20261103.md>) |
 | S4 BL-MVP-004 Repository文書整合 Read-only Precheck結果（提示記録・REVIEW_REQUIRED／受入・正本統合・同期未完了） | [Repository Document Alignment Read-only Precheck Result v0.1](<../03_verification/technical_validation/S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Result_v0.1_20261103.md>) |
+| S4-A BL-MVP-004承認根拠・Patch統合条件 Read-only補完確認指示（2026-10-24時点・保存用指示文） | [Approval Provenance and Patch Integration Read-only Codex Instruction v0.1](<S4A_BL-MVP-004_Approval_Provenance_and_Patch_Integration_ReadOnly_Codex_Instruction_v0.1_20261024.md>) |
+| S4-A BL-MVP-004 Read-only補完確認補足指示（保存用提示文・S4-Bは提案のみ） | [Read-only Supplement Instruction v0.1](<Codex_S4A_BL-MVP-004_ReadOnly_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
