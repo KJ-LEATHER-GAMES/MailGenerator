@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.83
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.84
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.83 |
+| バージョン | v1.84 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.84 更新概要
+
+- ユーザー提示の[S1 Archive BLOCKED解消・限定Precheck指示](<S1_Archive_Blocked_Resolution_Limited_Precheck_Instruction_v0.1_20261103.md>)を追加指示まで含めてProject Controlへ保存。再評価をBackup未確認事項と復元試験先候補に限定し、確定済み項目の再調査禁止、OneDrive UNKNOWNの維持、Archive実行未承認等の条件を保持する。
+- 最新管理者実測が未取得・未共有であるという追加指示を保持し、2026-10-23の既存Evidenceとの区別、実測受領前の媒体・物理独立性・BitLocker・Root ACLの新たなPASS判定禁止を明記した文面として登録する。今回の変更は指示書保存と参照登録に限り、限定Precheck・候補パス調査・媒体確認は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.83 更新概要
 
@@ -1116,6 +1121,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Stage 2 Closure・Primary管理共有リスク整理結果（提示記録・案A推奨／受容判断待ち） | [Stage 2 Closure and Primary Risk Review Result v0.1](<../03_verification/technical_validation/S1B_Stage2_Closure_and_Primary_Risk_Review_Result_v0.1_20261103.md>) |
 | S1-B Primary残留リスク受容記録・S1 Archive Read-only Precheck指示（保存用提示文・Archive実行未承認） | [Primary Risk Acceptance and Archive Read-only Precheck Instruction v0.1](<Codex_S1B_Primary_Risk_Acceptance_and_Archive_ReadOnly_Precheck_Instruction_v0.1_20261103.md>) |
 | S1-B Primary残留リスク受容記録・S1 Archive Read-only Precheck結果（提示記録・BLOCKED／Backup UNKNOWN） | [Primary Risk Acceptance and Archive Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Primary_Risk_Acceptance_and_Archive_ReadOnly_Precheck_Result_v0.1_20261103.md>) |
+| S1 Archive BLOCKED解消・限定Precheck指示（保存用提示文・最新実測待ち／Archive未承認） | [Archive Blocked Resolution Limited Precheck Instruction v0.1](<S1_Archive_Blocked_Resolution_Limited_Precheck_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
