@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.12
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.13
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.12 |
+| バージョン | v2.13 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.13 更新概要
+
+- ユーザー提示の[S4-B BL-MVP-004 Repository受入限定実行 停止結果](<../03_verification/technical_validation/S4B_BL-MVP-004_Limited_Repository_Acceptance_Stop_Result_v0.1_20261103.md>)をtechnical_validationへ追加。識別用見出しとコードブロック前の空行を加え、STOP_REVIEW_REQUIRED、Design §25.1末尾の想定区切り不在による候補生成処理の文脈照合失敗、Patch競合ではないという説明、再試行・Rollbackなし、A～G全工程未実施を保持する。
+- 本文のファイル変更なし・既存16ファイルSHA不変・新規3件未作成・受入未実施等は当時の提示結果として扱い、今回の独立検証や現行状態の判断とはしない。歴史的承認UNKNOWN・Provenance限定・残留UNKNOWNと再試行の追加承認条件を保存する。今回の変更は結果保存と参照登録に限り、編集再試行・Approval Record更新・正本統合・Repository受入／同期・Baseline再構成・技術再実行・S5着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.12 更新概要
 
@@ -1301,6 +1306,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S4-A Decision確定・S4-B限定実行計画最終整理結果（提示記録・READY_FOR_USER_AUTHORIZATION／実行未承認） | [Decision and S4-B Limited Execution Plan Finalization Result v0.1](<../03_verification/technical_validation/S4A_Decision_and_S4B_Limited_Execution_Plan_Finalization_Result_v0.1_20261103.md>) |
 | S4-B BL-MVP-004 Repository受入・文書同期 限定実行指示（2026-10-24時点・保存用指示文） | [Limited Repository Acceptance Execution Codex Instruction v0.1](<S4B_BL-MVP-004_Limited_Repository_Acceptance_Execution_Codex_Instruction_v0.1_20261024.md>) |
 | S4-B BL-MVP-004 Repository受入限定実行補足指示（保存用提示文・対象8件と段階検証） | [Limited Repository Acceptance Supplement Instruction v0.1](<Codex_S4B_BL-MVP-004_Limited_Repository_Acceptance_Supplement_Instruction_v0.1_20261103.md>) |
+| S4-B BL-MVP-004 Repository受入限定実行 停止結果（提示記録・STOP_REVIEW_REQUIRED／変更なし・全工程未実施） | [Limited Repository Acceptance Stop Result v0.1](<../03_verification/technical_validation/S4B_BL-MVP-004_Limited_Repository_Acceptance_Stop_Result_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
