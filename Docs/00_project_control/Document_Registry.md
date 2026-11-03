@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.86
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.87
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.86 |
+| バージョン | v1.87 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.87 更新概要
+
+- ユーザー提示の[Restore Test Destination Approval・Archive Final Precheck結果](<../03_verification/technical_validation/S1_Restore_Test_Destination_Approval_and_Archive_Final_Precheck_Result_v0.1_20261103.md>)をtechnical_validationへ追加。識別用見出しを付け、READYとRemainingBlockersなし、Archive実行・G2未承認、S1限定受容、OneDrive UNKNOWN、Overview v1.62／Handoff v1.35と相対リンク230件確認等の報告内容を保持する。
+- 既存PASSの再利用、網羅的なOneDrive調査を追加Gateにしない根拠、復元後の保持・削除が既存計画で規定済みという提示結果をそのまま保存する。READYは当時の技術評価として扱い、今回の独立確認や実行承認とはしない。今回の変更は結果保存と参照登録に限り、Overview／Handoff更新・Final Precheck再実施・Manifest変更・Archive実行は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.86 更新概要
 
@@ -1134,6 +1139,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1 Archive BLOCKED解消・限定Precheck指示（保存用提示文・最新実測待ち／Archive未承認） | [Archive Blocked Resolution Limited Precheck Instruction v0.1](<S1_Archive_Blocked_Resolution_Limited_Precheck_Instruction_v0.1_20261103.md>) |
 | S1 Archive BLOCKED解消・限定Precheck結果（提示記録・REVIEW_REQUIRED／復元先審査待ち） | [Archive Blocked Resolution Limited Precheck Result v0.1](<../03_verification/technical_validation/S1_Archive_Blocked_Resolution_Limited_Precheck_Result_v0.1_20261103.md>) |
 | S1 Restore Test Destination Approval・Archive Final Precheck指示（保存用提示文・Archive実行未承認） | [Restore Test Destination Approval and Archive Final Precheck Instruction v0.1](<Codex_S1_Restore_Test_Destination_Approval_and_Archive_Final_Precheck_Instruction_v0.1_20261103.md>) |
+| S1 Restore Test Destination Approval・Archive Final Precheck結果（提示記録・READY／Archive実行未承認） | [Restore Test Destination Approval and Archive Final Precheck Result v0.1](<../03_verification/technical_validation/S1_Restore_Test_Destination_Approval_and_Archive_Final_Precheck_Result_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
