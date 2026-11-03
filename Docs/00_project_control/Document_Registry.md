@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.92
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.93
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.92 |
+| バージョン | v1.93 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.93 更新概要
+
+- ユーザー提示の[S1-C 現在地訂正・Manifest更新・整合性レビュー結果](<../03_verification/technical_validation/S1C_Status_Correction_and_Manifest_Resume_Review_Result_v0.1_20261103.md>)をtechnical_validationへ追加。識別用見出しを付け、S1C_REVIEW_PASS_PENDING_G2、Overview v1.63／Handoff v1.36／Manifest本文v0.2 Draftの更新、5件の追跡性・Index整合、相対リンク239件・アンカー9件等の報告内容と照合根拠IDを保持する。
+- G2未承認・S1未Closure、3件の残留UNKNOWNと既存S1限定受容をそのまま保存する。本文は当時の提示結果として扱い、今回の独立レビューや正式承認とはしない。今回の変更は結果保存と参照登録に限り、Overview／Handoff訂正・Manifest更新・Private Index再照合・Archive再実行・G2判断は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.92 更新概要
 
@@ -1173,6 +1178,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-C Manifest更新・整合性レビュー停止結果（提示記録・STOP_REVIEW_REQUIRED／Manifest未編集） | [Manifest Update and Consistency Review Stop Result v0.1](<../03_verification/technical_validation/S1C_Manifest_Update_Consistency_Review_Stop_Result_v0.1_20261103.md>) |
 | S1-C Overview／Handoff現在地訂正・Manifest再開指示（2026-10-24時点・現在地訂正を先行する追加指示） | [Overview Handoff Status Correction and Manifest Resume Instruction v0.1](<S1C_Overview_Handoff_Status_Correction_and_Manifest_Resume_Instruction_v0.1_20261024.md>) |
 | S1-C 現在地訂正・Manifest再開補足指示（保存用提示文・G2／S1 Closure対象外） | [Status Correction and Manifest Resume Supplement Instruction v0.1](<Codex_S1C_Status_Correction_and_Manifest_Resume_Supplement_Instruction_v0.1_20261103.md>) |
+| S1-C 現在地訂正・Manifest更新・整合性レビュー結果（提示記録・S1C_REVIEW_PASS_PENDING_G2） | [Status Correction and Manifest Resume Review Result v0.1](<../03_verification/technical_validation/S1C_Status_Correction_and_Manifest_Resume_Review_Result_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
