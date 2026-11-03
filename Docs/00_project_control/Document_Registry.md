@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.97
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.98
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.97 |
+| バージョン | v1.98 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.98 更新概要
+
+- 添付の[S2 P2-02／P2-03 Formal Regression Closure統合指示 v0.1（2026-10-24）](<S2_P2-02_P2-03_Formal_Regression_Closure_Codex_Integrated_Instruction_v0.1_20261024.md>)と、ユーザー提示の[補足指示](<Codex_S2_P2-02_P2-03_Formal_Closure_Supplement_Instruction_v0.1_20261103.md>)をProject Controlへ追加。添付は原本どおり、補足文は識別用見出しを付けて保存する。編集4文書の限定、両Record CLOSED成立後の管理現在地更新、既存Disposition・Provenance限定・履歴の保持、S3自動着手禁止を保持する。
+- 本文のFormal Closure承認・既存Precheck等は保存用提示文として扱い、今回の実行や独立確認とはしない。今回の変更は資料保存と参照登録に限り、Regression Records／Overview／Handoff更新・正式Closure・技術テスト再実行・Archive再実行・Baseline変更・S3着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.97 更新概要
 
@@ -1205,6 +1210,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S2 P2-02／P2-03 Regression Records Read-only Precheck指示（2026-10-24時点・保存用指示文） | [Regression Records Read-only Precheck Codex Instruction v0.1](<S2_P2-02_P2-03_Regression_Records_ReadOnly_Precheck_Codex_Instruction_v0.1_20261024.md>) |
 | S2 P2-02／P2-03 Read-only Precheck補足指示（保存用提示文・Formal Closure未承認） | [Read-only Precheck Supplement Instruction v0.1](<Codex_S2_P2-02_P2-03_ReadOnly_Precheck_Supplement_Instruction_v0.1_20261103.md>) |
 | S2 P2-02／P2-03 Read-only Precheck結果（提示記録・両Unit READY_FOR_FORMAL_CLOSURE／正式Closure未実施） | [Regression Records Read-only Precheck Result v0.1](<../03_verification/technical_validation/S2_P2-02_P2-03_Regression_Records_ReadOnly_Precheck_Result_v0.1_20261103.md>) |
+| S2 P2-02／P2-03 Formal Regression Closure統合指示（2026-10-24時点・保存用指示文・編集4文書限定） | [Formal Regression Closure Codex Integrated Instruction v0.1](<S2_P2-02_P2-03_Formal_Regression_Closure_Codex_Integrated_Instruction_v0.1_20261024.md>) |
+| S2 P2-02／P2-03 Formal Closure補足指示（保存用提示文・S3以降対象外） | [Formal Closure Supplement Instruction v0.1](<Codex_S2_P2-02_P2-03_Formal_Closure_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
