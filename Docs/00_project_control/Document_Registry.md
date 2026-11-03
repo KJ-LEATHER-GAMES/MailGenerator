@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.06
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.07
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.06 |
+| バージョン | v2.07 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.07 更新概要
+
+- ユーザー提示の[S4 BL-MVP-004 Repository文書整合 Read-only Precheck結果](<../03_verification/technical_validation/S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Result_v0.1_20261103.md>)をtechnical_validationへ追加。Markdownのエスケープ・表・インデントを整え、個人パスを含むリンクはプロジェクト内の相対参照へ変更し、表示上の行番号は提示時点の記録として保持する。REVIEW_REQUIRED、既存Approvalと受入・正本統合・Registry同期の区別、固定Version組合せ、差分分類・最小修正案・推奨順序を保存する。
+- 本文のVersion・現在値・未完了状態・31ファイルSHA不変・リンク62件／アンカー6件PASS等は当時の提示結果として扱い、今回の独立検証や現行状態の判断とはしない。証拠限定・残留UNKNOWN・S1限定受容・OBS-P2-05-002の状態を保持する。今回の変更は結果保存と参照登録に限り、Baseline承認照合・正本統合・Repository受入／同期・技術テスト再実行・S5着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.06 更新概要
 
@@ -1263,6 +1268,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S3 P2-04新Cycle／I12 Formal Closure結果（提示記録・S3_FORMAL_CLOSURE_RECORDED／S4未着手） | [NewCycle I12 Formal Closure Result v0.1](<../03_verification/technical_validation/S3_P2-04_NewCycle_I12_Formal_Closure_Result_v0.1_20261103.md>) |
 | S4 BL-MVP-004 Repository文書整合 Read-only Precheck指示（2026-10-24時点・保存用指示文） | [Repository Document Alignment Read-only Precheck Codex Instruction v0.1](<S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Codex_Instruction_v0.1_20261024.md>) |
 | S4 BL-MVP-004 Read-only Precheck補足指示（保存用提示文・受入／同期は未実施） | [Read-only Precheck Supplement Instruction v0.1](<Codex_S4_BL-MVP-004_ReadOnly_Precheck_Supplement_Instruction_v0.1_20261103.md>) |
+| S4 BL-MVP-004 Repository文書整合 Read-only Precheck結果（提示記録・REVIEW_REQUIRED／受入・正本統合・同期未完了） | [Repository Document Alignment Read-only Precheck Result v0.1](<../03_verification/technical_validation/S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Result_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
