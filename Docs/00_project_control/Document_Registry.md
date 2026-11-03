@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.99
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.00
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.99 |
+| バージョン | v2.00 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.00 更新概要
+
+- ユーザー提示の[S2 Formal Closure編集パッチ再試行の限定承認](<S2_Formal_Closure_Scoped_Document_Edit_Retry_Approval_Instruction_v0.1_20261103.md>)をProject Controlへ追加。同じ4文書への1回限定、実在する文脈での編集箇所特定、両Record Closure成立後の管理現在地更新、再失敗時の停止、既存Disposition・証拠限定の保持等の指示文をそのまま保存する。
+- 本文の再試行承認は保存用提示文として扱い、今回の編集実行とはしない。今回の変更は指示書保存と参照登録に限り、対象4文書の再確認・編集再試行・Formal Closure・技術テスト再実行・Baseline変更・S3着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.99 更新概要
 
@@ -1218,6 +1223,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S2 P2-02／P2-03 Formal Regression Closure統合指示（2026-10-24時点・保存用指示文・編集4文書限定） | [Formal Regression Closure Codex Integrated Instruction v0.1](<S2_P2-02_P2-03_Formal_Regression_Closure_Codex_Integrated_Instruction_v0.1_20261024.md>) |
 | S2 P2-02／P2-03 Formal Closure補足指示（保存用提示文・S3以降対象外） | [Formal Closure Supplement Instruction v0.1](<Codex_S2_P2-02_P2-03_Formal_Closure_Supplement_Instruction_v0.1_20261103.md>) |
 | S2 P2-02／P2-03 Formal Closure編集停止結果（提示記録・STOP_REVIEW_REQUIRED／4文書無変更・再試行判断待ち） | [Formal Regression Closure Edit Stop Result v0.1](<../03_verification/technical_validation/S2_P2-02_P2-03_Formal_Regression_Closure_Edit_Stop_Result_v0.1_20261103.md>) |
+| S2 Formal Closure編集パッチ再試行の限定承認（保存用提示文・同じ4文書／1回限定） | [Scoped Document Edit Retry Approval Instruction v0.1](<S2_Formal_Closure_Scoped_Document_Edit_Retry_Approval_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
