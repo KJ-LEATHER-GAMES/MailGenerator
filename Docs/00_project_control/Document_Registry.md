@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.28
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.29
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.28 |
+| バージョン | v2.29 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.29 更新概要
+
+- ユーザー提示の[S5-B-P0 別PC環境調査結果（2026-10-25）](<../03_verification/technical_validation/S5B_P0_Separate_PC_Environment_Investigation_Result_v0.1_20261103.md>)をtechnical_validationへ追加。識別用見出し・表・コードブロック前の空行を整え、調査日時・OS／Office構成・Excel 64bitとVBE DLLの静的存在・XLSTART・容量・親ACLの確認報告、REVIEW_REQUIREDと取得不能／未検証事項を保持する。
+- 本文の環境固有値・CIM失敗／アクセス拒否・Production遮断UNKNOWN・起動安全性未確認・保存先未採用・保持未承認等は提示時点の記録として扱い、今回の独立検証や環境適合性判断とはしない。前回の環境調査未実施結果は保持する。今回の変更は結果保存と参照登録に限り、別PC調査・Registry照会・ネットワーク調査・保存先作成／書込み試験・Excel起動・Fixture作成・Compile・設定変更・Baseline変更・S5-C着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.28 更新概要
 
@@ -1398,6 +1403,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B-P0 別PC環境適合性確認指示（保存用提示文・限定Read-only／Preflight未承認） | [Separate PC Suitability Read-only Instruction v0.1](<Codex_S5B_P0_Separate_PC_Suitability_ReadOnly_Instruction_v0.1_20261103.md>) |
 | S5-B-P0 別PC環境適合性確認結果（提示記録・REVIEW_REQUIRED／環境調査未実施・UNKNOWN） | [Separate PC Suitability Read-only Result v0.1](<../03_verification/technical_validation/S5B_P0_Separate_PC_Suitability_ReadOnly_Result_v0.1_20261103.md>) |
 | S5-B-P0 別PC環境適合性確認最小指示 v0.2（保存用提示文・通常権限／Preflight未承認） | [Separate PC Suitability Read-only Instruction v0.2](<Codex_S5B_P0_Separate_PC_Suitability_ReadOnly_Instruction_v0.2_20261103.md>) |
+| S5-B-P0 別PC環境調査結果（2026-10-25の提示記録・REVIEW_REQUIRED／静的構成確認・隔離UNKNOWN） | [Separate PC Environment Investigation Result v0.1](<../03_verification/technical_validation/S5B_P0_Separate_PC_Environment_Investigation_Result_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
