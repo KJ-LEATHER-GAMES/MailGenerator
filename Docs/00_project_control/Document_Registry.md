@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.23
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.24
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.23 |
+| バージョン | v2.24 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.24 更新概要
+
+- ユーザー提示の[S5-B Preflight：隔離環境でのExcel安全制御・Compile両立確認 Codex限定実行指示案 v0.1](<Codex_S5B_Preflight_Isolated_Excel_Safety_Compile_Instruction_v0.1_20261103.md>)をProject Controlへ追加。別途明示承認を必要とする指示案であること、Gate P0～P6、隔離環境・専用プロセス所有・起動抑止・Application読戻し・無害なFixture・Compile1回・保全確認、異常時停止の条件を保持する。
+- 本文の既存状態・実行候補・PASS書式は保存用指示文の記述として扱い、今回のPreflight実行承認や独立検証とはしない。本番Workbook／Production Source／既存Evidenceを対象外とし、Fixture PASSと本番Compile・Build適合・Completionを分ける境界を保存する。今回の変更は指示案保存と参照登録に限り、隔離環境調査・VM構築・Excel起動・Fixture作成／Open・設定変更・Compile・技術実行・本番S5-B再試行・Baseline変更・S5-C着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.23 更新概要
 
@@ -1368,6 +1373,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B 最終Build確認・VBA Compile停止結果（提示記録・REVIEW_REQUIRED／Hash一致・Excel起動前停止） | [Final Build Verification VBA Compile Stop Result v0.1](<../03_verification/technical_validation/S5B_Final_Build_Verification_VBA_Compile_Stop_Result_v0.1_20261103.md>) |
 | S5-B Safe Execution Procedure Review指示（保存用提示文・限定Read-only／技術再試行未承認） | [Safe Execution Procedure Review Read-only Instruction v0.1](<Codex_S5B_Safe_Execution_Procedure_Review_ReadOnly_Instruction_v0.1_20261103.md>) |
 | S5-B Safe Execution Procedure Review結果（提示記録・REVIEW_REQUIRED／独立起動・Compile両立未確定） | [Safe Execution Procedure Review Result v0.1](<../03_verification/technical_validation/S5B_Safe_Execution_Procedure_Review_Result_v0.1_20261103.md>) |
+| S5-B Preflight 隔離Excel安全制御・Compile両立確認指示案（保存用提示文・別途実行承認／本番Workbook対象外） | [Preflight Isolated Excel Safety Compile Instruction v0.1](<Codex_S5B_Preflight_Isolated_Excel_Safety_Compile_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
