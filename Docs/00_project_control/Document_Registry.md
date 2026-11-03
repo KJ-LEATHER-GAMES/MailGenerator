@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.71
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.72
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.71 |
+| バージョン | v1.72 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.72 更新概要
+
+- ユーザー提示の[S1完了を区切りとするP2開発復帰案](<S1_Completion_and_P2_Return_Proposal_v0.1_20261103.md>)と、添付の[AI協働開発・新規課題の優先度分類／スコープ制御の改訂提案 v0.1](<AI_Collab_Development_Issue_Triage_Change_Proposal_v0.1.md>)をProject Controlへ追加。復帰案は識別用見出しを付け、末尾の空見出しを除いて保存し、添付提案は原本どおり保存する。
+- S1完了を区切りとする検討終了点、NOW／DEFER／OUT OF SCOPE、元の作業への復帰条件は提案として登録する。本文の進捗表・検証結果は提示時点の記載として扱い、今回の独立実測とはしない。今回の変更は資料保存と参照登録に限り、共通運用ルール・現行進捗・完了条件・承認状態・Baseline・G2判定は変更しない。添付内の調査・改訂依頼は実行していない。
 
 ### v1.71 更新概要
 
@@ -1052,6 +1057,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Root Snapshot添付参照コピー（ローカルのみ・Git除外） | [Root.before.json](<../../Evidence/S1-B/G-PREP-20261022T143534Z-21b5c43a/Root.before.json>) |
 | S1-B Backup Precheck～CP-P2実行計画（2026-10-22時点・Proposed／未承認） | [Backup Precheck to CP-P2 Action Plan v0.1](<S1B_Backup_Precheck_to_CP-P2_Action_Plan_v0.1_20261022.md>) |
 | 共通運用標準v0.1 | [文書管理・Baseline運用ルール](<rules/AI協働開発 文書管理・Baseline運用ルール.md>) |
+| S1完了を区切りとするP2開発復帰案（提案・進捗は提示時点） | [S1 Completion and P2 Return Proposal v0.1](<S1_Completion_and_P2_Return_Proposal_v0.1_20261103.md>) |
+| AI協働開発・新規課題の優先度分類／スコープ制御の改訂提案（未承認） | [Issue Triage Change Proposal v0.1](<AI_Collab_Development_Issue_Triage_Change_Proposal_v0.1.md>) |
 | DF-P1-001 Close | [Close Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/DF-P1-001 Close Record v0.1.md>) |
 | P1-01完了判定 | [Completion Record](<../02_implementation/P1_Walking_Skeleton/P1-01_OFT_Outlook/P1-01 OFT Path Outlook Connection Completion Record v0.1.md>) |
 | TV-P1-001正式判定 | [技術検証記録](../03_verification/technical_validation/TV-P1-001_正式判定.md) |
