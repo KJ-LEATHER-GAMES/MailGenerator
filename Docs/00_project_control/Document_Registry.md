@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.05
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.06
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.05 |
+| バージョン | v2.06 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v2.06 更新概要
+
+- 添付の[S4 BL-MVP-004 Repository文書整合 Read-only Precheck指示 v0.1（2026-10-24）](<S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Codex_Instruction_v0.1_20261024.md>)と、ユーザー提示の[補足指示](<Codex_S4_BL-MVP-004_ReadOnly_Precheck_Supplement_Instruction_v0.1_20261103.md>)をProject Controlへ追加。添付は原本どおり、補足文は識別用見出しを付けて保存する。ApprovalとRepository受入・登録・同期の個別判定、実文書・節・根拠による差分分類と最小修正案、S1～S3・歴史的Baseline参照・証拠限定・残留UNKNOWN保持の条件を保持する。
+- 本文のVersion・状態・承認記録に関する記述は保存用指示文として扱い、今回の独立確認やS4 Precheck実施とはしない。今回の変更は資料保存と参照登録に限り、Baseline承認照合・Repository受入／同期・技術文書更新・技術テスト再実行・S5着手は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.05 更新概要
 
@@ -1256,6 +1261,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S3 P2-04新Cycle／I12 Formal Closure統合指示（2026-10-24時点・保存用指示文） | [NewCycle I12 Formal Closure Codex Integrated Instruction v0.1](<S3_P2-04_NewCycle_I12_Formal_Closure_Codex_Integrated_Instruction_v0.1_20261024.md>) |
 | S3 P2-04新Cycle／I12 Formal Closure補足指示（保存用提示文・指定4文書更新） | [NewCycle I12 Formal Closure Supplement Instruction v0.1](<Codex_S3_P2-04_NewCycle_I12_Formal_Closure_Supplement_Instruction_v0.1_20261103.md>) |
 | S3 P2-04新Cycle／I12 Formal Closure結果（提示記録・S3_FORMAL_CLOSURE_RECORDED／S4未着手） | [NewCycle I12 Formal Closure Result v0.1](<../03_verification/technical_validation/S3_P2-04_NewCycle_I12_Formal_Closure_Result_v0.1_20261103.md>) |
+| S4 BL-MVP-004 Repository文書整合 Read-only Precheck指示（2026-10-24時点・保存用指示文） | [Repository Document Alignment Read-only Precheck Codex Instruction v0.1](<S4_BL-MVP-004_Repository_Document_Alignment_ReadOnly_Precheck_Codex_Instruction_v0.1_20261024.md>) |
+| S4 BL-MVP-004 Read-only Precheck補足指示（保存用提示文・受入／同期は未実施） | [Read-only Precheck Supplement Instruction v0.1](<Codex_S4_BL-MVP-004_ReadOnly_Precheck_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
