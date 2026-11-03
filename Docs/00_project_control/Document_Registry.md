@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.75
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.76
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.75 |
+| バージョン | v1.76 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.76 更新概要
+
+- 添付の[Stage 2限定実行指示 v0.1（旧指示・再実行不可）](<S1B_Stage2_Limited_Execution_Instruction_v0.1_20261023.md>)と[実行済み・事後検証指示 v0.1](<S1B_Stage2_PostExecution_Verification_Instruction_v0.1_20261023.md>)、ユーザー提示の[Read-only事後検証補足指示](<Codex_S1B_Stage2_PostExecution_Verification_Supplement_Instruction_v0.1_20261103.md>)をProject Controlへ追加。添付2件は原本どおり、補足文は識別用見出しを付けて保存する。旧実行指示を置き換え、変更コマンドを再実行しないという提示内容を参照欄にも明示する。
+- ユーザー管理者PowerShellによる実行1回・終了コード0・Root3主体等は提示された当時の実施報告として扱い、今回の独立実測・完了認定とはしない。Codexの変更直前確認を遡及してPASSとせず、SVI照合と正式完了判定を別工程とする記載を保持する。今回の変更は資料保存と参照登録に限り、事後検証・ACL変更・Stage 2再実行は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.75 更新概要
 
@@ -1065,7 +1070,10 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B Stage 1事前承認レビュー・計画（2026-10-23時点・実行未承認） | [Stage 1 Preapproval Review and Action Plan v0.1](<reviews/S1B_Stage1_Preapproval_Review_and_Action_Plan_v0.1_20261023.md>) |
 | S1-B USB ACL Remediation Stage 1限定実行指示（保存用提示文） | [USB ACL Remediation Stage 1 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage1_Instruction_v0.1_20261102.md>) |
 | S1-B USB ACL Remediation Stage 1実施結果（2026-10-23時点・SVI事後照合待ち） | [USB ACL Remediation Stage 1 Result v0.1](<../03_verification/technical_validation/S1B_USB_ACL_Remediation_Stage1_Result_v0.1_20261023.md>) |
-| S1-B USB ACL Remediation Stage 2限定実行指示（保存用提示文） | [USB ACL Remediation Stage 2 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage2_Instruction_v0.1_20261103.md>) |
+| S1-B USB ACL Remediation Stage 2限定実行指示（旧実行指示・再実行不可・保存用提示文） | [USB ACL Remediation Stage 2 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage2_Instruction_v0.1_20261103.md>) |
+| S1-B Stage 2限定実行指示（2026-10-23時点・旧指示・再実行不可） | [Stage 2 Limited Execution Instruction v0.1](<S1B_Stage2_Limited_Execution_Instruction_v0.1_20261023.md>) |
+| S1-B Stage 2実行済み・Read-only事後検証指示（2026-10-23時点・旧実行手順を置換） | [Stage 2 Post-Execution Verification Instruction v0.1](<S1B_Stage2_PostExecution_Verification_Instruction_v0.1_20261023.md>) |
+| S1-B Stage 2実行済み・Read-only事後検証補足指示（保存用提示文・再実行禁止） | [Stage 2 Post-Execution Verification Supplement Instruction v0.1](<Codex_S1B_Stage2_PostExecution_Verification_Supplement_Instruction_v0.1_20261103.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
