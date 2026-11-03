@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v1.73
+# 定型メール作成ツール Project Document Registry and Approved Baseline v1.74
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v1.73 |
+| バージョン | v1.74 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-03 |
+
+### v1.74 更新概要
+
+- 添付の[Stage 2実行前Read-only確認指示（2026-10-23）](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>)をProject Controlへ追加。媒体・BitLocker・Root4主体・Snapshot照合、ユーザーによるSVI再確認、独立したStage 2承認ゲート等の提示内容を原本どおり保存する。
+- 本文のSTAGE1_VERIFIED／Stage 2未承認・未実施は当時の開始条件として扱う。今回の変更は指示書保存と参照登録に限り、Precheck・スクリプト・ACL変更・Stage 2は実行していない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v1.73 更新概要
 
@@ -1056,6 +1061,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S1-B USB ACL Remediation Stage 1限定実行指示（保存用提示文） | [USB ACL Remediation Stage 1 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage1_Instruction_v0.1_20261102.md>) |
 | S1-B USB ACL Remediation Stage 1実施結果（2026-10-23時点・SVI事後照合待ち） | [USB ACL Remediation Stage 1 Result v0.1](<../03_verification/technical_validation/S1B_USB_ACL_Remediation_Stage1_Result_v0.1_20261023.md>) |
 | S1-B USB ACL Remediation Stage 2限定実行指示（保存用提示文） | [USB ACL Remediation Stage 2 Instruction v0.1](<Codex_S1B_USB_ACL_Remediation_Stage2_Instruction_v0.1_20261103.md>) |
+| S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
 | S1-B Stage 1直前SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPreStage1.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPreStage1.ps1>) |
 | S1-B G-PREP Snapshot最終検証指示（先行版・経過記録） | [G-PREP Snapshot Final Verification Read-only Instruction v0.1](<Codex_S1B_GPREP_Snapshot_Final_Verification_ReadOnly_Instruction_v0.1_20261102.md>) |
