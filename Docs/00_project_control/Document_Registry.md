@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.49
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.50
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.49 |
+| バージョン | v2.50 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-04 |
+
+### v2.50 更新概要
+
+- ユーザー提示の[S5-B F1-READ-01 ACL手動GUI確認報告と整理結果](<../03_verification/technical_validation/S5B_F1_READ01_ACL_User_Manual_GUI_Report_and_Response_v0.1_20261104.md>)をtechnical_validationへ追加。PromptとResponseを収録し、実パスと個人／カスタム主体表記を匿名化したうえで、4件のAllow ACE・権限・適用先・継承元対応、共通主体ACEのUNKNOWN、直接共有なし申告を保持する。匿名化箇所は保存注記で明示する。
+- 本文のGUI確認・ACL整理はUSER_ATTESTED／USER_MANUAL_GUIの提示記録として扱い、今回の独立観測や実効アクセス検証とはしない。継承ACEと継承設定有効／無効の区別、主体詳細・子資源／将来ユーザー権限・物理同一性未検証、REVIEW_REQUIRED・スクリプト実行未承認・隔離未確立を保持する。今回の変更は報告保存と参照登録に限り、GUI／ACL確認・スクリプト実行・Excel操作・ユーザー作成・環境変更・Preflight・Baseline変更は行っていない。現行の現在地・再開手順・完了条件・承認状態・Baseline・G2判定は変更しない。
 
 ### v2.49 更新概要
 
@@ -1524,6 +1529,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B F1-READ-01 Clone ACLスクリプト静的確認結果（提示記録・REVIEW_REQUIRED／実行未承認・ACL未取得） | [Clone ACL Static Review Result v0.1](<../03_verification/technical_validation/S5B_F1_READ01_Clone_ACL_Static_Review_Result_v0.1_20261104.md>) |
 | S5-B F1-READ-01 ACL情報GUI限定補完指示（保存用提示文・ユーザー手動GUI情報／現行スクリプト実行不承認） | [ACL GUI-only Supplement Instruction v0.1](<Codex_S5B_F1_READ01_ACL_GUI_Only_Supplement_Instruction_v0.1_20261104.md>) |
 | S5-B F1-READ-01 ACL情報GUI限定補完受領待ちレスポンス（提示記録・GUI結果未受領／匿名転記書式） | [ACL GUI-only Supplement Pending Result v0.1](<../03_verification/technical_validation/S5B_F1_READ01_ACL_GUI_Only_Supplement_Pending_Result_v0.1_20261104.md>) |
+| S5-B F1-READ-01 ACL手動GUI確認報告と整理結果（提示記録・匿名化／4 ACE申告・継承設定と共通主体ACEはUNKNOWN） | [ACL User Manual GUI Report and Response v0.1](<../03_verification/technical_validation/S5B_F1_READ01_ACL_User_Manual_GUI_Report_and_Response_v0.1_20261104.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
