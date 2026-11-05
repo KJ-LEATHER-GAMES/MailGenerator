@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.68
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.69
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.68 |
+| バージョン | v2.69 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-06 |
+
+### v2.69 更新概要
+
+- 添付の[S5-B 最小実行準備・検証用コピー受渡し設計 v0.1 DRAFT](<S5-B_最小実行準備・検証用コピー受渡し設計_v0.1_DRAFT.md>)をProject Controlへ原文どおり追加。論理基準Buildと物理検証コピーの分離、CP-0～CP-5、G0～G6、提案上のCOPY-PREP承認、全AUTH未承認、DRAFT／DESIGN_ONLYを保持する。
+- 本文の基準Build採用・一般PC調査終了・変更なし申告・Repository配置／Commitなし等は添付内の決定記録・作成時点の記述として保存し、今回の追加を根拠に現行の採用状態や実行承認を更新しない。原本とのSHA-256一致を確認し、受渡し・コピー作成・実機確認・Compileは実行しない。今回の保存・台帳更新・コミットは本文の未変更記録と区別し、現行のOverview・Handoff・Baseline・既存Closure等は変更しない。
 
 ### v2.68 更新概要
 
@@ -1642,6 +1647,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | PC一般調査の限定終了とP2開発復帰判断案（PROPOSED／USER DECISION REQUIRED・未採用） | [PC General Investigation Limited Closure and P2 Return Decision Proposal v0.1](<S5B_PC_General_Investigation_Limited_Closure_and_P2_Return_Decision_Proposal_v0.1_20261106.md>) |
 | S5-B Target Workbook特定Read-only照合指示（保存用提示文・既存資料限定／推測による確定禁止） | [Target Workbook Identification Read-only Instruction v0.1](<Codex_S5B_Target_Workbook_Identification_ReadOnly_Instruction_v0.1_20261106.md>) |
 | S5-B Target Workbook特定Read-only照合結果（提示記録・INCOMPLETE／現行Compileファイル対応UNKNOWN） | [Target Workbook Identification Read-only Result v0.1](<../03_verification/technical_validation/S5B_Target_Workbook_Identification_ReadOnly_Result_v0.1_20261106.md>) |
+| S5-B 最小実行準備・検証用コピー受渡し設計（添付原文・DRAFT／DESIGN_ONLY・全AUTH未承認） | [S5-B Minimal Execution Preparation and Validation Copy Handoff Design v0.1 DRAFT](<S5-B_最小実行準備・検証用コピー受渡し設計_v0.1_DRAFT.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
