@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.81
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.82
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.81 |
+| バージョン | v2.82 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-06 |
+
+### v2.82 更新概要
+
+- ユーザー提示の[S5-B AUTH-04-EVIDENCE-SETUP-01 実施結果評価・記録読戻し個別承認依頼案](<../03_verification/technical_validation/S5B_AUTH04_EVIDENCE_SETUP01_Result_Assessment_and_Record_Request_v0.1_20261106.md>)をtechnical_validationへ追加。結果表・次の承認対象表・工程依存表、依頼案の見出し階層とコードブロック前の空行を整え、COMPLETED_WITH_LIMITATIONS／USER_ATTESTED_PASSと独立確認・記録読戻し・C1アクセス拒否NOT_VERIFIEDを保持する。
+- 本文は申告受領・評価の提示記録として保存し、今回の実機確認・承認付与とは扱わない。承認範囲内のフォルダー作成と範囲外変更なしの区別、AUTH-04-EVIDENCE-RECORD-01 READY_FOR_USER_REVIEW／NOT_GRANTED、保持期間未承認を保持する。試験ファイル作成・読戻し・手動実施依頼は行わず、今回の変更は文書保存・台帳登録・コミットに限る。現行のOverview・Handoff・Baseline・既存Closure等は変更しない。
 
 ### v2.81 更新概要
 
@@ -1720,6 +1725,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B B1搬入前安全条件・Evidence記録方法机上設計（添付原文・DRAFT／OPEN_CONDITIONS・実操作未承認） | [B1 Pre-transfer Safety Conditions and Evidence Recording Desk Design v0.1 DRAFT](<S5-B_B1_搬入前安全条件・Evidence記録方法_机上設計_v0.1_DRAFT.md>) |
 | S5-B AUTH-04-B1-LOCATOR-CHECK-01評価結果・Evidence準備承認依頼案（提示記録・変更状況UNKNOWN／次工程NOT_GRANTED） | [B1 Locator Check Assessment and Evidence Setup Request v0.1](<../03_verification/technical_validation/S5B_AUTH04_B1_LOCATOR_CHECK01_Assessment_and_Evidence_Setup_Request_v0.1_20261106.md>) |
 | AUTH-04-EVIDENCE-SETUP-01個別承認依頼案（READY_FOR_USER_APPROVAL／NOT_GRANTED・変更なしはユーザー申告） | [Evidence Setup Individual Authorization Request Proposal v0.1](<S5B_AUTH04_EVIDENCE_SETUP01_Individual_Authorization_Request_Proposal_v0.1_20261106.md>) |
+| S5-B AUTH-04-EVIDENCE-SETUP-01実施結果評価・記録読戻し承認依頼案（提示記録・作成完了はユーザー申告／読戻し未承認） | [Evidence Setup Result Assessment and Record Request v0.1](<../03_verification/technical_validation/S5B_AUTH04_EVIDENCE_SETUP01_Result_Assessment_and_Record_Request_v0.1_20261106.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
