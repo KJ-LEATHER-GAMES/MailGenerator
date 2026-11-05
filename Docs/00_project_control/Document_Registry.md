@@ -1,15 +1,22 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.59
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.60
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.59 |
+| バージョン | v2.60 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-11-04 |
+| 更新日 | 2026-11-05 |
+
+### v2.60 更新概要
+
+- ユーザー提示の[P01所属確認の手動実行報告と応答](<../03_verification/technical_validation/S5B_F1_READ01_P01_User_Manual_Command_Report_and_Response_v0.1_20261105.md>)をtechnical_validationへ追加。報告されたメンバー名をM01・M02へ置換し入力行のユーザーパスを省略したうえで、正常終了、直接メンバー2件、対象PCのGUI確認・非昇格状態の補足をUSER_ATTESTED／USER_MANUAL_COMMANDとして保存する。
+- ユーザー提示の[P01調査の限定完了評価指示文](<Codex_S5B_F1_READ01_P01_Limited_Completion_Assessment_Instruction_v0.1_20261105.md>)をProject Controlへ追加。既存Evidenceのみでの評価、維持するUNKNOWN、追加操作禁止と停止境界を保存する。
+- ユーザー提示の[F1-READ-01限定完了評価結果](<../03_verification/technical_validation/S5B_F1_READ01_Limited_Completion_Assessment_Result_v0.1_20261105.md>)をtechnical_validationへ追加。限定調査範囲のCOMPLETE_WITH_LIMITATIONS、根拠と残留UNKNOWN、スクリプトのレビュー未完了・実行未承認、C1_REVIEW_REQUIRED・方式未選定・隔離未確立を保存する。
+- 今回は提示記録の保存と参照登録のみ。本文の確認依頼・評価指示を新たに実行せず、Codexによる所属照会・追加PC調査・独立検証は行っていない。記録内のDocumentMutation／GitOperation等は元の報告時点の記述として保持し、今回の保存・コミットとは区別する。現行のOverview・Handoff・Baseline・既存Closure等は変更しない。
 
 ### v2.59 更新概要
 
@@ -1584,6 +1591,9 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B F1-READ-01 P01所属確認手動実行手順案整理結果（提示記録・未承認／未実行・匿名化報告テンプレート） | [P01 User Manual Execution Procedure Draft Result v0.1](<../03_verification/technical_validation/S5B_F1_READ01_P01_User_Manual_Execution_Procedure_Draft_Result_v0.1_20261104.md>) |
 | F1-READ-01 P01所属確認ユーザー手動実行承認文（保存用提示文・本人非昇格1回／Codex実行不承認・SID一致未検証） | [P01 User Manual Execution Authorization v0.1](<S5B_F1_READ01_P01_User_Manual_Execution_Authorization_v0.1_20261104.md>) |
 | S5-B F1-READ-01 P01所属確認ユーザー手動実行承認受領結果（提示記録・本人1回のみ承認済み／匿名化結果待ち） | [P01 User Manual Execution Authorization Receipt Result v0.1](<../03_verification/technical_validation/S5B_F1_READ01_P01_User_Manual_Execution_Authorization_Receipt_Result_v0.1_20261104.md>) |
+| S5-B F1-READ-01 P01所属確認ユーザー手動実行報告と応答（匿名化済み提示記録・直接メンバー2件／対象PC・非昇格の申告補完） | [P01 User Manual Command Report and Response v0.1](<../03_verification/technical_validation/S5B_F1_READ01_P01_User_Manual_Command_Report_and_Response_v0.1_20261105.md>) |
+| S5-B F1-READ-01 P01調査限定完了評価指示（保存用提示文・既存Evidenceのみ／追加操作禁止） | [P01 Limited Completion Assessment Instruction v0.1](<Codex_S5B_F1_READ01_P01_Limited_Completion_Assessment_Instruction_v0.1_20261105.md>) |
+| S5-B F1-READ-01 限定完了評価結果（提示記録・COMPLETE_WITH_LIMITATIONS／C1隔離未確立） | [Limited Completion Assessment Result v0.1](<../03_verification/technical_validation/S5B_F1_READ01_Limited_Completion_Assessment_Result_v0.1_20261105.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
