@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.71
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.72
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.71 |
+| バージョン | v2.72 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-06 |
+
+### v2.72 更新概要
+
+- ユーザー提示の[S5-B 初回個別承認案の最終レビュー結果](<../03_verification/technical_validation/S5B_AUTH04_PRECHECK01_Final_Review_Result_v0.1_20261106.md>)をtechnical_validationへ追加。識別用見出し・表・インラインコードを整え、READY_FOR_USER_APPROVALとAUTH-04-PRECHECK-01 NOT_GRANTEDの区別、既存Evidence再利用、追加確認3項目、手動承認範囲、結果ラベルの限界・STOP条件・残留リスク・次アクションを保持する。
+- 本文の机上レビュー判定・前提・未変更等は提示された結果記録として保存し、今回の独立レビュー・承認付与・実機確認とは扱わない。Private Index参照・GUI操作・手動確認依頼は実行せず、今回の保存・台帳更新・コミットは本文のファイル変更／Git操作未実施と区別する。現行のOverview・Handoff・Baseline・既存Closure等は変更しない。
 
 ### v2.71 更新概要
 
@@ -1660,6 +1665,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S5-B 最小実行準備・検証用コピー受渡し設計（添付原文・DRAFT／DESIGN_ONLY・全AUTH未承認） | [S5-B Minimal Execution Preparation and Validation Copy Handoff Design v0.1 DRAFT](<S5-B_最小実行準備・検証用コピー受渡し設計_v0.1_DRAFT.md>) |
 | S5-B 初回個別承認依頼案（AUTH-04-PRECHECK-01提案番号・NOT_GRANTED／USER DECISION REQUIRED） | [Initial Individual Authorization Request Proposal v0.1](<S5B_AUTH04_PRECHECK01_Initial_Individual_Authorization_Request_Proposal_v0.1_20261106.md>) |
 | S5-B 初回個別承認案最終レビュー指示（保存用提示文・机上レビューのみ／実機操作禁止） | [AUTH-04-PRECHECK-01 Final Review Instruction v0.1](<Codex_S5B_AUTH04_PRECHECK01_Final_Review_Instruction_v0.1_20261106.md>) |
+| S5-B 初回個別承認案最終レビュー結果（提示記録・READY_FOR_USER_APPROVAL／NOT_GRANTED維持） | [AUTH-04-PRECHECK-01 Final Review Result v0.1](<../03_verification/technical_validation/S5B_AUTH04_PRECHECK01_Final_Review_Result_v0.1_20261106.md>) |
 | S1-B Stage 2実行前Read-only確認指示（2026-10-23時点・実行未承認） | [Stage 2 Read-only Precheck Instruction](<S1B_Stage2_ReadOnly_Precheck_Instruction_20261023.md>) |
 | S1-B Stage 2 Read-only Precheck結果（2026-10-23 21:29時点・STOP / REVIEW_REQUIRED） | [Stage 2 Read-only Precheck Result v0.1](<../03_verification/technical_validation/S1B_Stage2_ReadOnly_Precheck_Result_v0.1_20261023.md>) |
 | S1-B Stage 2事後SVI照合補助コード（実機未実行） | [Test-SVI-SnapshotPostStage2.ps1](<../../tests/powershell/P2_Scan_Sync/Test-SVI-SnapshotPostStage2.ps1>) |
