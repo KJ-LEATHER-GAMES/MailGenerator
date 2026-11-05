@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.62
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.63
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.62 |
+| バージョン | v2.63 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-05 |
+
+### v2.63 更新概要
+
+- ユーザー提示の[S5-B F1-READ-01／F1-2引き継ぎまとめ](<../05_handoff/history/Context_Handoff_S5B_F1_READ01_and_F1_2_20261105_v0.1.md>)を引継ぎ履歴へ追加。実施内容9項目・決定事項6項目・未解決事項・次アクション・再開プロンプトを保存する。F1-READ-01のCOMPLETE_WITH_LIMITATIONS、F1-2のDESIGN_REVIEW_COMPLETE_WITH_OPEN_CONDITIONS、C1_REVIEW_REQUIRED・方式未選定・隔離未検証を記録する。
+- 本文の現在地・参照文書名／版・未承認／未変更・管理文書反映未確認等は提示された引継ぎ時点の記述として保持し、当地の正本・現行登録状態を再判定したものとは扱わない。次アクション・引用プロンプトは保存のみで実行せず、現行Current Handoff・Overview・Baselineを変更しない。今回の履歴追加・台帳登録・コミットは本文内の文書変更／Git操作禁止と対象を区別する。
 
 ### v2.62 更新概要
 
@@ -1477,6 +1482,7 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | S0～S1-B記事素材（2026-10-22時点・企画資料） | [Article Materials v0.1](<Article_Materials_S0_S1B_Archive_20261022_v0.1.md>) |
 | S1-B Backup Precheck引継ぎ履歴（2026-10-22時点） | [Context Handoff v0.1](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>) |
 | S1-B ACL Stage 1検証済み引継ぎ履歴（2026-10-23時点・Stage 2未承認／未実施） | [Context Handoff: Stage 1 Verified](<../05_handoff/history/Context_Handoff_S1B_ACL_Stage1_Verified_20261023.md>) |
+| S5-B F1-READ-01／F1-2引継ぎ履歴（ユーザー提示まとめ・限定調査完了／設計レビューOpen Conditions・隔離未確立） | [Context Handoff: S5-B F1-READ-01 and F1-2 v0.1](<../05_handoff/history/Context_Handoff_S5B_F1_READ01_and_F1_2_20261105_v0.1.md>) |
 | S1-B ACL・BitLocker・開発スコープの記事素材（2026-10-23時点・企画資料） | [Note Material: ACL, BitLocker and Project Scope](<Note_Material_S1B_ACL_BitLocker_and_Project_Scope_20261023.md>) |
 | S1-B PRECHECKレビュー（2026-10-21時点・Review draft） | [Precheck Review and Next Actions v0.1](<reviews/S1-B_Precheck_Review_and_Next_Actions_v0.1_20261021.md>) |
 | S1-B Precheck追加調査指示（Read-only・提示文） | [Additional Read-only Instruction v0.1](<Codex_S1_B_Precheck_Additional_ReadOnly_Instruction_v0.1_20261101.md>) |
