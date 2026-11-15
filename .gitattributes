@@ -1,0 +1,6 @@
+# Preserve imported bytes; allow original Markdown spacing and VBA CRLF.
+/Docs/00_project_control/reviews/P3-01_Production_and_Test_Fixture_Candidate_Review_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/SOURCE_MANIFEST.md -text
+/tests/vba/P3_Configuration_UserForm/STATIC_REVIEW.py -text
+/Docs/02_implementation/P3_Configuration_UserForm/modConfigurationValidator_P3-01_Candidate_v0.1.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP3_01ConfigurationValidatorCandidateTests_v0.1.bas -text whitespace=cr-at-eol

@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.83
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.84
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.83 |
+| バージョン | v2.84 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-11-06 |
+| 更新日 | 2026-11-15 |
+
+### v2.84 更新概要
+
+- 添付ZIPのP3-01 Configuration Validator候補5件を用途別に追加。Production候補は実装文書配下、テスト候補と補助チェッカーはtests配下、レビューはreviewsへ配置し、全件の原本バイトとCP932を保持する。WORKING CANDIDATE / NOT APPROVED / NOT COMPILED / NOT RUNとして登録し、既存src・Workbook・Approved仕様・Baselineは変更しない。
+- 原文中の未コミット記述・静的PASSはパッケージ作成時の記録。今回の追加・コミット・pushや独立した機能検証とは区別する。SOURCE_MANIFESTのパスとSTATIC_REVIEW.pyの入力パスは元ZIP構成を指すため、配置後の直接実行用ではない。対応表は第5節の登録行を参照。チェッカー実行・VBA Import・Compile・テスト実行・P3正式開始は行わない。
 
 ### v2.83 更新概要
 
@@ -1579,6 +1584,11 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-01 Production候補（ZIP: `src/modConfigurationValidator_P3-01_Candidate_v0.1.bas`／未承認・未Compile） | [CP932 Candidate v0.1](<../02_implementation/P3_Configuration_UserForm/modConfigurationValidator_P3-01_Candidate_v0.1.bas>) |
+| P3-01テストFixture候補（ZIP: `tests/modP3_01ConfigurationValidatorCandidateTests_v0.1.bas`／未実行） | [VBA Fixture v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_01ConfigurationValidatorCandidateTests_v0.1.bas>) |
+| P3-01候補レビュー（ZIP: `Docs/P3-01_Production_and_Test_Fixture_Candidate_Review_v0.1.md`／提示記録） | [Candidate Review v0.1](<reviews/P3-01_Production_and_Test_Fixture_Candidate_Review_v0.1.md>) |
+| P3-01原本Manifest（ZIP: `Docs/SOURCE_MANIFEST.md`／元ZIPのパス・SHA-256） | [Source Manifest](<../02_implementation/P3_Configuration_UserForm/SOURCE_MANIFEST.md>) |
+| P3-01静的チェッカー原本（ZIP: `Docs/STATIC_REVIEW.py`／元ZIP配置専用・今回未実行） | [STATIC_REVIEW.py](<../../tests/vba/P3_Configuration_UserForm/STATIC_REVIEW.py>) |
 | S0～S1-B記事素材（2026-10-22時点・企画資料） | [Article Materials v0.1](<Article_Materials_S0_S1B_Archive_20261022_v0.1.md>) |
 | S1-B Backup Precheck引継ぎ履歴（2026-10-22時点） | [Context Handoff v0.1](<../05_handoff/history/Context_Handoff_S1B_Backup_Precheck_20261022_v0.1.md>) |
 | S1-B ACL Stage 1検証済み引継ぎ履歴（2026-10-23時点・Stage 2未承認／未実施） | [Context Handoff: Stage 1 Verified](<../05_handoff/history/Context_Handoff_S1B_ACL_Stage1_Verified_20261023.md>) |
