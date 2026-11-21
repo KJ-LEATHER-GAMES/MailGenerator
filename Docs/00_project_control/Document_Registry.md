@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.88
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.89
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.88 |
+| バージョン | v2.89 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.89 更新概要
+
+- 添付P3-04 XU-01 A案ZIPの13件を用途別に登録。新規11件を保存し、Designer制約メモとGate StubはSHA-256一致の既存P3-04ファイル2件を再利用する。Form・コード補助・Controller・案内・Manifest・未適用Patch2種はP3実装文書配下、Runner・チェッカーはtests、レビューはreviews、静的JSONはtechnical_validationへ配置。原本バイト・CP932/CRLFを保持し、既存候補は上書きしない。
+- A案設計承認は添付内の申告として記録し、今回の実装採用・XU-01 Closure・実行承認とは扱わない。WORKING CANDIDATE / REVIEW_REQUIRED、実機未検証、27ケース未実行を保持。JSONは46/46 PASSだがレビュー§7と英文末尾に43件表記が混在するため、原文は修正せず不一致を残す。元ZIPの参照名・チェッカーの外部配置依存・各配置先は第5節で対応付ける。Patch適用・チェッカー実行・VBA Import/Compile/表示・次工程作業は行わず、既存src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.88 更新概要
 
@@ -1604,6 +1609,19 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-04 XU-01 A パッケージ案内（提示記録・REVIEW_REQUIRED）（元ZIP内: `00_README.md`） | [P3-04_XU01_A_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_README_v0.1.md>) |
+| P3-04 XU-01 A Designer制約（既存P3-04版と同一・再利用）（元ZIP内: `Docs/Designer_Setup_and_Import_Limitations_v0.1.md`） | [P3-04_Designer_Setup_and_Import_Limitations_v0.1.md](<reviews/P3-04_Designer_Setup_and_Import_Limitations_v0.1.md>) |
+| P3-04 XU-01 A CP932/CRLF適用用Patch候補（未適用）（元ZIP内: `Docs/P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch`） | [P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch>) |
+| P3-04 XU-01 A 設計・実装候補レビュー（提示記録・実装未承認）（元ZIP内: `Docs/P3-04_XU01_A_Design_Implementation_Review_v0.1.md`） | [P3-04_XU01_A_Design_Implementation_Review_v0.1.md](<reviews/P3-04_XU01_A_Design_Implementation_Review_v0.1.md>) |
+| P3-04 XU-01 A UTF-8正規化レビュー差分（元CP932へ直接適用不可）（元ZIP内: `Docs/P3-04_XU01_A_UTF8_Normalized_Review_Diff_v0.1.patch`） | [P3-04_XU01_A_UTF8_Normalized_Review_Diff_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_UTF8_Normalized_Review_Diff_v0.1.patch>) |
+| P3-04 XU-01 A 静的結果（提示46/46・VBA実行証拠ではない）（元ZIP内: `Docs/STATIC_REVIEW_RESULT_XU01_A.json`） | [P3-04_XU01_A_STATIC_REVIEW_RESULT_v0.1.json](<../03_verification/technical_validation/P3-04_XU01_A_STATIC_REVIEW_RESULT_v0.1.json>) |
+| P3-04 XU-01 A 静的チェッカー原本（元配置依存・今回未実行）（元ZIP内: `Docs/STATIC_REVIEW_XU01_A.py`） | [P3-04_XU01_A_STATIC_REVIEW_v0.1.py](<../../tests/vba/P3_Configuration_UserForm/P3-04_XU01_A_STATIC_REVIEW_v0.1.py>) |
+| P3-04 XU-01 A 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-04_XU01_A_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_SOURCE_MANIFEST_v0.1.md>) |
+| P3-04 XU-01 A Formコード補助（旧版と別保存）（元ZIP内: `src/frmMailGenerator_CodeOnly_XU01_A_v0.1.txt`） | [frmMailGenerator_CodeOnly_XU01_A_v0.1.txt](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_CodeOnly_XU01_A_v0.1.txt>) |
+| P3-04 XU-01 A Form候補（未Import・未Compile・未採用）（元ZIP内: `src/frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm`） | [frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm>) |
+| P3-04 XU-01 A Controller候補（旧版と別保存・未採用）（元ZIP内: `src/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas`） | [modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas>) |
+| P3-04 XU-01 A 隔離テストRunner（27ケース定義・未実行）（元ZIP内: `tests/modP3_04FormXU01ATests_v0.1_CP932.bas`） | [modP3_04FormXU01ATests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04FormXU01ATests_v0.1_CP932.bas>) |
+| P3-04 XU-01 A 隔離テストStub（既存P3-04版と同一・再利用）（元ZIP内: `tests/modP3_04GateStub_v0.1_CP932.bas`） | [modP3_04GateStub_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04GateStub_v0.1_CP932.bas>) |
 | P3横断ソースレビュー（提示記録・採用REVIEW_REQUIRED）（元ZIP内: `P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md`） | [P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md](<reviews/P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md>) |
 | P3横断最小修正Patch候補（未適用）（元ZIP内: `P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch`） | [P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch>) |
 | P3横断静的監査結果（提示記録・17 MATCH／4 ISSUE／1 NOT_VERIFIED）（元ZIP内: `P3_Cross_Unit_Static_Audit_Result_20261121.json`） | [P3_Cross_Unit_Static_Audit_Result_20261121.json](<../03_verification/technical_validation/P3_Cross_Unit_Static_Audit_Result_20261121.json>) |

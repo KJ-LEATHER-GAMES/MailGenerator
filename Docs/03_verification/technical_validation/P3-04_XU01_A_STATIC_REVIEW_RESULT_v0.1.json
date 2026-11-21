@@ -1,0 +1,316 @@
+{
+  "review": "P3-04 XU-01 A source-only static verification",
+  "date": "2026-11-21",
+  "approved_decision": "XU-01 Option A only",
+  "run_context": "Python static checks and disposable git patch application, no VBE/VBA/Outlook execution",
+  "total": 46,
+  "pass_count": 46,
+  "fail_count": 0,
+  "cases": [
+    "FAIL",
+    "NIL_RESULT",
+    "NO_ROWS",
+    "NO_GROUPS",
+    "GROUP_WRONG_TYPE",
+    "MIXED",
+    "TAG_BINDING",
+    "LABELS",
+    "REQUIRED_MARKERS",
+    "OPTION_ORDER",
+    "SELECT_STYLE",
+    "TEXT_SINGLE_LINE",
+    "EMPTY",
+    "BAD_TYPE",
+    "BAD_DESCRIPTION",
+    "MISSING_GROUP",
+    "BAD_OPTION_VALUE",
+    "REPEATED_FORM",
+    "BUILD_TWICE",
+    "DIRECT_BUILD_SUCCESS",
+    "DIRECT_BUILD_FAILURE",
+    "DIRECT_BUILD_NIL_RESULT",
+    "DIRECT_BUILD_BAD_ROWS",
+    "DIRECT_BUILD_BAD_OPTION",
+    "DIRECT_SHOW_UNBUILT",
+    "DIRECT_SHOW_AFTER_FAILURE",
+    "DIRECT_SHOW_AFTER_SUCCESS"
+  ],
+  "checks": [
+    {
+      "id": "ST-01",
+      "name": "CP932 .frm is readable",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-02",
+      "name": "Original fixed shell retained",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-03",
+      "name": "Form has a single no-argument public builder",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-04",
+      "name": "Old public carrier signature eliminated",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-05",
+      "name": "Renderer is private and accepts carrier",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-06",
+      "name": "Gate direct call appears only in Form public builder",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-07",
+      "name": "Build validated inputs calls gate before private renderer",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-08",
+      "name": "Gate result Nothing returns fail-closed",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-09",
+      "name": "Gate failure result object is propagated",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-10",
+      "name": "Gate carrier absence and wrong type fail-closed",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-11",
+      "name": "Renderer is private and cannot be called by Controller",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-12",
+      "name": "No direct Gate call in Controller",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-13",
+      "name": "Controller calls public builder exactly once",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-14",
+      "name": "Controller instantiates before delegated gate",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-15",
+      "name": "Controller publishes only after Success",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-16",
+      "name": "Controller unloads Form on build failure",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-17",
+      "name": "Controller Show gated by Build Result",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-18",
+      "name": "Unbuilt direct Show guarded in Activate",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-19",
+      "name": "Display guard does not perform implicit gate or sync",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-20",
+      "name": "mBuilt remains private",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-21",
+      "name": "mBuilt becomes True only after constructing controls",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-22",
+      "name": "Control-add exceptions reset readiness",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-23",
+      "name": "Guard against duplicate/reentrant build",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-24",
+      "name": "Gate in-progress marker cleared",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-25",
+      "name": "Input State and mail generation not implemented",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-26",
+      "name": "Control Tag kept",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-27",
+      "name": "Select remains list only",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-28",
+      "name": "Existing result/error class compatible",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-29",
+      "name": "Test-only Stub separates real P3-03",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-30",
+      "name": "All original 19 cases retained",
+      "status": "PASS",
+      "details": "27 unique cases (19 original + 8 new)"
+    },
+    {
+      "id": "ST-31",
+      "name": "Direct unbuilt Show scenario exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-32",
+      "name": "Direct show after failure scenario exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-33",
+      "name": "Direct show after success scenario exists",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-34",
+      "name": "Upstream Result identity test present",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-35",
+      "name": "Rebuild does not rerun Gate",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-36",
+      "name": "No forbidden Production dependencies",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-37",
+      "name": "Patch defines Form + Controller + Test",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-38",
+      "name": "Form Function/Sub block count balanced",
+      "status": "PASS",
+      "details": "Functions 10/10; Subs 2/2"
+    },
+    {
+      "id": "ST-39",
+      "name": "Controller Function/Sub block count balanced",
+      "status": "PASS",
+      "details": "Functions 3/3; Subs 0/0"
+    },
+    {
+      "id": "ST-40",
+      "name": "Runner Function/Sub block count balanced",
+      "status": "PASS",
+      "details": "Functions 3/3; Subs 1/1"
+    },
+    {
+      "id": "ST-41",
+      "name": "git apply --check on exact original snapshots",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-42",
+      "name": "git apply to disposable snapshot",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-43",
+      "name": "Patch result equals generated source files",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-44",
+      "name": "Raw CP932 CRLF patch git apply --check",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-45",
+      "name": "Raw CP932 CRLF patch applies to disposable files",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "ST-46",
+      "name": "Raw patch yields exact expected bytes",
+      "status": "PASS",
+      "details": ""
+    }
+  ]
+}

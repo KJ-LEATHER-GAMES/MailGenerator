@@ -1,0 +1,334 @@
+--- a/src/frmMailGenerator_P3-04_Candidate_v0.1.frm
++++ b/src/frmMailGenerator_P3-04_Candidate_v0.1.frm
+@@ -67,7 +67,7 @@
+ 
+ ' P3-04 WORKING CANDIDATE. Designer export is NOT VBE-import/Compile verified.
+ ' The fixed shell is in the designer; only InputArea children are dynamic.
+-' Never call this before P3-03 PrepareUserFormLaunch succeeds.
++' The public builder invokes P3-03 Gate itself; never bypass it.
+ ' Input State, Clear, Mail generation and input validation are NOT implemented.
+ 
+ Private Const ERR_CONFIG As String = "ConfigurationError"
+@@ -76,8 +76,80 @@
+ Private Const INPUT_LEFT As Single = 12!
+ Private Const INPUT_WIDTH As Single = 485!
+ Private mBuilt As Boolean
+-
+-Public Function BuildValidatedInputs( _
++Private mBuildInProgress As Boolean
++
++' IMPORTANT: .Show is an intrinsic UserForm method and cannot be overridden.
++' Immediately hide a form that has not completed the validated builder.
++' An instant of native painting cannot be excluded without a real VBE/UI test.
++Private Sub UserForm_Activate()
++    If Not mBuilt Then Me.Hide
++End Sub
++
++' The ONLY public input-building entry. Caller-supplied carriers are forbidden.
++' Every unbuilt instance must acquire its own current validated snapshot.
++Public Function BuildValidatedInputs() As COperationResult
++    Dim sortedActiveDefinitions As Collection
++    Dim activeOptionsByGroup As Object
++    Dim gateResult As COperationResult
++    Dim buildResult As COperationResult
++
++    On Error GoTo UnexpectedFailure
++
++    If mBuilt Then
++        Set BuildValidatedInputs = CreateFailureResult( _
++            ERR_UNEXPECTED, "This form was already built.", "frmMailGenerator")
++        Exit Function
++    End If
++    If mBuildInProgress Then
++        Set BuildValidatedInputs = BadCarrier("frmMailGenerator.BuildInProgress")
++        Exit Function
++    End If
++
++    mBuildInProgress = True
++    Set gateResult = PrepareUserFormLaunch( _
++        sortedActiveDefinitions, activeOptionsByGroup)
++
++    If gateResult Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("UserFormLaunchGate.Result")
++        GoTo CleanExit
++    End If
++    If Not gateResult.Success Then
++        ' Keep original upstream Result/ErrorInfo identity and precedence.
++        Set BuildValidatedInputs = gateResult
++        GoTo CleanExit
++    End If
++    If sortedActiveDefinitions Is Nothing Or activeOptionsByGroup Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("UserFormLaunchGate.Outputs")
++        GoTo CleanExit
++    End If
++    If TypeName(activeOptionsByGroup) <> "Dictionary" Then
++        Set BuildValidatedInputs = BadCarrier("ActiveOptionsByGroup")
++        GoTo CleanExit
++    End If
++
++    ' Private renderer accepts only carriers received in this gate invocation.
++    Set buildResult = BuildInputsFromGate( _
++        sortedActiveDefinitions, activeOptionsByGroup)
++    If buildResult Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("frmMailGenerator.RenderResult")
++    Else
++        Set BuildValidatedInputs = buildResult
++    End If
++
++CleanExit:
++    mBuildInProgress = False
++    Exit Function
++
++UnexpectedFailure:
++    ' Never leave a partially rendered form eligible for display.
++    RemoveDynamicControls
++    mBuilt = False
++    Set BuildValidatedInputs = BadCarrier("frmMailGenerator.BuildValidatedInputs")
++    Resume CleanExit
++End Function
++
++' Not callable from the rest of the VBA project.
++Private Function BuildInputsFromGate( _
+     ByVal sortedActiveDefinitions As Collection, _
+     ByVal activeOptionsByGroup As Object _
+ ) As COperationResult
+@@ -88,16 +160,16 @@
+ 
+     On Error GoTo UnexpectedFailure
+     If mBuilt Then
+-        Set BuildValidatedInputs = CreateFailureResult( _
++        Set BuildInputsFromGate = CreateFailureResult( _
+             ERR_UNEXPECTED, "This form was already built.", "frmMailGenerator")
+         Exit Function
+     End If
+     If sortedActiveDefinitions Is Nothing Or activeOptionsByGroup Is Nothing Then
+-        Set BuildValidatedInputs = BadCarrier("UserForm.InputSnapshot")
++        Set BuildInputsFromGate = BadCarrier("UserForm.InputSnapshot")
+         Exit Function
+     End If
+     If TypeName(activeOptionsByGroup) <> "Dictionary" Then
+-        Set BuildValidatedInputs = BadCarrier("ActiveOptionsByGroup")
++        Set BuildInputsFromGate = BadCarrier("ActiveOptionsByGroup")
+         Exit Function
+     End If
+ 
+@@ -109,7 +181,7 @@
+         If TypeName(item) <> "Dictionary" Then GoTo InvalidRow
+         Set stepResult = ValidateRenderableRow(item, activeOptionsByGroup)
+         If Not stepResult.Success Then
+-            Set BuildValidatedInputs = stepResult
++            Set BuildInputsFromGate = stepResult
+             Exit Function
+         End If
+     Next itemValue
+@@ -127,7 +199,7 @@
+         Set stepResult = AppendInputRow(item, activeOptionsByGroup, itemIndex)
+         If Not stepResult.Success Then
+             RemoveDynamicControls
+-            Set BuildValidatedInputs = stepResult
++            Set BuildInputsFromGate = stepResult
+             Exit Function
+         End If
+     Next itemValue
+@@ -139,16 +211,16 @@
+     End If
+ 
+     mBuilt = True
+-    Set BuildValidatedInputs = CreateSuccessResult()
++    Set BuildInputsFromGate = CreateSuccessResult()
+     Exit Function
+ 
+ InvalidRow:
+-    Set BuildValidatedInputs = BadCarrier("SortedActiveDefinitions.Row")
++    Set BuildInputsFromGate = BadCarrier("SortedActiveDefinitions.Row")
+     Exit Function
+ UnexpectedFailure:
+     RemoveDynamicControls
+     mBuilt = False
+-    Set BuildValidatedInputs = BadCarrier("frmMailGenerator.BuildValidatedInputs")
++    Set BuildInputsFromGate = BadCarrier("frmMailGenerator.BuildInputsFromGate")
+ End Function
+ 
+ Private Function ValidateRenderableRow( _
+--- a/src/modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas
++++ b/src/modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas
+@@ -2,43 +2,22 @@
+ Option Explicit
+ 
+ ' P3-04 WORKING CANDIDATE. Do not overwrite P2-05 modUiController.
+-' Only the P3-03 successful Gate may produce a form instance.
++' The Form public builder enforces P3-03 Gate on every new instance.
+ ' UI errors remain a COperationResult for the future caller to present.
+ Private Const ERR_UNEXPECTED As String = "UnexpectedError"
+ 
+ Public Function BuildMailGeneratorForm( _
+     ByRef candidateForm As frmMailGenerator _
+ ) As COperationResult
+-    Dim sortedDefinitions As Collection
+-    Dim optionGroups As Object
+     Dim stepResult As COperationResult
+     Dim localForm As frmMailGenerator
+ 
+     Set candidateForm = Nothing
+     On Error GoTo UnexpectedFailure
+ 
+-    Set stepResult = PrepareUserFormLaunch(sortedDefinitions, optionGroups)
+-    If stepResult Is Nothing Then
+-        Set BuildMailGeneratorForm = MissingCarrier("UserFormLaunchGate.Result")
+-        Exit Function
+-    End If
+-    If Not stepResult.Success Then
+-        ' Preserve upstream Result; do not initialize a UserForm.
+-        Set BuildMailGeneratorForm = stepResult
+-        Exit Function
+-    End If
+-    If sortedDefinitions Is Nothing Or optionGroups Is Nothing Then
+-        Set BuildMailGeneratorForm = MissingCarrier("UserFormLaunchGate.Outputs")
+-        Exit Function
+-    End If
+-    If TypeName(optionGroups) <> "Dictionary" Then
+-        Set BuildMailGeneratorForm = MissingCarrier("ActiveOptionsByGroup")
+-        Exit Function
+-    End If
+-
+-    ' New UserForm is created ONLY AFTER successful Gate and output checks.
++    ' XU-01 approved A: instantiate the shell before Gate; never Show on failure.
+     Set localForm = New frmMailGenerator
+-    Set stepResult = localForm.BuildValidatedInputs(sortedDefinitions, optionGroups)
++    Set stepResult = localForm.BuildValidatedInputs()
+     If stepResult Is Nothing Then
+         Set BuildMailGeneratorForm = MissingCarrier("frmMailGenerator.BuildResult")
+         GoTo BuildFailed
+--- a/tests/modP3_04FormCandidateTests_v0.1_CP932.bas
++++ b/tests/modP3_04FormCandidateTests_v0.1_CP932.bas
+@@ -18,7 +18,11 @@
+         "MIXED", "TAG_BINDING", "LABELS", "REQUIRED_MARKERS", _
+         "OPTION_ORDER", "SELECT_STYLE", "TEXT_SINGLE_LINE", _
+         "EMPTY", "BAD_TYPE", "BAD_DESCRIPTION", "MISSING_GROUP", _
+-        "BAD_OPTION_VALUE", "REPEATED_FORM", "BUILD_TWICE")
++        "BAD_OPTION_VALUE", "REPEATED_FORM", "BUILD_TWICE", _
++        "DIRECT_BUILD_SUCCESS", "DIRECT_BUILD_FAILURE", _
++        "DIRECT_BUILD_NIL_RESULT", "DIRECT_BUILD_BAD_ROWS", _
++        "DIRECT_BUILD_BAD_OPTION", "DIRECT_SHOW_UNBUILT", _
++        "DIRECT_SHOW_AFTER_FAILURE", "DIRECT_SHOW_AFTER_SUCCESS")
+ 
+     For Each key In cases
+         result = CheckCase(CStr(key))
+@@ -39,8 +43,6 @@
+     Dim secondInstance As frmMailGenerator
+     Dim stepResult As COperationResult
+     Dim repeatResult As COperationResult
+-    Dim stubRows As Collection
+-    Dim stubGroups As Object
+     Dim combo As MSForms.ComboBox
+     Dim selector As MSForms.ComboBox
+     Dim txt1 As MSForms.TextBox
+@@ -53,6 +55,15 @@
+              "OPTION_ORDER", "SELECT_STYLE", "TEXT_SINGLE_LINE", _
+              "REPEATED_FORM", "BUILD_TWICE"
+             scenario = "MIXED"
++    End Select
++
++    Select Case key
++        Case "DIRECT_BUILD_SUCCESS", "DIRECT_BUILD_FAILURE", _
++             "DIRECT_BUILD_NIL_RESULT", "DIRECT_BUILD_BAD_ROWS", _
++             "DIRECT_BUILD_BAD_OPTION", "DIRECT_SHOW_UNBUILT", _
++             "DIRECT_SHOW_AFTER_FAILURE", "DIRECT_SHOW_AFTER_SUCCESS"
++            CheckCase = CheckDirectCase(key)
++            Exit Function
+     End Select
+ 
+     ConfigureP304Stub scenario
+@@ -105,10 +116,8 @@
+                     CheckCase = (repeatResult.Success And _
+                         P304GateCalls = 2 And Not secondInstance Is Nothing)
+                 Case "BUILD_TWICE"
+-                    Set stubRows = New Collection
+-                    Set stubGroups = CreateObject("Scripting.Dictionary")
+-                    Set repeatResult = formInstance.BuildValidatedInputs(stubRows, stubGroups)
+-                    CheckCase = (Not repeatResult.Success)
++                    Set repeatResult = formInstance.BuildValidatedInputs()
++                    CheckCase = (Not repeatResult.Success And P304GateCalls = 1)
+             End Select
+     End Select
+ 
+@@ -131,3 +140,79 @@
+ ) As MSForms.Control
+     Set GetInput = formInstance.Controls("fraInputArea").Controls(controlName)
+ End Function
++
++' XU-01: exercise direct entry points (NOT just the UI Controller).
++Private Function CheckDirectCase(ByVal key As String) As Boolean
++    Dim frm As frmMailGenerator
++    Dim result As COperationResult
++    Dim scenario As String
++    On Error GoTo TestFailed
++
++    scenario = "MIXED"
++    Select Case key
++        Case "DIRECT_BUILD_FAILURE", "DIRECT_SHOW_AFTER_FAILURE"
++            scenario = "FAIL"
++        Case "DIRECT_BUILD_NIL_RESULT"
++            scenario = "NIL_RESULT"
++        Case "DIRECT_BUILD_BAD_ROWS"
++            scenario = "NO_ROWS"
++        Case "DIRECT_BUILD_BAD_OPTION"
++            scenario = "BAD_OPTION_VALUE"
++    End Select
++
++    ConfigureP304Stub scenario
++    Set frm = New frmMailGenerator
++
++    Select Case key
++        Case "DIRECT_SHOW_UNBUILT"
++            ' .Show without any public builder must never leave UI visible.
++            frm.Show vbModeless
++            CheckDirectCase = (Not frm.Visible And _
++                P304GateCalls = 0 And _
++                frm.Controls("fraInputArea").Controls.Count = 0)
++        Case "DIRECT_BUILD_SUCCESS"
++            Set result = frm.BuildValidatedInputs()
++            If Not result Is Nothing Then
++                CheckDirectCase = (result.Success And _
++                    P304GateCalls = 1 And _
++                    frm.Controls("fraInputArea").Controls.Count = 12)
++            End If
++        Case "DIRECT_BUILD_FAILURE"
++            Set result = frm.BuildValidatedInputs()
++            CheckDirectCase = (result Is P304Failure And _
++                P304GateCalls = 1 And _
++                frm.Controls("fraInputArea").Controls.Count = 0)
++        Case "DIRECT_BUILD_NIL_RESULT", "DIRECT_BUILD_BAD_ROWS", _
++             "DIRECT_BUILD_BAD_OPTION"
++            Set result = frm.BuildValidatedInputs()
++            If Not result Is Nothing Then
++                CheckDirectCase = (Not result.Success And _
++                    P304GateCalls = 1 And _
++                    frm.Controls("fraInputArea").Controls.Count = 0)
++            End If
++        Case "DIRECT_SHOW_AFTER_FAILURE"
++            Set result = frm.BuildValidatedInputs()
++            If result Is P304Failure Then
++                frm.Show vbModeless
++                CheckDirectCase = (Not frm.Visible And P304GateCalls = 1)
++            End If
++        Case "DIRECT_SHOW_AFTER_SUCCESS"
++            Set result = frm.BuildValidatedInputs()
++            If Not result Is Nothing Then
++                If result.Success Then
++                    frm.Show vbModeless
++                    CheckDirectCase = (frm.Visible And P304GateCalls = 1)
++                End If
++            End If
++    End Select
++
++TestExit:
++    On Error Resume Next
++    If Not frm Is Nothing Then Unload frm
++    Set frm = Nothing
++    On Error GoTo 0
++    Exit Function
++TestFailed:
++    CheckDirectCase = False
++    Resume TestExit
++End Function
