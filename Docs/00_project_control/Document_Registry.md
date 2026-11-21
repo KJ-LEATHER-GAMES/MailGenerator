@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.87
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.88
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.87 |
+| バージョン | v2.88 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.88 更新概要
+
+- 添付P3横断ソースレビューZIPの6件を追加。報告書はreviews、静的監査JSONはtechnical_validation、Manifestと未適用PatchはP3実装文書配下、修正済み候補2件は専用のP3_Cross_Unit_Minimal_Fixes_Candidate_v0.1サブフォルダーへ保存し、原本バイトとCP932/CRLFを保持する。既存P3-01～04候補は上書きしない。
+- REVIEW COMPLETED WITH FINDINGSとProduction採用REVIEW_REQUIRED、17 MATCH／4 ISSUE／1 NOT_VERIFIED、XU-01等の未決判断を添付の記録として登録。本文のRegistry v2.37参照、未コミット・Patch照合PASSは原文作成時点の記述。元ZIP内のパスと配置先は第5節で対応付ける。今回Patch適用・候補採用・次工程審査・VBA Import/Compile/実行は行わず、既存src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.87 更新概要
 
@@ -1599,6 +1604,12 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3横断ソースレビュー（提示記録・採用REVIEW_REQUIRED）（元ZIP内: `P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md`） | [P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md](<reviews/P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md>) |
+| P3横断最小修正Patch候補（未適用）（元ZIP内: `P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch`） | [P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch>) |
+| P3横断静的監査結果（提示記録・17 MATCH／4 ISSUE／1 NOT_VERIFIED）（元ZIP内: `P3_Cross_Unit_Static_Audit_Result_20261121.json`） | [P3_Cross_Unit_Static_Audit_Result_20261121.json](<../03_verification/technical_validation/P3_Cross_Unit_Static_Audit_Result_20261121.json>) |
+| P3横断レビュー原本Manifest（元構成のパス・SHA-256）（元ZIP内: `P3_Cross_Unit_Review_Source_Manifest_20261121.md`） | [P3_Cross_Unit_Review_Source_Manifest_20261121.md](<../02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Review_Source_Manifest_20261121.md>) |
+| P3横断P3-01修正候補（別保存・未採用・未Compile）（元ZIP内: `patched_source/p301/src/modConfigurationValidator_P3-01_Candidate_v0.1.bas`） | [modConfigurationValidator_P3-01_Candidate_v0.1.bas](<../02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1/modConfigurationValidator_P3-01_Candidate_v0.1.bas>) |
+| P3横断P3-02修正候補（別保存・未採用・未Compile）（元ZIP内: `patched_source/p302/P3-02_Application_Candidate_Package/src/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas`） | [modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas>) |
 | P3-04 Designer作成・Import制約（未承認・frx未生成）（元ZIP内: `Docs/Designer_Setup_and_Import_Limitations_v0.1.md`） | [P3-04_Designer_Setup_and_Import_Limitations_v0.1.md](<reviews/P3-04_Designer_Setup_and_Import_Limitations_v0.1.md>) |
 | P3-04候補レビュー（提示記録・未承認）（元ZIP内: `Docs/P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md`） | [P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md](<reviews/P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md>) |
 | P3-04原本Manifest（元構成のパス・SHA-256）（元ZIP内: `Docs/SOURCE_MANIFEST.md`） | [P3-04_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_SOURCE_MANIFEST_v0.1.md>) |

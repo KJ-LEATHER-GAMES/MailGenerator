@@ -27,3 +27,10 @@
 /Docs/02_implementation/P3_Configuration_UserForm/modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_04FormCandidateTests_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_04GateStub_v0.1_CP932.bas -text whitespace=cr-at-eol
+/Docs/00_project_control/reviews/P3-01_to_P3-04_Cross_Unit_Source_Review_v0.1_20261121.md -text whitespace=-blank-at-eol
+# Preserve original patch context spaces and its terminal blank line.
+/Docs/02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1.patch -text whitespace=-blank-at-eol,-blank-at-eof
+/Docs/03_verification/technical_validation/P3_Cross_Unit_Static_Audit_Result_20261121.json -text
+/Docs/02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Review_Source_Manifest_20261121.md -text
+/Docs/02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1/modConfigurationValidator_P3-01_Candidate_v0.1.bas -text whitespace=cr-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3_Cross_Unit_Minimal_Fixes_Candidate_v0.1/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol

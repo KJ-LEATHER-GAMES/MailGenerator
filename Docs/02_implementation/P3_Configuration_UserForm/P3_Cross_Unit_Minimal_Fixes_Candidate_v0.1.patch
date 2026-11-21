@@ -1,0 +1,57 @@
+--- a/p301/src/modConfigurationValidator_P3-01_Candidate_v0.1.bas
++++ b/p301/src/modConfigurationValidator_P3-01_Candidate_v0.1.bas
+@@ -523,13 +523,23 @@
+     End Select
+ End Function
+ 
+ Private Function IsValidSortOrder(ByVal rawValue As Variant) As Boolean
++    Dim sortKey As Double
++
++    On Error GoTo InvalidValue
+     If IsError(rawValue) Or IsNull(rawValue) Or IsEmpty(rawValue) Then Exit Function
+     If IsObject(rawValue) Or IsArray(rawValue) Then Exit Function
+     If VarType(rawValue) = vbBoolean Then Exit Function
+     If Len(Trim$(CStr(rawValue))) = 0 Then Exit Function
+-    IsValidSortOrder = IsNumeric(rawValue)
++    If Not IsNumeric(rawValue) Then Exit Function
++
++    ' Match the P3-03 sortable numeric domain; prevent late CDbl failures.
++    sortKey = CDbl(rawValue)
++    IsValidSortOrder = True
++    Exit Function
++InvalidValue:
++    IsValidSortOrder = False
+ End Function
+ 
+ Private Function IsApprovedDateFormat(ByVal rawValue As Variant) As Boolean
+     Dim fmt As String
+--- a/p302/P3-02_Application_Candidate_Package/src/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas
++++ b/p302/P3-02_Application_Candidate_Package/src/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas
+@@ -163,21 +163,27 @@
+                 Set terminalResult = CreateFailureResult( _
+                     ERROR_UNEXPECTED, _
+                     "Scan MailItem cleanup raised an unexpected error.", _
+                     "MailItemCleanup")
++            Else
++                Debug.Print "P3-02 secondary cleanup exception after primary failure."
+             End If
+         ElseIf cleanupResult Is Nothing Then
+             If terminalResult Is Nothing Then
+                 Set terminalResult = MissingOutput("MailItemCleanup")
+             ElseIf terminalResult.Success Then
+                 Set terminalResult = MissingOutput("MailItemCleanup")
++            Else
++                Debug.Print "P3-02 secondary cleanup returned no result."
+             End If
+         ElseIf Not cleanupResult.Success Then
+             ' Keep the first failure if scan failed; no error aggregation here.
+             If terminalResult Is Nothing Then
+                 Set terminalResult = cleanupResult
+             ElseIf terminalResult.Success Then
+                 Set terminalResult = cleanupResult
++            Else
++                Debug.Print "P3-02 secondary cleanup failed after primary failure."
+             End If
+         End If
+     End If
+ 
