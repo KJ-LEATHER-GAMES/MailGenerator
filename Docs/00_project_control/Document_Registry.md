@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.93
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.94
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.93 |
+| バージョン | v2.94 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.94 更新概要
+
+- 添付P304/P305 Input State最小統合Candidate ZIPの14件を用途別に登録。新規12件を保存し、Input State本体とXU-02回帰RunnerはSHA-256一致の既存2件を再利用する。Form・Controller・案内・Manifest・正規化差分はP3実装文書配下、レビューはreviews、静的JSONはtechnical_validation、テストガイドと正常系/障害注入の各Fixtureはtests内の専用サブフォルダーへ分離して保存。原本バイト・CP932/CRLFを保持し、元ZIPの名称と各配置先を第5節で対応付ける。
+- WORKING CANDIDATE / NOT APPROVED FOR PRODUCTION、実機未検証・テスト実行0件を保持。接続設計承認・静的112/112 PASS等は添付内の記録であり、今回の承認・採用・独立レビュー・Runtime検証とは扱わない。テスト内訳は21＋9＋35＝65件だがガイドには計63件とあり、原文を修正せず不一致を記録する。既存候補・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更せず、Patch適用・Import・Compile・Form表示・テスト・後続工程は実施しない。
 
 ### v2.93 更新概要
 
@@ -1629,6 +1634,20 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P304/P305統合 案内（提示記録・未採用）（元ZIP内: `00_README.md`） | [P304_P305_Integrated_Input_State_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_README_v0.1.md>) |
+| P304/P305統合 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P304_P305_Integrated_Input_State_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_SOURCE_MANIFEST_v0.1.md>) |
+| P304/P305統合 正規化レビュー差分（CP932原本へ直接適用禁止）（元ZIP内: `diffs/XU02_to_Input_State_Integrated_UTF8.patch`） | [P304_P305_XU02_to_Input_State_Integrated_UTF8_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P304_P305_XU02_to_Input_State_Integrated_UTF8_v0.1.patch>) |
+| P304/P305統合 ソースレビュー（提示記録・REVIEW_REQUIRED）（元ZIP内: `docs/P304_P305_Integrated_Source_Review_v0.1.md`） | [P304_P305_Integrated_Source_Review_v0.1.md](<reviews/P304_P305_Integrated_Source_Review_v0.1.md>) |
+| P304/P305統合 隔離テストガイド（正常系/障害注入は別Workbook・未実行）（元ZIP内: `docs/P304_P305_Integration_Test_Guide_v0.1.md`） | [P304_P305_Integration_Test_Guide_v0.1.md](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/P304_P305_Integration_Test_Guide_v0.1.md>) |
+| P304/P305統合 Form候補（旧版と別保存・未Import・未Compile）（元ZIP内: `src/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm`） | [frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm>) |
+| P304/P305統合 Input State参照（既存P3-05と同一・再利用）（元ZIP内: `src/modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas`） | [modInputState_P3-05_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modInputState_P3-05_Candidate_v0.1_CP932.bas>) |
+| P304/P305統合 Controller候補（旧版と別保存・未採用）（元ZIP内: `src/modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas`） | [modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas>) |
+| P304/P305統合 障害注入Runner（9件定義・未実行）（元ZIP内: `tests/fault_injection/modP304P305FaultTests_v0.1_CP932.bas`） | [modP304P305FaultTests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/fault_injection/modP304P305FaultTests_v0.1_CP932.bas>) |
+| P304/P305統合 Input State置換Stub（実P3-05との混合Import禁止）（元ZIP内: `tests/fault_injection/modP305FaultInjectionStub_v0.1_CP932.bas`） | [modP305FaultInjectionStub_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/fault_injection/modP305FaultInjectionStub_v0.1_CP932.bas>) |
+| P304/P305統合 正常系Runner（21件定義・未実行）（元ZIP内: `tests/nominal/modP304P305NominalTests_v0.1_CP932.bas`） | [modP304P305NominalTests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP304P305NominalTests_v0.1_CP932.bas>) |
+| P304/P305統合 Gate Stub（実P3-03との混合Import禁止）（元ZIP内: `tests/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas`） | [modP3_04GateStub_From_XU02_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas>) |
+| P304/P305統合 XU-02回帰Runner参照（既存35件版と同一・再利用）（元ZIP内: `tests/nominal/modP3_04XU02RegressionTests_v0.1_CP932.bas`） | [modP3_04XU02Tests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04XU02Tests_v0.1_CP932.bas>) |
+| P304/P305統合 静的監査JSON（提示112/112・Runtime証拠ではない）（元ZIP内: `verification/P304_P305_Source_Static_Audit_v0.1.json`） | [P304_P305_Source_Static_Audit_v0.1.json](<../03_verification/technical_validation/P304_P305_Source_Static_Audit_v0.1.json>) |
 | P3 XU-02差分/接続v0.2 原本Manifest（元構成のパス・SHA-256）（元ZIP内: `05_SOURCE_MANIFEST.md`） | [P3-04_XU02_Diff_Review_P305_Integration_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_SOURCE_MANIFEST_v0.1.md>) |
 | P3 XU-02差分/接続v0.2 案内（提示記録・未採用）（元ZIP内: `00_README.md`） | [P3-04_XU02_Diff_Review_P305_Integration_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_README_v0.1.md>) |
 | P3 XU-02差分/接続v0.2 接続仕様候補（同ID v0.1保持・NOT APPROVED）（元ZIP内: `02_P304_P305_Input_State_Interface_Spec_Candidate_v0.2.md`） | [P3-04_Input_State_Integration_Design_Candidate_v0.2.md](<../02_implementation/P3_Configuration_UserForm/P3-04_Input_State_Integration_Design_Candidate_v0.2.md>) |

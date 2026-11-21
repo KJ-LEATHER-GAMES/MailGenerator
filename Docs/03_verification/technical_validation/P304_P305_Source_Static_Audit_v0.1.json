@@ -1,0 +1,760 @@
+{
+  "date": "2026-11-21",
+  "baseline": "BL-MVP-004",
+  "scope": "static_source_review_only",
+  "candidate_status": "WORKING_CANDIDATE_NOT_PRODUCTION",
+  "checks_total": 112,
+  "pass": 112,
+  "fail": 0,
+  "tests_defined": {
+    "nominal": [
+      "RESTORE_TEXT",
+      "RESTORE_DATE_RAW",
+      "RESTORE_SELECT_EXACT",
+      "RESTORE_MISSING",
+      "RESTORE_EMPTY",
+      "RESTORE_CASE_KEY",
+      "STALE_SELECT",
+      "SELECT_CASE",
+      "CLOSE_CAPTURE",
+      "CLOSE_EMPTY_SELECT",
+      "PREFLIGHT_BAD_TAG",
+      "PREFLIGHT_DUP_TAG",
+      "CLEAR_BOTH",
+      "CLEAR_SKIP_COMMIT",
+      "CLEAR_REINPUT",
+      "CLEAR_MANUAL_EMPTY",
+      "SINGLE_GATE",
+      "SCALAR_ISOLATED",
+      "GATE_FAILURE",
+      "UNBUILT_NO_SAVE",
+      "STALE_CLOSE_EMPTY"
+    ],
+    "fault_injection": [
+      "RESTORE_GET_FAIL",
+      "RESTORE_GET_NIL",
+      "SAVE_SECOND_FAIL",
+      "SAVE_SECOND_NIL",
+      "SAVE_RETRY_ALL",
+      "CLEAR_FAIL_LOCK",
+      "CLEAR_NIL_LOCK",
+      "CLEAR_RETRY_RECOVER",
+      "NO_DOUBLE_SAVE"
+    ],
+    "xu02_regression": [
+      "FAIL",
+      "NIL_RESULT",
+      "NO_ROWS",
+      "NO_GROUPS",
+      "GROUP_WRONG_TYPE",
+      "MIXED",
+      "TAG_BINDING",
+      "LABELS",
+      "REQUIRED_MARKERS",
+      "OPTION_ORDER",
+      "SELECT_STYLE",
+      "TEXT_SINGLE_LINE",
+      "EMPTY",
+      "BAD_TYPE",
+      "BAD_DESCRIPTION",
+      "MISSING_GROUP",
+      "BAD_OPTION_VALUE",
+      "REPEATED_FORM",
+      "BUILD_TWICE",
+      "DIRECT_BUILD_SUCCESS",
+      "DIRECT_BUILD_FAILURE",
+      "DIRECT_BUILD_NIL_RESULT",
+      "DIRECT_BUILD_BAD_ROWS",
+      "DIRECT_BUILD_BAD_OPTION",
+      "DIRECT_SHOW_UNBUILT",
+      "DIRECT_SHOW_AFTER_FAILURE",
+      "DIRECT_SHOW_AFTER_SUCCESS",
+      "SOURCE_ROW_MUTATION",
+      "SOURCE_OPTION_MUTATION",
+      "SOURCE_CLEAR",
+      "CASE_MISMATCH",
+      "SECOND_ROW_INVALID",
+      "MISSING_REQUIRED",
+      "OPTION_NONOBJECT",
+      "OPTION_ARRAY_VALUE"
+    ]
+  },
+  "tests_executed": 0,
+  "vba_compile": "NOT_VERIFIED",
+  "userform_import": "NOT_VERIFIED",
+  "runtime_event_semantics": "NOT_VERIFIED",
+  "checks": [
+    {
+      "id": "SRC-001",
+      "check": "P3-05 original code byte-for-byte unchanged",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-002",
+      "check": "Form Name preserved",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-003",
+      "check": "Controller Name preserved",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-004",
+      "check": "P3-05 Name preserved",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-005",
+      "check": "Public Form gate builder preserved",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-006",
+      "check": "Gate is called in Form public builder",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-007",
+      "check": "Only one Gate call in Form source",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-008",
+      "check": "Gate before snapshot",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-009",
+      "check": "Snapshot before renderer",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-010",
+      "check": "Renderer before state restore",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-011",
+      "check": "Restore before mBuilt True",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-012",
+      "check": "Snapshot original carriers released before renderer",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-013",
+      "check": "Renderer private",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-014",
+      "check": "Snapshot constructor private",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-015",
+      "check": "Direct Show guard retained",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-016",
+      "check": "Form error control static, no new dynamic errors",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-017",
+      "check": "Clear button enabled after restore",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-018",
+      "check": "Create Mail remains disabled",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-019",
+      "check": "Capture input bindings via Tag",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-020",
+      "check": "Capture schema case-insensitive",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-021",
+      "check": "Capture snapshot duplicate Tag detection",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-022",
+      "check": "Capture schema rejects unknown Tag",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-023",
+      "check": "Capture expected count enforced",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-024",
+      "check": "Capture prior to any SetInputValue",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-025",
+      "check": "Save write starts after preflight success",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-026",
+      "check": "Sequential commit uses approved API",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-027",
+      "check": "Sequential commit Result Nothing guard",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-028",
+      "check": "Sequential commit Failure guard",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-029",
+      "check": "Close Cancel on Save Failure",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-030",
+      "check": "Close Cancel on Preflight Failure",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-031",
+      "check": "No rollback claimed",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-032",
+      "check": "QueryClose event exists",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-033",
+      "check": "Commit succeeded prevents double save",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-034",
+      "check": "Controlled internal Hide only on committed branch",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-035",
+      "check": "Controller checks committed state after Show",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-036",
+      "check": "Controller no Unload in uncommitted branch",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-037",
+      "check": "Controller handles final Unload when committed",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-038",
+      "check": "Restore reads using approved API",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-039",
+      "check": "Restore failure blocks builder",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-040",
+      "check": "Exact active Select value matching",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-041",
+      "check": "Stale Select has no implicit choice",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-042",
+      "check": "Stale value keeps Store untouched during restore",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-043",
+      "check": "Stale warning includes empty-save consequence",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-044",
+      "check": "Clear performs preflight before store clear",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-045",
+      "check": "Clear uses approved ClearInputValues",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-046",
+      "check": "Clear only empties UI after Store success",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-047",
+      "check": "Clear sets explicit flag on full success",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-048",
+      "check": "Clear failure locks exit",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-049",
+      "check": "Explicit clear + empty -> skip Set loop",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-050",
+      "check": "Clear lock can reset on success",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-051",
+      "check": "Do not use unsafely untyped ctl.ListIndex",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-052",
+      "check": "Do not use unsafely untyped ctl.List",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-053",
+      "check": "Typed TextBox and ComboBox objects",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-054",
+      "check": "InputState has three public APIs",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-055",
+      "check": "InputState has no Excel persistence",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-056",
+      "check": "No Gate Stub imported in production src",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-057",
+      "check": "Fault stub separate from real input state",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-058",
+      "check": "Regression tests separately bundled",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-059",
+      "check": "Actual case-only mismatch fixture",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-060",
+      "check": "CP932 decode: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-061",
+      "check": "CRLF without lone LF: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-062",
+      "check": "No source utf8 BOM: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-063",
+      "check": "Function/End Function count: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "5/5"
+    },
+    {
+      "id": "SRC-064",
+      "check": "Sub/End Sub count: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "0/0"
+    },
+    {
+      "id": "SRC-065",
+      "check": "VB_Name metadata: modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-066",
+      "check": "CP932 decode: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-067",
+      "check": "CRLF without lone LF: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-068",
+      "check": "No source utf8 BOM: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-069",
+      "check": "Function/End Function count: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": "13/13"
+    },
+    {
+      "id": "SRC-070",
+      "check": "Sub/End Sub count: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": "5/5"
+    },
+    {
+      "id": "SRC-071",
+      "check": "VB_Name metadata: frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-072",
+      "check": "CP932 decode: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-073",
+      "check": "CRLF without lone LF: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-074",
+      "check": "No source utf8 BOM: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-075",
+      "check": "Function/End Function count: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "id": "SRC-076",
+      "check": "Sub/End Sub count: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "0/0"
+    },
+    {
+      "id": "SRC-077",
+      "check": "VB_Name metadata: modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-078",
+      "check": "CP932 decode: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-079",
+      "check": "CRLF without lone LF: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-080",
+      "check": "No source utf8 BOM: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-081",
+      "check": "Function/End Function count: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "id": "SRC-082",
+      "check": "Sub/End Sub count: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-083",
+      "check": "VB_Name metadata: modP3_04XU02RegressionTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-084",
+      "check": "CP932 decode: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-085",
+      "check": "CRLF without lone LF: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-086",
+      "check": "No source utf8 BOM: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-087",
+      "check": "Function/End Function count: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "id": "SRC-088",
+      "check": "Sub/End Sub count: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-089",
+      "check": "VB_Name metadata: modP304P305NominalTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-090",
+      "check": "CP932 decode: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-091",
+      "check": "CRLF without lone LF: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-092",
+      "check": "No source utf8 BOM: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-093",
+      "check": "Function/End Function count: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "2/2"
+    },
+    {
+      "id": "SRC-094",
+      "check": "Sub/End Sub count: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-095",
+      "check": "VB_Name metadata: modP3_04GateStub_From_XU02_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-096",
+      "check": "CP932 decode: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-097",
+      "check": "CRLF without lone LF: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-098",
+      "check": "No source utf8 BOM: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-099",
+      "check": "Function/End Function count: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-100",
+      "check": "Sub/End Sub count: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-101",
+      "check": "VB_Name metadata: modP304P305FaultTests_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-102",
+      "check": "CP932 decode: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-103",
+      "check": "CRLF without lone LF: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-104",
+      "check": "No source utf8 BOM: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-105",
+      "check": "Function/End Function count: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "id": "SRC-106",
+      "check": "Sub/End Sub count: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": "1/1"
+    },
+    {
+      "id": "SRC-107",
+      "check": "VB_Name metadata: modP305FaultInjectionStub_v0.1_CP932.bas",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-108",
+      "check": "21 nominal test IDs defined",
+      "result": "PASS",
+      "detail": "21"
+    },
+    {
+      "id": "SRC-109",
+      "check": "9 fault injection test IDs defined",
+      "result": "PASS",
+      "detail": "9"
+    },
+    {
+      "id": "SRC-110",
+      "check": "35 regression IDs retained",
+      "result": "PASS",
+      "detail": "35"
+    },
+    {
+      "id": "SRC-111",
+      "check": "No repeated nominal test IDs",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "SRC-112",
+      "check": "No repeated fault test IDs",
+      "result": "PASS",
+      "detail": ""
+    }
+  ]
+}

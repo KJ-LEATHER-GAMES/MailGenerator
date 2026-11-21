@@ -1,0 +1,476 @@
+--- a/frmMailGenerator-XU02.frm
++++ b/frmMailGenerator-Integrated.frm
+@@ -1,7 +1,7 @@
+ VERSION 5.00
+ Begin VB.UserForm frmMailGenerator
+    Caption         =   "定型メール作成 - P3候補"
+-   ClientHeight    =   7575
++   ClientHeight    =   8580
+    ClientLeft      =   45
+    ClientTop       =   375
+    ClientWidth     =   8715
+@@ -29,13 +29,13 @@
+    End
+    Begin MSForms.Frame fraErrorArea
+       Caption         =   "案内"
+-      Height          =   615
++      Height          =   1545
+       Left            =   180
+       Top             =   6240
+       Width           =   8355
+       Begin MSForms.Label lblErrorText
+-         Caption         =   "開発候補：メール作成・クリア・入力保持は未接続です。"
+-         Height          =   285
++         Caption         =   "入力値を準備しています。"
++         Height          =   1155
+          Left            =   120
+          Top             =   225
+          Width           =   7965
+@@ -46,15 +46,15 @@
+       Enabled         =   0   'False
+       Height          =   420
+       Left            =   4470
+-      Top             =   6945
++      Top             =   7980
+       Width           =   1965
+    End
+    Begin MSForms.CommandButton cmdClear
+-      Caption         =   "入力クリア（未実装）"
++      Caption         =   "入力クリア"
+       Enabled         =   0   'False
+       Height          =   420
+       Left            =   6585
+-      Top             =   6945
++      Top             =   7980
+       Width           =   1965
+    End
+ End
+@@ -69,7 +69,8 @@
+ ' The fixed shell is in the designer; only InputArea children are dynamic.
+ ' The public builder invokes P3-03 Gate itself; never bypass it.
+ ' XU-02 A: all Row/Option values are copied before the first Controls.Add.
+-' Input State, Clear, Mail generation and input validation are NOT implemented.
++' P3-05 Input State restore / Clear / QueryClose are integrated candidates.
++' Mail creation and business input validation remain out of scope.
+ 
+ Private Const ERR_CONFIG As String = "ConfigurationError"
+ Private Const ERR_UNEXPECTED As String = "UnexpectedError"
+@@ -78,6 +79,10 @@
+ Private Const INPUT_WIDTH As Single = 485!
+ Private mBuilt As Boolean
+ Private mBuildInProgress As Boolean
++Private mInputSchema As Object                ' Fresh scalars only; not Gate carriers
++Private mCommitSucceeded As Boolean
++Private mExplicitClearSucceeded As Boolean
++Private mClearFailureLock As Boolean
+ 
+ ' IMPORTANT: .Show is an intrinsic UserForm method and cannot be overridden.
+ ' Immediately hide a form that has not completed the validated builder.
+@@ -95,6 +100,7 @@
+     Dim buildResult As COperationResult
+     Dim snapshotResult As COperationResult
+     Dim displaySnapshot As Collection
++    Dim restoreResult As COperationResult
+ 
+     On Error GoTo UnexpectedFailure
+ 
+@@ -155,9 +161,34 @@
+     Set buildResult = BuildInputsFromSnapshot(displaySnapshot)
+     If buildResult Is Nothing Then
+         Set BuildValidatedInputs = BadCarrier("frmMailGenerator.RenderResult")
+-    Else
++        GoTo CleanFailedBuild
++    End If
++    If Not buildResult.Success Then
+         Set BuildValidatedInputs = buildResult
+-    End If
++        GoTo CleanFailedBuild
++    End If
++
++    ' A new form is not displayable until every state lookup has succeeded.
++    Set restoreResult = RestoreInputState()
++    If restoreResult Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("frmMailGenerator.RestoreResult")
++        GoTo CleanFailedBuild
++    End If
++    If Not restoreResult.Success Then
++        Set BuildValidatedInputs = restoreResult
++        GoTo CleanFailedBuild
++    End If
++
++    Me.cmdClear.Enabled = True
++    mBuilt = True
++    Set BuildValidatedInputs = CreateSuccessResult()
++    GoTo CleanExit
++
++CleanFailedBuild:
++    RemoveDynamicControls
++    Set mInputSchema = Nothing
++    Me.cmdClear.Enabled = False
++    mBuilt = False
+ 
+ CleanExit:
+     mBuildInProgress = False
+@@ -166,6 +197,8 @@
+ UnexpectedFailure:
+     ' Never leave a partially rendered form eligible for display.
+     RemoveDynamicControls
++    Set mInputSchema = Nothing
++    Me.cmdClear.Enabled = False
+     mBuilt = False
+     Set BuildValidatedInputs = BadCarrier("frmMailGenerator.BuildValidatedInputs")
+     Resume CleanExit
+@@ -285,6 +318,8 @@
+     Dim snapshotRow As Object
+     Dim itemIndex As Long
+     Dim stepResult As COperationResult
++    Dim schema As Object
++    Dim schemaResult As COperationResult
+ 
+     On Error GoTo UnexpectedFailure
+     If mBuilt Then
+@@ -296,6 +331,18 @@
+         Set BuildInputsFromSnapshot = BadCarrier("UserForm.DisplaySnapshot")
+         Exit Function
+     End If
++
++    ' Preflight the entire binding schema before adding any controls.
++    Set schemaResult = CreateInputSchema(displaySnapshot, schema)
++    If schemaResult Is Nothing Then
++        Set BuildInputsFromSnapshot = BadCarrier("UserForm.BindingSchemaResult")
++        Exit Function
++    End If
++    If Not schemaResult.Success Then
++        Set BuildInputsFromSnapshot = schemaResult
++        Exit Function
++    End If
++    Set mInputSchema = schema
+ 
+     Me.cmdCreateMail.Enabled = False
+     Me.cmdClear.Enabled = False
+@@ -311,6 +358,7 @@
+         If stepResult Is Nothing Then GoTo UnexpectedFailure
+         If Not stepResult.Success Then
+             RemoveDynamicControls
++            Set mInputSchema = Nothing
+             Set BuildInputsFromSnapshot = stepResult
+             Exit Function
+         End If
+@@ -322,11 +370,12 @@
+         Me.fraInputArea.ScrollHeight = Me.fraInputArea.Height
+     End If
+ 
+-    mBuilt = True
++    ' mBuilt is set only after RestoreInputState succeeds in the public builder.
+     Set BuildInputsFromSnapshot = CreateSuccessResult()
+     Exit Function
+ UnexpectedFailure:
+     RemoveDynamicControls
++    Set mInputSchema = Nothing
+     mBuilt = False
+     Set BuildInputsFromSnapshot = BadCarrier("frmMailGenerator.BuildInputsFromSnapshot")
+ End Function
+@@ -430,6 +479,283 @@
+ UnexpectedFailure:
+     Set AppendInputRow = BadCarrier("frmMailGenerator.ControlBuild")
+ End Function
++
++
++' Form-visible read-only state: Controller may report success only if QueryClose
++' has saved (or applied explicit-Clear no-save) and ended the modal display.
++Public Property Get InputCommitSucceeded() As Boolean
++    InputCommitSucceeded = mCommitSucceeded
++End Property
++
++' A caller is not allowed to use .Hide directly. QueryClose is the single
++' supported exit path; this *internal* Hide keeps the committed flag alive
++' until the Controller checks it and performs the final Unload.
++Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
++    Dim captured As Object
++    Dim allEmpty As Boolean
++    Dim stepResult As COperationResult
++    Dim k As Variant
++
++    On Error GoTo UnexpectedFailure
++    If Not mBuilt Then Exit Sub
++    If mCommitSucceeded Then Exit Sub   ' Controller's final Unload: no double save
++
++    If mClearFailureLock Then
++        Cancel = True
++        ReportStatus "入力クリアで不整合が発生しました。再度クリアが成功するまで終了できません。"
++        Exit Sub
++    End If
++
++    Set stepResult = CaptureCurrentInputs(captured, allEmpty)
++    If stepResult Is Nothing Then GoTo CaptureFailed
++    If Not stepResult.Success Then GoTo CaptureFailed
++
++    If Not (mExplicitClearSucceeded And allEmpty) Then
++        ' Approved D-COMMIT A: sequential writes only after whole-form preflight.
++        ' A later failure MAY leave already written keys changed (no rollback).
++        For Each k In captured.Keys
++            Set stepResult = SetInputValue(CStr(k), CStr(captured(k)))
++            If stepResult Is Nothing Then GoTo SaveFailed
++            If Not stepResult.Success Then GoTo SaveFailed
++        Next k
++    End If
++
++    mCommitSucceeded = True
++    Cancel = True
++    Me.Hide  ' Internal controlled Hide, not an allowed external entry point
++    Exit Sub
++
++CaptureFailed:
++    Cancel = True
++    ReportStatus "入力値の事前検査に失敗しました。保存せず、画面を保持します。"
++    Exit Sub
++SaveFailed:
++    Cancel = True
++    ReportStatus "入力値を保存できません。一部の項目だけ保存済みの可能性があります。終了せず全件を再試行してください。"
++    Exit Sub
++UnexpectedFailure:
++    mCommitSucceeded = False
++    Cancel = True
++    ReportStatus "終了処理でエラーが発生しました。フォームを閉じずに保持します。"
++End Sub
++
++Private Sub cmdClear_Click()
++    Dim captured As Object
++    Dim allEmpty As Boolean
++    Dim stepResult As COperationResult
++    Dim ctl As MSForms.Control
++    Dim inputBox As MSForms.TextBox
++    Dim choiceBox As MSForms.ComboBox
++
++    On Error GoTo ClearFailed
++    If Not mBuilt Or mCommitSucceeded Then Exit Sub
++
++    ' Preflight first. If Store clear fails, visible controls remain unchanged.
++    Set stepResult = CaptureCurrentInputs(captured, allEmpty)
++    If stepResult Is Nothing Then GoTo ClearFailed
++    If Not stepResult.Success Then GoTo ClearFailed
++
++    Set stepResult = ClearInputValues()
++    If stepResult Is Nothing Then GoTo ClearFailed
++    If Not stepResult.Success Then GoTo ClearFailed
++
++    ' Store cleared, but UI clearing is not atomic. Lock closure on any error.
++    mClearFailureLock = True
++    mExplicitClearSucceeded = False
++    For Each ctl In Me.fraInputArea.Controls
++        Select Case TypeName(ctl)
++            Case "TextBox"
++                Set inputBox = ctl
++                inputBox.Value = vbNullString
++            Case "ComboBox"
++                Set choiceBox = ctl
++                choiceBox.ListIndex = -1
++        End Select
++    Next ctl
++
++    mExplicitClearSucceeded = True
++    mClearFailureLock = False
++    ReportStatus "入力値をクリアしました。空欄のまま閉じれば保存辞書も空のままです。"
++    Exit Sub
++
++ClearFailed:
++    mExplicitClearSucceeded = False
++    mClearFailureLock = True
++    ReportStatus "入力クリアが完了しませんでした。Store／画面が不一致の可能性があります。再度クリアしてください。"
++End Sub
++
++' No original P3-03 row, option, or Group object is stored in this schema.
++Private Function CreateInputSchema( _
++    ByVal displaySnapshot As Collection, _
++    ByRef schema As Object _
++) As COperationResult
++    Dim item As Variant
++    Dim row As Object
++    Dim nameText As String
++    Dim typeText As String
++
++    Set schema = Nothing
++    On Error GoTo InvalidSchema
++    Set schema = CreateObject("Scripting.Dictionary")
++    schema.CompareMode = vbTextCompare
++    For Each item In displaySnapshot
++        Set row = item
++        nameText = CStr(row("VariableName"))
++        typeText = CStr(row("Type"))
++        If Len(Trim$(nameText)) = 0 Then GoTo InvalidSchema
++        If schema.Exists(nameText) Then GoTo InvalidSchema
++        schema.Add nameText, typeText
++    Next item
++    Set CreateInputSchema = CreateSuccessResult()
++    Exit Function
++InvalidSchema:
++    Set schema = Nothing
++    Set CreateInputSchema = BadCarrier("frmMailGenerator.InputSchema")
++End Function
++
++' Failure during any lookup prevents form display. Stale Select values are
++' displayed as "not selected" with a warning; the Store is not changed here.
++Private Function RestoreInputState() As COperationResult
++    Dim ctl As MSForms.Control
++    Dim stepResult As COperationResult
++    Dim found As Boolean
++    Dim savedText As String
++    Dim i As Long
++    Dim matched As Boolean
++    Dim issueCount As Long
++    Dim firstIssue As String
++    Dim variableName As String
++    Dim inputBox As MSForms.TextBox
++    Dim choiceBox As MSForms.ComboBox
++
++    On Error GoTo UnexpectedFailure
++    For Each ctl In Me.fraInputArea.Controls
++        If TypeName(ctl) = "TextBox" Or TypeName(ctl) = "ComboBox" Then
++            variableName = CStr(ctl.Tag)
++            Set stepResult = TryGetInputValue(variableName, found, savedText)
++            If stepResult Is Nothing Then GoTo UnexpectedFailure
++            If Not stepResult.Success Then
++                Set RestoreInputState = stepResult
++                Exit Function
++            End If
++
++            If TypeName(ctl) = "TextBox" Then
++                Set inputBox = ctl
++                If found Then
++                    inputBox.Value = savedText
++                Else
++                    inputBox.Value = vbNullString
++                End If
++            Else
++                Set choiceBox = ctl
++                choiceBox.ListIndex = -1
++                If found And Len(savedText) > 0 Then
++                    matched = False
++                    For i = 0 To choiceBox.ListCount - 1
++                        ' D-SELECT-CASE A: only exact active Value is restored.
++                        If StrComp(savedText, CStr(choiceBox.List(i, 0)), vbBinaryCompare) = 0 Then
++                            choiceBox.ListIndex = i
++                            matched = True
++                            Exit For
++                        End If
++                    Next i
++                    If Not matched Then
++                        issueCount = issueCount + 1
++                        If issueCount > 1 Then firstIssue = firstIssue & vbCrLf
++                        firstIssue = firstIssue & variableName & ": 前回の選択値「" & savedText & _
++                            "」は現在無効です。未選択で閉じると空文字で保存されます。"
++                    End If
++                End If
++            End If
++        End If
++    Next ctl
++
++    If issueCount > 0 Then
++        ' Full message is also available via the fixed label's ControlTipText.
++        ReportStatus firstIssue
++    Else
++        ReportStatus "入力内容を確認してください。"
++    End If
++    Set RestoreInputState = CreateSuccessResult()
++    Exit Function
++UnexpectedFailure:
++    Set RestoreInputState = BadCarrier("frmMailGenerator.RestoreInputState")
++End Function
++
++' All inputs are read and validated before the first SetInputValue call.
++' Tag is checked against the fresh, case-insensitive expected scalar schema.
++Private Function CaptureCurrentInputs( _
++    ByRef captured As Object, _
++    ByRef allEmpty As Boolean _
++) As COperationResult
++    Dim ctl As MSForms.Control
++    Dim inputName As String
++    Dim inputValue As String
++    Dim seen As Object
++    Dim expectedType As String
++    Dim selectedIndex As Long
++    Dim rawValue As Variant
++    Dim inputBox As MSForms.TextBox
++    Dim choiceBox As MSForms.ComboBox
++
++    Set captured = Nothing
++    allEmpty = True
++    On Error GoTo InvalidCapture
++    If mInputSchema Is Nothing Then GoTo InvalidCapture
++    Set seen = CreateObject("Scripting.Dictionary")
++    seen.CompareMode = vbTextCompare
++    Set captured = CreateObject("Scripting.Dictionary")
++    captured.CompareMode = vbTextCompare
++
++    For Each ctl In Me.fraInputArea.Controls
++        If TypeName(ctl) = "TextBox" Or TypeName(ctl) = "ComboBox" Then
++            inputName = CStr(ctl.Tag)
++            If Len(Trim$(inputName)) = 0 Then GoTo InvalidCapture
++            If Not mInputSchema.Exists(inputName) Then GoTo InvalidCapture
++            If seen.Exists(inputName) Then GoTo InvalidCapture
++            expectedType = CStr(mInputSchema(inputName))
++
++            If TypeName(ctl) = "TextBox" Then
++                Set inputBox = ctl
++                If expectedType <> "Text" And expectedType <> "Date" Then GoTo InvalidCapture
++                rawValue = inputBox.Value
++                If IsNull(rawValue) Then GoTo InvalidCapture
++                If IsError(rawValue) Then GoTo InvalidCapture
++                inputValue = CStr(rawValue)
++            Else
++                Set choiceBox = ctl
++                If expectedType <> "Select" Then GoTo InvalidCapture
++                If choiceBox.Style <> fmStyleDropDownList Then GoTo InvalidCapture
++                selectedIndex = CLng(choiceBox.ListIndex)
++                If selectedIndex < -1 Or selectedIndex >= choiceBox.ListCount Then GoTo InvalidCapture
++                If selectedIndex = -1 Then
++                    inputValue = vbNullString
++                Else
++                    inputValue = CStr(choiceBox.List(selectedIndex, 0))
++                End If
++            End If
++            seen.Add inputName, True
++            captured.Add inputName, inputValue
++            If Len(inputValue) <> 0 Then allEmpty = False
++        End If
++    Next ctl
++    If seen.Count <> mInputSchema.Count Then GoTo InvalidCapture
++
++    Set CaptureCurrentInputs = CreateSuccessResult()
++    Exit Function
++InvalidCapture:
++    Set captured = Nothing
++    allEmpty = False
++    Set CaptureCurrentInputs = BadCarrier("frmMailGenerator.CaptureInputs")
++End Function
++
++Private Sub ReportStatus(ByVal statusText As String)
++    On Error Resume Next
++    Me.lblErrorText.WordWrap = True
++    Me.lblErrorText.Caption = statusText
++    Me.lblErrorText.ControlTipText = statusText
++    On Error GoTo 0
++End Sub
+ 
+ Private Function TryGetGroup( _
+     ByVal groups As Object, _
+--- a/modP3UserFormController-XU02.bas
++++ b/modP3UserFormController-Integrated.bas
+@@ -63,8 +63,16 @@
+         Exit Function
+     End If
+ 
+-    ' No Input State restore, mail generation, or Clear handlers in P3-04.
++    ' Normal X close: QueryClose commits, internally hides, then returns here.
++    ' Direct external .Hide is forbidden: never accept it as a saved close.
+     newForm.Show vbModal
++    If Not newForm.InputCommitSucceeded Then
++        Set ShowMailGeneratorForm = MissingCarrier("frmMailGenerator.UncommittedHide")
++        ' Do not Unload: that could invoke QueryClose and silently save now.
++        Set newForm = Nothing
++        Exit Function
++    End If
++    ' QueryClose has committed. Final Unload skips the second capture.
+     Unload newForm
+     Set newForm = Nothing
+     Set ShowMailGeneratorForm = CreateSuccessResult()
