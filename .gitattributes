@@ -4,3 +4,9 @@
 /tests/vba/P3_Configuration_UserForm/STATIC_REVIEW.py -text
 /Docs/02_implementation/P3_Configuration_UserForm/modConfigurationValidator_P3-01_Candidate_v0.1.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_01ConfigurationValidatorCandidateTests_v0.1.bas -text whitespace=cr-at-eol
+/Docs/00_project_control/reviews/P3-02_Current_Snapshot_Application_Integration_Candidate_Review_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-02_SOURCE_MANIFEST_v0.1.md -text
+/tests/vba/P3_Configuration_UserForm/P3-02_STATIC_REVIEW_v0.1.py -text
+/Docs/02_implementation/P3_Configuration_UserForm/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP3_02ConfigurationApplicationCandidateTests_v0.1_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP3_02TestStubs_v0.1_CP932.bas -text whitespace=cr-at-eol
