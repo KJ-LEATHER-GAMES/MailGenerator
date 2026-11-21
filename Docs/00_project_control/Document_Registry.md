@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.85
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.86
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.85 |
+| バージョン | v2.86 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.86 更新概要
+
+- 添付ZIPのP3-03 UserForm Launch Gate候補7件を用途別に追加。Production候補は実装文書配下、隔離テストStub・Runner・静的チェッカーはtests配下、レビューはreviews、提示された静的結果はtechnical_validationへ配置。汎用名の補助ファイルにはP3-03を付け、既存P3-01／P3-02と区別して原本バイト・CP932・CRLFを保持する。
+- WORKING CANDIDATE / NOT APPROVED / NOT COMPILED / NOT EXECUTEDとして登録。作成日2026-11-16、静的35/35 PASS・未保存／未コミット記述は添付作成時点の記録であり、今回の独立した機能検証とは扱わない。原文中のManifest・チェッカー・結果名は元ZIP構成を指し、第5節に配置対応を示す。チェッカーは元構成専用で今回未実行。実Form表示・VBA Import・Compile・21ケース実行・P3正式開始は行わず、既存P3-01／P3-02・src・Workbook・Overview・Handoff・Baselineは変更しない。
 
 ### v2.85 更新概要
 
@@ -1589,6 +1594,13 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-03 Launch Gate候補（元ZIP内: `src/modP3UserFormLaunchGate_P3-03_Candidate_v0.1_CP932.bas`／未承認・未Compile） | [CP932 Candidate v0.1](<../02_implementation/P3_Configuration_UserForm/modP3UserFormLaunchGate_P3-03_Candidate_v0.1_CP932.bas>) |
+| P3-03隔離テストStub（元ZIP内: `tests/modP3_03GateTestStub_v0.1_CP932.bas`／P3-02本体との同時Import不可） | [Test Stub v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_03GateTestStub_v0.1_CP932.bas>) |
+| P3-03隔離テストRunner（元ZIP内: `tests/modP3_03LaunchGateCandidateTests_v0.1_CP932.bas`／21ケース定義・未実行） | [VBA Fixture v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_03LaunchGateCandidateTests_v0.1_CP932.bas>) |
+| P3-03候補レビュー（元ZIP内: `Docs/P3-03_UserForm_Launch_Gate_Candidate_Review_v0.1.md`／提示記録） | [Candidate Review v0.1](<reviews/P3-03_UserForm_Launch_Gate_Candidate_Review_v0.1.md>) |
+| P3-03原本Manifest（元ZIP内: `Docs/SOURCE_MANIFEST.md`／依存候補・新規VBAのSHA-256） | [Source Manifest v0.1](<../02_implementation/P3_Configuration_UserForm/P3-03_SOURCE_MANIFEST_v0.1.md>) |
+| P3-03静的チェッカー原本（元ZIP内: `Docs/STATIC_REVIEW.py`／元構成専用・今回未実行） | [Static Review v0.1](<../../tests/vba/P3_Configuration_UserForm/P3-03_STATIC_REVIEW_v0.1.py>) |
+| P3-03静的レビュー結果（元ZIP内: `Docs/STATIC_REVIEW_RESULT.md`／提示された35/35 PASS・VBA実行証拠ではない） | [Static Review Result v0.1](<../03_verification/technical_validation/P3-03_STATIC_REVIEW_RESULT_v0.1.md>) |
 | P3-02 Application候補（元ZIP内: `src/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas`／未承認・未Compile） | [CP932 Candidate v0.1](<../02_implementation/P3_Configuration_UserForm/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas>) |
 | P3-02隔離テストRunner（元ZIP内: `tests/modP3_02ConfigurationApplicationCandidateTests_v0.1_CP932.bas`／23シナリオ定義・未実行） | [VBA Fixture v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_02ConfigurationApplicationCandidateTests_v0.1_CP932.bas>) |
 | P3-02隔離テストStub（元ZIP内: `tests/modP3_02TestStubs_v0.1_CP932.bas`／本番APIと同名・本番混入不可） | [Test Stubs v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_02TestStubs_v0.1_CP932.bas>) |

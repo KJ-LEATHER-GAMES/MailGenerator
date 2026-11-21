@@ -10,3 +10,10 @@
 /Docs/02_implementation/P3_Configuration_UserForm/modConfigurationApplication_P3-02_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_02ConfigurationApplicationCandidateTests_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_02TestStubs_v0.1_CP932.bas -text whitespace=cr-at-eol
+/Docs/00_project_control/reviews/P3-03_UserForm_Launch_Gate_Candidate_Review_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-03_SOURCE_MANIFEST_v0.1.md -text
+/tests/vba/P3_Configuration_UserForm/P3-03_STATIC_REVIEW_v0.1.py -text
+/Docs/03_verification/technical_validation/P3-03_STATIC_REVIEW_RESULT_v0.1.md -text
+/Docs/02_implementation/P3_Configuration_UserForm/modP3UserFormLaunchGate_P3-03_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP3_03GateTestStub_v0.1_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP3_03LaunchGateCandidateTests_v0.1_CP932.bas -text whitespace=cr-at-eol
