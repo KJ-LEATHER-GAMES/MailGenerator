@@ -1,0 +1,353 @@
+--- a/frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm
++++ b/frmMailGenerator_P3-04_XU01_XU02_A_Candidate_v0.1.frm
+@@ -68,6 +68,7 @@
+ ' P3-04 WORKING CANDIDATE. Designer export is NOT VBE-import/Compile verified.
+ ' The fixed shell is in the designer; only InputArea children are dynamic.
+ ' The public builder invokes P3-03 Gate itself; never bypass it.
++' XU-02 A: all Row/Option values are copied before the first Controls.Add.
+ ' Input State, Clear, Mail generation and input validation are NOT implemented.
+ 
+ Private Const ERR_CONFIG As String = "ConfigurationError"
+@@ -92,6 +93,8 @@
+     Dim activeOptionsByGroup As Object
+     Dim gateResult As COperationResult
+     Dim buildResult As COperationResult
++    Dim snapshotResult As COperationResult
++    Dim displaySnapshot As Collection
+ 
+     On Error GoTo UnexpectedFailure
+ 
+@@ -127,9 +130,29 @@
+         GoTo CleanExit
+     End If
+ 
+-    ' Private renderer accepts only carriers received in this gate invocation.
+-    Set buildResult = BuildInputsFromGate( _
+-        sortedActiveDefinitions, activeOptionsByGroup)
++    ' XU-02 A: take an all-row, all-option scalar snapshot BEFORE any Controls.Add.
++    ' No original Row/Option dictionary may be read during rendering.
++    Set snapshotResult = CreateDisplaySnapshot( _
++        sortedActiveDefinitions, activeOptionsByGroup, displaySnapshot)
++
++    ' Release the original Gate carriers before entering the private renderer.
++    Set sortedActiveDefinitions = Nothing
++    Set activeOptionsByGroup = Nothing
++
++    If snapshotResult Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("frmMailGenerator.SnapshotResult")
++        GoTo CleanExit
++    End If
++    If Not snapshotResult.Success Then
++        Set BuildValidatedInputs = snapshotResult
++        GoTo CleanExit
++    End If
++    If displaySnapshot Is Nothing Then
++        Set BuildValidatedInputs = BadCarrier("frmMailGenerator.DisplaySnapshot")
++        GoTo CleanExit
++    End If
++
++    Set buildResult = BuildInputsFromSnapshot(displaySnapshot)
+     If buildResult Is Nothing Then
+         Set BuildValidatedInputs = BadCarrier("frmMailGenerator.RenderResult")
+     Else
+@@ -148,43 +171,131 @@
+     Resume CleanExit
+ End Function
+ 
+-' Not callable from the rest of the VBA project.
+-Private Function BuildInputsFromGate( _
++' XU-02 A: copy every source Row/Option to PRIVATE DISPLAY DATA.
++' Each row is a fresh Dictionary of primitive strings/Boolean; OptionValues is
++' a fresh Collection of strings. No original Collection/Dictionary is stored.
++' This entire operation completes BEFORE the first Controls.Add call.
++Private Function CreateDisplaySnapshot( _
+     ByVal sortedActiveDefinitions As Collection, _
+-    ByVal activeOptionsByGroup As Object _
++    ByVal activeOptionsByGroup As Object, _
++    ByRef displaySnapshot As Collection _
+ ) As COperationResult
++    Dim candidate As Collection
+     Dim itemValue As Variant
+-    Dim item As Object
++    Dim sourceRow As Object
++    Dim snapshotRow As Object
++    Dim optionValues As Collection
++    Dim sourceOptions As Collection
++    Dim optionValue As Variant
++    Dim sourceOption As Object
++    Dim variableName As String
++    Dim displayText As String
++    Dim typeText As String
++    Dim descriptionText As String
++    Dim groupName As String
++    Dim valueText As String
++    Dim requiredFlag As Boolean
++
++    Set displaySnapshot = Nothing
++    On Error GoTo UnexpectedFailure
++    If sortedActiveDefinitions Is Nothing Then GoTo InvalidRow
++    If activeOptionsByGroup Is Nothing Then GoTo InvalidRow
++    If TypeName(activeOptionsByGroup) <> "Dictionary" Then GoTo InvalidRow
++
++    Set candidate = New Collection
++    For Each itemValue In sortedActiveDefinitions
++        If Not IsObject(itemValue) Then GoTo InvalidRow
++        Set sourceRow = itemValue
++        If sourceRow Is Nothing Then GoTo InvalidRow
++        If TypeName(sourceRow) <> "Dictionary" Then GoTo InvalidRow
++
++        If Not ReadNonBlank(sourceRow, "VariableName", variableName) Then GoTo InvalidRow
++        If Not ReadNonBlank(sourceRow, "DisplayName", displayText) Then GoTo InvalidRow
++        If Not ReadNonBlank(sourceRow, "Type", typeText) Then GoTo InvalidRow
++        If Not sourceRow.Exists("Required") Then GoTo InvalidRow
++        If Not TryRequiredFlag(sourceRow("Required"), requiredFlag) Then
++            Set CreateDisplaySnapshot = CreateFailureResult( _
++                ERR_CONFIG, "Required is not a supported value.", variableName & ".Required")
++            Exit Function
++        End If
++        If typeText <> "Text" And typeText <> "Date" And typeText <> "Select" Then
++            Set CreateDisplaySnapshot = CreateFailureResult( _
++                ERR_CONFIG, "Unsupported input Type.", variableName & ".Type")
++            Exit Function
++        End If
++
++        descriptionText = vbNullString
++        If sourceRow.Exists("Description") Then
++            If Not TryOptionalText(sourceRow("Description"), descriptionText) Then GoTo InvalidRow
++        End If
++
++        groupName = vbNullString
++        Set optionValues = New Collection
++        If typeText = "Select" Then
++            If Not ReadNonBlank(sourceRow, "OptionSource", groupName) Then GoTo InvalidRow
++            ' Preserve exact, case-sensitive OptionGroup identity (vbBinaryCompare).
++            If Not TryGetGroup(activeOptionsByGroup, groupName, sourceOptions) Then GoTo InvalidRow
++            If sourceOptions.Count = 0 Then
++                Set CreateDisplaySnapshot = CreateFailureResult( _
++                    ERR_CONFIG, "Select has no active option.", groupName)
++                Exit Function
++            End If
++            For Each optionValue In sourceOptions
++                If Not IsObject(optionValue) Then GoTo InvalidRow
++                Set sourceOption = optionValue
++                If sourceOption Is Nothing Then GoTo InvalidRow
++                If TypeName(sourceOption) <> "Dictionary" Then GoTo InvalidRow
++                If Not sourceOption.Exists("Value") Then GoTo InvalidRow
++                If Not TryScalarText(sourceOption("Value"), valueText) Then GoTo InvalidRow
++                ' Store only the string, never the source Option dictionary.
++                optionValues.Add valueText
++            Next optionValue
++        End If
++
++        Set snapshotRow = CreateObject("Scripting.Dictionary")
++        snapshotRow.CompareMode = vbBinaryCompare
++        snapshotRow.Add "VariableName", variableName
++        snapshotRow.Add "DisplayName", displayText
++        snapshotRow.Add "Type", typeText
++        snapshotRow.Add "Required", requiredFlag
++        snapshotRow.Add "Description", descriptionText
++        snapshotRow.Add "OptionSource", groupName
++        snapshotRow.Add "OptionValues", optionValues
++        candidate.Add snapshotRow
++    Next itemValue
++
++    ' Publish only after the LAST row and LAST Option have been copied.
++    Set displaySnapshot = candidate
++    Set CreateDisplaySnapshot = CreateSuccessResult()
++    Exit Function
++InvalidRow:
++    Set displaySnapshot = Nothing
++    Set CreateDisplaySnapshot = BadCarrier("UserForm.InputSnapshot.Row")
++    Exit Function
++UnexpectedFailure:
++    Set displaySnapshot = Nothing
++    Set CreateDisplaySnapshot = BadCarrier("frmMailGenerator.CreateDisplaySnapshot")
++End Function
++
++' Private renderer: receives ONLY the isolated display snapshot.
++Private Function BuildInputsFromSnapshot( _
++    ByVal displaySnapshot As Collection _
++) As COperationResult
++    Dim snapshotValue As Variant
++    Dim snapshotRow As Object
+     Dim itemIndex As Long
+     Dim stepResult As COperationResult
+ 
+     On Error GoTo UnexpectedFailure
+     If mBuilt Then
+-        Set BuildInputsFromGate = CreateFailureResult( _
++        Set BuildInputsFromSnapshot = CreateFailureResult( _
+             ERR_UNEXPECTED, "This form was already built.", "frmMailGenerator")
+         Exit Function
+     End If
+-    If sortedActiveDefinitions Is Nothing Or activeOptionsByGroup Is Nothing Then
+-        Set BuildInputsFromGate = BadCarrier("UserForm.InputSnapshot")
++    If displaySnapshot Is Nothing Then
++        Set BuildInputsFromSnapshot = BadCarrier("UserForm.DisplaySnapshot")
+         Exit Function
+     End If
+-    If TypeName(activeOptionsByGroup) <> "Dictionary" Then
+-        Set BuildInputsFromGate = BadCarrier("ActiveOptionsByGroup")
+-        Exit Function
+-    End If
+-
+-    ' Preflight every item BEFORE adding any dynamic control.
+-    For Each itemValue In sortedActiveDefinitions
+-        If Not IsObject(itemValue) Then GoTo InvalidRow
+-        Set item = itemValue
+-        If item Is Nothing Then GoTo InvalidRow
+-        If TypeName(item) <> "Dictionary" Then GoTo InvalidRow
+-        Set stepResult = ValidateRenderableRow(item, activeOptionsByGroup)
+-        If Not stepResult.Success Then
+-            Set BuildInputsFromGate = stepResult
+-            Exit Function
+-        End If
+-    Next itemValue
+ 
+     Me.cmdCreateMail.Enabled = False
+     Me.cmdClear.Enabled = False
+@@ -193,16 +304,17 @@
+     Me.fraInputArea.ScrollWidth = Me.fraInputArea.Width - 18!
+ 
+     itemIndex = 0
+-    For Each itemValue In sortedActiveDefinitions
+-        Set item = itemValue
++    For Each snapshotValue In displaySnapshot
++        Set snapshotRow = snapshotValue
+         itemIndex = itemIndex + 1
+-        Set stepResult = AppendInputRow(item, activeOptionsByGroup, itemIndex)
++        Set stepResult = AppendInputRow(snapshotRow, itemIndex)
++        If stepResult Is Nothing Then GoTo UnexpectedFailure
+         If Not stepResult.Success Then
+             RemoveDynamicControls
+-            Set BuildInputsFromGate = stepResult
++            Set BuildInputsFromSnapshot = stepResult
+             Exit Function
+         End If
+-    Next itemValue
++    Next snapshotValue
+ 
+     If (12! + CSng(itemIndex) * ROW_HEIGHT) > Me.fraInputArea.Height Then
+         Me.fraInputArea.ScrollHeight = 20! + CSng(itemIndex) * ROW_HEIGHT
+@@ -211,72 +323,16 @@
+     End If
+ 
+     mBuilt = True
+-    Set BuildInputsFromGate = CreateSuccessResult()
+-    Exit Function
+-
+-InvalidRow:
+-    Set BuildInputsFromGate = BadCarrier("SortedActiveDefinitions.Row")
++    Set BuildInputsFromSnapshot = CreateSuccessResult()
+     Exit Function
+ UnexpectedFailure:
+     RemoveDynamicControls
+     mBuilt = False
+-    Set BuildInputsFromGate = BadCarrier("frmMailGenerator.BuildInputsFromGate")
+-End Function
+-
+-Private Function ValidateRenderableRow( _
+-    ByVal row As Object, _
+-    ByVal optionGroups As Object _
+-) As COperationResult
+-    Dim nameText As String
+-    Dim displayText As String
+-    Dim typeText As String
+-    Dim requiredFlag As Boolean
+-    Dim groupName As String
+-    Dim activeOptions As Collection
+-    Dim optionValue As Variant
+-    Dim optionItem As Object
+-    Dim optionText As String
+-
+-    If Not ReadNonBlank(row, "VariableName", nameText) Then GoTo InvalidRow
+-    If Not ReadNonBlank(row, "DisplayName", displayText) Then GoTo InvalidRow
+-    If Not ReadNonBlank(row, "Type", typeText) Then GoTo InvalidRow
+-    If Not row.Exists("Required") Then GoTo InvalidRow
+-    If Not TryRequiredFlag(row("Required"), requiredFlag) Then
+-        Set ValidateRenderableRow = CreateFailureResult( _
+-            ERR_CONFIG, "Required is not a supported value.", nameText & ".Required")
+-        Exit Function
+-    End If
+-    If typeText <> "Text" And typeText <> "Date" And typeText <> "Select" Then
+-        Set ValidateRenderableRow = CreateFailureResult( _
+-            ERR_CONFIG, "Unsupported input Type.", nameText & ".Type")
+-        Exit Function
+-    End If
+-    If typeText = "Select" Then
+-        If Not ReadNonBlank(row, "OptionSource", groupName) Then GoTo InvalidRow
+-        If Not TryGetGroup(optionGroups, groupName, activeOptions) Then GoTo InvalidRow
+-        If activeOptions.Count = 0 Then
+-            Set ValidateRenderableRow = CreateFailureResult( _
+-                ERR_CONFIG, "Select has no active option.", groupName)
+-            Exit Function
+-        End If
+-        For Each optionValue In activeOptions
+-            If Not IsObject(optionValue) Then GoTo InvalidRow
+-            Set optionItem = optionValue
+-            If optionItem Is Nothing Then GoTo InvalidRow
+-            If TypeName(optionItem) <> "Dictionary" Then GoTo InvalidRow
+-            If Not optionItem.Exists("Value") Then GoTo InvalidRow
+-            If Not TryScalarText(optionItem("Value"), optionText) Then GoTo InvalidRow
+-        Next optionValue
+-    End If
+-    Set ValidateRenderableRow = CreateSuccessResult()
+-    Exit Function
+-InvalidRow:
+-    Set ValidateRenderableRow = BadCarrier("UserForm.InputSnapshot.Row")
++    Set BuildInputsFromSnapshot = BadCarrier("frmMailGenerator.BuildInputsFromSnapshot")
+ End Function
+ 
+ Private Function AppendInputRow( _
+     ByVal row As Object, _
+-    ByVal optionGroups As Object, _
+     ByVal position As Long _
+ ) As COperationResult
+     Dim displayLabel As MSForms.Label
+@@ -286,15 +342,12 @@
+     Dim choiceBox As MSForms.ComboBox
+     Dim optionItems As Collection
+     Dim optionValue As Variant
+-    Dim optionItem As Object
+     Dim suffix As String
+     Dim y As Single
+     Dim typeText As String
+     Dim variableName As String
+     Dim displayText As String
+-    Dim groupName As String
+     Dim hintText As String
+-    Dim valueText As String
+     Dim requiredFlag As Boolean
+ 
+     On Error GoTo UnexpectedFailure
+@@ -341,8 +394,8 @@
+             .Value = vbNullString
+         End With
+     Else
+-        groupName = CStr(row("OptionSource"))
+-        If Not TryGetGroup(optionGroups, groupName, optionItems) Then GoTo UnexpectedFailure
++        ' OptionValues is the private String-only collection, NOT OptionMaster.
++        Set optionItems = row("OptionValues")
+         Set choiceBox = Me.fraInputArea.Controls.Add( _
+             "Forms.ComboBox.1", "cboInput_" & suffix, True)
+         With choiceBox
+@@ -355,17 +408,12 @@
+             .ListIndex = -1
+         End With
+         For Each optionValue In optionItems
+-            Set optionItem = optionValue
+-            If Not TryScalarText(optionItem("Value"), valueText) Then GoTo UnexpectedFailure
+-            choiceBox.AddItem valueText
++            choiceBox.AddItem CStr(optionValue)
+         Next optionValue
+         choiceBox.ListIndex = -1
+     End If
+ 
+-    hintText = vbNullString
+-    If row.Exists("Description") Then
+-        If Not TryOptionalText(row("Description"), hintText) Then GoTo UnexpectedFailure
+-    End If
++    hintText = CStr(row("Description"))
+     Set descriptionLabel = Me.fraInputArea.Controls.Add( _
+         "Forms.Label.1", "lblDescription_" & suffix, True)
+     With descriptionLabel

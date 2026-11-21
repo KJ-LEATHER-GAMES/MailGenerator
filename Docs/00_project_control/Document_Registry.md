@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.91
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.92
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.91 |
+| バージョン | v2.92 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.92 更新概要
+
+- 添付P3-04 XU-02 A Scalar Snapshot最小修正ZIPの12件を用途別に登録。新規11件を保存し、ControllerはSHA-256一致の既存XU-01 A版を再利用する。Form・コード補助・案内・Manifest・未適用レビュー差分はP3実装文書配下、Stub・Runner・チェッカーはtests、レビューはreviews、テスト表は仕様書配下、静的JSONはtechnical_validationへ配置。原本バイトとCP932/CRLFを保持する。
+- WORKING CANDIDATE / NOT APPROVED / NOT APPLIEDとXU-02 Closure REVIEW_REQUIRED、35ケース未実行・Input State未接続を保持。XU-01/XU-02 A案やP3-05 APIの承認記述、静的62/62 PASS、GitHub未変更等は添付作成時点の提示記録であり、今回の承認・独立レビュー・Runtime検証とは扱わない。元ZIP内参照名・チェッカーの外部配置依存と各配置先は第5節に対応付ける。既存候補・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更せず、Patch適用・チェッカー実行・VBA Import/Compile/表示・次工程作業は実施しない。
 
 ### v2.91 更新概要
 
@@ -1619,6 +1624,18 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-04 XU-02 A 案内（提示記録・WORKING CANDIDATE）（元ZIP内: `00_README.md`） | [P3-04_XU02_A_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_A_README_v0.1.md>) |
+| P3-04 XU-02 A 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-04_XU02_A_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_A_SOURCE_MANIFEST_v0.1.md>) |
+| P3-04 XU-02 A 最小修正レビュー（提示記録・Closure未成立）（元ZIP内: `docs/P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md`） | [P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md](<reviews/P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md>) |
+| P3-04 XU-02 A テスト表候補（35件・未実行）（元ZIP内: `docs/P3-04_XU02_A_Test_Matrix_v0.1.md`） | [P3-04_XU02_A_Test_Matrix_v0.1.md](<../01_specifications/P3-04_XU02_A_Test_Matrix_v0.1.md>) |
+| P3-04 XU-02 A 正規化レビュー差分（CP932原本へ直接適用不可）（元ZIP内: `docs/XU02_UTF8_Normalized_Review_Diff_v0.1.patch`） | [P3-04_XU02_A_UTF8_Normalized_Review_Diff_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_A_UTF8_Normalized_Review_Diff_v0.1.patch>) |
+| P3-04 XU-02 A Formコード補助（旧版と別保存）（元ZIP内: `src/frmMailGenerator_CodeOnly_XU01_XU02_A_v0.1.txt`） | [frmMailGenerator_CodeOnly_XU01_XU02_A_v0.1.txt](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_CodeOnly_XU01_XU02_A_v0.1.txt>) |
+| P3-04 XU-02 A Form候補（未採用・未Import・未Compile）（元ZIP内: `src/frmMailGenerator_P3-04_XU01_XU02_A_Candidate_v0.1.frm`） | [frmMailGenerator_P3-04_XU01_XU02_A_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P3-04_XU01_XU02_A_Candidate_v0.1.frm>) |
+| P3-04 XU-02 A Controller参照（既存XU-01 A版と同一・再利用）（元ZIP内: `src/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas`） | [modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas>) |
+| P3-04 XU-02 A 隔離Stub（実P3-03との混合Import禁止）（元ZIP内: `tests/modP3_04GateStub_XU02_v0.1_CP932.bas`） | [modP3_04GateStub_XU02_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04GateStub_XU02_v0.1_CP932.bas>) |
+| P3-04 XU-02 A 隔離Runner（35ケース定義・未実行）（元ZIP内: `tests/modP3_04XU02Tests_v0.1_CP932.bas`） | [modP3_04XU02Tests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04XU02Tests_v0.1_CP932.bas>) |
+| P3-04 XU-02 A 静的監査結果（提示62/62・Runtime証拠ではない）（元ZIP内: `verification/XU02_STATIC_AUDIT.json`） | [P3-04_XU02_A_STATIC_AUDIT_20261121.json](<../03_verification/technical_validation/P3-04_XU02_A_STATIC_AUDIT_20261121.json>) |
+| P3-04 XU-02 A 静的チェッカー原本（元配置依存・今回未実行）（元ZIP内: `verification/static_review_xu02.py`） | [P3-04_XU02_A_static_review_v0.1.py](<../../tests/vba/P3_Configuration_UserForm/P3-04_XU02_A_static_review_v0.1.py>) |
 | P3-05 API/P3-04接続 案内（提示記録・未承認）（元ZIP内: `00_README.md`） | [P3-05_API_Review_P3-04_Integration_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_API_Review_P3-04_Integration_README_v0.1.md>) |
 | P3-05 API/P3-04接続 API/Stringソースレビュー（採用提案・未承認）（元ZIP内: `01_P3-05_API_String_Source_Review_v0.1.md`） | [P3-05_API_String_Source_Review_v0.1.md](<reviews/P3-05_API_String_Source_Review_v0.1.md>) |
 | P3-05 API/P3-04接続 設計候補（XU-02・Capture/Restore/Clear未承認）（元ZIP内: `02_P3-04_Input_State_Integration_Design_Candidate_v0.1.md`） | [P3-04_Input_State_Integration_Design_Candidate_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_Input_State_Integration_Design_Candidate_v0.1.md>) |
