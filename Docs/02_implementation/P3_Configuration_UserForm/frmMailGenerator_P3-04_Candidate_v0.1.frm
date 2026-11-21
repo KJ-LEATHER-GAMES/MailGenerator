@@ -1,0 +1,419 @@
+VERSION 5.00
+Begin VB.UserForm frmMailGenerator
+   Caption         =   "定型メール作成 - P3候補"
+   ClientHeight    =   7575
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   8715
+   StartUpPosition =   1  'CenterOwner
+   Begin MSForms.Label lblHeader
+      Caption         =   "定型メール作成"
+      Height          =   285
+      Left            =   180
+      Top             =   135
+      Width           =   8295
+   End
+   Begin MSForms.Label lblGuidance
+      Caption         =   "必須項目は * で表示します。"
+      Height          =   270
+      Left            =   180
+      Top             =   480
+      Width           =   8295
+   End
+   Begin MSForms.Frame fraInputArea
+      Caption         =   "入力項目"
+      Height          =   5370
+      Left            =   180
+      Top             =   810
+      Width           =   8355
+   End
+   Begin MSForms.Frame fraErrorArea
+      Caption         =   "案内"
+      Height          =   615
+      Left            =   180
+      Top             =   6240
+      Width           =   8355
+      Begin MSForms.Label lblErrorText
+         Caption         =   "開発候補：メール作成・クリア・入力保持は未接続です。"
+         Height          =   285
+         Left            =   120
+         Top             =   225
+         Width           =   7965
+      End
+   End
+   Begin MSForms.CommandButton cmdCreateMail
+      Caption         =   "メール作成（未実装）"
+      Enabled         =   0   'False
+      Height          =   420
+      Left            =   4470
+      Top             =   6945
+      Width           =   1965
+   End
+   Begin MSForms.CommandButton cmdClear
+      Caption         =   "入力クリア（未実装）"
+      Enabled         =   0   'False
+      Height          =   420
+      Left            =   6585
+      Top             =   6945
+      Width           =   1965
+   End
+End
+Attribute VB_Name = "frmMailGenerator"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Option Explicit
+
+' P3-04 WORKING CANDIDATE. Designer export is NOT VBE-import/Compile verified.
+' The fixed shell is in the designer; only InputArea children are dynamic.
+' Never call this before P3-03 PrepareUserFormLaunch succeeds.
+' Input State, Clear, Mail generation and input validation are NOT implemented.
+
+Private Const ERR_CONFIG As String = "ConfigurationError"
+Private Const ERR_UNEXPECTED As String = "UnexpectedError"
+Private Const ROW_HEIGHT As Single = 63!
+Private Const INPUT_LEFT As Single = 12!
+Private Const INPUT_WIDTH As Single = 485!
+Private mBuilt As Boolean
+
+Public Function BuildValidatedInputs( _
+    ByVal sortedActiveDefinitions As Collection, _
+    ByVal activeOptionsByGroup As Object _
+) As COperationResult
+    Dim itemValue As Variant
+    Dim item As Object
+    Dim itemIndex As Long
+    Dim stepResult As COperationResult
+
+    On Error GoTo UnexpectedFailure
+    If mBuilt Then
+        Set BuildValidatedInputs = CreateFailureResult( _
+            ERR_UNEXPECTED, "This form was already built.", "frmMailGenerator")
+        Exit Function
+    End If
+    If sortedActiveDefinitions Is Nothing Or activeOptionsByGroup Is Nothing Then
+        Set BuildValidatedInputs = BadCarrier("UserForm.InputSnapshot")
+        Exit Function
+    End If
+    If TypeName(activeOptionsByGroup) <> "Dictionary" Then
+        Set BuildValidatedInputs = BadCarrier("ActiveOptionsByGroup")
+        Exit Function
+    End If
+
+    ' Preflight every item BEFORE adding any dynamic control.
+    For Each itemValue In sortedActiveDefinitions
+        If Not IsObject(itemValue) Then GoTo InvalidRow
+        Set item = itemValue
+        If item Is Nothing Then GoTo InvalidRow
+        If TypeName(item) <> "Dictionary" Then GoTo InvalidRow
+        Set stepResult = ValidateRenderableRow(item, activeOptionsByGroup)
+        If Not stepResult.Success Then
+            Set BuildValidatedInputs = stepResult
+            Exit Function
+        End If
+    Next itemValue
+
+    Me.cmdCreateMail.Enabled = False
+    Me.cmdClear.Enabled = False
+    Me.fraInputArea.ScrollBars = fmScrollBarsVertical
+    Me.fraInputArea.ScrollTop = 0
+    Me.fraInputArea.ScrollWidth = Me.fraInputArea.Width - 18!
+
+    itemIndex = 0
+    For Each itemValue In sortedActiveDefinitions
+        Set item = itemValue
+        itemIndex = itemIndex + 1
+        Set stepResult = AppendInputRow(item, activeOptionsByGroup, itemIndex)
+        If Not stepResult.Success Then
+            RemoveDynamicControls
+            Set BuildValidatedInputs = stepResult
+            Exit Function
+        End If
+    Next itemValue
+
+    If (12! + CSng(itemIndex) * ROW_HEIGHT) > Me.fraInputArea.Height Then
+        Me.fraInputArea.ScrollHeight = 20! + CSng(itemIndex) * ROW_HEIGHT
+    Else
+        Me.fraInputArea.ScrollHeight = Me.fraInputArea.Height
+    End If
+
+    mBuilt = True
+    Set BuildValidatedInputs = CreateSuccessResult()
+    Exit Function
+
+InvalidRow:
+    Set BuildValidatedInputs = BadCarrier("SortedActiveDefinitions.Row")
+    Exit Function
+UnexpectedFailure:
+    RemoveDynamicControls
+    mBuilt = False
+    Set BuildValidatedInputs = BadCarrier("frmMailGenerator.BuildValidatedInputs")
+End Function
+
+Private Function ValidateRenderableRow( _
+    ByVal row As Object, _
+    ByVal optionGroups As Object _
+) As COperationResult
+    Dim nameText As String
+    Dim displayText As String
+    Dim typeText As String
+    Dim requiredFlag As Boolean
+    Dim groupName As String
+    Dim activeOptions As Collection
+    Dim optionValue As Variant
+    Dim optionItem As Object
+    Dim optionText As String
+
+    If Not ReadNonBlank(row, "VariableName", nameText) Then GoTo InvalidRow
+    If Not ReadNonBlank(row, "DisplayName", displayText) Then GoTo InvalidRow
+    If Not ReadNonBlank(row, "Type", typeText) Then GoTo InvalidRow
+    If Not row.Exists("Required") Then GoTo InvalidRow
+    If Not TryRequiredFlag(row("Required"), requiredFlag) Then
+        Set ValidateRenderableRow = CreateFailureResult( _
+            ERR_CONFIG, "Required is not a supported value.", nameText & ".Required")
+        Exit Function
+    End If
+    If typeText <> "Text" And typeText <> "Date" And typeText <> "Select" Then
+        Set ValidateRenderableRow = CreateFailureResult( _
+            ERR_CONFIG, "Unsupported input Type.", nameText & ".Type")
+        Exit Function
+    End If
+    If typeText = "Select" Then
+        If Not ReadNonBlank(row, "OptionSource", groupName) Then GoTo InvalidRow
+        If Not TryGetGroup(optionGroups, groupName, activeOptions) Then GoTo InvalidRow
+        If activeOptions.Count = 0 Then
+            Set ValidateRenderableRow = CreateFailureResult( _
+                ERR_CONFIG, "Select has no active option.", groupName)
+            Exit Function
+        End If
+        For Each optionValue In activeOptions
+            If Not IsObject(optionValue) Then GoTo InvalidRow
+            Set optionItem = optionValue
+            If optionItem Is Nothing Then GoTo InvalidRow
+            If TypeName(optionItem) <> "Dictionary" Then GoTo InvalidRow
+            If Not optionItem.Exists("Value") Then GoTo InvalidRow
+            If Not TryScalarText(optionItem("Value"), optionText) Then GoTo InvalidRow
+        Next optionValue
+    End If
+    Set ValidateRenderableRow = CreateSuccessResult()
+    Exit Function
+InvalidRow:
+    Set ValidateRenderableRow = BadCarrier("UserForm.InputSnapshot.Row")
+End Function
+
+Private Function AppendInputRow( _
+    ByVal row As Object, _
+    ByVal optionGroups As Object, _
+    ByVal position As Long _
+) As COperationResult
+    Dim displayLabel As MSForms.Label
+    Dim requiredLabel As MSForms.Label
+    Dim descriptionLabel As MSForms.Label
+    Dim inputBox As MSForms.TextBox
+    Dim choiceBox As MSForms.ComboBox
+    Dim optionItems As Collection
+    Dim optionValue As Variant
+    Dim optionItem As Object
+    Dim suffix As String
+    Dim y As Single
+    Dim typeText As String
+    Dim variableName As String
+    Dim displayText As String
+    Dim groupName As String
+    Dim hintText As String
+    Dim valueText As String
+    Dim requiredFlag As Boolean
+
+    On Error GoTo UnexpectedFailure
+    suffix = Format$(position, "0000")
+    y = 10! + (CSng(position) - 1!) * ROW_HEIGHT
+    variableName = CStr(row("VariableName"))
+    displayText = CStr(row("DisplayName"))
+    typeText = CStr(row("Type"))
+    requiredFlag = False
+    If Not TryRequiredFlag(row("Required"), requiredFlag) Then GoTo UnexpectedFailure
+
+    Set displayLabel = Me.fraInputArea.Controls.Add( _
+        "Forms.Label.1", "lblDisplay_" & suffix, True)
+    With displayLabel
+        .Caption = displayText
+        .Left = INPUT_LEFT
+        .Top = y
+        .Width = INPUT_WIDTH - 25!
+        .Height = 15!
+        .WordWrap = False
+    End With
+
+    Set requiredLabel = Me.fraInputArea.Controls.Add( _
+        "Forms.Label.1", "lblRequired_" & suffix, True)
+    With requiredLabel
+        .Caption = "*"
+        .Left = INPUT_LEFT + INPUT_WIDTH - 23!
+        .Top = y
+        .Width = 18!
+        .Height = 15!
+        .Visible = requiredFlag
+    End With
+
+    If typeText = "Text" Or typeText = "Date" Then
+        Set inputBox = Me.fraInputArea.Controls.Add( _
+            "Forms.TextBox.1", "txtInput_" & suffix, True)
+        With inputBox
+            .Left = INPUT_LEFT
+            .Top = y + 17!
+            .Width = INPUT_WIDTH
+            .Height = 20!
+            .MultiLine = False
+            .Tag = variableName
+            .Value = vbNullString
+        End With
+    Else
+        groupName = CStr(row("OptionSource"))
+        If Not TryGetGroup(optionGroups, groupName, optionItems) Then GoTo UnexpectedFailure
+        Set choiceBox = Me.fraInputArea.Controls.Add( _
+            "Forms.ComboBox.1", "cboInput_" & suffix, True)
+        With choiceBox
+            .Left = INPUT_LEFT
+            .Top = y + 17!
+            .Width = INPUT_WIDTH
+            .Height = 20!
+            .Style = fmStyleDropDownList
+            .Tag = variableName
+            .ListIndex = -1
+        End With
+        For Each optionValue In optionItems
+            Set optionItem = optionValue
+            If Not TryScalarText(optionItem("Value"), valueText) Then GoTo UnexpectedFailure
+            choiceBox.AddItem valueText
+        Next optionValue
+        choiceBox.ListIndex = -1
+    End If
+
+    hintText = vbNullString
+    If row.Exists("Description") Then
+        If Not TryOptionalText(row("Description"), hintText) Then GoTo UnexpectedFailure
+    End If
+    Set descriptionLabel = Me.fraInputArea.Controls.Add( _
+        "Forms.Label.1", "lblDescription_" & suffix, True)
+    With descriptionLabel
+        .Caption = hintText
+        .Left = INPUT_LEFT
+        .Top = y + 40!
+        .Width = INPUT_WIDTH
+        .Height = 16!
+        .WordWrap = False
+    End With
+
+    Set AppendInputRow = CreateSuccessResult()
+    Exit Function
+UnexpectedFailure:
+    Set AppendInputRow = BadCarrier("frmMailGenerator.ControlBuild")
+End Function
+
+Private Function TryGetGroup( _
+    ByVal groups As Object, _
+    ByVal requiredGroup As String, _
+    ByRef items As Collection _
+) As Boolean
+    Dim k As Variant
+    Dim candidate As Object
+    Set items = Nothing
+    On Error GoTo InvalidGroup
+    For Each k In groups.Keys
+        If StrComp(CStr(k), requiredGroup, vbBinaryCompare) = 0 Then
+            Set candidate = groups(CStr(k))
+            If candidate Is Nothing Then Exit Function
+            If TypeName(candidate) <> "Collection" Then Exit Function
+            Set items = candidate
+            TryGetGroup = True
+            Exit Function
+        End If
+    Next k
+InvalidGroup:
+End Function
+
+Private Function ReadNonBlank( _
+    ByVal item As Object, _
+    ByVal key As String, _
+    ByRef textValue As String _
+) As Boolean
+    If Not item.Exists(key) Then Exit Function
+    If Not TryScalarText(item(key), textValue) Then Exit Function
+    ReadNonBlank = (Len(Trim$(textValue)) > 0)
+End Function
+
+Private Function TryScalarText( _
+    ByVal value As Variant, _
+    ByRef textValue As String _
+) As Boolean
+    On Error GoTo InvalidValue
+    If IsError(value) Or IsNull(value) Then Exit Function
+    If IsObject(value) Or IsArray(value) Then Exit Function
+    If IsEmpty(value) Then
+        textValue = vbNullString
+    Else
+        textValue = CStr(value)
+    End If
+    TryScalarText = True
+InvalidValue:
+End Function
+
+Private Function TryOptionalText( _
+    ByVal value As Variant, _
+    ByRef textValue As String _
+) As Boolean
+    If IsEmpty(value) Then
+        textValue = vbNullString
+        TryOptionalText = True
+    Else
+        TryOptionalText = TryScalarText(value, textValue)
+    End If
+End Function
+
+Private Function TryRequiredFlag( _
+    ByVal value As Variant, _
+    ByRef isRequired As Boolean _
+) As Boolean
+    Dim normalized As String
+    On Error GoTo InvalidValue
+    If IsError(value) Or IsNull(value) Or IsEmpty(value) Then Exit Function
+    If IsObject(value) Or IsArray(value) Then Exit Function
+    Select Case VarType(value)
+        Case vbBoolean
+            isRequired = CBool(value)
+            TryRequiredFlag = True
+        Case vbByte, vbInteger, vbLong, vbSingle, vbDouble, vbCurrency, vbDecimal
+            If CDbl(value) = 1# Then
+                isRequired = True
+                TryRequiredFlag = True
+            ElseIf CDbl(value) = 0# Then
+                isRequired = False
+                TryRequiredFlag = True
+            End If
+        Case vbString
+            normalized = LCase$(Trim$(CStr(value)))
+            If normalized = "true" Then
+                isRequired = True
+                TryRequiredFlag = True
+            ElseIf normalized = "false" Then
+                isRequired = False
+                TryRequiredFlag = True
+            End If
+    End Select
+InvalidValue:
+End Function
+
+Private Sub RemoveDynamicControls()
+    Dim i As Long
+    On Error Resume Next
+    For i = Me.fraInputArea.Controls.Count - 1 To 0 Step -1
+        Me.fraInputArea.Controls.Remove Me.fraInputArea.Controls(i).Name
+    Next i
+    On Error GoTo 0
+End Sub
+
+Private Function BadCarrier(ByVal target As String) As COperationResult
+    Set BadCarrier = CreateFailureResult( _
+        ERR_UNEXPECTED, "Form input carrier is missing or malformed.", target)
+End Function

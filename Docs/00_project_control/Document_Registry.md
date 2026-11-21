@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.86
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.87
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.86 |
+| バージョン | v2.87 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.87 更新概要
+
+- 添付ZIPのP3-04 Minimal Dynamic UserForm候補10件を用途別に追加。Form・コード補助・Controller・Manifestは実装文書配下、Stub・Runner・静的チェッカーはtests、候補レビュー・Designer/Import制約はreviews、提示された静的結果はtechnical_validationへ配置。補助ファイル名にP3-04を付け、原本バイト・CP932・改行を保持する。
+- WORKING CANDIDATE / NOT APPROVED / NOT IMPORTED / NOT COMPILED / NOT EXECUTEDを保持。作成日2026-11-16、静的37/37 PASS・未コミット記述は添付作成時点の提示記録。frmはfrx未生成のテキスト候補でImport可能性・描画は未検証。元ZIP内の参照名・チェッカー入力パスと配置先の対応は第5節に示す。今回チェッカー・VBA・19シナリオ・Form表示は実行せず、既存P3-01～03・src・Workbook・Overview・Handoff・Baselineは変更しない。
 
 ### v2.86 更新概要
 
@@ -1594,6 +1599,16 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-04 Designer作成・Import制約（未承認・frx未生成）（元ZIP内: `Docs/Designer_Setup_and_Import_Limitations_v0.1.md`） | [P3-04_Designer_Setup_and_Import_Limitations_v0.1.md](<reviews/P3-04_Designer_Setup_and_Import_Limitations_v0.1.md>) |
+| P3-04候補レビュー（提示記録・未承認）（元ZIP内: `Docs/P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md`） | [P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md](<reviews/P3-04_Minimal_Dynamic_UserForm_Candidate_Review_v0.1.md>) |
+| P3-04原本Manifest（元構成のパス・SHA-256）（元ZIP内: `Docs/SOURCE_MANIFEST.md`） | [P3-04_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_SOURCE_MANIFEST_v0.1.md>) |
+| P3-04静的チェッカー原本（元構成専用・今回未実行）（元ZIP内: `Docs/STATIC_REVIEW.py`） | [P3-04_STATIC_REVIEW_v0.1.py](<../../tests/vba/P3_Configuration_UserForm/P3-04_STATIC_REVIEW_v0.1.py>) |
+| P3-04静的レビュー結果（提示37/37 PASS・VBA実行証拠ではない）（元ZIP内: `Docs/STATIC_REVIEW_RESULT.md`） | [P3-04_STATIC_REVIEW_RESULT_v0.1.md](<../03_verification/technical_validation/P3-04_STATIC_REVIEW_RESULT_v0.1.md>) |
+| P3-04 Formコード補助（Designer別途必要・未実行）（元ZIP内: `src/frmMailGenerator_CodeOnly_v0.1.txt`） | [frmMailGenerator_CodeOnly_P3-04_v0.1.txt](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_CodeOnly_P3-04_v0.1.txt>) |
+| P3-04 UserFormテキスト候補（frx未生成・Import未検証）（元ZIP内: `src/frmMailGenerator_P3-04_Candidate_v0.1.frm`） | [frmMailGenerator_P3-04_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P3-04_Candidate_v0.1.frm>) |
+| P3-04 Controller候補（未承認・未Compile）（元ZIP内: `src/modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas`） | [modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modP3UserFormController_P3-04_Candidate_v0.1_CP932.bas>) |
+| P3-04隔離テストRunner（19シナリオ定義・未実行）（元ZIP内: `tests/modP3_04FormCandidateTests_v0.1_CP932.bas`） | [modP3_04FormCandidateTests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04FormCandidateTests_v0.1_CP932.bas>) |
+| P3-04隔離テストStub（P3-03本体との同時Import不可）（元ZIP内: `tests/modP3_04GateStub_v0.1_CP932.bas`） | [modP3_04GateStub_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04GateStub_v0.1_CP932.bas>) |
 | P3-03 Launch Gate候補（元ZIP内: `src/modP3UserFormLaunchGate_P3-03_Candidate_v0.1_CP932.bas`／未承認・未Compile） | [CP932 Candidate v0.1](<../02_implementation/P3_Configuration_UserForm/modP3UserFormLaunchGate_P3-03_Candidate_v0.1_CP932.bas>) |
 | P3-03隔離テストStub（元ZIP内: `tests/modP3_03GateTestStub_v0.1_CP932.bas`／P3-02本体との同時Import不可） | [Test Stub v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_03GateTestStub_v0.1_CP932.bas>) |
 | P3-03隔離テストRunner（元ZIP内: `tests/modP3_03LaunchGateCandidateTests_v0.1_CP932.bas`／21ケース定義・未実行） | [VBA Fixture v0.1](<../../tests/vba/P3_Configuration_UserForm/modP3_03LaunchGateCandidateTests_v0.1_CP932.bas>) |
