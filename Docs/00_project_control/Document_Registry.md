@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.89
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.90
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.89 |
+| バージョン | v2.90 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.90 更新概要
+
+- 添付P3-05 Input State実装準備ZIPの8件を追加。案内・Manifest・独立実装仕様候補・VBA候補はP3実装文書配下、隔離Fixture・静的チェッカーはtests、ソースレビューはreviews、静的監査JSONはtechnical_validationへ配置。原本バイト・CP932/CRLFを保持し、元ZIPパスと配置先を第5節で対応付ける。
+- WORKING CANDIDATE / NOT APPROVED / NOT IMPORTED、Production採用REVIEW_REQUIRED、18ケース未実行・UI復元/Clear未接続を保持。静的36/36 PASS・既存仕様参照・Repository未変更等は添付作成時点の提示記録。今回チェッカー実行・VBA Import/Compile/実行・UI接続・API採用・次工程判断は行わず、既存P3-01～04・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。チェッカーは元パッケージ配置に依存し、配置後の直接実行用ではない。
 
 ### v2.89 更新概要
 
@@ -1609,6 +1614,14 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-05 Input State案内（提示記録・未承認）（元ZIP内: `00_README.md`） | [P3-05_Input_State_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_Input_State_README_v0.1.md>) |
+| P3-05 Input State原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-05_Input_State_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_Input_State_SOURCE_MANIFEST_v0.1.md>) |
+| P3-05 Input Stateソースレビュー（提示記録・Production採用REVIEW_REQUIRED）（元ZIP内: `docs/P3-05_Input_State_Source_Review_v0.1.md`） | [P3-05_Input_State_Source_Review_v0.1.md](<reviews/P3-05_Input_State_Source_Review_v0.1.md>) |
+| P3-05 Input State独立実装仕様候補（WORKING CANDIDATE）（元ZIP内: `docs/P3-05_Input_State_Unit_Specification_Candidate_v0.1.md`） | [P3-05_Input_State_Unit_Specification_Candidate_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_Input_State_Unit_Specification_Candidate_v0.1.md>) |
+| P3-05 Input State実装候補（未承認・未Compile）（元ZIP内: `src/modInputState_P3-05_Candidate_v0.1_CP932.bas`） | [modInputState_P3-05_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modInputState_P3-05_Candidate_v0.1_CP932.bas>) |
+| P3-05 Input State隔離Fixture（18ケース定義・未実行）（元ZIP内: `tests/modP305InputStateCandidateTests_v0.1_CP932.bas`） | [modP305InputStateCandidateTests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP305InputStateCandidateTests_v0.1_CP932.bas>) |
+| P3-05 Input State静的監査結果（提示36/36・VBA実行証拠ではない）（元ZIP内: `verification/P3-05_Static_Audit_20261121.json`） | [P3-05_Static_Audit_20261121.json](<../03_verification/technical_validation/P3-05_Static_Audit_20261121.json>) |
+| P3-05 Input State静的チェッカー原本（元配置依存・今回未実行）（元ZIP内: `verification/static_audit.py`） | [P3-05_Input_State_static_audit_v0.1.py](<../../tests/vba/P3_Configuration_UserForm/P3-05_Input_State_static_audit_v0.1.py>) |
 | P3-04 XU-01 A パッケージ案内（提示記録・REVIEW_REQUIRED）（元ZIP内: `00_README.md`） | [P3-04_XU01_A_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_README_v0.1.md>) |
 | P3-04 XU-01 A Designer制約（既存P3-04版と同一・再利用）（元ZIP内: `Docs/Designer_Setup_and_Import_Limitations_v0.1.md`） | [P3-04_Designer_Setup_and_Import_Limitations_v0.1.md](<reviews/P3-04_Designer_Setup_and_Import_Limitations_v0.1.md>) |
 | P3-04 XU-01 A CP932/CRLF適用用Patch候補（未適用）（元ZIP内: `Docs/P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch`） | [P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P3-04_XU01_A_CP932_CRLF_Apply_Candidate_v0.1.patch>) |

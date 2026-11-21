@@ -1,0 +1,231 @@
+{
+  "document_id": "P3-05-STATIC-REVIEW-20261121",
+  "date": "2026-11-21",
+  "scope": "Source-only textual/structural checks; no VBE Compile or VBA runtime execution",
+  "production_source_sha256": "293638d4a9617b56adc43925fe1c026c02dc7ca93870857e066918ef83fd6322",
+  "test_fixture_sha256": "53e46b83bc2e9e640d4b1a6096fbe856853484eea92880119c9878f4f270812e",
+  "check_count": 36,
+  "pass_count": 36,
+  "fail_count": 0,
+  "vba_compile": "NOT VERIFIED",
+  "vba_runtime": "NOT RUN",
+  "formal_MTS_input": "NOT RUN",
+  "checks": [
+    {
+      "id": "S01",
+      "check": "Production valid CP932 roundtrip",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S02",
+      "check": "Fixture valid CP932 roundtrip",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S03",
+      "check": "Production CRLF only",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S04",
+      "check": "Fixture CRLF only",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S05",
+      "check": "Correct Production VB_Name",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S06",
+      "check": "Correct fixture VB_Name",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S07",
+      "check": "Option Explicit in both",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S08",
+      "check": "Only three public Production APIs",
+      "result": "PASS",
+      "detail": "['SetInputValue', 'TryGetInputValue', 'ClearInputValues']"
+    },
+    {
+      "id": "S09",
+      "check": "State store private at module scope",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S10",
+      "check": "Dictionary used for in-memory storage",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S11",
+      "check": "Case insensitive dictionary",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S12",
+      "check": "Init candidate before assignment to global",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S13",
+      "check": "Write handles add and replace",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S14",
+      "check": "No input text Trim/Format",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S15",
+      "check": "Empty/absent lookup uses hasValue flag",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S16",
+      "check": "Lookup clears both outputs before read",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S17",
+      "check": "Both access paths validate blank key",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S18",
+      "check": "Clear removes all entries",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S19",
+      "check": "Clear of uninitialized store safe",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S20",
+      "check": "Failure uses existing COperationResult model",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S21",
+      "check": "Expected error taxonomy",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S22",
+      "check": "No direct Excel/Outlook/Word/UserForm dependencies",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S23",
+      "check": "No persistence/network/MsgBox/Debug in Production",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S24",
+      "check": "No retry/sleep/doevents in Production",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S25",
+      "check": "No Object/Dictionary reference exposed via Public",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S26",
+      "check": "Production Function ends balanced",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S27",
+      "check": "Fixture has one public runner",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S28",
+      "check": "18 unique test IDs",
+      "result": "PASS",
+      "detail": "count=18"
+    },
+    {
+      "id": "S29",
+      "check": "All case IDs C01-C18",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S30",
+      "check": "Fixture tests core APIs",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S31",
+      "check": "Fixture tests false/zero/blank/non-ASCII",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S32",
+      "check": "Fixture uses P0 error model rather than stub result",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S33",
+      "check": "Fixture does not define production APIs",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S34",
+      "check": "Fixture has no Form/Outlook/Excel invocation",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S35",
+      "check": "Fixture Sub/Function structure balanced",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S36",
+      "check": "No line above conservative 1000-character limit",
+      "result": "PASS",
+      "detail": ""
+    }
+  ]
+}

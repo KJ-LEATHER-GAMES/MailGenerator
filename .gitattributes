@@ -45,3 +45,11 @@
 /Docs/02_implementation/P3_Configuration_UserForm/frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm -text whitespace=cr-at-eol
 /Docs/02_implementation/P3_Configuration_UserForm/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/modP3_04FormXU01ATests_v0.1_CP932.bas -text whitespace=cr-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-05_Input_State_README_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-05_Input_State_SOURCE_MANIFEST_v0.1.md -text whitespace=-blank-at-eol
+/Docs/00_project_control/reviews/P3-05_Input_State_Source_Review_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-05_Input_State_Unit_Specification_Candidate_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/modInputState_P3-05_Candidate_v0.1_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/modP305InputStateCandidateTests_v0.1_CP932.bas -text whitespace=cr-at-eol
+/Docs/03_verification/technical_validation/P3-05_Static_Audit_20261121.json -text
+/tests/vba/P3_Configuration_UserForm/P3-05_Input_State_static_audit_v0.1.py -text
