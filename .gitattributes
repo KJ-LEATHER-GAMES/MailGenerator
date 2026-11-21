@@ -70,3 +70,12 @@
 /tests/vba/P3_Configuration_UserForm/modP3_04XU02Tests_v0.1_CP932.bas -text whitespace=cr-at-eol
 /Docs/03_verification/technical_validation/P3-04_XU02_A_STATIC_AUDIT_20261121.json -text
 /tests/vba/P3_Configuration_UserForm/P3-04_XU02_A_static_review_v0.1.py -text
+/Docs/02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_SOURCE_MANIFEST_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_README_v0.1.md -text whitespace=-blank-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/P3-04_Input_State_Integration_Design_Candidate_v0.2.md -text whitespace=-blank-at-eol
+/Docs/01_specifications/P3-04_P3-05_Integration_Test_Matrix_v0.2.md -text whitespace=-blank-at-eol
+/Docs/00_project_control/reviews/P3-04_XU02_Diff_Source_Review_v0.1_20261121.md -text whitespace=-blank-at-eol
+/Docs/00_project_control/P3-04_P3-05_Connection_Decision_Issue_Risk_Log_v0.1.md -text whitespace=-blank-at-eol
+/Docs/03_verification/technical_validation/P3-04_XU02_Diff_Static_Audit_Scope_20261121.md -text whitespace=-blank-at-eol
+/Docs/03_verification/technical_validation/P3-04_XU02_Diff_Source_Delta_Audit_20261121.json -text
+/Docs/02_implementation/P3_Configuration_UserForm/P3-04_XU02_vs_XU01_Normalized_UTF8_v0.1.diff -text whitespace=-blank-at-eol,-blank-at-eof

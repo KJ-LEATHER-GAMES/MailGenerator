@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.92
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.93
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.92 |
+| バージョン | v2.93 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.93 更新概要
+
+- 添付P3-04 XU-02差分レビュー/P3-05接続設計ZIPの9件を追加。差分レビューはreviews、Decision/Issue/RiskログはProject Control、接続仕様v0.2・案内・Manifest・閲覧差分はP3実装文書配下、テスト表v0.2は仕様書配下、監査スコープ・JSONはtechnical_validationへ配置。原本バイトと元ZIP参照名を保持し、各配置先を第5節で対応付ける。
+- 同Document IDの接続仕様・テスト表は未承認v0.2候補として別保存し、v0.1を維持する。SOURCE REVIEW COMPLETEDとソース限定PASS、監査30/30、既存設計/API承認は添付内の記録であり、今回の独立レビュー・採用・承認とは扱わない。30統合テストは未実装・未実行、Close/Clear/Select等はOPEN、XU-01/02 Closureは未成立。差分適用・意思決定手順・UI結線・VBA実行は行わず、既存候補・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.92 更新概要
 
@@ -1624,6 +1629,15 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3 XU-02差分/接続v0.2 原本Manifest（元構成のパス・SHA-256）（元ZIP内: `05_SOURCE_MANIFEST.md`） | [P3-04_XU02_Diff_Review_P305_Integration_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_SOURCE_MANIFEST_v0.1.md>) |
+| P3 XU-02差分/接続v0.2 案内（提示記録・未採用）（元ZIP内: `00_README.md`） | [P3-04_XU02_Diff_Review_P305_Integration_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_Diff_Review_P305_Integration_README_v0.1.md>) |
+| P3 XU-02差分/接続v0.2 接続仕様候補（同ID v0.1保持・NOT APPROVED）（元ZIP内: `02_P304_P305_Input_State_Interface_Spec_Candidate_v0.2.md`） | [P3-04_Input_State_Integration_Design_Candidate_v0.2.md](<../02_implementation/P3_Configuration_UserForm/P3-04_Input_State_Integration_Design_Candidate_v0.2.md>) |
+| P3 XU-02差分/接続v0.2 統合テスト表候補（30件・未実装・未実行）（元ZIP内: `03_P304_P305_Integration_Test_Matrix_Candidate_v0.2.md`） | [P3-04_P3-05_Integration_Test_Matrix_v0.2.md](<../01_specifications/P3-04_P3-05_Integration_Test_Matrix_v0.2.md>) |
+| P3 XU-02差分/接続v0.2 差分ソースレビュー（提示PASS・Closure未成立）（元ZIP内: `01_XU02_Diff_Source_Review_v0.1.md`） | [P3-04_XU02_Diff_Source_Review_v0.1_20261121.md](<reviews/P3-04_XU02_Diff_Source_Review_v0.1_20261121.md>) |
+| P3 XU-02差分/接続v0.2 Decision/Issue/Riskログ（提示記録・OPEN維持）（元ZIP内: `04_DECISION_ISSUE_RISK_LOG_v0.1.md`） | [P3-04_P3-05_Connection_Decision_Issue_Risk_Log_v0.1.md](<P3-04_P3-05_Connection_Decision_Issue_Risk_Log_v0.1.md>) |
+| P3 XU-02差分/接続v0.2 静的監査スコープ（Runtime証拠ではない）（元ZIP内: `verification/README.md`） | [P3-04_XU02_Diff_Static_Audit_Scope_20261121.md](<../03_verification/technical_validation/P3-04_XU02_Diff_Static_Audit_Scope_20261121.md>) |
+| P3 XU-02差分/接続v0.2 静的監査JSON（提示30/30・実機未検証）（元ZIP内: `verification/source_delta_audit.json`） | [P3-04_XU02_Diff_Source_Delta_Audit_20261121.json](<../03_verification/technical_validation/P3-04_XU02_Diff_Source_Delta_Audit_20261121.json>) |
+| P3 XU-02差分/接続v0.2 UTF-8正規化閲覧差分（CP932原本へ適用禁止）（元ZIP内: `diffs/XU02_vs_XU01_normalized_UTF8.diff`） | [P3-04_XU02_vs_XU01_Normalized_UTF8_v0.1.diff](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_vs_XU01_Normalized_UTF8_v0.1.diff>) |
 | P3-04 XU-02 A 案内（提示記録・WORKING CANDIDATE）（元ZIP内: `00_README.md`） | [P3-04_XU02_A_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_A_README_v0.1.md>) |
 | P3-04 XU-02 A 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-04_XU02_A_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_XU02_A_SOURCE_MANIFEST_v0.1.md>) |
 | P3-04 XU-02 A 最小修正レビュー（提示記録・Closure未成立）（元ZIP内: `docs/P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md`） | [P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md](<reviews/P3-04_XU02_A_Minimal_Change_Source_Review_v0.1.md>) |
