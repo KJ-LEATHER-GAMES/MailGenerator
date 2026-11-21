@@ -1,0 +1,119 @@
+{
+  "document_id": "P3-05-API-SOURCE-REVIEW-CHECK-20261121",
+  "date": "2026-11-21",
+  "scope": "Python source-only string/structural assertions (NOT VBA compile, runtime, or formal test)",
+  "count": 20,
+  "matching_observations": 20,
+  "source_sha256": {
+    "P3-05_Input_State_Candidate_v0.1/src/modInputState_P3-05_Candidate_v0.1_CP932.bas": "293638d4a9617b56adc43925fe1c026c02dc7ca93870857e066918ef83fd6322",
+    "P3-05_Input_State_Candidate_v0.1/tests/modP305InputStateCandidateTests_v0.1_CP932.bas": "53e46b83bc2e9e640d4b1a6096fbe856853484eea92880119c9878f4f270812e",
+    "P3-04_XU01_Gate_Enforced_Candidate_v0.1/src/frmMailGenerator_P3-04_XU01_A_Candidate_v0.1.frm": "dfa70b8e4d3ede487c061bc82ac5be1ff0a7c2b0801c8899660da98a7d58a322",
+    "P3-04_XU01_Gate_Enforced_Candidate_v0.1/src/modP3UserFormController_P3-04_XU01_A_Candidate_v0.1_CP932.bas": "87fdefe7f53b568e4c7d3df56884828a7647f51c91fa24a0f998ef9c86d9cd88"
+  },
+  "status": "SOURCE_OBSERVATIONS_VERIFIED / INTEGRATION_NOT_IMPLEMENTED",
+  "checks": [
+    {
+      "item": "P3-05 CP932 source decodes and roundtrips",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "P3-05 known module name",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Three public APIs exact names",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Input data has String parameter",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Output returns String and hasValue",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Input store private",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Case insensitive dictionary",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Set preserves raw string",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Clear removes store entries",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Get returns no key without mutation",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "P3-05 fixture has unique 18 case IDs",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Form builder invokes Gate",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Form TextBox/ComboBox Tag bindings",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Form has no QueryClose handler",
+      "observation": "GAP_CONFIRMED",
+      "verified": true
+    },
+    {
+      "item": "Form has no P3-05 API calls",
+      "observation": "GAP_CONFIRMED",
+      "verified": true
+    },
+    {
+      "item": "Controller shows and unloads Form",
+      "observation": "MATCH",
+      "verified": true
+    },
+    {
+      "item": "Clear button is still disabled",
+      "observation": "GAP_CONFIRMED",
+      "verified": true
+    },
+    {
+      "item": "P3-03 shares row dictionary references",
+      "observation": "XU02_CONFIRMED",
+      "verified": true
+    },
+    {
+      "item": "P3-03 shares option dictionary reference",
+      "observation": "XU02_CONFIRMED",
+      "verified": true
+    },
+    {
+      "item": "No production source file was modified",
+      "observation": "MATCH",
+      "verified": true
+    }
+  ],
+  "vba_compile": "NOT RUN",
+  "vba_runtime": "NOT RUN",
+  "formal_mts_input": "NOT RUN"
+}

@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.90
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.91
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.90 |
+| バージョン | v2.91 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-21 |
+
+### v2.91 更新概要
+
+- 添付P3-05 API Review/P3-04 Input State接続設計ZIPの6件を追加。APIレビューはreviews、接続設計・案内・ManifestはP3実装文書配下、統合テスト表は配置ルールに従い仕様書配下、観測JSONはtechnical_validationへ配置。原本バイトを保持し、元ZIP名・参照先と配置先の対応を第5節に登録する。
+- REVIEW COMPLETED / DESIGN CANDIDATE / NOT PRODUCTION APPROVEDを維持。3 API/String採用、Scalar Snapshot、終了Capture、Select失効値処理は提案・未承認、20統合テストは未実装・未実行。観測20件とSource Review判定は提示記録であり、今回の独立したレビュー・採用判断・Runtime検証とは扱わない。既存候補・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更せず、添付内の意思決定手順・UI結線・次工程作業は実施しない。
 
 ### v2.90 更新概要
 
@@ -1614,6 +1619,12 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| P3-05 API/P3-04接続 案内（提示記録・未承認）（元ZIP内: `00_README.md`） | [P3-05_API_Review_P3-04_Integration_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_API_Review_P3-04_Integration_README_v0.1.md>) |
+| P3-05 API/P3-04接続 API/Stringソースレビュー（採用提案・未承認）（元ZIP内: `01_P3-05_API_String_Source_Review_v0.1.md`） | [P3-05_API_String_Source_Review_v0.1.md](<reviews/P3-05_API_String_Source_Review_v0.1.md>) |
+| P3-05 API/P3-04接続 設計候補（XU-02・Capture/Restore/Clear未承認）（元ZIP内: `02_P3-04_Input_State_Integration_Design_Candidate_v0.1.md`） | [P3-04_Input_State_Integration_Design_Candidate_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-04_Input_State_Integration_Design_Candidate_v0.1.md>) |
+| P3-05 API/P3-04接続 統合テスト表候補（20件・未実装・未実行）（元ZIP内: `03_P3-04_P3-05_Integration_Test_Matrix_v0.1.md`） | [P3-04_P3-05_Integration_Test_Matrix_v0.1.md](<../01_specifications/P3-04_P3-05_Integration_Test_Matrix_v0.1.md>) |
+| P3-05 API/P3-04接続 ソース観測JSON（提示20件・Runtime証拠ではない）（元ZIP内: `04_Source_Observation_Checks.json`） | [P3-05_API_Review_Source_Observation_Checks_20261121.json](<../03_verification/technical_validation/P3-05_API_Review_Source_Observation_Checks_20261121.json>) |
+| P3-05 API/P3-04接続 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-05_API_Review_P3-04_Integration_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_API_Review_P3-04_Integration_SOURCE_MANIFEST_v0.1.md>) |
 | P3-05 Input State案内（提示記録・未承認）（元ZIP内: `00_README.md`） | [P3-05_Input_State_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_Input_State_README_v0.1.md>) |
 | P3-05 Input State原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P3-05_Input_State_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P3-05_Input_State_SOURCE_MANIFEST_v0.1.md>) |
 | P3-05 Input Stateソースレビュー（提示記録・Production採用REVIEW_REQUIRED）（元ZIP内: `docs/P3-05_Input_State_Source_Review_v0.1.md`） | [P3-05_Input_State_Source_Review_v0.1.md](<reviews/P3-05_Input_State_Source_Review_v0.1.md>) |
