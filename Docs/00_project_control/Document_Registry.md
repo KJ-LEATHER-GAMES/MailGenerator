@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.98
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.99
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.98 |
+| バージョン | v2.99 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-22 |
+
+### v2.99 更新概要
+
+- 添付Direct Show Failureレビュー、診断ZIP内4件、回帰画面1枚を登録。単独レビューとZIP内レビューはSHA-256一致のため同一ファイルとしてtechnical_validationへ保存し、診断案内・原本Manifest・TEST ONLY診断Moduleはtestsの専用領域、画像はEvidenceへ配置する。全5件の原本バイトと診断ModuleのCP932・内部名を保持し、元ZIP名・内部パスと保存先を第5節に対応付ける。
+- 回帰33 PASS/2 FAIL、Direct Show 2件のFailure、モジュール表示名に関する説明、T1-XU01-DS-001 OPEN等は提示資料の記録として保持する。独立再実行・正式Finding登録・Closure・修正採用は行わず、診断Import・Workbookコピー・Compile・ブレークポイント・診断実行等の添付手順は実施しない。既存候補・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.98 更新概要
 
@@ -1654,6 +1659,11 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| T1 Direct Show Failureレビュー（単独添付とZIP内`docs/T1_XU01_DirectShow_Failure_Review_v0.1.md`は同一／回帰33 PASS・2 FAILの提示記録） | [T1 Direct Show Failure Review v0.1](<../03_verification/technical_validation/T1_XU01_DirectShow_Failure_Review_v0.1.md>) |
+| T1診断案内（元ZIP: `T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1.zip`／内部`00_README.md`・TEST ONLY／未実行） | [00_README.md](<../../tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/00_README.md>) |
+| T1診断原本Manifest（同ZIP内`SOURCE_MANIFEST.md`・元構成のSHA-256） | [SOURCE_MANIFEST.md](<../../tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/SOURCE_MANIFEST.md>) |
+| T1 Direct Show診断Module（同ZIP内`tests/modTESTONLY_XU01ShowDiag_v0.1_CP932.bas`・Import／Compile／実行なし） | [modTESTONLY_XU01ShowDiag_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/modTESTONLY_XU01ShowDiag_v0.1_CP932.bas>) |
+| T1回帰35件の画面原本（33 PASS・2 FAIL／ユーザー提供画像） | [T1_07_回帰35件.png](<../../Evidence/T1/2026-11-22/screenshots/T1_07_回帰35件.png>) |
 | T1 Nominal Runtime実施Evidence（実行者提供証拠による21/21 PASSの提示記録） | [T1 Nominal Runtime Evidence v0.1](<../03_verification/technical_validation/01_T1_Nominal_Runtime_Evidence_v0.1.md>) |
 | T1 Nominal Runtimeレビュー・進捗記録（T1全体未完了・T1-FIND-001 OPEN） | [T1 Nominal Runtime Review and Progress v0.1](<../03_verification/technical_validation/02_T1_Nominal_Runtime_Review_and_Progress_v0.1.md>) |
 | T1実施Evidence改訂版（v0.2・ユーザー報告COMPILE_PASS／Runtimeは当時NOT RUN） | [T1 Import/Compile Evidence v0.2](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.2.md>) |

@@ -108,3 +108,8 @@
 /Evidence/T1/2026-11-22/screenshots/T1_02_Form_Designer_01.png binary
 /Evidence/T1/2026-11-22/screenshots/T1_03_Form_Designer_02.png binary
 /Evidence/T1/2026-11-22/screenshots/T1_04_Form_Code.png binary
+/Docs/03_verification/technical_validation/T1_XU01_DirectShow_Failure_Review_v0.1.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+/tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/00_README.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+/tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/SOURCE_MANIFEST.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+/tests/vba/P3_Configuration_UserForm/T1_XU01_DirectShow_Failure_Diagnostic_20261122_v0.1/modTESTONLY_XU01ShowDiag_v0.1_CP932.bas -text whitespace=cr-at-eol
+/Evidence/T1/2026-11-22/screenshots/T1_07_回帰35件.png binary
