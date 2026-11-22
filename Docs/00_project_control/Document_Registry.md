@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.97
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.98
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.97 |
+| バージョン | v2.98 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-22 |
+
+### v2.98 更新概要
+
+- T1 Nominal Runtime EvidenceとReview/Progressの添付2件をtechnical_validationへ原本バイトのまま追加。Nominal 21/21 PASSとT1-FIND-001 OPENは提示文書の報告として保存し、今回の独立検証・Issue登録・後続操作の承認とは扱わない。
+- 本文が参照するRuntime画像・個別ログファイルは今回未添付。原文のevidence/reference相対配置表記は保持し、既存Compile Evidence v0.2への参照は本台帳のリンクを利用する。Regression 35件・Hide/X・T2/T3等は実行せず、既存文書・画像・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.97 更新概要
 
@@ -1649,7 +1654,9 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
-| T1実施Evidence改訂版（v0.2・ユーザー報告COMPILE_PASS／Runtime NOT RUN） | [T1 Import/Compile Evidence v0.2](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.2.md>) |
+| T1 Nominal Runtime実施Evidence（実行者提供証拠による21/21 PASSの提示記録） | [T1 Nominal Runtime Evidence v0.1](<../03_verification/technical_validation/01_T1_Nominal_Runtime_Evidence_v0.1.md>) |
+| T1 Nominal Runtimeレビュー・進捗記録（T1全体未完了・T1-FIND-001 OPEN） | [T1 Nominal Runtime Review and Progress v0.1](<../03_verification/technical_validation/02_T1_Nominal_Runtime_Review_and_Progress_v0.1.md>) |
+| T1実施Evidence改訂版（v0.2・ユーザー報告COMPILE_PASS／Runtimeは当時NOT RUN） | [T1 Import/Compile Evidence v0.2](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.2.md>) |
 | T1実施Evidence提出原本（旧版v0.1・本文内Status不一致を保持） | [T1 Import/Compile Evidence v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.1.md>) |
 | T1実施Evidenceレビュー（提示記録・独立再実行NOT VERIFIED・Runtime NOT RUN） | [T1 Evidence Review v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_Review_20261122_v0.1.md>) |
 | T1画面原本01（Windowsファイルエクスプローラー・元ファイル名を保持） | [T1_01_Project_Explorer.png](<../../Evidence/T1/2026-11-22/screenshots/T1_01_Project_Explorer.png>) |

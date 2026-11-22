@@ -101,6 +101,8 @@
 /tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_VBE_Import_Compile_Detailed_Runbook_v0.1.md -text whitespace=-blank-at-eol
 /Docs/03_verification/technical_validation/T1_Import_Compile_Evidence_v0.1.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 /Docs/03_verification/technical_validation/T1_Import_Compile_Evidence_v0.2.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+/Docs/03_verification/technical_validation/01_T1_Nominal_Runtime_Evidence_v0.1.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+/Docs/03_verification/technical_validation/02_T1_Nominal_Runtime_Review_and_Progress_v0.1.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 /Docs/03_verification/technical_validation/T1_Import_Compile_Evidence_Review_20261122_v0.1.md -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 /Evidence/T1/2026-11-22/screenshots/T1_01_Project_Explorer.png binary
 /Evidence/T1/2026-11-22/screenshots/T1_02_Form_Designer_01.png binary
