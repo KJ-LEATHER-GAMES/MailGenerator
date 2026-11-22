@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.96
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.97
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.96 |
+| バージョン | v2.97 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-22 |
+
+### v2.97 更新概要
+
+- T1 Import/Compile Evidence v0.2をtechnical_validationへ原本バイトのまま追加し、同Document IDの改訂版の参照入口とする。提出原本v0.1・レビューv0.1・既存画像は変更せず保持する。
+- Status整合、Class 2件の手動作成経緯、画像対応の修正は添付内の記録として保存する。COMPILE_PASSは実行者報告の範囲に限定し、Direct Import・Source完全一致・独立再実行・Runtime PASS・Production採用を認定しない。本文のRuntime手順は実施せず、既存候補・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.96 更新概要
 
@@ -1644,7 +1649,8 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
-| T1実施Evidence原本（ユーザー報告COMPILE_PASS／本文内Status不一致を保持） | [T1 Import/Compile Evidence v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.1.md>) |
+| T1実施Evidence改訂版（v0.2・ユーザー報告COMPILE_PASS／Runtime NOT RUN） | [T1 Import/Compile Evidence v0.2](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.2.md>) |
+| T1実施Evidence提出原本（旧版v0.1・本文内Status不一致を保持） | [T1 Import/Compile Evidence v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.1.md>) |
 | T1実施Evidenceレビュー（提示記録・独立再実行NOT VERIFIED・Runtime NOT RUN） | [T1 Evidence Review v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_Review_20261122_v0.1.md>) |
 | T1画面原本01（Windowsファイルエクスプローラー・元ファイル名を保持） | [T1_01_Project_Explorer.png](<../../Evidence/T1/2026-11-22/screenshots/T1_01_Project_Explorer.png>) |
 | T1画面原本02（VBE／Form Designer上部） | [T1_02_Form_Designer_01.png](<../../Evidence/T1/2026-11-22/screenshots/T1_02_Form_Designer_01.png>) |
