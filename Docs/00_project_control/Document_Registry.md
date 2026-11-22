@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.94
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.95
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.94 |
+| バージョン | v2.95 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
-| 更新日 | 2026-11-21 |
+| 更新日 | 2026-11-22 |
+
+### v2.95 更新概要
+
+- 添付T1 Nominal VBE Import/Compile詳細ガイドZIPの14件を登録。新規8件を保存し、統合Form・Input State・Controller・正常系Runner・Gate Stub・回帰RunnerはSHA-256一致の既存6件を再利用する。詳細ガイド・チェックリスト・未記入Evidenceテンプレート・案内・Manifest・補助テスト2件はtestsのT1専用フォルダー、統合Form CodeOnly補助はP3実装文書配下へ配置。原本バイト・CP932/CRLFを保持し、元ZIP名と各保存先を第5節に対応付ける。
+- PREPARED_NOT_EXECUTED、Compile NOT VERIFIED、Runtime NOT RUNと未記入テンプレートの状態を保持。元実行キット由来・GitHub未変更等は添付内の記録であり、今回の実機確認・実行承認・結果取得とは扱わない。P0依存3件はZIP非収録のままとし、追加取得・複製は行わない。既存候補・src・Workbook・Overview・Handoff・Approved仕様・Baselineは変更せず、Workbook作成・VBE Import・手動Designer・Compile・補助テスト・画面保存等のガイド操作は実施しない。
 
 ### v2.94 更新概要
 
@@ -1634,6 +1639,20 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| T1 Import/Compile案内（PREPARED・未実施）（元ZIP内: `00_README.md`） | [README.md](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/README.md>) |
+| T1 Import/Compile原本Manifest（元構成のパス・SHA-256）（元ZIP内: `SOURCE_MANIFEST.json`） | [SOURCE_MANIFEST.json](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/SOURCE_MANIFEST.json>) |
+| T1 Import/Compile Form参照（既存統合版と同一・再利用）（元ZIP内: `T1_sources/candidate/src/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm`） | [frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm>) |
+| T1 Import/Compile Input State参照（既存P3-05と同一・再利用）（元ZIP内: `T1_sources/candidate/src/modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas`） | [modInputState_P3-05_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modInputState_P3-05_Candidate_v0.1_CP932.bas>) |
+| T1 Import/Compile Controller参照（既存統合版と同一・再利用）（元ZIP内: `T1_sources/candidate/src/modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas`） | [modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas](<../02_implementation/P3_Configuration_UserForm/modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas>) |
+| T1 Import/Compile 正常系Runner参照（既存21件版と同一・再利用）（元ZIP内: `T1_sources/candidate/tests/nominal/modP304P305NominalTests_v0.1_CP932.bas`） | [modP304P305NominalTests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP304P305NominalTests_v0.1_CP932.bas>) |
+| T1 Import/Compile Gate Stub参照（既存統合版と同一・再利用）（元ZIP内: `T1_sources/candidate/tests/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas`） | [modP3_04GateStub_From_XU02_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas>) |
+| T1 Import/Compile 回帰Runner参照（既存35件版と同一・再利用）（元ZIP内: `T1_sources/candidate/tests/nominal/modP3_04XU02RegressionTests_v0.1_CP932.bas`） | [modP3_04XU02Tests_v0.1_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/modP3_04XU02Tests_v0.1_CP932.bas>) |
+| T1 Import/Compile Direct Hide補助テスト（TEST ONLY・未実行）（元ZIP内: `T1_sources/candidate/tests/nominal/modTESTONLY_DirectHide_Tests_CP932.bas`） | [modTESTONLY_DirectHide_Tests_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/modTESTONLY_DirectHide_Tests_CP932.bas>) |
+| T1 Import/Compile Modal QueryClose補助テスト（TEST ONLY・未実行）（元ZIP内: `T1_sources/candidate/tests/nominal/modTESTONLY_ModalQueryClose_Smoke_CP932.bas`） | [modTESTONLY_ModalQueryClose_Smoke_CP932.bas](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/modTESTONLY_ModalQueryClose_Smoke_CP932.bas>) |
+| T1 Import/Compile 統合Form CodeOnly補助（CP932・未使用）（元ZIP内: `T1_sources/docs/frmMailGenerator_Original_CodeOnly_CP932.txt`） | [frmMailGenerator_P304_P305_Integrated_CodeOnly_T1_v0.1_CP932.txt](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P304_P305_Integrated_CodeOnly_T1_v0.1_CP932.txt>) |
+| T1 Import/Compile Evidence記録テンプレート（未記入・NOT VERIFIED）（元ZIP内: `docs/T1_Import_Compile_Evidence_Template_v0.1.md`） | [T1_Import_Compile_Evidence_Template_v0.1.md](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_Import_Compile_Evidence_Template_v0.1.md>) |
+| T1 Import/Compile 確認用チェックリスト（未実施）（元ZIP内: `docs/T1_Import_Compile_Quick_Checklist_v0.1.md`） | [T1_Import_Compile_Quick_Checklist_v0.1.md](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_Import_Compile_Quick_Checklist_v0.1.md>) |
+| T1 Import/Compile 詳細実行ガイド（手順保存のみ・実行承認ではない）（元ZIP内: `docs/T1_VBE_Import_Compile_Detailed_Runbook_v0.1.md`） | [T1_VBE_Import_Compile_Detailed_Runbook_v0.1.md](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_VBE_Import_Compile_Detailed_Runbook_v0.1.md>) |
 | P304/P305統合 案内（提示記録・未採用）（元ZIP内: `00_README.md`） | [P304_P305_Integrated_Input_State_README_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_README_v0.1.md>) |
 | P304/P305統合 原本Manifest（元構成のパス・サイズ・SHA-256）（元ZIP内: `SOURCE_MANIFEST.md`） | [P304_P305_Integrated_Input_State_SOURCE_MANIFEST_v0.1.md](<../02_implementation/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_SOURCE_MANIFEST_v0.1.md>) |
 | P304/P305統合 正規化レビュー差分（CP932原本へ直接適用禁止）（元ZIP内: `diffs/XU02_to_Input_State_Integrated_UTF8.patch`） | [P304_P305_XU02_to_Input_State_Integrated_UTF8_v0.1.patch](<../02_implementation/P3_Configuration_UserForm/P304_P305_XU02_to_Input_State_Integrated_UTF8_v0.1.patch>) |

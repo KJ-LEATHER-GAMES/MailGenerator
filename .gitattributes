@@ -91,3 +91,11 @@
 /tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP304P305NominalTests_v0.1_CP932.bas -text whitespace=cr-at-eol
 /tests/vba/P3_Configuration_UserForm/P304_P305_Integrated_Input_State_v0.1/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas -text whitespace=cr-at-eol
 /Docs/03_verification/technical_validation/P304_P305_Source_Static_Audit_v0.1.json -text
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/README.md -text whitespace=-blank-at-eol
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/SOURCE_MANIFEST.json -text
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/modTESTONLY_DirectHide_Tests_CP932.bas -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/modTESTONLY_ModalQueryClose_Smoke_CP932.bas -text whitespace=cr-at-eol
+/Docs/02_implementation/P3_Configuration_UserForm/frmMailGenerator_P304_P305_Integrated_CodeOnly_T1_v0.1_CP932.txt -text whitespace=cr-at-eol
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_Import_Compile_Evidence_Template_v0.1.md -text whitespace=-blank-at-eol
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_Import_Compile_Quick_Checklist_v0.1.md -text whitespace=-blank-at-eol
+/tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/docs/T1_VBE_Import_Compile_Detailed_Runbook_v0.1.md -text whitespace=-blank-at-eol

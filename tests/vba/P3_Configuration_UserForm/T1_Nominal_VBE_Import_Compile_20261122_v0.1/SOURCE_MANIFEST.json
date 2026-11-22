@@ -1,0 +1,28 @@
+{
+  "document_id": "DOC-VER-P304P305-T1-IMPORT-COMPILE",
+  "revision": "v0.1",
+  "date": "2026-11-22",
+  "status": "PREPARED_NOT_EXECUTED",
+  "source_basis": "P304_P305_Isolated_VBE_Execution_Kit_20261121_v0.1.zip",
+  "source_files_sha256": {
+    "candidate/src/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm": "b8c3a6bdb64599797583b9f0d518c9dff06e56621772561faf31fdb24cda6bbd",
+    "candidate/src/modInputState_P305_ApprovedContract_Unmodified_v0.1_CP932.bas": "293638d4a9617b56adc43925fe1c026c02dc7ca93870857e066918ef83fd6322",
+    "candidate/src/modP3UserFormController_P304_P305_Integrated_Candidate_v0.1_CP932.bas": "ef84a9f68b0f0737754d1f0586777f594a0d97cc11dd4c06abd41c5760178c32",
+    "candidate/tests/nominal/modP3_04GateStub_From_XU02_v0.1_CP932.bas": "55a2bdc9a79c5750d803063838d5f9533b5c4296bca073d013f92867a1e0e400",
+    "candidate/tests/nominal/modP304P305NominalTests_v0.1_CP932.bas": "3798f36394664c5ebd8d9f7150189530f215b26c687f8cff8c0387b44901f538",
+    "candidate/tests/nominal/modP3_04XU02RegressionTests_v0.1_CP932.bas": "21335430c963c18567f8d8eda03e39e25ed1a38d1d200327cb58ced2431910fb",
+    "candidate/tests/nominal/modTESTONLY_DirectHide_Tests_CP932.bas": "9db48f3a8481d8c826a661cc1db5a57c4cd7eb0d9044401c220b16959b640a35",
+    "candidate/tests/nominal/modTESTONLY_ModalQueryClose_Smoke_CP932.bas": "d9faaf8759646ac7c760d06ba014733614c69beca6e083e7e39d948594d1dea3",
+    "docs/frmMailGenerator_Original_CodeOnly_CP932.txt": "9ba169452b8a5d60046a1fb619d25f11cf3c4f2a717c0b510c52457870373445"
+  },
+  "runtime": "NOT RUN",
+  "compile": "NOT VERIFIED",
+  "gitHub": "NOT MODIFIED",
+  "production": "NOT MODIFIED",
+  "baseline": "BL-MVP-004_UNCHANGED",
+  "p0_dependencies_not_included": [
+    "src/classes/COperationResult.cls",
+    "src/classes/CErrorInfo.cls",
+    "src/modules/modResult.bas"
+  ]
+}
