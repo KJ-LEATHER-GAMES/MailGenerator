@@ -1,2 +1,5 @@
 # Local-only G-PREP snapshot containing personal SID and private path data.
 /Evidence/S1-B/G-PREP-20261022T143534Z-21b5c43a/Root.before.json
+
+# Local-only original screenshot containing an Office account email address.
+/Evidence/T1/2026-11-22/private/T1_05_Excel_Version.png

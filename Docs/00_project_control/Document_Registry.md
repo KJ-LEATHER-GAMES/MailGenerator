@@ -1,15 +1,20 @@
-# 定型メール作成ツール Project Document Registry and Approved Baseline v2.95
+# 定型メール作成ツール Project Document Registry and Approved Baseline v2.96
 
 ## 1. 文書情報
 
 | 項目 | 内容 |
 |---|---|
 | 文書名 | 定型メール作成ツール Project Document Registry and Approved Baseline |
-| バージョン | v2.95 |
+| バージョン | v2.96 |
 | 文書種別 | Project Control / Document Registry / Baseline Manifest |
 | 対象プロジェクト | 定型メール作成ツール |
 | 適用ルール | AI協働開発 文書管理・Baseline運用ルール v0.1 |
 | 更新日 | 2026-11-22 |
+
+### v2.96 更新概要
+
+- 添付T1 Import/Compile実施記録・Evidenceレビュー2件をtechnical_validation、画面原本4枚をEvidence/T1/2026-11-22/screenshotsへ追加。Excel製品情報画像1枚はアカウント情報を含むため同日private領域へローカル原本保存し、Git対象外とする。全7件の原本バイトを保持する。
+- COMPILE_PASSはユーザー実測の提示記録として保存し、今回の独立再実行・Source同一性実証・Runtime許可とは扱わない。原本のStatus NOT VERIFIEDと末尾COMPILE_PASSの不一致、T1_01がWindowsエクスプローラー画像であること、Module1表示等の画像内容は改変せず保持する。本文内の追記推奨・Runtime手順・次工程移行は実施しない。既存候補・Workbook・Overview・Handoff・Approved仕様・Baselineは変更しない。
 
 ### v2.95 更新概要
 
@@ -1639,6 +1644,13 @@ BL-MVP-001は削除・Invalidatedせず、過去時点の正式Baselineとして
 | --- | --- |
 | 現在地・未解決事項・次作業 | [Project Overview](Project_Overview.md) |
 | セッション再開手順 | [Current Handoff](../05_handoff/Current_Handoff.md) |
+| T1実施Evidence原本（ユーザー報告COMPILE_PASS／本文内Status不一致を保持） | [T1 Import/Compile Evidence v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_v0.1.md>) |
+| T1実施Evidenceレビュー（提示記録・独立再実行NOT VERIFIED・Runtime NOT RUN） | [T1 Evidence Review v0.1](<../03_verification/technical_validation/T1_Import_Compile_Evidence_Review_20261122_v0.1.md>) |
+| T1画面原本01（Windowsファイルエクスプローラー・元ファイル名を保持） | [T1_01_Project_Explorer.png](<../../Evidence/T1/2026-11-22/screenshots/T1_01_Project_Explorer.png>) |
+| T1画面原本02（VBE／Form Designer上部） | [T1_02_Form_Designer_01.png](<../../Evidence/T1/2026-11-22/screenshots/T1_02_Form_Designer_01.png>) |
+| T1画面原本03（VBE／Form Designer下部） | [T1_03_Form_Designer_02.png](<../../Evidence/T1/2026-11-22/screenshots/T1_03_Form_Designer_02.png>) |
+| T1画面原本04（VBE Formコード表示・全コード一致の証拠ではない） | [T1_04_Form_Code.png](<../../Evidence/T1/2026-11-22/screenshots/T1_04_Form_Code.png>) |
+| T1画面原本05（Officeアカウント情報を含むローカル原本・Git対象外） | `Evidence/T1/2026-11-22/private/T1_05_Excel_Version.png`（LOCAL_ONLY、SHA-256: `a10699e4b02e8094c4017a750d869d78c692158c6eb719b23c7d9caa25375963`、Git cloneには非収録） |
 | T1 Import/Compile案内（PREPARED・未実施）（元ZIP内: `00_README.md`） | [README.md](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/README.md>) |
 | T1 Import/Compile原本Manifest（元構成のパス・SHA-256）（元ZIP内: `SOURCE_MANIFEST.json`） | [SOURCE_MANIFEST.json](<../../tests/vba/P3_Configuration_UserForm/T1_Nominal_VBE_Import_Compile_20261122_v0.1/SOURCE_MANIFEST.json>) |
 | T1 Import/Compile Form参照（既存統合版と同一・再利用）（元ZIP内: `T1_sources/candidate/src/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm`） | [frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm](<../02_implementation/P3_Configuration_UserForm/frmMailGenerator_P304_P305_Integrated_Candidate_v0.1.frm>) |
